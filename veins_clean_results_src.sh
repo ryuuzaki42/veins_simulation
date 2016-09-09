@@ -21,10 +21,10 @@
 # Livre(FSF) Inc., 51 Franklin St, Fifth Floor, Boston, MA 02110-1301 USA
 # Script: limpa o histórico de resultados de execução do framework Veins
 #
-# Última atualização: 31/05/2016
+# Última atualização: 09/09/2016
 #
 # Pasta do Veins (altere se a sua for diferente)
-cd /media/sda4/prog/simulation_veins/
+cd /media/sda4/prog/veins_simulation/
 
 readPar=$1
 
