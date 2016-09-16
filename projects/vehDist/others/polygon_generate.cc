@@ -49,7 +49,7 @@ int main() {
     string fileOutput = "vehDist.poly.xml";
     count = idPolygon = 1;
 
-    countKm = 1; // 1 km of grid
+    countKm = 3; // 1 to 1 km of grid
 
     myfile.open (fileOutput);
     myfile << "<shapes>" << endl << endl;
