@@ -28,12 +28,13 @@ cd /media/sda4/prog/veins_simulation/
 
 inputPar=$1
 
-echo -e "\nDeseja remover os results da pasta de projects?\n"
-echo -e "Irá apagar os arquivos:"
+echo -e "\nEste script remove os results da pasta projects"
+echo -e "\nIrá apagar os arquivos:"
 echo -e "\tprojects/*/results"
 echo -e "\tprojects/*/.tkenvrc"
 echo -e "\tprojects/*/run.r"
-echo -e "\n(y)es - (rm ...) ou (n)o - (exit)"
+echo -e "\tprojects/*/veins_run_output.r"
+echo -en "Deseja continuar?\n(y)es - (n)o: "
 
 if [ "$inputPar" != "y" ]; then
     read resposta
@@ -45,6 +46,7 @@ if [ "$resposta" = "y" ]; then # Altere projects para o nome da sua pasta de pro
     rm -r projects/*/results/
     rm projects/*/.tkenvrc
     rm projects/*/run.r
+    rm projects/*/veins_run_output.r
     echo -e "\nOs arquivos foram apagados\n"
 else
     echo -e "\nOs arquivos não foram apagados\n"
