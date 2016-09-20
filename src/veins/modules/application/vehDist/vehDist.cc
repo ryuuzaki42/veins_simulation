@@ -78,7 +78,7 @@ void vehDist::onBeaconMessage(WaveShortMessage* wsm) {
                         colorCarryMessageVehDist(messagesBufferVehDist);
                         printMessagesBuffer();
                     } else {
-                        cout << source << " message is on the buffer at: " << simTime() << endl;
+                        cout << source << " message (" << wsm->getGlobalMessageIdentificaton() << ") is on the buffer at: " << simTime() << endl;
                     }
                 } else { // wsm->getHopCount() < 0
                     cout << "Error: received message with hopCount < 0, hopCount: " << wsm->getHopCount() << " at: " << simTime() << endl;
@@ -200,7 +200,7 @@ void vehDist::sendBeaconMessage() {
     messageToSend++; // Move to next message
 
     if (!SuseRateTimeToSend){
-        cout << source << " schedule useRateTimeToSend: false at: " << simTime() << " to: " << (simTime() + 1);
+        cout << source << " schedule useRateTimeToSend: false at: " << simTime() << " to: " << (simTime() + 1) << endl;
         scheduleAt((simTime() + par("normalTimeSendMessage").doubleValue()), sendBeaconMessageEvt);
     } else {
         if (messageToSend >= messagesOrderReceivedVehDist.size() || messagesOrderReceivedVehDist.empty()) {
@@ -224,7 +224,7 @@ void vehDist::sendBeaconMessage() {
 
 void vehDist::trySendBeaconMessage() {
     if (!messagesBufferVehDist.empty()) {
-        cout << source << " messagesBuffer with "<< messagesBufferVehDist.size() << " message(s) at " << simTime() << endl;
+        cout << source << " messagesBuffer with "<< messagesBufferVehDist.size() << " message(s) at: " << simTime() << endl;
         // Test with hopCount 0, send only
 
         if (!beaconStatusNeighbors.empty()) {
@@ -248,7 +248,7 @@ void vehDist::trySendBeaconMessage() {
                 catVeh = itBeaconN->second.getCategory();
 
                 cout << source << " chose the vehicle " << rcvId << " in the exp " << SexpSendbyDSCR << " to be a next hop to the " << idMessage << " message" << endl;
-                cout << "    " << source << " send message to " << rcvId << " with category " << catVeh << " at "<< simTime() << endl;
+                cout << "    " << source << " send message to " << rcvId << " with category " << catVeh << " at: "<< simTime() << endl;
                 cout << "    MessageToSend: " << messageToSend << endl;
                 cout << "    MessageID: " << idMessage << endl;
                 cout << "    Source: " << messagesBufferVehDist[idMessage].getSource() << endl;
@@ -261,7 +261,7 @@ void vehDist::trySendBeaconMessage() {
                 ScountMsgPacketSend++;
 
                 if (!SallowMessageCopy) {
-                    cout << source << " send the message " << idMessage << " and removing (message copy not allow) at "  << simTime() << endl;
+                    cout << source << " send the message " << idMessage << " and removing (message copy not allow) at: "  << simTime() << endl;
 
                     insertMessageDropVeh(idMessage, 2, messagesBufferVehDist[idMessage].getTimestamp()); // Removed by the value of tyRemoved (1 buffer, 2 copy, 3 time)
 
@@ -309,7 +309,7 @@ string vehDist::neighborWithShortestDistanceToTargeOnlyDelivery(string idMessage
 
     for (itBeaconNeighbors = beaconStatusNeighbors.begin(); itBeaconNeighbors != beaconStatusNeighbors.end(); itBeaconNeighbors++) {
         if (strcmp(itBeaconNeighbors->second.getSource(), messagesBufferVehDist[idMessage].getTarget()) == 0) {
-            cout << source << " found target, message " << idMessage << " target " << messagesBufferVehDist[idMessage].getTarget() << " at " << simTime() << endl;
+            cout << source << " found target, message " << idMessage << " target " << messagesBufferVehDist[idMessage].getTarget() << " at: " << simTime() << endl;
             return itBeaconNeighbors->second.getSource();
         }
     }
@@ -339,7 +339,7 @@ string vehDist::neighborWithShortestDistanceToTarge(string idMessage) {
             } else {
                 neighborDistanceBefore = traci->getDistance(itBeaconNeighbors->second.getSenderPosPrevious(), messagesBufferVehDist[idMessage].getTargetPos(), false);
                 neighborDistanceNow = traci->getDistance(itBeaconNeighbors->second.getSenderPos(), messagesBufferVehDist[idMessage].getTargetPos(), false);
-                cout << "    1337 " << itBeaconNeighbors->first << "DistB: " << neighborDistanceBefore << " DistN: " << neighborDistanceNow << endl;
+                cout << "    1337 " << itBeaconNeighbors->first << " DistB: " << neighborDistanceBefore << " DistN: " << neighborDistanceNow << endl;
 
                 if (SusePathHistory) { // True will check if the vehicle is closing to target (message target destination)
                     insert = false;
@@ -413,7 +413,7 @@ string vehDist::neighborWithShortestDistanceToTarge(string idMessage) {
         cout << "    Position: " << mobility->getCurrentPosition() << endl;
         cout << "    RateTimeToSend: " << rateTimeToSend << endl;
 
-        cout << endl << endl << "Printing vehShortestDistanceToTarget to " << source << " at " << simTime() << endl << endl;
+        cout << endl << endl << "Printing vehShortestDistanceToTarget to " << source << " at: " << simTime() << endl << endl;
         for (itShortestDistance = vehShortestDistanceToTarget.begin(); itShortestDistance != vehShortestDistanceToTarget.end(); itShortestDistance++) {
             cout << "    Id(veh): " << itShortestDistance->first << endl;
             cout << "    Position: " << itShortestDistance->second.senderPos << endl;
@@ -428,7 +428,7 @@ string vehDist::neighborWithShortestDistanceToTarge(string idMessage) {
             cout << "    DecisionValueDistanceSpeedRateTimeToSend: " << itShortestDistance->second.decisionValueDistanceSpeedRateTimeToSend << endl << endl;
         }
     } else {
-        cout << endl << "vehShortestDistanceToTarget to " << source << " at " << simTime() << " vehShortestDistanceToTarget is empty" << endl << endl;
+        cout << endl << "vehShortestDistanceToTarget to " << source << " at: " << simTime() << " vehShortestDistanceToTarget is empty" << endl << endl;
     }
 
     if (SusePathHistory) {
