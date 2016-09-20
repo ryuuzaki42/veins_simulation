@@ -30,11 +30,11 @@ cd /media/sda4/prog/veins_simulation/
 echo -e "Deseja executar o SUMO com interface gráfica:\n(y)es - sumo-gui ou (n)o sumo"
 read resposta
 
-if [ $resposta = y ]; then
+if [ "$resposta" = "y" ]; then
     echo -e "\nRunning sumo-gui\n"
     python sumo-launchd.py -vv -c sumo-gui
-elif [ $resposta = n ]; then
+elif [ "$resposta" = "n" ]; then
     echo -e "\nRunning sumo\n"
     python sumo-launchd.py -vv -c sumo
 fi
-#
+echo -e "Fim do script\n"
