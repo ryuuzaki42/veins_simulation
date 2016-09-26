@@ -21,7 +21,7 @@
 # Livre(FSF) Inc., 51 Franklin St, Fifth Floor, Boston, MA 02110-1301 USA
 # Script: limpa o histórico de resultados de execução do framework Veins
 #
-# Última atualização: 20/09/2016
+# Última atualização: 26/09/2016
 #
 # Pasta do Veins (altere se a sua for diferente)
 cd /media/sda4/prog/veins_simulation/
@@ -34,8 +34,15 @@ echo -e "\tprojects/*/results"
 echo -e "\tprojects/*/.tkenvrc"
 echo -e "\tprojects/*/run.r"
 echo -e "\tprojects/*/veins_run_output.r"
-echo -en "Deseja continuar?\n(y)es - (n)o: "
 
+echo -e "\nList of files that will be deleted:\n"
+ls -r projects/*/results/
+ls projects/*/.tkenvrc
+ls projects/*/.tkenvlog
+ls projects/*/run.r
+ls projects/*/veins_run_output.r
+
+echo -en "\nDeseja continuar?\n(y)es - (n)o: "
 if [ "$inputPar" != "y" ]; then
     read resposta
 else
@@ -45,6 +52,7 @@ fi
 if [ "$resposta" = "y" ]; then # Altere projects para o nome da sua pasta de projetos
     rm -r projects/*/results/
     rm projects/*/.tkenvrc
+    rm projects/*/.tkenvlog
     rm projects/*/run.r
     rm projects/*/veins_run_output.r
     echo -e "\nOs arquivos foram apagados\n"

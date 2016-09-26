@@ -26,6 +26,7 @@ examples/**/valgrind.out
 # projects results
 projects/**/results
 projects/**/.tkenvrc
+projects/**/.tkenvlog
 projects/**/valgrind.out
 
 # c++ compiled
