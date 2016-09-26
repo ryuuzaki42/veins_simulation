@@ -322,14 +322,15 @@ void BaseWaveApplLayer::restartFilesResultRSU(string folderResult) {
 
     bool justAppend;
     if (myId == 0) {
+        string pathFolder = par("folderPathSed");
         if (SexpNumber <= 4) { // Set the maxSpeed to 16.67 m/s (60 km/h) in the expNumber 1 to 4
-            string comand = "sed -i 's/maxSpeed=.* color/maxSpeed=\"16.67\" color/g' vehDist.rou.xml";
+            string comand = "sed -i 's/maxSpeed=.* color/maxSpeed=\"16.67\" color/g' " + pathFolder +"vehDist.rou.xml";
             system(comand.c_str());
-            cout << endl << "Change the speed to 16.67 m/s, command: " << comand << endl;
+            cout << endl << "Change the speed to 16.67 m/s, command1: " << comand << endl;
         } else if (SexpNumber >= 5) { // Set the maxSpeed to 25 m/s  (90 km/h) in the expNumber 5 to 8
-            string comand = "sed -i 's/maxSpeed=.* color/maxSpeed=\"25\" color/g' vehDist.rou.xml";
+            string comand = "sed -i 's/maxSpeed=.* color/maxSpeed=\"25\" color/g' " + pathFolder +"vehDist.rou.xml";
             system(comand.c_str());
-            cout << endl << "Change the speed to 25 m/s, command: " << comand << endl;
+            cout << endl << "Change the speed to 25 m/s, command1: " << comand << endl;
         }
 
         string commandCreateFolder = "mkdir -p " + folderResult + " > /dev/null";

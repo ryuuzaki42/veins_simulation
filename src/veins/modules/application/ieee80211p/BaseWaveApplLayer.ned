@@ -58,6 +58,7 @@ simple BaseWaveApplLayer like IBaseApplLayer {
 
         bool useRateTimeToSend = default(false); // Use or not the rateTimeToSend
         double normalTimeSendMessage @unit("s") = default(0s); // Time will send a message whe useRateTimeToSend is false.
+        string folderPathSed;
 
     gates:
         input lowerLayerIn; // from mac layer
