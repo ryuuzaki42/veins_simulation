@@ -51,6 +51,41 @@ void TraCIScenarioManagerLaunchd::initialize(int stage)
 		// default basedir is where current network file was loaded from
 		std::string basedir = cSimulation::getActiveSimulation()->getEnvir()->getConfig()->getConfigEntry("network").getBaseDirectory();
 		cXMLElement* basedir_node = new cXMLElement("basedir", __FILE__, launchConfig);
+
+        // Parse to allow ../ (up folder)
+        std::string basedir_tmp = basedir;
+        std::string launchLocation = launchConfig->getSourceLocation();
+        std::cout << endl << "basedir_tmp: " << basedir_tmp << endl;
+        std::cout << "launchLocation: " << launchLocation << endl;
+
+        bool continueLoop = false;
+        if (launchLocation.compare(0,2, "..") == 0) { // To set true on loop and remove the last / from path
+            basedir_tmp = basedir_tmp.substr(0, basedir_tmp.find_last_of("\\/")); // Remove last part path/name/, remove name/
+            continueLoop = true;
+        }
+
+        while (continueLoop) {
+            if (launchLocation.compare(0,2, "..") == 0) {
+                basedir_tmp = basedir_tmp.substr(0, basedir_tmp.find_last_of("\\/")); // Remove last part path/name/, remove name/
+                launchLocation = launchLocation.substr(3, launchLocation.length()); // Remove ../
+
+                continueLoop = true;
+            } else {
+                continueLoop = false;
+            }
+
+            if (!continueLoop) {
+                launchLocation = launchLocation.substr(0, (launchLocation.length() -2)); // Remove :2 from and string
+                basedir_tmp = basedir_tmp + "/" + launchLocation; // Combine the two strings
+
+                basedir_tmp = basedir_tmp.substr(0, basedir_tmp.find_last_of("\\/"));
+                basedir_tmp = basedir_tmp + "/";
+                std::cout << "basedir_tmp: " << basedir_tmp << endl;
+
+                basedir = basedir_tmp; // Set new value of basedir
+            }
+        }
+
 		basedir_node->setAttribute("path", basedir.c_str());
 		launchConfig->appendChild(basedir_node);
 	}
