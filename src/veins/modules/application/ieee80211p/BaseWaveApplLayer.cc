@@ -776,7 +776,8 @@ void BaseWaveApplLayer::toFinishRSU() {
     printCountMessagesReceivedRSU();
 
     if (myId == 0) {
-        string comand = "sed -i 's/maxSpeed=.* color/maxSpeed=\"16.67\" color/g' vehDist.rou.xml";
+        string pathFolder = par("folderPathSed");
+        string comand = "sed -i 's/maxSpeed=.* color/maxSpeed=\"16.67\" color/g' " + pathFolder +"vehDist.rou.xml";
         system(comand.c_str()); // Set the maxSpeed back to default: 16.67 m/s (60 km/h)
         cout << endl << "Setting speed back to default (16.67 m/s), command: " << comand << endl;
     }
