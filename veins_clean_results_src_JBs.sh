@@ -33,14 +33,14 @@ echo -e "\nIrá apagar os arquivos:"
 echo -e "\tprojects/*/results"
 echo -e "\tprojects/*/.tkenvrc"
 echo -e "\tprojects/*/run.r"
-echo -e "\tprojects/*/veins_run_output.r"
+echo -e "\tprojects/*/runExperimentOuptut.r"
 
 echo -e "\nList of files that will be deleted:\n"
 ls -r projects/*/results/
 ls projects/*/.tkenvrc
 ls projects/*/.tkenvlog
 ls projects/*/run.r
-ls projects/*/veins_run_output.r
+ls projects/*/runExperimentOuptut.r
 
 echo -en "\nDeseja continuar?\n(y)es - (n)o: "
 if [ "$inputPar" != "y" ]; then
@@ -54,7 +54,7 @@ if [ "$resposta" = "y" ]; then # Altere projects para o nome da sua pasta de pro
     rm projects/*/.tkenvrc
     rm projects/*/.tkenvlog
     rm projects/*/run.r
-    rm projects/*/veins_run_output.r
+    rm projects/*/runExperimentOuptut.r
     echo -e "\nOs arquivos foram apagados\n"
 else
     echo -e "\nOs arquivos não foram apagados\n"
