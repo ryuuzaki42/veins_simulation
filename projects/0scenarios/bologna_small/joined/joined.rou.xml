@@ -1,4 +1,4 @@
-<routes>                                                  
+<routes>
     <vehicle arrivalPos="-1" depart="0" departLane="best" departPos="0" id="Audinot_7_0" type="private"><route edges="a131 a117 a209 "/></vehicle>
     <vehicle arrivalPos="-1" depart="0" departLane="best" departPos="0" id="Borgo_100_0" type="private"><route edges="b6 b100 b7 b3[1] b3[1]b "/></vehicle>
     <vehicle arrivalPos="-1" depart="0" departLane="best" departPos="0" id="Certosa_9_0" type="private"><route edges="b22[0] b22[1] b2[1][1][1] b2[1][1][1]b "/></vehicle>
@@ -19,7 +19,7 @@
     <vehicle arrivalPos="-1" depart="3" departLane="best" departPos="0" id="Gandhi_60_2" type="private"><route edges="b1[0] ba1[1] b1[1] a72[0] a72[1] a69 a161 a122 a1b a1 a204a[0] a204b[0] a204[1][0] a204[1][1] "/></vehicle>
     <vehicle arrivalPos="-1" depart="3" departLane="best" departPos="0" id="Pepoli_3_2" type="ignoring"><route edges="a210 a43[0] a118 a65 a57[0] a57[1] a62 a159 a42 a39 a35 a38 a15 a14  "/></vehicle>
     <vehicle arrivalPos="-1" depart="4" departLane="best" departPos="0" id="Gandhi_30_3" type="private"><route edges="b1[0] b25 b23 b17[0] b17[1] b11[0] b11[1][1] b70 "/></vehicle>
-    <vehicle arrivalPos="-1" depart="4" departLane="best" departPos="0" id="Malvasia_70_1" type="private"><route edges="b52 b51 b56[0] b39[0] b39[1][0] b39[1][1][0] b39[1][1][1] b45 a67 a80 a127 a77[1][0] a77ab a77bc a21a a21b a103 a14  "/></vehicle> 
+    <vehicle arrivalPos="-1" depart="4" departLane="best" departPos="0" id="Malvasia_70_1" type="private"><route edges="b52 b51 b56[0] b39[0] b39[1][0] b39[1][1][0] b39[1][1][1] b45 a67 a80 a127 a77[1][0] a77ab a77bc a21a a21b a103 a14  "/></vehicle>
     <vehicle arrivalPos="-1" depart="4" departLane="best" departPos="0" id="Pertini_20_2" type="private"><route edges="b63[0] b63[1] b4[0] b4[1][1][0] b4[1][1][1] "/></vehicle>
     <vehicle arrivalPos="-1" depart="4" departLane="best" departPos="0" id="Prati_Capraia_10_1" type="private"><route edges="b3[0] b10 "/></vehicle>
     <vehicle arrivalPos="-1" depart="4" departLane="best" departPos="0" id="Silvani_7_2" type="private"><route edges="a203[0] a203[1] a203[1]b a202 a34 a113 a209 "/></vehicle>
@@ -81,7 +81,7 @@
     <vehicle arrivalPos="-1" depart="23" departLane="best" departPos="0" id="Silvani_7_10" type="private"><route edges="a203[0] a203[1] a203[1]b a202 a34 a113 a209 "/></vehicle>
     <vehicle arrivalPos="-1" depart="24" departLane="best" departPos="0" id="Borgo_20_4" type="private"><route edges="b6 b100 b7 b4[1][1][1] "/></vehicle>
     <vehicle arrivalPos="-1" depart="24" departLane="best" departPos="0" id="Malvasia_100_5" type="private"><route edges="b52 b51 b56[0] b56[1][0] b56[1][1] b5[1][0]+66 b5[1][1][1] b8 b3[1] b3[1]b "/></vehicle>
-    <vehicle arrivalPos="-1" depart="24" departLane="best" departPos="0" id="Pepoli_3_14" type="ignoring"><route edges="a210 a43[0] a118 a65 a57[0] a57[1] a62 a159 a42 a39 a35 a38 a15 a14  "/></vehicle>   
+    <vehicle arrivalPos="-1" depart="24" departLane="best" departPos="0" id="Pepoli_3_14" type="ignoring"><route edges="a210 a43[0] a118 a65 a57[0] a57[1] a62 a159 a42 a39 a35 a38 a15 a14  "/></vehicle>
     <vehicle arrivalPos="-1" depart="24" departLane="best" departPos="0" id="Prati_Capraia_100_5" type="private"><route edges="b3[0] b3[1] b3[1]b "/></vehicle>
     <vehicle arrivalPos="-1" depart="24" departLane="best" departPos="0" id="XXI_Aprile_7_7" type="private"><route edges=" a9 a211 a45 a206 a32 a40 a41 a160 a61 a58[0] a58[1] a66 a117 a209 "/></vehicle>
     <vehicle arrivalPos="-1" depart="25" departLane="best" departPos="0" id="Gandhi_60_16" type="private"><route edges="b1[0] ba1[1] b1[1] a72[0] a72[1] a69 a161 a122 a1b a1 a204a[0] a204b[0] a204[1][0] a204[1][1] "/></vehicle>
@@ -93,7 +93,7 @@
     <vehicle arrivalPos="-1" depart="27" departLane="best" departPos="0" id="Pertini_22_13" type="private"><route edges="b13[0] b14 b17[0] b17[1] b8 b4[1][1][1] "/></vehicle>
     <vehicle arrivalPos="-1" depart="28" departLane="best" departPos="0" id="Costa_12_11" type="private"><route edges="a78[0] a56a a56b a77bc a77cd a53cd a53[0] a53[1][0] a79 a68 a11 b38[0] b38[0]a b38[1][0] b38[1][1] b38[1][1]a b56[1][0] b56[1][1] b5[1][0]+66 b5[1][1][1] b8 b4[1][1][1] "/></vehicle>
     <vehicle arrivalPos="-1" depart="28" departLane="best" departPos="0" id="Gandhi_60_18" type="private"><route edges="b1[0] ba1[1] b1[1] a72[0] a72[1] a69 a161 a122 a1b a1 a204a[0] a204b[0] a204[1][0] a204[1][1] "/></vehicle>
-    <vehicle arrivalPos="-1" depart="28" departLane="best" departPos="0" id="Silvani_11_12" type="private"><route edges="a203[0] b12 b56[0] b39[0] b39[1][0] b39[1][1][0] b39[1][1][1] b45 a67 a80 a127 a77[1][0] a77ab a77bc a21a a21b a103 a14  "/></vehicle>  
+    <vehicle arrivalPos="-1" depart="28" departLane="best" departPos="0" id="Silvani_11_12" type="private"><route edges="a203[0] b12 b56[0] b39[0] b39[1][0] b39[1][1][0] b39[1][1][1] b45 a67 a80 a127 a77[1][0] a77ab a77bc a21a a21b a103 a14  "/></vehicle>
     <vehicle arrivalPos="-1" depart="29" departLane="best" departPos="0" id="Malvasia_10_6" type="private"><route edges="b52 b51 b56[0] b56[1][0] b56[1][1] b5[1][0]+66 b5[1][1][1] b8 b10 "/></vehicle>
     <vehicle arrivalPos="-1" depart="29" departLane="best" departPos="0" id="Pepoli_11_17" type="private"><route edges="a210 a43[0] a43[1] a201 a201c a204a[0] a124 b12 b56[0] b39[0] b39[1][0] b39[1][1][0] b39[1][1][1] b45 a67 a80 a127 a77[1][0] a77[1][1] "/></vehicle>
     <vehicle arrivalPos="-1" depart="29" departLane="best" departPos="0" id="Prati_Capraia_30_6" type="ignoring"><route edges="b3[0] b9 b11[0] b11[1][1] b70 "/></vehicle>
@@ -132,7 +132,7 @@
     <vehicle arrivalPos="-1" depart="40" departLane="best" departPos="0" id="Gandhi_40_26" type="private"><route edges="b1[0] ba1[1] b1[1] b38[0] b38[0]a b46 b49[0] b49[1] b55 b53 b53a "/></vehicle>
     <vehicle arrivalPos="-1" depart="40" departLane="best" departPos="0" id="Pertini_20_19" type="private"><route edges="b63[0] b63[1] b4[0] b4[1][1][0] b4[1][1][1] "/></vehicle>
     <vehicle arrivalPos="-1" depart="40" departLane="best" departPos="0" id="Silvani_11_17" type="private"><route edges="a203[0] b12 b56[0] b56[1][0] b56[1][1] b5[1][0]+66 b5[1][1][1] b16[0] b16[1] b18 b20+19b b2[1][1][1]b "/></vehicle>
-    <vehicle arrivalPos="-1" depart="41" departLane="best" departPos="0" id="Pepoli_11_24" type="private"><route edges="a210 a43[0] a43[1] a201 a201c a204a[0] a124 b12 b56[0] b56[1][0] b56[1][1] b5[1][0]+66 b5[1][1][1] b16[0] b29[0] "/></vehicle>  
+    <vehicle arrivalPos="-1" depart="41" departLane="best" departPos="0" id="Pepoli_11_24" type="private"><route edges="a210 a43[0] a43[1] a201 a201c a204a[0] a124 b12 b56[0] b56[1][0] b56[1][1] b5[1][0]+66 b5[1][1][1] b16[0] b29[0] "/></vehicle>
     <vehicle arrivalPos="-1" depart="42" departLane="best" departPos="0" id="Audinot_10_2" type="private"><route edges="a131 a119 a116 a46 a201 a201c a204a[0] a204b[0] a204[1][0] a204[1][1] "/></vehicle>
     <vehicle arrivalPos="-1" depart="42" departLane="best" departPos="0" id="Borgo_20_7" type="private"><route edges="b6 b100 b7 b4[1][1][1] "/></vehicle>
     <vehicle arrivalPos="-1" depart="42" departLane="best" departPos="0" id="Pepoli_8_25" type="private"><route edges="a210 a43[0] a43[1] a134 a134b "/></vehicle>
@@ -160,10 +160,10 @@
     <vehicle arrivalPos="-1" depart="49" departLane="best" departPos="0" id="Pepoli_11_29" type="private"><route edges="a210 a43[0] a43[1] a201 a201c a204a[0] a124 b12 b56[0] b56[1][0] b56[1][1] b5[1][0]+66 b5[1][1][1] b8 b3[1] b3[1]b "/></vehicle>
     <vehicle arrivalPos="-1" depart="49" departLane="best" departPos="0" id="Pertini_60_23" type="private"><route edges="b13[0] b14 b18 b20+19a ba1[1] b1[1] a72[0] a72[1] a69 a161 a122 a3 a2 a202 a34 a134 a134b "/></vehicle>
     <vehicle arrivalPos="-1" depart="49" departLane="best" departPos="0" id="Silvani_7_21" type="private"><route edges="a203[0] a203[1] a203[1]b a202 a34 a113 a209 "/></vehicle>
-    <vehicle arrivalPos="-1" depart="50" departLane="best" departPos="0" id="Gandhi_70_32" type="private"><route edges="b1[0] ba1[1] b1[1] a67 a80 a127 a77[1][0] a77ab a77bc a21a a21b a103 a14  "/></vehicle>     
+    <vehicle arrivalPos="-1" depart="50" departLane="best" departPos="0" id="Gandhi_70_32" type="private"><route edges="b1[0] ba1[1] b1[1] a67 a80 a127 a77[1][0] a77ab a77bc a21a a21b a103 a14  "/></vehicle>
     <vehicle arrivalPos="-1" depart="51" departLane="best" departPos="0" id="Gandhi_60_33" type="private"><route edges="b1[0] ba1[1] b1[1] a72[0] a72[1] a69 a161 a122 a1b a1 a204a[0] a204b[0] a204[1][0] a204[1][1] "/></vehicle>
     <vehicle arrivalPos="-1" depart="51" departLane="best" departPos="0" id="Pepoli_11_30" type="private"><route edges="a210 a43[0] a43[1] a201 a201c a204a[0] a124 b12 b56[0] b56[1][0] b56[1][1] b5[1][0]+66 b5[1][1][1] b8 b3[1] b3[1]b "/></vehicle>
-    <vehicle arrivalPos="-1" depart="51" departLane="best" departPos="0" id="Pertini_102_24" type="private"><route edges="b13[0] b14 b17[0] b29[0] "/></vehicle>  
+    <vehicle arrivalPos="-1" depart="51" departLane="best" departPos="0" id="Pertini_102_24" type="private"><route edges="b13[0] b14 b17[0] b29[0] "/></vehicle>
     <vehicle arrivalPos="-1" depart="51" departLane="best" departPos="0" id="Silvani_7_22" type="private"><route edges="a203[0] a203[1] a203[1]b a202 a34 a113 a209 "/></vehicle>
     <vehicle arrivalPos="-1" depart="52" departLane="best" departPos="0" id="Costa_50_20" type="private"><route edges="a78[0] a56a am1 a21b a103 a16 a37 a36 a40 a41 a160 a61 a58[0] a58[1] a200 a60 "/></vehicle>
     <vehicle arrivalPos="-1" depart="53" departLane="best" departPos="0" id="Malvasia_100_11" type="private"><route edges="b52 b51 b56[0] b56[1][0] b56[1][1] b5[1][0]+66 b5[1][1][1] b8 b3[1] b3[1]b "/></vehicle>
@@ -185,7 +185,7 @@
     <vehicle arrivalPos="-1" depart="58" departLane="best" departPos="0" id="Pepoli_10_34" type="private"><route edges="a210 a43[0] a43[1] a201 a201c a204a[0] a204b[0] a204[1][0] a204[1][1] "/></vehicle>
     <vehicle arrivalPos="-1" depart="58" departLane="best" departPos="0" id="Pertini_20_27" type="private"><route edges="b63[0] b63[1] b4[0] b4[1][1][0] b4[1][1][1] "/></vehicle>
     <vehicle arrivalPos="-1" depart="58" departLane="best" departPos="0" id="Prati_Capraia_100_12" type="private"><route edges="b3[0] b3[1] b3[1]b "/></vehicle>
-    <vehicle arrivalPos="-1" depart="58" departLane="best" departPos="0" id="Silvani_3_25" type="ignoring"><route edges="a203[0] a203[1] a203[1]b a202 a34 a113 a118 a65 a57[0] a57[1] a62 a159 a42 a39 a35 a38 a15 a14  "/></vehicle> 
+    <vehicle arrivalPos="-1" depart="58" departLane="best" departPos="0" id="Silvani_3_25" type="ignoring"><route edges="a203[0] a203[1] a203[1]b a202 a34 a113 a118 a65 a57[0] a57[1] a62 a159 a42 a39 a35 a38 a15 a14  "/></vehicle>
     <vehicle arrivalPos="-1" depart="60" departLane="best" departPos="0" id="Borgo_10_10" type="ignoring"><route edges="b6 b100 b7 b9 b16[0] b30 b31 b5[1][1][1] b8 b10 "/></vehicle>
     <vehicle arrivalPos="-1" depart="60" departLane="best" departPos="0" id="Gandhi_60_39" type="private"><route edges="b1[0] ba1[1] b1[1] a72[0] a72[1] a69 a161 a122 a1b a1 a204a[0] a124 b12 b56[0] b56[1][0] b56[1][1] b5[1][0]+66 b5[1][1][1] b8 b10 "/></vehicle>
     <vehicle arrivalPos="-1" depart="60" departLane="best" departPos="0" id="Pepoli_11_35" type="private"><route edges="a210 a43[0] a43[1] a201 a201c a204a[0] a124 b12 b56[0] b56[1][0] b56[1][1] b5[1][0]+66 b5[1][1][1] b8 b10 "/></vehicle>
@@ -218,7 +218,7 @@
     <vehicle arrivalPos="-1" depart="68" departLane="best" departPos="0" id="Pertini_10_32" type="private"><route edges="b63[0] b63[1] b4[0] b4[1][1][0] b10 "/></vehicle>
     <vehicle arrivalPos="-1" depart="68" departLane="best" departPos="0" id="Prati_Capraia_100_14" type="private"><route edges="b3[0] b3[1] b3[1]b "/></vehicle>
     <vehicle arrivalPos="-1" depart="68" departLane="best" departPos="0" id="Silvani_7_29" type="private"><route edges="a203[0] a203[1] a203[1]b a202 a34 a113 a209 "/></vehicle>
-    <vehicle arrivalPos="-1" depart="69" departLane="best" departPos="0" id="Turati_3_2" type="ignoring"><route edges="a195 a159 a42 a39 a35 a38 a15 a14  "/></vehicle> 
+    <vehicle arrivalPos="-1" depart="69" departLane="best" departPos="0" id="Turati_3_2" type="ignoring"><route edges="a195 a159 a42 a39 a35 a38 a15 a14  "/></vehicle>
     <vehicle arrivalPos="-1" depart="70" departLane="best" departPos="0" id="Costa_70_27" type="private"><route edges="a78[0] a56a a56b a77bc a77cd a53cd a53[0] a78[1][1] a189[0] a189[1][0]+20000 a189[1][1] a188 a87[0] a20001+87[1][0] a87[1][1] am90 a89[0] a20002+89[1][0] a89[1][1] a91 a186 a109[0] a109[1][0]+20003 a109[1][1] a116 a46 a113 a209 "/></vehicle>
     <vehicle arrivalPos="-1" depart="70" departLane="best" departPos="0" id="Gandhi_80_45" type="private"><route edges="b1[0] b21 "/></vehicle>
     <vehicle arrivalPos="-1" depart="70" departLane="best" departPos="0" id="Pepoli_11_41" type="private"><route edges="a210 a43[0] a43[1] a201 a201c a204a[0] a124 b12 b56[0] b39[0] b39[1][0] b39[1][1][0] b39[1][1][1] b45 b2[0] b2[1][0] b2[1][1][0] b2[1][1][1] b2[1][1][1]b "/></vehicle>
@@ -229,7 +229,7 @@
     <vehicle arrivalPos="-1" depart="72" departLane="best" departPos="0" id="Malvasia_30_15" type="private"><route edges="b52 b51 b56[0] b56[1][0] b56[1][1] b70 "/></vehicle>
     <vehicle arrivalPos="-1" depart="72" departLane="best" departPos="0" id="Prati_Capraia_50_15" type="ignoring"><route edges="b3[0] b9 b11[0] b11[1][1] b101 b35[0] b35[1][0] b35[1][1][0] b20000+35[1][1][1][0] b35[1][1][1][1] "/></vehicle>
     <vehicle arrivalPos="-1" depart="73" departLane="best" departPos="0" id="Costa_1_28" type="private"><route edges="a78[0] a56a a56b a77bc a77cd a53cd a53[0] a53[1][0] a79 a68 a11 b2[0] b2[1][0] b2[1][1][0] b2[1][1][1] b2[1][1][1]b "/></vehicle>
-    <vehicle arrivalPos="-1" depart="73" departLane="best" departPos="0" id="Pepoli_3_43" type="ignoring"><route edges="a210 a43[0] a118 a65 a57[0] a57[1] a62 a159 a42 a39 a35 a38 a15 a14  "/></vehicle>   
+    <vehicle arrivalPos="-1" depart="73" departLane="best" departPos="0" id="Pepoli_3_43" type="ignoring"><route edges="a210 a43[0] a118 a65 a57[0] a57[1] a62 a159 a42 a39 a35 a38 a15 a14  "/></vehicle>
     <vehicle arrivalPos="-1" depart="73" departLane="best" departPos="0" id="Pertini_23_34" type="private"><route edges="b13[0] b14 b17[0] b29[0] b29[1] b4[1][1][0] b4[1][1][1] "/></vehicle>
     <vehicle arrivalPos="-1" depart="73" departLane="best" departPos="0" id="Silvani_7_31" type="private"><route edges="a203[0] a203[1] a203[1]b a202 a34 a113 a209 "/></vehicle>
     <vehicle arrivalPos="-1" depart="74" departLane="best" departPos="0" id="Nigrisoli_80_12" type="private"><route edges="b65 b5[1][0]+66 b5[1][1][1] b16[0] b16[1] b18 b20+19a b21 "/></vehicle>
@@ -266,7 +266,7 @@
     <vehicle arrivalPos="-1" depart="85" departLane="best" departPos="0" id="Borgo_50_14" type="ignoring"><route edges="b6 b100 b7 b9 b11[0] b11[1][1] b101 b35[0] b35[1][0] b35[1][1][0] b20000+35[1][1][1][0] b35[1][1][1][1] "/></vehicle>
     <vehicle arrivalPos="-1" depart="85" departLane="best" departPos="0" id="Gandhi_50_55" type="ignoring"><route edges="b1[0] b25 b23 b17[0] b17[1] b11[0] b11[1][1] b101 b35[0] b35[1][0] b35[1][1][0] b20000+35[1][1][1][0] b35[1][1][1][1] "/></vehicle>
     <vehicle arrivalPos="-1" depart="85" departLane="best" departPos="0" id="Pepoli_10_50" type="private"><route edges="a210 a43[0] a43[1] a201 a201c a204a[0] a204b[0] a204[1][0] a204[1][1] "/></vehicle>
-    <vehicle arrivalPos="-1" depart="86" departLane="best" departPos="0" id="Costa_3_33" type="private"><route edges="a78[0] a56a am1 a21b a103 a14  "/></vehicle> 
+    <vehicle arrivalPos="-1" depart="86" departLane="best" departPos="0" id="Costa_3_33" type="private"><route edges="a78[0] a56a am1 a21b a103 a14  "/></vehicle>
     <vehicle arrivalPos="-1" depart="86" departLane="best" departPos="0" id="Pertini_22_40" type="private"><route edges="b13[0] b14 b17[0] b17[1] b8 b4[1][1][1] "/></vehicle>
     <vehicle arrivalPos="-1" depart="87" departLane="best" departPos="0" id="Gandhi_52_56" type="ignoring"><route edges="b1[0] b25 b23 b17[0] b30 b31 b11[1][1] b101 b35[0] b35[1][0] b35[1][1][0] b20000+35[1][1][1][0] b35[1][1][1][1] "/></vehicle>
     <vehicle arrivalPos="-1" depart="87" departLane="best" departPos="0" id="Malvasia_100_18" type="private"><route edges="b52 b51 b56[0] b56[1][0] b56[1][1] b5[1][0]+66 b5[1][1][1] b8 b3[1] b3[1]b "/></vehicle>
@@ -307,10 +307,10 @@
     <vehicle arrivalPos="-1" depart="98" departLane="best" departPos="0" id="Gandhi_40_63" type="private"><route edges="b1[0] ba1[1] b1[1] b38[0] b38[0]a b46 b49[0] b49[1] b55 b53 b53a "/></vehicle>
     <vehicle arrivalPos="-1" depart="98" departLane="best" departPos="0" id="Nigrisoli_50_16" type="ignoring"><route edges="b65 b101 b35[0] b35[1][0] b35[1][1][0] b20000+35[1][1][1][0] b35[1][1][1][1] "/></vehicle>
     <vehicle arrivalPos="-1" depart="98" departLane="best" departPos="0" id="Pertini_20_46" type="private"><route edges="b63[0] b63[1] b4[0] b4[1][1][0] b4[1][1][1] "/></vehicle>
-    <vehicle arrivalPos="-1" depart="99" departLane="best" departPos="0" id="Costa_3_38" type="private"><route edges="a78[0] a56a am1 a21b a103 a14  "/></vehicle>    
+    <vehicle arrivalPos="-1" depart="99" departLane="best" departPos="0" id="Costa_3_38" type="private"><route edges="a78[0] a56a am1 a21b a103 a14  "/></vehicle>
     <vehicle arrivalPos="-1" depart="99" departLane="best" departPos="0" id="Pepoli_11_58" type="private"><route edges="a210 a43[0] a43[1] a201 a201c a204a[0] a124 b12 b56[0] b39[0] b39[1][0] b39[1][1][0] b39[1][1][1] b45 a67 a80 a127 a77[1][0] a77[1][1] "/></vehicle>
     <vehicle arrivalPos="-1" depart="99" departLane="best" departPos="0" id="Silvani_7_42" type="private"><route edges="a203[0] a203[1] a203[1]b a202 a34 a113 a209 "/></vehicle>
-    <vehicle arrivalPos="-1" depart="100" departLane="best" departPos="0" id="Gandhi_70_64" type="private"><route edges="b1[0] ba1[1] b1[1] a67 a80 a127 a77[1][0] a77ab a77bc a21a a21b a103 a14  "/></vehicle>  
+    <vehicle arrivalPos="-1" depart="100" departLane="best" departPos="0" id="Gandhi_70_64" type="private"><route edges="b1[0] ba1[1] b1[1] a67 a80 a127 a77[1][0] a77ab a77bc a21a a21b a103 a14  "/></vehicle>
     <vehicle arrivalPos="-1" depart="101" departLane="best" departPos="0" id="Costa_70_39" type="private"><route edges="a78[0] a56a a56b a77bc a77cd a53cd a53[0] a78[1][1] a189[0] a189[1][0]+20000 a189[1][1] a188 a87[0] a20001+87[1][0] a87[1][1] am90 a89[0] a20002+89[1][0] a89[1][1] a91 a186 a109[0] a109[1][0]+20003 a109[1][1] a116 a46 a113 a209 "/></vehicle>
     <vehicle arrivalPos="-1" depart="101" departLane="best" departPos="0" id="Pepoli_10_59" type="private"><route edges="a210 a43[0] a43[1] a201 a201c a204a[0] a204b[0] a204[1][0] a204[1][1] "/></vehicle>
     <vehicle arrivalPos="-1" depart="101" departLane="best" departPos="0" id="Silvani_11_43" type="private"><route edges="a203[0] b12 b56[0] b56[1][0] b56[1][1] b5[1][0]+66 b5[1][1][1] b8 b3[1] b3[1]b "/></vehicle>
@@ -325,13 +325,13 @@
     <vehicle arrivalPos="-1" depart="104" departLane="best" departPos="0" id="Gandhi_60_67" type="private"><route edges="b1[0] ba1[1] b1[1] a72[0] a72[1] a69 a161 a122 a1b a1 a204a[0] a204b[0] a204[1][0] a204[1][1] "/></vehicle>
 <!--    <vehicle arrivalPos="-1" depart="104" departLane="best" departPos="0" id="Nigrisoli_92_17" type="private"><route edges="b65 b67 b32 b16[1] b18 b20+19b b2[1][1][1]b "/></vehicle>  -->
     <vehicle arrivalPos="-1" depart="104" departLane="best" departPos="0" id="Pepoli_11_61" type="private"><route edges="a210 a43[0] a43[1] a201 a201c a204a[0] a124 b12 b56[0] b56[1][0] b56[1][1] b5[1][0]+66 b5[1][1][1] b8 b10 "/></vehicle>
-    <vehicle arrivalPos="-1" depart="104" departLane="best" departPos="0" id="Turati_3_3" type="ignoring"><route edges="a195 a159 a42 a39 a35 a38 a15 a14  "/></vehicle>    
+    <vehicle arrivalPos="-1" depart="104" departLane="best" departPos="0" id="Turati_3_3" type="ignoring"><route edges="a195 a159 a42 a39 a35 a38 a15 a14  "/></vehicle>
     <vehicle arrivalPos="-1" depart="105" departLane="best" departPos="0" id="Pertini_30_49" type="private"><route edges="b13[0] b14 b17[0] b30 b31 b11[1][1] b70 "/></vehicle>
     <vehicle arrivalPos="-1" depart="106" departLane="best" departPos="0" id="Gandhi_40_68" type="private"><route edges="b1[0] ba1[1] b1[1] b38[0] b38[0]a b46 b49[0] b49[1] b55 b53 b53a "/></vehicle>
     <vehicle arrivalPos="-1" depart="106" departLane="best" departPos="0" id="Pepoli_8_62" type="private"><route edges="a210 a43[0] a43[1] a134 a134b "/></vehicle>
     <vehicle arrivalPos="-1" depart="106" departLane="best" departPos="0" id="Silvani_7_45" type="private"><route edges="a203[0] a203[1] a203[1]b a202 a34 a113 a209 "/></vehicle>
     <vehicle arrivalPos="-1" depart="106" departLane="best" departPos="0" id="XXI_Aprile_113_30" type="private"><route edges=" a13 a104 a24 a22 a59 a53cd a53[0] a53[1][0] a79 a74 a72[1] a69 a161 a122 a1b a1 a204a[0] a124 b12 b56[0] b56[1][0] b56[1][1] b5[1][0]+66 b5[1][1][1] b8 b3[1] b3[1]b "/></vehicle>
-    <vehicle arrivalPos="-1" depart="107" departLane="best" departPos="0" id="Audinot_3_5" type="ignoring"><route edges="a131 a65 a57[0] a57[1] a62 a159 a42 a39 a35 a38 a15 a14  "/></vehicle>  
+    <vehicle arrivalPos="-1" depart="107" departLane="best" departPos="0" id="Audinot_3_5" type="ignoring"><route edges="a131 a65 a57[0] a57[1] a62 a159 a42 a39 a35 a38 a15 a14  "/></vehicle>
     <vehicle arrivalPos="-1" depart="107" departLane="best" departPos="0" id="Gandhi_60_69" type="private"><route edges="b1[0] ba1[1] b1[1] a72[0] a72[1] a69 a161 a122 a1b a1 a204a[0] a204b[0] a204[1][0] a204[1][1] "/></vehicle>
     <vehicle arrivalPos="-1" depart="107" departLane="best" departPos="0" id="Malvasia_95_22" type="private"><route edges="b52 b51 b50[0] b97 b39[1][0] b39[1][1][0] b37 b34[1][1] b2[1][0] b2[1][1][0] b2[1][1][1] b2[1][1][1]b "/></vehicle>
     <vehicle arrivalPos="-1" depart="107" departLane="best" departPos="0" id="Pertini_20_50" type="private"><route edges="b63[0] b63[1] b4[0] b4[1][1][0] b4[1][1][1] "/></vehicle>
@@ -347,13 +347,13 @@
     <vehicle arrivalPos="-1" depart="110" departLane="best" departPos="0" id="Silvani_11_47" type="private"><route edges="a203[0] b12 b56[0] b56[1][0] b56[1][1] b5[1][0]+66 b5[1][1][1] b16[0] b16[1] b18 b20+19b b2[1][1][1]b "/></vehicle>
     <vehicle arrivalPos="-1" depart="110" departLane="best" departPos="0" id="XXI_Aprile_7_31" type="private"><route edges=" a9 a211 a45 a206 a32 a40 a41 a160 a61 a58[0] a58[1] a66 a117 a209 "/></vehicle>
     <vehicle arrivalPos="-1" depart="111" departLane="best" departPos="0" id="Malvasia_100_23" type="private"><route edges="b52 b51 b56[0] b56[1][0] b56[1][1] b5[1][0]+66 b5[1][1][1] b8 b3[1] b3[1]b "/></vehicle>
-    <vehicle arrivalPos="-1" depart="111" departLane="best" departPos="0" id="Nigrisoli_72_18" type="ignoring"><route edges="b65 b101 b35[0] b39[0] b39[1][0] b39[1][1][0] b39[1][1][1] b45 a67 a80 a127 a77[1][0] a77ab a77bc a21a a21b a103 a14  "/></vehicle>  
+    <vehicle arrivalPos="-1" depart="111" departLane="best" departPos="0" id="Nigrisoli_72_18" type="ignoring"><route edges="b65 b101 b35[0] b39[0] b39[1][0] b39[1][1][0] b39[1][1][1] b45 a67 a80 a127 a77[1][0] a77ab a77bc a21a a21b a103 a14  "/></vehicle>
     <vehicle arrivalPos="-1" depart="111" departLane="best" departPos="0" id="Pepoli_10_65" type="private"><route edges="a210 a43[0] a43[1] a201 a201c a204a[0] a204b[0] a204[1][0] a204[1][1] "/></vehicle>
     <vehicle arrivalPos="-1" depart="111" departLane="best" departPos="0" id="Pertini_60_52" type="private"><route edges="b13[0] b14 b18 b20+19a ba1[1] b1[1] a72[0] a72[1] a69 a161 a122 a1b a1 a204a[0] a204b[0] a204[1][0] a204[1][1] "/></vehicle>
     <vehicle arrivalPos="-1" depart="111" departLane="best" departPos="0" id="Prati_Capraia_100_23" type="private"><route edges="b3[0] b3[1] b3[1]b "/></vehicle>
     <vehicle arrivalPos="-1" depart="112" departLane="best" departPos="0" id="Costa_70_43" type="private"><route edges="a78[0] a56a a56b a77bc a77cd a53cd a53[0] a78[1][1] a189[0] a189[1][0]+20000 a189[1][1] a188 a87[0] a20001+87[1][0] a87[1][1] am90 a89[0] a20002+89[1][0] a89[1][1] a91 a186 a109[0] a109[1][0]+20003 a109[1][1] a116 a46 a113 a209 "/></vehicle>
     <vehicle arrivalPos="-1" depart="112" departLane="best" departPos="0" id="Gandhi_40_72" type="private"><route edges="b1[0] ba1[1] b1[1] b38[0] b38[0]a b46 b49[0] b49[1] b55 b53 b53a "/></vehicle>
-    <vehicle arrivalPos="-1" depart="113" departLane="best" departPos="0" id="Pepoli_3_66" type="ignoring"><route edges="a210 a43[0] a118 a65 a57[0] a57[1] a62 a159 a42 a39 a35 a38 a15 a14  "/></vehicle>  
+    <vehicle arrivalPos="-1" depart="113" departLane="best" departPos="0" id="Pepoli_3_66" type="ignoring"><route edges="a210 a43[0] a118 a65 a57[0] a57[1] a62 a159 a42 a39 a35 a38 a15 a14  "/></vehicle>
     <vehicle arrivalPos="-1" depart="113" departLane="best" departPos="0" id="Pertini_20_53" type="private"><route edges="b63[0] b63[1] b4[0] b4[1][1][0] b4[1][1][1] "/></vehicle>
     <vehicle arrivalPos="-1" depart="113" departLane="best" departPos="0" id="Silvani_7_48" type="private"><route edges="a203[0] a203[1] a203[1]b a202 a34 a113 a209 "/></vehicle>
     <vehicle arrivalPos="-1" depart="113" departLane="best" departPos="0" id="XXI_Aprile_7_32" type="private"><route edges=" a9 a211 a45 a206 a32 a40 a41 a160 a61 a58[0] a58[1] a66 a117 a209 "/></vehicle>
@@ -416,7 +416,7 @@
     <vehicle arrivalPos="-1" depart="133" departLane="best" departPos="0" id="Borgo_20_22" type="private"><route edges="b6 b100 b7 b4[1][1][1] "/></vehicle>
     <vehicle arrivalPos="-1" depart="133" departLane="best" departPos="0" id="Costa_11_51" type="private"><route edges="a78[0] a56a a56b a77bc a77cd a53cd a53[0] a78[1][1] a189[0] a189[1][0]+20000 a189[1][1] a188 a87[0] a20001+87[1][0] a87[1][1] am90 a171 a161 a122 a1b a1 a204a[0] a124 b12 b56[0] b56[1][0] b56[1][1] b5[1][0]+66 b5[1][1][1] b8 b3[1] b3[1]b "/></vehicle>
     <vehicle arrivalPos="-1" depart="133" departLane="best" departPos="0" id="Pepoli_11_78" type="private"><route edges="a210 a43[0] a43[1] a201 a201c a204a[0] a124 b12 b56[0] b56[1][0] b56[1][1] b5[1][0]+66 b5[1][1][1] b8 b3[1] b3[1]b "/></vehicle>
-    <vehicle arrivalPos="-1" depart="133" departLane="best" departPos="0" id="Pertini_102_62" type="private"><route edges="b13[0] b14 b17[0] b29[0] "/></vehicle>  
+    <vehicle arrivalPos="-1" depart="133" departLane="best" departPos="0" id="Pertini_102_62" type="private"><route edges="b13[0] b14 b17[0] b29[0] "/></vehicle>
     <vehicle arrivalPos="-1" depart="134" departLane="best" departPos="0" id="Gandhi_60_86" type="private"><route edges="b1[0] ba1[1] b1[1] a72[0] a72[1] a69 a161 a122 a1b a1 a204a[0] a204b[0] a204[1][0] a204[1][1] "/></vehicle>
     <vehicle arrivalPos="-1" depart="134" departLane="best" departPos="0" id="Silvani_7_57" type="private"><route edges="a203[0] a203[1] a203[1]b a202 a34 a113 a209 "/></vehicle>
     <vehicle arrivalPos="-1" depart="135" departLane="best" departPos="0" id="Costa_12_52" type="private"><route edges="a78[0] a56a a56b a77bc a77cd a53cd a53[0] a53[1][0] a79 a68 a11 b38[0] b38[0]a b46 b49[0] b49[1] b55 b53 b53a "/></vehicle>
@@ -450,7 +450,7 @@
     <vehicle arrivalPos="-1" depart="145" departLane="best" departPos="0" id="Borgo_100_24" type="private"><route edges="b6 b100 b7 b3[1] b3[1]b "/></vehicle>
     <vehicle arrivalPos="-1" depart="145" departLane="best" departPos="0" id="Certosa_6_4" type="private"><route edges="b22[0] b22[1] ba1[1] b1[1] a72[0] a72[1] a69 a161 a122 a1b a1 a204a[0] a204b[0] a204[1][0] a204[1][1] "/></vehicle>
     <vehicle arrivalPos="-1" depart="145" departLane="best" departPos="0" id="Malvasia_100_30" type="private"><route edges="b52 b51 b56[0] b56[1][0] b56[1][1] b5[1][0]+66 b5[1][1][1] b8 b3[1] b3[1]b "/></vehicle>
-    <vehicle arrivalPos="-1" depart="145" departLane="best" departPos="0" id="Pepoli_3_85" type="ignoring"><route edges="a210 a43[0] a118 a65 a57[0] a57[1] a62 a159 a42 a39 a35 a38 a15 a14  "/></vehicle>  
+    <vehicle arrivalPos="-1" depart="145" departLane="best" departPos="0" id="Pepoli_3_85" type="ignoring"><route edges="a210 a43[0] a118 a65 a57[0] a57[1] a62 a159 a42 a39 a35 a38 a15 a14  "/></vehicle>
     <vehicle arrivalPos="-1" depart="145" departLane="best" departPos="0" id="Prati_Capraia_100_30" type="private"><route edges="b3[0] b3[1] b3[1]b "/></vehicle>
     <vehicle arrivalPos="-1" depart="145" departLane="best" departPos="0" id="XXI_Aprile_2_41" type="private"><route edges=" a13 a104 a24 a22 a59 a53cd a53[0] a53[1][0] a53[1][1][0] a77[1][0] a77[1][1] "/></vehicle>
     <vehicle arrivalPos="-1" depart="146" departLane="best" departPos="0" id="Costa_1_56" type="private"><route edges="a78[0] a56a a56b a77bc a77cd a53cd a53[0] a53[1][0] a79 a68 a11 b2[0] b2[1][0] b2[1][1][0] b21 "/></vehicle>
@@ -461,7 +461,7 @@
     <vehicle arrivalPos="-1" depart="148" departLane="best" departPos="0" id="Pertini_20_69" type="private"><route edges="b63[0] b63[1] b4[0] b4[1][1][0] b4[1][1][1] "/></vehicle>
     <vehicle arrivalPos="-1" depart="148" departLane="best" departPos="0" id="Silvani_7_63" type="private"><route edges="a203[0] a203[1] a203[1]b a202 a34 a113 a209 "/></vehicle>
     <vehicle arrivalPos="-1" depart="149" departLane="best" departPos="0" id="Pepoli_1_87" type="ignoring"><route edges="a210 a43[0] a118 a65 a57[0] a57[1] a62 a159 a42 a39 a35 a38 a50 a19 a22 a59 a53cd a53[0] a53[1][0] a79 a68 a11 b2[0] b2[1][0] b2[1][1][0] b2[1][1][1] b2[1][1][1]b "/></vehicle>
-    <vehicle arrivalPos="-1" depart="150" departLane="best" departPos="0" id="Audinot_3_7" type="ignoring"><route edges="a131 a65 a57[0] a57[1] a62 a159 a42 a39 a35 a38 a15 a14  "/></vehicle> 
+    <vehicle arrivalPos="-1" depart="150" departLane="best" departPos="0" id="Audinot_3_7" type="ignoring"><route edges="a131 a65 a57[0] a57[1] a62 a159 a42 a39 a35 a38 a15 a14  "/></vehicle>
     <vehicle arrivalPos="-1" depart="150" departLane="best" departPos="0" id="Gandhi_60_96" type="private"><route edges="b1[0] ba1[1] b1[1] a72[0] a72[1] a69 a161 a122 a3 a2 a202 a34 a113 a209 "/></vehicle>
     <vehicle arrivalPos="-1" depart="150" departLane="best" departPos="0" id="Malvasia_100_31" type="private"><route edges="b52 b51 b56[0] b56[1][0] b56[1][1] b5[1][0]+66 b5[1][1][1] b8 b3[1] b3[1]b "/></vehicle>
     <vehicle arrivalPos="-1" depart="150" departLane="best" departPos="0" id="Pepoli_10_88" type="private"><route edges="a210 a43[0] a43[1] a201 a201c a204a[0] a204b[0] a204[1][0] a204[1][1] "/></vehicle>
@@ -494,7 +494,7 @@
     <vehicle arrivalPos="-1" depart="160" departLane="best" departPos="0" id="Prati_Capraia_30_33" type="ignoring"><route edges="b3[0] b9 b11[0] b11[1][1] b70 "/></vehicle>
     <vehicle arrivalPos="-1" depart="160" departLane="best" departPos="0" id="Silvani_7_68" type="private"><route edges="a203[0] a203[1] a203[1]b a202 a34 a113 a209 "/></vehicle>
     <vehicle arrivalPos="-1" depart="161" departLane="best" departPos="0" id="Costa_70_62" type="private"><route edges="a78[0] a56a a56b a77bc a77cd a53cd a53[0] a78[1][1] a189[0] a189[1][0]+20000 a189[1][1] a188 a87[0] a20001+87[1][0] a87[1][1] am90 a89[0] a20002+89[1][0] a89[1][1] a91 a186 a109[0] a109[1][0]+20003 a109[1][1] a116 a46 a113 a209 "/></vehicle>
-    <vehicle arrivalPos="-1" depart="161" departLane="best" departPos="0" id="Pepoli_11_94" type="private"><route edges="a210 a43[0] a43[1] a201 a201c a204a[0] a124 b12 b56[0] b39[0] b39[1][0] b39[1][1][0] b39[1][1][1] b45 a67 a80 a127 a77[1][0] a77ab a77bc a21a a21b a103 a14  "/></vehicle> 
+    <vehicle arrivalPos="-1" depart="161" departLane="best" departPos="0" id="Pepoli_11_94" type="private"><route edges="a210 a43[0] a43[1] a201 a201c a204a[0] a124 b12 b56[0] b39[0] b39[1][0] b39[1][1][0] b39[1][1][1] b45 a67 a80 a127 a77[1][0] a77ab a77bc a21a a21b a103 a14  "/></vehicle>
     <vehicle arrivalPos="-1" depart="162" departLane="best" departPos="0" id="Pepoli_11_95" type="private"><route edges="a210 a43[0] a43[1] a201 a201c a204a[0] a124 b12 b56[0] b56[1][0] b56[1][1] b5[1][0]+66 b5[1][1][1] b8 b3[1] b3[1]b "/></vehicle>
     <vehicle arrivalPos="-1" depart="162" departLane="best" departPos="0" id="Silvani_7_69" type="private"><route edges="a203[0] a203[1] a203[1]b a202 a34 a113 a209 "/></vehicle>
     <vehicle arrivalPos="-1" depart="163" departLane="best" departPos="0" id="Pertini_20_76" type="private"><route edges="b63[0] b63[1] b4[0] b4[1][1][0] b4[1][1][1] "/></vehicle>
@@ -508,7 +508,7 @@
     <vehicle arrivalPos="-1" depart="165" departLane="best" departPos="0" id="Pertini_23_77" type="private"><route edges="b13[0] b14 b17[0] b29[0] b29[1] b4[1][1][0] b4[1][1][1] "/></vehicle>
     <vehicle arrivalPos="-1" depart="165" departLane="best" departPos="0" id="Prati_Capraia_100_34" type="private"><route edges="b3[0] b3[1] b3[1]b "/></vehicle>
     <vehicle arrivalPos="-1" depart="165" departLane="best" departPos="0" id="Silvani_7_70" type="private"><route edges="a203[0] a203[1] a203[1]b a202 a34 a113 a209 "/></vehicle>
-    <vehicle arrivalPos="-1" depart="166" departLane="best" departPos="0" id="Pepoli_3_97" type="ignoring"><route edges="a210 a43[0] a118 a65 a57[0] a57[1] a62 a159 a42 a39 a35 a38 a15 a14  "/></vehicle> 
+    <vehicle arrivalPos="-1" depart="166" departLane="best" departPos="0" id="Pepoli_3_97" type="ignoring"><route edges="a210 a43[0] a118 a65 a57[0] a57[1] a62 a159 a42 a39 a35 a38 a15 a14  "/></vehicle>
     <vehicle arrivalPos="-1" depart="167" departLane="best" departPos="0" id="Costa_12_64" type="private"><route edges="a78[0] a56a a56b a77bc a77cd a53cd a53[0] a53[1][0] a79 a68 a11 b38[0] b38[0]a b38[1][0] b38[1][1] b38[1][1]a b56[1][0] b34[0] b34[1][0] b26 b26.-170 b18 b20+19b b2[1][1][1]b "/></vehicle>
     <vehicle arrivalPos="-1" depart="167" departLane="best" departPos="0" id="Gandhi_60_107" type="private"><route edges="b1[0] ba1[1] b1[1] a72[0] a72[1] a69 a161 a122 a1b a1 a204a[0] a204b[0] a204[1][0] a204[1][1] "/></vehicle>
     <vehicle arrivalPos="-1" depart="167" departLane="best" departPos="0" id="Pertini_20_78" type="private"><route edges="b63[0] b63[1] b4[0] b4[1][1][0] b4[1][1][1] "/></vehicle>
@@ -620,7 +620,7 @@
     <vehicle arrivalPos="-1" depart="201" departLane="best" departPos="0" id="Gandhi_60_129" type="private"><route edges="b1[0] ba1[1] b1[1] a72[0] a72[1] a69 a161 a122 a1b a1 a204a[0] a204b[0] a204[1][0] a204[1][1] "/></vehicle>
     <vehicle arrivalPos="-1" depart="202" departLane="best" departPos="0" id="Pepoli_11_118" type="private"><route edges="a210 a43[0] a43[1] a201 a201c a204a[0] a124 b12 b56[0] b56[1][0] b56[1][1] b5[1][0]+66 b5[1][1][1] b8 b3[1] b3[1]b "/></vehicle>
     <vehicle arrivalPos="-1" depart="202" departLane="best" departPos="0" id="Pertini_20_94" type="private"><route edges="b63[0] b63[1] b4[0] b4[1][1][0] b4[1][1][1] "/></vehicle>
-    <vehicle arrivalPos="-1" depart="202" departLane="best" departPos="0" id="Silvani_11_86" type="private"><route edges="a203[0] b12 b56[0] b56[1][0] b56[1][1] b5[1][0]+66 b5[1][1][1] b16[0] b29[0] "/></vehicle> 
+    <vehicle arrivalPos="-1" depart="202" departLane="best" departPos="0" id="Silvani_11_86" type="private"><route edges="a203[0] b12 b56[0] b56[1][0] b56[1][1] b5[1][0]+66 b5[1][1][1] b16[0] b29[0] "/></vehicle>
     <vehicle arrivalPos="-1" depart="202" departLane="best" departPos="0" id="XXI_Aprile_7_57" type="private"><route edges=" a9 a211 a45 a206 a32 a40 a41 a160 a61 a58[0] a58[1] a66 a117 a209 "/></vehicle>
     <vehicle arrivalPos="-1" depart="203" departLane="best" departPos="0" id="Costa_50_78" type="private"><route edges="a78[0] a56a am1 a21b a103 a16 a37 a36 a40 a41 a160 a61 a58[0] a58[1] a200 a60 "/></vehicle>
     <vehicle arrivalPos="-1" depart="203" departLane="best" departPos="0" id="Gandhi_60_130" type="private"><route edges="b1[0] ba1[1] b1[1] a72[0] a72[1] a69 a161 a122 a1b a1 a204a[0] a204b[0] a204[1][0] a204[1][1] "/></vehicle>
@@ -845,7 +845,7 @@
     <vehicle arrivalPos="-1" depart="273" departLane="best" departPos="0" id="Pertini_20_127" type="private"><route edges="b63[0] b63[1] b4[0] b4[1][1][0] b4[1][1][1] "/></vehicle>
     <vehicle arrivalPos="-1" depart="273" departLane="best" departPos="0" id="Silvani_7_116" type="private"><route edges="a203[0] a203[1] a203[1]b a202 a34 a113 a209 "/></vehicle>
     <vehicle arrivalPos="-1" depart="274" departLane="best" departPos="0" id="Costa_12_105" type="private"><route edges="a78[0] a56a a56b a77bc a77cd a53cd a53[0] a53[1][0] a79 a68 a11 b38[0] b38[0]a b46 b49[0] b49[1] b55 b53 b53a "/></vehicle>
-    <vehicle arrivalPos="-1" depart="274" departLane="best" departPos="0" id="Pepoli_11_160" type="private"><route edges="a210 a43[0] a43[1] a201 a201c a204a[0] a124 b12 b56[0] b56[1][0] b56[1][1] b5[1][0]+66 b5[1][1][1] b16[0] b29[0] "/></vehicle> 
+    <vehicle arrivalPos="-1" depart="274" departLane="best" departPos="0" id="Pepoli_11_160" type="private"><route edges="a210 a43[0] a43[1] a201 a201c a204a[0] a124 b12 b56[0] b56[1][0] b56[1][1] b5[1][0]+66 b5[1][1][1] b16[0] b29[0] "/></vehicle>
     <vehicle arrivalPos="-1" depart="275" departLane="best" departPos="0" id="Pertini_20_128" type="private"><route edges="b63[0] b63[1] b4[0] b4[1][1][0] b4[1][1][1] "/></vehicle>
     <vehicle arrivalPos="-1" depart="276" departLane="best" departPos="0" id="Costa_12_106" type="private"><route edges="a78[0] a56a a56b a77bc a77cd a53cd a53[0] a53[1][0] a79 a68 a11 b38[0] b38[0]a b38[1][0] b38[1][1] b38[1][1]a b56[1][0] b56[1][1] b70 "/></vehicle>
     <vehicle arrivalPos="-1" depart="276" departLane="best" departPos="0" id="Pepoli_10_161" type="private"><route edges="a210 a43[0] a43[1] a201 a201c a204a[0] a204b[0] a204[1][0] a204[1][1] "/></vehicle>
@@ -914,7 +914,7 @@
     <vehicle arrivalPos="-1" depart="299" departLane="best" departPos="0" id="Silvani_11_127" type="private"><route edges="a203[0] b12 b56[0] b39[0] b39[1][0] b39[1][1][0] b39[1][1][1] b45 a67 a80 a127 a77[1][0] a77ab a77bc a21a a21b a103 a14  "/></vehicle>
     <vehicle arrivalPos="-1" depart="300" departLane="best" departPos="0" id="Costa_8_115" type="private"><route edges="a78[0] a56a a56b a77bc a77cd a53cd a53[0] a78[1][1] a189[0] a189[1][0]+20000 a189[1][1] a188 a87[0] a20001+87[1][0] a87[1][1] am90 a89[0] a20002+89[1][0] a89[1][1] a91 a186 a109[0] a109[1][0]+20003 a109[1][1] a116 a46 a134 a134b "/></vehicle>
     <vehicle arrivalPos="-1" depart="300" departLane="best" departPos="0" id="Gandhi_60_192" type="private"><route edges="b1[0] ba1[1] b1[1] a72[0] a72[1] a69 a161 a122 a3 a2 a202 a34 a134 a134b "/></vehicle>
-    <vehicle arrivalPos="-1" depart="300" departLane="best" departPos="0" id="Pepoli_11_175" type="private"><route edges="a210 a43[0] a43[1] a201 a201c a204a[0] a124 b12 b56[0] b56[1][0] b56[1][1] b5[1][0]+66 b5[1][1][1] b16[0] b29[0] "/></vehicle> 
+    <vehicle arrivalPos="-1" depart="300" departLane="best" departPos="0" id="Pepoli_11_175" type="private"><route edges="a210 a43[0] a43[1] a201 a201c a204a[0] a124 b12 b56[0] b56[1][0] b56[1][1] b5[1][0]+66 b5[1][1][1] b16[0] b29[0] "/></vehicle>
     <vehicle arrivalPos="-1" depart="301" departLane="best" departPos="0" id="Gandhi_60_193" type="private"><route edges="b1[0] ba1[1] b1[1] a72[0] a72[1] a69 a161 a122 a1b a1 a204a[0] a204b[0] a204[1][0] a204[1][1] "/></vehicle>
     <vehicle arrivalPos="-1" depart="301" departLane="best" departPos="0" id="Malvasia_100_62" type="private"><route edges="b52 b51 b56[0] b56[1][0] b56[1][1] b5[1][0]+66 b5[1][1][1] b8 b3[1] b3[1]b "/></vehicle>
     <vehicle arrivalPos="-1" depart="301" departLane="best" departPos="0" id="Pepoli_11_176" type="private"><route edges="a210 a43[0] a43[1] a201 a201c a204a[0] a124 b12 b56[0] b56[1][0] b56[1][1] b5[1][0]+66 b5[1][1][1] b8 b3[1] b3[1]b "/></vehicle>
@@ -1311,7 +1311,7 @@
     <vehicle arrivalPos="-1" depart="428" departLane="best" departPos="0" id="Gandhi_60_274" type="private"><route edges="b1[0] ba1[1] b1[1] a72[0] a72[1] a69 a161 a122 a1b a1 a204a[0] a204b[0] a204[1][0] a204[1][1] "/></vehicle>
     <vehicle arrivalPos="-1" depart="428" departLane="best" departPos="0" id="Malvasia_100_88" type="private"><route edges="b52 b51 b56[0] b56[1][0] b56[1][1] b5[1][0]+66 b5[1][1][1] b8 b3[1] b3[1]b "/></vehicle>
     <vehicle arrivalPos="-1" depart="428" departLane="best" departPos="0" id="Prati_Capraia_100_88" type="private"><route edges="b3[0] b3[1] b3[1]b "/></vehicle>
-    <vehicle arrivalPos="-1" depart="429" departLane="best" departPos="0" id="Silvani_11_182" type="private"><route edges="a203[0] b12 b56[0] b56[1][0] b56[1][1] b5[1][0]+66 b5[1][1][1] b16[0] b29[0] "/></vehicle> 
+    <vehicle arrivalPos="-1" depart="429" departLane="best" departPos="0" id="Silvani_11_182" type="private"><route edges="a203[0] b12 b56[0] b56[1][0] b56[1][1] b5[1][0]+66 b5[1][1][1] b16[0] b29[0] "/></vehicle>
     <vehicle arrivalPos="-1" depart="430" departLane="best" departPos="0" id="Pepoli_10_251" type="private"><route edges="a210 a43[0] a43[1] a201 a201c a204a[0] a204b[0] a204[1][0] a204[1][1] "/></vehicle>
     <vehicle arrivalPos="-1" depart="430" departLane="best" departPos="0" id="Pertini_20_200" type="private"><route edges="b63[0] b63[1] b4[0] b4[1][1][0] b4[1][1][1] "/></vehicle>
     <vehicle arrivalPos="-1" depart="431" departLane="best" departPos="0" id="Borgo_100_71" type="private"><route edges="b6 b100 b7 b3[1] b3[1]b "/></vehicle>
@@ -1388,7 +1388,7 @@
     <vehicle arrivalPos="-1" depart="452" departLane="best" departPos="0" id="Silvani_7_192" type="private"><route edges="a203[0] a203[1] a203[1]b a202 a34 a113 a209 "/></vehicle>
     <vehicle arrivalPos="-1" depart="453" departLane="best" departPos="0" id="Gandhi_60_290" type="private"><route edges="b1[0] ba1[1] b1[1] a72[0] a72[1] a69 a161 a122 a1b a1 a204a[0] a204b[0] a204[1][0] a204[1][1] "/></vehicle>
     <vehicle arrivalPos="-1" depart="454" departLane="best" departPos="0" id="Costa_50_174" type="private"><route edges="a78[0] a56a am1 a21b a103 a16 a37 a36 a40 a41 a160 a61 a58[0] a58[1] a200 a60 "/></vehicle>
-    <vehicle arrivalPos="-1" depart="454" departLane="best" departPos="0" id="Pepoli_11_265" type="private"><route edges="a210 a43[0] a43[1] a201 a201c a204a[0] a124 b12 b56[0] b56[1][0] b56[1][1] b5[1][0]+66 b5[1][1][1] b16[0] b29[0] "/></vehicle>  
+    <vehicle arrivalPos="-1" depart="454" departLane="best" departPos="0" id="Pepoli_11_265" type="private"><route edges="a210 a43[0] a43[1] a201 a201c a204a[0] a124 b12 b56[0] b56[1][0] b56[1][1] b5[1][0]+66 b5[1][1][1] b16[0] b29[0] "/></vehicle>
     <vehicle arrivalPos="-1" depart="455" departLane="best" departPos="0" id="Pertini_20_212" type="private"><route edges="b63[0] b63[1] b4[0] b4[1][1][0] b4[1][1][1] "/></vehicle>
     <vehicle arrivalPos="-1" depart="455" departLane="best" departPos="0" id="Silvani_11_193" type="private"><route edges="a203[0] b12 b56[0] b39[0] b39[1][0] b39[1][1][0] b39[1][1][1] b45 b2[0] b2[1][0] b2[1][1][0] b2[1][1][1] b2[1][1][1]b "/></vehicle>
     <vehicle arrivalPos="-1" depart="456" departLane="best" departPos="0" id="Borgo_40_75" type="ignoring"><route edges="b6 b100 b7 b9 b11[0] b11[1][1] b101 b34[0] b34[1][0] b36 b46 b49[0] b49[1] b55 b53 b53a "/></vehicle>
@@ -1670,7 +1670,7 @@
     <vehicle arrivalPos="-1" depart="545" departLane="best" departPos="0" id="Gandhi_60_349" type="private"><route edges="b1[0] ba1[1] b1[1] a72[0] a72[1] a69 a161 a122 a1b a1 a204a[0] a204b[0] a204[1][0] a204[1][1] "/></vehicle>
     <vehicle arrivalPos="-1" depart="545" departLane="best" departPos="0" id="Pepoli_10_318" type="private"><route edges="a210 a43[0] a43[1] a201 a201c a204a[0] a204b[0] a204[1][0] a204[1][1] "/></vehicle>
     <vehicle arrivalPos="-1" depart="546" departLane="best" departPos="0" id="Costa_3_209" type="private"><route edges="a78[0] a56a am1 a21b a103 a14  "/></vehicle>
-    <vehicle arrivalPos="-1" depart="546" departLane="best" departPos="0" id="Pepoli_11_319" type="private"><route edges="a210 a43[0] a43[1] a201 a201c a204a[0] a124 b12 b56[0] b56[1][0] b56[1][1] b5[1][0]+66 b5[1][1][1] b16[0] b29[0] "/></vehicle>   
+    <vehicle arrivalPos="-1" depart="546" departLane="best" departPos="0" id="Pepoli_11_319" type="private"><route edges="a210 a43[0] a43[1] a201 a201c a204a[0] a124 b12 b56[0] b56[1][0] b56[1][1] b5[1][0]+66 b5[1][1][1] b16[0] b29[0] "/></vehicle>
     <vehicle arrivalPos="-1" depart="546" departLane="best" departPos="0" id="Pertini_50_254" type="ignoring"><route edges="b63[0] b63[1] b4[0] b4[1][1][0] b9 b11[0] b11[1][1] b101 b35[0] b35[1][0] b35[1][1][0] b20000+35[1][1][1][0] b35[1][1][1][1] "/></vehicle>
     <vehicle arrivalPos="-1" depart="547" departLane="best" departPos="0" id="Borgo_20_90" type="private"><route edges="b6 b100 b7 b4[1][1][1] "/></vehicle>
     <vehicle arrivalPos="-1" depart="547" departLane="best" departPos="0" id="Silvani_11_232" type="private"><route edges="a203[0] b12 b56[0] b56[1][0] b56[1][1] b5[1][0]+66 b5[1][1][1] b8 b3[1] b3[1]b "/></vehicle>
@@ -1766,7 +1766,7 @@
     <vehicle arrivalPos="-1" depart="576" departLane="best" departPos="0" id="XXI_Aprile_1_162" type="private"><route edges=" a13 a104 a24 a22 a59 a53cd a53[0] a53[1][0] a79 a68 a11 b2[0] b2[1][0] b2[1][1][0] b2[1][1][1] b2[1][1][1]b "/></vehicle>
     <vehicle arrivalPos="-1" depart="577" departLane="best" departPos="0" id="Borgo_20_95" type="private"><route edges="b6 b100 b7 b4[1][1][1] "/></vehicle>
     <vehicle arrivalPos="-1" depart="577" departLane="best" departPos="0" id="Costa_12_221" type="private"><route edges="a78[0] a56a a56b a77bc a77cd a53cd a53[0] a53[1][0] a79 a68 a11 b38[0] b38[0]a b46 b49[0] b49[1] b55 b53 b53a "/></vehicle>
-    <vehicle arrivalPos="-1" depart="577" departLane="best" departPos="0" id="Pepoli_11_337" type="private"><route edges="a210 a43[0] a43[1] a201 a201c a204a[0] a124 b12 b56[0] b56[1][0] b56[1][1] b5[1][0]+66 b5[1][1][1] b16[0] b29[0] "/></vehicle>  
+    <vehicle arrivalPos="-1" depart="577" departLane="best" departPos="0" id="Pepoli_11_337" type="private"><route edges="a210 a43[0] a43[1] a201 a201c a204a[0] a124 b12 b56[0] b56[1][0] b56[1][1] b5[1][0]+66 b5[1][1][1] b16[0] b29[0] "/></vehicle>
     <vehicle arrivalPos="-1" depart="577" departLane="best" departPos="0" id="Silvani_11_245" type="private"><route edges="a203[0] b12 b56[0] b56[1][0] b56[1][1] b5[1][0]+66 b5[1][1][1] b8 b3[1] b3[1]b "/></vehicle>
     <vehicle arrivalPos="-1" depart="578" departLane="best" departPos="0" id="Gandhi_40_370" type="private"><route edges="b1[0] ba1[1] b1[1] b38[0] b38[0]a b46 b49[0] b49[1] b55 b53 b53a "/></vehicle>
     <vehicle arrivalPos="-1" depart="578" departLane="best" departPos="0" id="Malvasia_100_119" type="private"><route edges="b52 b51 b56[0] b56[1][0] b56[1][1] b5[1][0]+66 b5[1][1][1] b8 b3[1] b3[1]b "/></vehicle>
@@ -1810,7 +1810,7 @@
     <vehicle arrivalPos="-1" depart="591" departLane="best" departPos="0" id="Pepoli_11_345" type="private"><route edges="a210 a43[0] a43[1] a201 a201c a204a[0] a124 b12 b56[0] b56[1][0] b56[1][1] b5[1][0]+66 b5[1][1][1] b8 b10 "/></vehicle>
     <vehicle arrivalPos="-1" depart="591" departLane="best" departPos="0" id="Pertini_20_275" type="private"><route edges="b63[0] b63[1] b4[0] b4[1][1][0] b4[1][1][1] "/></vehicle>
     <vehicle arrivalPos="-1" depart="592" departLane="best" departPos="0" id="Gandhi_60_379" type="private"><route edges="b1[0] ba1[1] b1[1] a72[0] a72[1] a69 a161 a122 a1b a1 a204a[0] a204b[0] a204[1][0] a204[1][1] "/></vehicle>
-    <vehicle arrivalPos="-1" depart="592" departLane="best" departPos="0" id="Silvani_11_251" type="private"><route edges="a203[0] b12 b56[0] b56[1][0] b56[1][1] b5[1][0]+66 b5[1][1][1] b16[0] b29[0] "/></vehicle>  
+    <vehicle arrivalPos="-1" depart="592" departLane="best" departPos="0" id="Silvani_11_251" type="private"><route edges="a203[0] b12 b56[0] b56[1][0] b56[1][1] b5[1][0]+66 b5[1][1][1] b16[0] b29[0] "/></vehicle>
     <vehicle arrivalPos="-1" depart="593" departLane="best" departPos="0" id="Costa_1_227" type="private"><route edges="a78[0] a56a a56b a77bc a77cd a53cd a53[0] a53[1][0] a79 a68 a11 b2[0] b2[1][0] b2[1][1][0] b2[1][1][1] b2[1][1][1]b "/></vehicle>
     <vehicle arrivalPos="-1" depart="593" departLane="best" departPos="0" id="Malvasia_94_122" type="private"><route edges="b52 b51 b50[0] b97 b39[1][0] b39[1][1][0] b39[1][1][1] b45 b2[0] b2[1][0] b2[1][1][0] b2[1][1][1] b2[1][1][1]b "/></vehicle>
     <vehicle arrivalPos="-1" depart="593" departLane="best" departPos="0" id="Pertini_10_276" type="private"><route edges="b63[0] b63[1] b4[0] b4[1][1][0] b10 "/></vehicle>
@@ -2389,12 +2389,12 @@
     <vehicle arrivalPos="-1" depart="778" departLane="best" departPos="0" id="Silvani_11_330" type="private"><route edges="a203[0] b12 b56[0] b56[1][0] b56[1][1] b5[1][0]+66 b5[1][1][1] b8 b3[1] b3[1]b "/></vehicle>
     <vehicle arrivalPos="-1" depart="779" departLane="best" departPos="0" id="XXI_Aprile_7_219" type="private"><route edges=" a9 a211 a45 a206 a32 a40 a41 a160 a61 a58[0] a58[1] a66 a117 a209 "/></vehicle>
     <vehicle arrivalPos="-1" depart="780" departLane="best" departPos="0" id="Gandhi_40_499" type="private"><route edges="b1[0] ba1[1] b1[1] b38[0] b38[0]a b46 b49[0] b49[1] b55 b53 b53a "/></vehicle>
-    <vehicle arrivalPos="-1" depart="780" departLane="best" departPos="0" id="Pepoli_11_455" type="private"><route edges="a210 a43[0] a43[1] a201 a201c a204a[0] a124 b12 b56[0] b56[1][0] b56[1][1] b5[1][0]+66 b5[1][1][1] b16[0] b29[0] "/></vehicle>  
+    <vehicle arrivalPos="-1" depart="780" departLane="best" departPos="0" id="Pepoli_11_455" type="private"><route edges="a210 a43[0] a43[1] a201 a201c a204a[0] a124 b12 b56[0] b56[1][0] b56[1][1] b5[1][0]+66 b5[1][1][1] b16[0] b29[0] "/></vehicle>
     <vehicle arrivalPos="-1" depart="780" departLane="best" departPos="0" id="Pertini_20_363" type="private"><route edges="b63[0] b63[1] b4[0] b4[1][1][0] b4[1][1][1] "/></vehicle>
 <!--    <vehicle arrivalPos="-1" depart="780" departLane="best" departPos="0" id="Silvani_11_331" type="private"><route edges="a203[0] b12 b56[0] b39[0] b39[1][0] b39[1][1][0] b46 a181 a18 a191 a188 a87[0] a20001+87[1][0] a87[1][1] am90 a89[0] a20002+89[1][0] a89[1][1] a91 a186 a109[0] a109[1][0]+20003 a109[1][1] a120 a117 a209 "/></vehicle>  -->
     <vehicle arrivalPos="-1" depart="781" departLane="best" departPos="0" id="Costa_70_299" type="private"><route edges="a78[0] a56a a56b a77bc a77cd a53cd a53[0] a78[1][1] a189[0] a189[1][0]+20000 a189[1][1] a188 a87[0] a20001+87[1][0] a87[1][1] am90 a89[0] a20002+89[1][0] a89[1][1] a91 a186 a109[0] a109[1][0]+20003 a109[1][1] a116 a46 a113 a209 "/></vehicle>
     <vehicle arrivalPos="-1" depart="781" departLane="best" departPos="0" id="Pepoli_11_456" type="private"><route edges="a210 a43[0] a43[1] a201 a201c a204a[0] a124 b12 b56[0] b56[1][0] b56[1][1] b5[1][0]+66 b5[1][1][1] b8 b3[1] b3[1]b "/></vehicle>
-    <vehicle arrivalPos="-1" depart="782" departLane="best" departPos="0" id="Pertini_102_364" type="private"><route edges="b13[0] b14 b17[0] b29[0] "/></vehicle>  
+    <vehicle arrivalPos="-1" depart="782" departLane="best" departPos="0" id="Pertini_102_364" type="private"><route edges="b13[0] b14 b17[0] b29[0] "/></vehicle>
     <vehicle arrivalPos="-1" depart="782" departLane="best" departPos="0" id="XXI_Aprile_7_220" type="private"><route edges=" a9 a211 a45 a206 a32 a40 a41 a160 a61 a58[0] a58[1] a66 a117 a209 "/></vehicle>
     <vehicle arrivalPos="-1" depart="783" departLane="best" departPos="0" id="Costa_50_300" type="private"><route edges="a78[0] a56a am1 a21b a103 a16 a37 a36 a40 a41 a160 a61 a58[0] a58[1] a200 a60 "/></vehicle>
     <vehicle arrivalPos="-1" depart="783" departLane="best" departPos="0" id="Gandhi_60_501" type="private"><route edges="b1[0] ba1[1] b1[1] a72[0] a72[1] a69 a161 a122 a3 a2 a202 a34 a113 a209 "/></vehicle>
@@ -2445,7 +2445,7 @@
     <vehicle arrivalPos="-1" depart="796" departLane="best" departPos="0" id="XXI_Aprile_7_224" type="private"><route edges=" a9 a211 a45 a206 a32 a40 a41 a160 a61 a58[0] a58[1] a66 a117 a209 "/></vehicle>
     <vehicle arrivalPos="-1" depart="797" departLane="best" departPos="0" id="Gandhi_60_510" type="private"><route edges="b1[0] ba1[1] b1[1] a72[0] a72[1] a69 a161 a122 a1b a1 a204a[0] a204b[0] a204[1][0] a204[1][1] "/></vehicle>
     <vehicle arrivalPos="-1" depart="797" departLane="best" departPos="0" id="Malvasia_92_164" type="private"><route edges="b52 b51 b56[0] b56[1][0] b34[0] b34[1][0] b34[1][1] b2[1][0] b2[1][1][0] b2[1][1][1] b2[1][1][1]b "/></vehicle>
-    <vehicle arrivalPos="-1" depart="797" departLane="best" departPos="0" id="Pepoli_11_465" type="private"><route edges="a210 a43[0] a43[1] a201 a201c a204a[0] a124 b12 b56[0] b56[1][0] b56[1][1] b5[1][0]+66 b5[1][1][1] b16[0] b29[0] "/></vehicle>  
+    <vehicle arrivalPos="-1" depart="797" departLane="best" departPos="0" id="Pepoli_11_465" type="private"><route edges="a210 a43[0] a43[1] a201 a201c a204a[0] a124 b12 b56[0] b56[1][0] b56[1][1] b5[1][0]+66 b5[1][1][1] b16[0] b29[0] "/></vehicle>
     <vehicle arrivalPos="-1" depart="797" departLane="best" departPos="0" id="Pertini_20_371" type="private"><route edges="b63[0] b63[1] b4[0] b4[1][1][0] b4[1][1][1] "/></vehicle>
     <vehicle arrivalPos="-1" depart="797" departLane="best" departPos="0" id="Prati_Capraia_100_164" type="private"><route edges="b3[0] b3[1] b3[1]b "/></vehicle>
     <vehicle arrivalPos="-1" depart="797" departLane="best" departPos="0" id="Silvani_7_338" type="private"><route edges="a203[0] a203[1] a203[1]b a202 a34 a113 a209 "/></vehicle>
@@ -2494,7 +2494,7 @@
     <vehicle arrivalPos="-1" depart="812" departLane="best" departPos="0" id="Pepoli_11_474" type="private"><route edges="a210 a43[0] a43[1] a201 a201c a204a[0] a124 b12 b56[0] b39[0] b39[1][0] b98 b34[1][0] b26 b26.-170 b18 b20+19b b2[1][1][1]b "/></vehicle>
     <vehicle arrivalPos="-1" depart="812" departLane="best" departPos="0" id="Pertini_20_378" type="private"><route edges="b63[0] b63[1] b4[0] b4[1][1][0] b4[1][1][1] "/></vehicle>
     <vehicle arrivalPos="-1" depart="812" departLane="best" departPos="0" id="Prati_Capraia_100_167" type="private"><route edges="b3[0] b3[1] b3[1]b "/></vehicle>
-    <vehicle arrivalPos="-1" depart="813" departLane="best" departPos="0" id="Silvani_11_345" type="private"><route edges="a203[0] b12 b56[0] b56[1][0] b56[1][1] b5[1][0]+66 b5[1][1][1] b16[0] b29[0] "/></vehicle> 
+    <vehicle arrivalPos="-1" depart="813" departLane="best" departPos="0" id="Silvani_11_345" type="private"><route edges="a203[0] b12 b56[0] b56[1][0] b56[1][1] b5[1][0]+66 b5[1][1][1] b16[0] b29[0] "/></vehicle>
     <vehicle arrivalPos="-1" depart="814" departLane="best" departPos="0" id="Borgo_20_134" type="private"><route edges="b6 b100 b7 b4[1][1][1] "/></vehicle>
     <vehicle arrivalPos="-1" depart="814" departLane="best" departPos="0" id="Gandhi_60_521" type="private"><route edges="b1[0] ba1[1] b1[1] a72[0] a72[1] a69 a161 a122 a1b a1 a204a[0] a124 b12 b56[0] b56[1][0] b34[0] b34[1][0] b26 b26.-170 b18 b20+19b b2[1][1][1]b "/></vehicle>
     <vehicle arrivalPos="-1" depart="814" departLane="best" departPos="0" id="Pepoli_8_475" type="private"><route edges="a210 a43[0] a43[1] a134 a134b "/></vehicle>
@@ -2602,7 +2602,7 @@
     <vehicle arrivalPos="-1" depart="846" departLane="best" departPos="0" id="Malvasia_70_174" type="private"><route edges="b52 b51 b56[0] b39[0] b39[1][0] b39[1][1][0] b39[1][1][1] b45 a67 a80 a127 a77[1][0] a77[1][1] "/></vehicle>
     <vehicle arrivalPos="-1" depart="846" departLane="best" departPos="0" id="Pepoli_11_494" type="private"><route edges="a210 a43[0] a43[1] a201 a201c a204a[0] a124 b12 b56[0] b56[1][0] b56[1][1] b5[1][0]+66 b5[1][1][1] b8 b4[1][1][1] "/></vehicle>
     <vehicle arrivalPos="-1" depart="846" departLane="best" departPos="0" id="Prati_Capraia_100_174" type="private"><route edges="b3[0] b3[1] b3[1]b "/></vehicle>
-    <vehicle arrivalPos="-1" depart="846" departLane="best" departPos="0" id="Silvani_11_359" type="private"><route edges="a203[0] b12 b56[0] b56[1][0] b56[1][1] b5[1][0]+66 b5[1][1][1] b16[0] b29[0] "/></vehicle> 
+    <vehicle arrivalPos="-1" depart="846" departLane="best" departPos="0" id="Silvani_11_359" type="private"><route edges="a203[0] b12 b56[0] b56[1][0] b56[1][1] b5[1][0]+66 b5[1][1][1] b16[0] b29[0] "/></vehicle>
     <vehicle arrivalPos="-1" depart="846" departLane="best" departPos="0" id="XXI_Aprile_7_238" type="private"><route edges=" a9 a211 a45 a206 a32 a40 a41 a160 a61 a58[0] a58[1] a66 a117 a209 "/></vehicle>
     <vehicle arrivalPos="-1" depart="847" departLane="best" departPos="0" id="Gandhi_60_542" type="private"><route edges="b1[0] ba1[1] b1[1] a72[0] a72[1] a69 a161 a122 a1b a1 a204a[0] a204b[0] a204[1][0] a204[1][1] "/></vehicle>
     <vehicle arrivalPos="-1" depart="847" departLane="best" departPos="0" id="Pertini_20_394" type="private"><route edges="b63[0] b63[1] b4[0] b4[1][1][0] b4[1][1][1] "/></vehicle>
@@ -2621,7 +2621,7 @@
     <vehicle arrivalPos="-1" depart="852" departLane="best" departPos="0" id="Pepoli_8_497" type="private"><route edges="a210 a43[0] a43[1] a134 a134b "/></vehicle>
     <vehicle arrivalPos="-1" depart="853" departLane="best" departPos="0" id="Gandhi_60_546" type="private"><route edges="b1[0] ba1[1] b1[1] a72[0] a72[1] a69 a161 a122 a1b a1 a204a[0] a204b[0] a204[1][0] a204[1][1] "/></vehicle>
     <vehicle arrivalPos="-1" depart="853" departLane="best" departPos="0" id="Pepoli_8_498" type="private"><route edges="a210 a43[0] a43[1] a134 a134b "/></vehicle>
-    <vehicle arrivalPos="-1" depart="853" departLane="best" departPos="0" id="Pertini_102_397" type="private"><route edges="b13[0] b14 b17[0] b29[0] "/></vehicle>  
+    <vehicle arrivalPos="-1" depart="853" departLane="best" departPos="0" id="Pertini_102_397" type="private"><route edges="b13[0] b14 b17[0] b29[0] "/></vehicle>
     <vehicle arrivalPos="-1" depart="853" departLane="best" departPos="0" id="Silvani_7_362" type="private"><route edges="a203[0] a203[1] a203[1]b a202 a34 a113 a209 "/></vehicle>
     <vehicle arrivalPos="-1" depart="853" departLane="best" departPos="0" id="XXI_Aprile_7_240" type="private"><route edges=" a9 a211 a45 a206 a32 a40 a41 a160 a61 a58[0] a58[1] a66 a117 a209 "/></vehicle>
     <vehicle arrivalPos="-1" depart="854" departLane="best" departPos="0" id="Costa_50_327" type="private"><route edges="a78[0] a56a am1 a21b a103 a16 a37 a36 a40 a41 a160 a61 a58[0] a58[1] a200 a60 "/></vehicle>
@@ -2666,7 +2666,7 @@
     <vehicle arrivalPos="-1" depart="867" departLane="best" departPos="0" id="Pepoli_1_506" type="ignoring"><route edges="a210 a43[0] a118 a65 a57[0] a57[1] a62 a159 a42 a39 a35 a38 a50 a19 a22 a59 a53cd a53[0] a53[1][0] a79 a68 a11 b2[0] b2[1][0] b2[1][1][0] b2[1][1][1] b2[1][1][1]b "/></vehicle>
     <vehicle arrivalPos="-1" depart="867" departLane="best" departPos="0" id="XXI_Aprile_113_244" type="private"><route edges=" a13 a104 a24 a22 a59 a53cd a53[0] a53[1][0] a79 a74 a72[1] a69 a161 a122 a1b a1 a204a[0] a124 b12 b56[0] b39[0] b39[1][0] b39[1][1][0] b39[1][1][1] b45 b2[0] b2[1][0] b2[1][1][0] b2[1][1][1] b2[1][1][1]b "/></vehicle>
     <vehicle arrivalPos="-1" depart="868" departLane="best" departPos="0" id="Pertini_50_404" type="ignoring"><route edges="b63[0] b63[1] b4[0] b4[1][1][0] b9 b11[0] b11[1][1] b101 b35[0] b35[1][0] b35[1][1][0] b20000+35[1][1][1][0] b35[1][1][1][1] "/></vehicle>
-    <vehicle arrivalPos="-1" depart="868" departLane="best" departPos="0" id="Silvani_11_368" type="private"><route edges="a203[0] b12 b56[0] b56[1][0] b56[1][1] b5[1][0]+66 b5[1][1][1] b16[0] b29[0] "/></vehicle>  
+    <vehicle arrivalPos="-1" depart="868" departLane="best" departPos="0" id="Silvani_11_368" type="private"><route edges="a203[0] b12 b56[0] b56[1][0] b56[1][1] b5[1][0]+66 b5[1][1][1] b16[0] b29[0] "/></vehicle>
     <vehicle arrivalPos="-1" depart="869" departLane="best" departPos="0" id="Borgo_100_143" type="private"><route edges="b6 b100 b7 b3[1] b3[1]b "/></vehicle>
     <vehicle arrivalPos="-1" depart="869" departLane="best" departPos="0" id="Costa_70_333" type="private"><route edges="a78[0] a56a a56b a77bc a77cd a53cd a53[0] a78[1][1] a189[0] a189[1][0]+20000 a189[1][1] a188 a87[0] a20001+87[1][0] a87[1][1] am90 a89[0] a20002+89[1][0] a89[1][1] a91 a186 a109[0] a109[1][0]+20003 a109[1][1] a116 a46 a113 a209 "/></vehicle>
     <vehicle arrivalPos="-1" depart="869" departLane="best" departPos="0" id="Gandhi_60_556" type="private"><route edges="b1[0] ba1[1] b1[1] a72[0] a72[1] a69 a161 a122 a1b a1 a204a[0] a204b[0] a204[1][0] a204[1][1] "/></vehicle>
@@ -2719,7 +2719,7 @@
     <vehicle arrivalPos="-1" depart="882" departLane="best" departPos="0" id="XXI_Aprile_7_248" type="private"><route edges=" a9 a211 a45 a206 a32 a40 a41 a160 a61 a58[0] a58[1] a66 a117 a209 "/></vehicle>
     <vehicle arrivalPos="-1" depart="883" departLane="best" departPos="0" id="Costa_1_338" type="private"><route edges="a78[0] a56a a56b a77bc a77cd a53cd a53[0] a53[1][0] a79 a68 a11 b2[0] b2[1][0] b2[1][1][0] b2[1][1][1] b2[1][1][1]b "/></vehicle>
     <vehicle arrivalPos="-1" depart="883" departLane="best" departPos="0" id="Gandhi_40_565" type="private"><route edges="b1[0] ba1[1] b1[1] b38[0] b38[0]a b46 b49[0] b49[1] b55 b53 b53a "/></vehicle>
-    <vehicle arrivalPos="-1" depart="883" departLane="best" departPos="0" id="Pertini_102_411" type="private"><route edges="b13[0] b14 b17[0] b29[0] "/></vehicle>  
+    <vehicle arrivalPos="-1" depart="883" departLane="best" departPos="0" id="Pertini_102_411" type="private"><route edges="b13[0] b14 b17[0] b29[0] "/></vehicle>
     <vehicle arrivalPos="-1" depart="884" departLane="best" departPos="0" id="Gandhi_40_566" type="private"><route edges="b1[0] ba1[1] b1[1] b38[0] b38[0]a b46 b49[0] b49[1] b55 b53 b53a "/></vehicle>
     <vehicle arrivalPos="-1" depart="884" departLane="best" departPos="0" id="Pepoli_11_516" type="private"><route edges="a210 a43[0] a43[1] a201 a201c a204a[0] a124 b12 b56[0] b39[0] b39[1][0] b39[1][1][0] b39[1][1][1] b45 a67 a80 a127 a77[1][0] a77[1][1] "/></vehicle>
     <vehicle arrivalPos="-1" depart="884" departLane="best" departPos="0" id="Silvani_7_375" type="private"><route edges="a203[0] a203[1] a203[1]b a202 a34 a113 a209 "/></vehicle>
@@ -2995,7 +2995,7 @@
     <vehicle arrivalPos="-1" depart="975" departLane="best" departPos="0" id="Gandhi_60_624" type="private"><route edges="b1[0] ba1[1] b1[1] a72[0] a72[1] a69 a161 a122 a1b a1 a204a[0] a124 b12 b56[0] b39[0] b39[1][0] b39[1][1][0] b39[1][1][1] b45 b2[0] b2[1][0] b2[1][1][0] b2[1][1][1] b2[1][1][1]b "/></vehicle>
     <vehicle arrivalPos="-1" depart="975" departLane="best" departPos="0" id="Pepoli_11_569" type="private"><route edges="a210 a43[0] a43[1] a201 a201c a204a[0] a124 b12 b56[0] b56[1][0] b56[1][1] b5[1][0]+66 b5[1][1][1] b8 b4[1][1][1] "/></vehicle>
     <vehicle arrivalPos="-1" depart="976" departLane="best" departPos="0" id="Pertini_20_454" type="private"><route edges="b63[0] b63[1] b4[0] b4[1][1][0] b4[1][1][1] "/></vehicle>
-    <vehicle arrivalPos="-1" depart="976" departLane="best" departPos="0" id="Silvani_11_414" type="private"><route edges="a203[0] b12 b56[0] b56[1][0] b56[1][1] b5[1][0]+66 b5[1][1][1] b16[0] b29[0] "/></vehicle>   
+    <vehicle arrivalPos="-1" depart="976" departLane="best" departPos="0" id="Silvani_11_414" type="private"><route edges="a203[0] b12 b56[0] b56[1][0] b56[1][1] b5[1][0]+66 b5[1][1][1] b16[0] b29[0] "/></vehicle>
     <vehicle arrivalPos="-1" depart="977" departLane="best" departPos="0" id="Malvasia_100_201" type="private"><route edges="b52 b51 b56[0] b56[1][0] b56[1][1] b5[1][0]+66 b5[1][1][1] b8 b3[1] b3[1]b "/></vehicle>
     <vehicle arrivalPos="-1" depart="977" departLane="best" departPos="0" id="Pepoli_11_570" type="private"><route edges="a210 a43[0] a43[1] a201 a201c a204a[0] a124 b12 b56[0] b39[0] b39[1][0] b39[1][1][0] b39[1][1][1] b45 a67 a80 a127 a77[1][0] a77[1][1] "/></vehicle>
     <vehicle arrivalPos="-1" depart="977" departLane="best" departPos="0" id="Prati_Capraia_10_201" type="private"><route edges="b3[0] b10 "/></vehicle>
@@ -3020,7 +3020,7 @@
     <vehicle arrivalPos="-1" depart="983" departLane="best" departPos="0" id="Silvani_11_417" type="private"><route edges="a203[0] b12 b56[0] b39[0] b39[1][0] b39[1][1][0] b39[1][1][1] b45 b2[0] b2[1][0] b2[1][1][0] b2[1][1][1] b2[1][1][1]b "/></vehicle>
     <vehicle arrivalPos="-1" depart="984" departLane="best" departPos="0" id="Costa_1_377" type="private"><route edges="a78[0] a56a a56b a77bc a77cd a53cd a53[0] a53[1][0] a79 a68 a11 b2[0] b2[1][0] b24 b23 b17[0] b17[1] b8 b4[1][1][1] "/></vehicle>
     <vehicle arrivalPos="-1" depart="984" departLane="best" departPos="0" id="Gandhi_60_630" type="private"><route edges="b1[0] ba1[1] b1[1] a72[0] a72[1] a69 a161 a122 a3 a2 a202 a34 a134 a134b "/></vehicle>
-    <vehicle arrivalPos="-1" depart="984" departLane="best" departPos="0" id="Pepoli_11_574" type="private"><route edges="a210 a43[0] a43[1] a201 a201c a204a[0] a124 b12 b56[0] b56[1][0] b56[1][1] b5[1][0]+66 b5[1][1][1] b16[0] b29[0] "/></vehicle> 
+    <vehicle arrivalPos="-1" depart="984" departLane="best" departPos="0" id="Pepoli_11_574" type="private"><route edges="a210 a43[0] a43[1] a201 a201c a204a[0] a124 b12 b56[0] b56[1][0] b56[1][1] b5[1][0]+66 b5[1][1][1] b16[0] b29[0] "/></vehicle>
     <vehicle arrivalPos="-1" depart="984" departLane="best" departPos="0" id="Pertini_20_458" type="private"><route edges="b63[0] b63[1] b4[0] b4[1][1][0] b4[1][1][1] "/></vehicle>
     <vehicle arrivalPos="-1" depart="985" departLane="best" departPos="0" id="Audinot_7_46" type="private"><route edges="a131 a117 a209 "/></vehicle>
     <vehicle arrivalPos="-1" depart="985" departLane="best" departPos="0" id="Borgo_100_162" type="private"><route edges="b6 b100 b7 b3[1] b3[1]b "/></vehicle>
@@ -3034,7 +3034,7 @@
     <vehicle arrivalPos="-1" depart="987" departLane="best" departPos="0" id="Pertini_20_459" type="private"><route edges="b63[0] b63[1] b4[0] b4[1][1][0] b4[1][1][1] "/></vehicle>
     <vehicle arrivalPos="-1" depart="987" departLane="best" departPos="0" id="Prati_Capraia_100_203" type="private"><route edges="b3[0] b3[1] b3[1]b "/></vehicle>
     <vehicle arrivalPos="-1" depart="988" departLane="best" departPos="0" id="Silvani_11_419" type="private"><route edges="a203[0] b12 b56[0] b56[1][0] b56[1][1] b5[1][0]+66 b5[1][1][1] b8 b3[1] b3[1]b "/></vehicle>
-    <vehicle arrivalPos="-1" depart="988" departLane="best" departPos="0" id="XXI_Aprile_113_278" type="private"><route edges=" a13 a104 a24 a22 a59 a53cd a53[0] a53[1][0] a79 a74 a72[1] a69 a161 a122 a1b a1 a204a[0] a124 b12 b56[0] b56[1][0] b56[1][1] b5[1][0]+66 b5[1][1][1] b16[0] b29[0] "/></vehicle>  
+    <vehicle arrivalPos="-1" depart="988" departLane="best" departPos="0" id="XXI_Aprile_113_278" type="private"><route edges=" a13 a104 a24 a22 a59 a53cd a53[0] a53[1][0] a79 a74 a72[1] a69 a161 a122 a1b a1 a204a[0] a124 b12 b56[0] b56[1][0] b56[1][1] b5[1][0]+66 b5[1][1][1] b16[0] b29[0] "/></vehicle>
     <vehicle arrivalPos="-1" depart="989" departLane="best" departPos="0" id="Gandhi_42_633" type="ignoring"><route edges="b1[0] b25 b23 b27 b36 b46 b49[0] b49[1] b55 b53 b53a "/></vehicle>
     <vehicle arrivalPos="-1" depart="989" departLane="best" departPos="0" id="Pepoli_11_577" type="private"><route edges="a210 a43[0] a43[1] a201 a201c a204a[0] a124 b12 b56[0] b56[1][0] b56[1][1] b5[1][0]+66 b5[1][1][1] b8 b3[1] b3[1]b "/></vehicle>
     <vehicle arrivalPos="-1" depart="989" departLane="best" departPos="0" id="Pertini_20_460" type="private"><route edges="b63[0] b63[1] b4[0] b4[1][1][0] b4[1][1][1] "/></vehicle>
@@ -3180,7 +3180,7 @@
     <vehicle arrivalPos="-1" depart="1034" departLane="best" departPos="0" id="Costa_70_396" type="private"><route edges="a78[0] a56a a56b a77bc a77cd a53cd a53[0] a78[1][1] a189[0] a189[1][0]+20000 a189[1][1] a188 a87[0] a20001+87[1][0] a87[1][1] am90 a89[0] a20002+89[1][0] a89[1][1] a91 a186 a109[0] a109[1][0]+20003 a109[1][1] a116 a46 a113 a209 "/></vehicle>
     <vehicle arrivalPos="-1" depart="1034" departLane="best" departPos="0" id="Gandhi_50_662" type="ignoring"><route edges="b1[0] b25 b23 b17[0] b17[1] b11[0] b11[1][1] b101 b35[0] b35[1][0] b35[1][1][0] b20000+35[1][1][1][0] b35[1][1][1][1] "/></vehicle>
     <vehicle arrivalPos="-1" depart="1034" departLane="best" departPos="0" id="Pertini_20_481" type="private"><route edges="b63[0] b63[1] b4[0] b4[1][1][0] b4[1][1][1] "/></vehicle>
-    <vehicle arrivalPos="-1" depart="1035" departLane="best" departPos="0" id="Pepoli_11_604" type="private"><route edges="a210 a43[0] a43[1] a201 a201c a204a[0] a124 b12 b56[0] b56[1][0] b56[1][1] b5[1][0]+66 b5[1][1][1] b16[0] b29[0] "/></vehicle>   
+    <vehicle arrivalPos="-1" depart="1035" departLane="best" departPos="0" id="Pepoli_11_604" type="private"><route edges="a210 a43[0] a43[1] a201 a201c a204a[0] a124 b12 b56[0] b56[1][0] b56[1][1] b5[1][0]+66 b5[1][1][1] b16[0] b29[0] "/></vehicle>
     <vehicle arrivalPos="-1" depart="1035" departLane="best" departPos="0" id="Silvani_11_439" type="private"><route edges="a203[0] b12 b56[0] b56[1][0] b56[1][1] b5[1][0]+66 b5[1][1][1] b16[0] b16[1] b18 b20+19b b2[1][1][1]b "/></vehicle>
     <vehicle arrivalPos="-1" depart="1035" departLane="best" departPos="0" id="XXI_Aprile_7_291" type="private"><route edges=" a9 a211 a45 a206 a32 a40 a41 a160 a61 a58[0] a58[1] a66 a117 a209 "/></vehicle>
 <!--    <vehicle arrivalPos="-1" depart="1036" departLane="best" departPos="0" id="Malvasia_62_213" type="private"><route edges="b52 b51 b50[0] b97 b39[1][0] b39[1][1][0] b46 a181 a18 a191 a188 a87[0] a20001+87[1][0] a87[1][1] am90 a89[0] a20002+89[1][0] a89[1][1] a91 a186 a109[0] a109[1][0]+20003 a109[1][1] a116 a46 a134 a134b "/></vehicle>  -->
@@ -3273,7 +3273,7 @@
     <vehicle arrivalPos="-1" depart="1063" departLane="best" departPos="0" id="XXI_Aprile_1_299" type="private"><route edges=" a13 a104 a24 a22 a59 a53cd a53[0] a53[1][0] a79 a68 a11 b2[0] b2[1][0] b2[1][1][0] b2[1][1][1] b2[1][1][1]b "/></vehicle>
     <vehicle arrivalPos="-1" depart="1064" departLane="best" departPos="0" id="Borgo_20_175" type="private"><route edges="b6 b100 b7 b4[1][1][1] "/></vehicle>
     <vehicle arrivalPos="-1" depart="1064" departLane="best" departPos="0" id="Gandhi_60_681" type="private"><route edges="b1[0] ba1[1] b1[1] a72[0] a72[1] a69 a161 a122 a1b a1 a204a[0] a204b[0] a204[1][0] a204[1][1] "/></vehicle>
-    <vehicle arrivalPos="-1" depart="1064" departLane="best" departPos="0" id="Pepoli_11_621" type="private"><route edges="a210 a43[0] a43[1] a201 a201c a204a[0] a124 b12 b56[0] b56[1][0] b56[1][1] b5[1][0]+66 b5[1][1][1] b16[0] b29[0] "/></vehicle>   
+    <vehicle arrivalPos="-1" depart="1064" departLane="best" departPos="0" id="Pepoli_11_621" type="private"><route edges="a210 a43[0] a43[1] a201 a201c a204a[0] a124 b12 b56[0] b56[1][0] b56[1][1] b5[1][0]+66 b5[1][1][1] b16[0] b29[0] "/></vehicle>
     <vehicle arrivalPos="-1" depart="1064" departLane="best" departPos="0" id="Pertini_20_495" type="private"><route edges="b63[0] b63[1] b4[0] b4[1][1][0] b4[1][1][1] "/></vehicle>
     <vehicle arrivalPos="-1" depart="1065" departLane="best" departPos="0" id="Costa_200_408" type="private"><route edges="a78[0] a56a a56b a77bc a77cd a53cd a53[0] a78[1][1] a189[0] a189[1][0]+20000 a189[1][1] a188 a87[0] a20001+87[1][0] a87[1][1] am90 a89[0] a20002+89[1][0] a89[1][1] a91 a186 a109[0] a109[1][0]+20003 a109[1][1] a116 a46 a201 a201c a204a[0] a204b[0] a204[1][0] a204[1][1] "/></vehicle>
     <vehicle arrivalPos="-1" depart="1065" departLane="best" departPos="0" id="Malvasia_100_219" type="private"><route edges="b52 b51 b56[0] b56[1][0] b56[1][1] b5[1][0]+66 b5[1][1][1] b8 b3[1] b3[1]b "/></vehicle>
@@ -3819,7 +3819,7 @@
     <vehicle arrivalPos="-1" depart="1240" departLane="best" departPos="0" id="Malvasia_92_255" type="private"><route edges="b52 b51 b56[0] b56[1][0] b34[0] b34[1][0] b34[1][1] b2[1][0] b2[1][1][0] b2[1][1][1] b2[1][1][1]b "/></vehicle>
     <vehicle arrivalPos="-1" depart="1240" departLane="best" departPos="0" id="Pertini_20_577" type="private"><route edges="b63[0] b63[1] b4[0] b4[1][1][0] b4[1][1][1] "/></vehicle>
     <vehicle arrivalPos="-1" depart="1240" departLane="best" departPos="0" id="Prati_Capraia_100_255" type="private"><route edges="b3[0] b3[1] b3[1]b "/></vehicle>
-    <vehicle arrivalPos="-1" depart="1240" departLane="best" departPos="0" id="Silvani_11_526" type="private"><route edges="a203[0] b12 b56[0] b56[1][0] b56[1][1] b5[1][0]+66 b5[1][1][1] b16[0] b29[0] "/></vehicle> 
+    <vehicle arrivalPos="-1" depart="1240" departLane="best" departPos="0" id="Silvani_11_526" type="private"><route edges="a203[0] b12 b56[0] b56[1][0] b56[1][1] b5[1][0]+66 b5[1][1][1] b16[0] b29[0] "/></vehicle>
     <vehicle arrivalPos="-1" depart="1241" departLane="best" departPos="0" id="Pepoli_11_724" type="private"><route edges="a210 a43[0] a43[1] a201 a201c a204a[0] a124 b12 b56[0] b56[1][0] b56[1][1] b5[1][0]+66 b5[1][1][1] b8 b3[1] b3[1]b "/></vehicle>
     <vehicle arrivalPos="-1" depart="1242" departLane="best" departPos="0" id="Audinot_5_58" type="private"><route edges="a131 a65 a200 a60 "/></vehicle>
     <vehicle arrivalPos="-1" depart="1242" departLane="best" departPos="0" id="Pepoli_11_725" type="private"><route edges="a210 a43[0] a43[1] a201 a201c a204a[0] a124 b12 b56[0] b56[1][0] b34[0] b34[1][0] b26 b26.-170 b18 b20+19b b2[1][1][1]b "/></vehicle>
@@ -3873,7 +3873,7 @@
     <vehicle arrivalPos="-1" depart="1259" departLane="best" departPos="0" id="Costa_50_482" type="private"><route edges="a78[0] a56a am1 a21b a103 a16 a37 a36 a40 a41 a160 a61 a58[0] a58[1] a200 a60 "/></vehicle>
     <vehicle arrivalPos="-1" depart="1259" departLane="best" departPos="0" id="Silvani_7_534" type="private"><route edges="a203[0] a203[1] a203[1]b a202 a34 a113 a209 "/></vehicle>
     <vehicle arrivalPos="-1" depart="1260" departLane="best" departPos="0" id="Malvasia_30_259" type="private"><route edges="b52 b51 b56[0] b56[1][0] b56[1][1] b70 "/></vehicle>
-    <vehicle arrivalPos="-1" depart="1260" departLane="best" departPos="0" id="Pepoli_11_735" type="private"><route edges="a210 a43[0] a43[1] a201 a201c a204a[0] a124 b12 b56[0] b56[1][0] b56[1][1] b5[1][0]+66 b5[1][1][1] b16[0] b29[0] "/></vehicle>  
+    <vehicle arrivalPos="-1" depart="1260" departLane="best" departPos="0" id="Pepoli_11_735" type="private"><route edges="a210 a43[0] a43[1] a201 a201c a204a[0] a124 b12 b56[0] b56[1][0] b56[1][1] b5[1][0]+66 b5[1][1][1] b16[0] b29[0] "/></vehicle>
     <vehicle arrivalPos="-1" depart="1260" departLane="best" departPos="0" id="Pertini_10_586" type="private"><route edges="b63[0] b63[1] b4[0] b4[1][1][0] b10 "/></vehicle>
     <vehicle arrivalPos="-1" depart="1260" departLane="best" departPos="0" id="Prati_Capraia_100_259" type="private"><route edges="b3[0] b3[1] b3[1]b "/></vehicle>
     <vehicle arrivalPos="-1" depart="1261" departLane="best" departPos="0" id="Costa_70_483" type="private"><route edges="a78[0] a56a a56b a77bc a77cd a53cd a53[0] a78[1][1] a189[0] a189[1][0]+20000 a189[1][1] a188 a87[0] a20001+87[1][0] a87[1][1] am90 a89[0] a20002+89[1][0] a89[1][1] a91 a186 a109[0] a109[1][0]+20003 a109[1][1] a116 a46 a113 a209 "/></vehicle>
@@ -3895,7 +3895,7 @@
     <vehicle arrivalPos="-1" depart="1265" departLane="best" departPos="0" id="Nigrisoli_40_205" type="private"><route edges="b65 b101 b34[0] b34[1][0] b36 b46 b49[0] b49[1] b55 b53 b53a "/></vehicle>
     <vehicle arrivalPos="-1" depart="1265" departLane="best" departPos="0" id="Pepoli_8_738" type="private"><route edges="a210 a43[0] a43[1] a134 a134b "/></vehicle>
     <vehicle arrivalPos="-1" depart="1266" departLane="best" departPos="0" id="Pepoli_10_739" type="private"><route edges="a210 a43[0] a43[1] a201 a201c a204a[0] a204b[0] a204[1][0] a204[1][1] "/></vehicle>
-    <vehicle arrivalPos="-1" depart="1266" departLane="best" departPos="0" id="Pertini_102_589" type="private"><route edges="b13[0] b14 b17[0] b29[0] "/></vehicle>   
+    <vehicle arrivalPos="-1" depart="1266" departLane="best" departPos="0" id="Pertini_102_589" type="private"><route edges="b13[0] b14 b17[0] b29[0] "/></vehicle>
     <vehicle arrivalPos="-1" depart="1266" departLane="best" departPos="0" id="Silvani_7_537" type="private"><route edges="a203[0] a203[1] a203[1]b a202 a34 a113 a209 "/></vehicle>
     <vehicle arrivalPos="-1" depart="1266" departLane="best" departPos="0" id="XXI_Aprile_7_356" type="private"><route edges=" a9 a211 a45 a206 a32 a40 a41 a160 a61 a58[0] a58[1] a66 a117 a209 "/></vehicle>
     <vehicle arrivalPos="-1" depart="1267" departLane="best" departPos="0" id="Costa_1_485" type="private"><route edges="a78[0] a56a a56b a77bc a77cd a53cd a53[0] a53[1][0] a79 a68 a11 b2[0] b2[1][0] b2[1][1][0] b2[1][1][1] b2[1][1][1]b "/></vehicle>
@@ -3980,7 +3980,7 @@
     <vehicle arrivalPos="-1" depart="1292" departLane="best" departPos="0" id="Gandhi_40_827" type="private"><route edges="b1[0] ba1[1] b1[1] b38[0] b38[0]a b46 b49[0] b49[1] b55 b53 b53a "/></vehicle>
     <vehicle arrivalPos="-1" depart="1292" departLane="best" departPos="0" id="Pepoli_3_754" type="ignoring"><route edges="a210 a43[0] a118 a65 a57[0] a57[1] a62 a159 a42 a39 a35 a38 a15 a14  "/></vehicle>
     <vehicle arrivalPos="-1" depart="1292" departLane="best" departPos="0" id="Pertini_20_601" type="private"><route edges="b63[0] b63[1] b4[0] b4[1][1][0] b4[1][1][1] "/></vehicle>
-    <vehicle arrivalPos="-1" depart="1292" departLane="best" departPos="0" id="Silvani_11_548" type="private"><route edges="a203[0] b12 b56[0] b56[1][0] b56[1][1] b5[1][0]+66 b5[1][1][1] b16[0] b29[0] "/></vehicle>  
+    <vehicle arrivalPos="-1" depart="1292" departLane="best" departPos="0" id="Silvani_11_548" type="private"><route edges="a203[0] b12 b56[0] b56[1][0] b56[1][1] b5[1][0]+66 b5[1][1][1] b16[0] b29[0] "/></vehicle>
     <vehicle arrivalPos="-1" depart="1293" departLane="best" departPos="0" id="Costa_70_495" type="private"><route edges="a78[0] a56a a56b a77bc a77cd a53cd a53[0] a78[1][1] a189[0] a189[1][0]+20000 a189[1][1] a188 a87[0] a20001+87[1][0] a87[1][1] am90 a89[0] a20002+89[1][0] a89[1][1] a91 a186 a109[0] a109[1][0]+20003 a109[1][1] a116 a46 a113 a209 "/></vehicle>
     <vehicle arrivalPos="-1" depart="1293" departLane="best" departPos="0" id="Turati_1_37" type="ignoring"><route edges="a195 a159 a42 a39 a35 a38 a50 a19 a22 a59 a53cd a53[0] a53[1][0] a79 a68 a11 b2[0] b2[1][0] b2[1][1][0] b2[1][1][1] b2[1][1][1]b "/></vehicle>
     <vehicle arrivalPos="-1" depart="1294" departLane="best" departPos="0" id="Gandhi_60_828" type="private"><route edges="b1[0] ba1[1] b1[1] a72[0] a72[1] a69 a161 a122 a3 a2 a202 a34 a113 a209 "/></vehicle>
@@ -4097,7 +4097,7 @@
     <vehicle arrivalPos="-1" depart="1328" departLane="best" departPos="0" id="Silvani_11_563" type="private"><route edges="a203[0] b12 b56[0] b56[1][0] b56[1][1] b5[1][0]+66 b5[1][1][1] b8 b3[1] b3[1]b "/></vehicle>
     <vehicle arrivalPos="-1" depart="1328" departLane="best" departPos="0" id="Turati_10_38" type="private"><route edges="a195 a61 a58[0] a58[1] a66 a119 a116 a46 a201 a201c a204a[0] a204b[0] a204[1][0] a204[1][1] "/></vehicle>
     <vehicle arrivalPos="-1" depart="1329" departLane="best" departPos="0" id="Costa_1_509" type="private"><route edges="a78[0] a56a a56b a77bc a77cd a53cd a53[0] a53[1][0] a79 a68 a11 b2[0] b2[1][0] b2[1][1][0] b2[1][1][1] b2[1][1][1]b "/></vehicle>
-    <vehicle arrivalPos="-1" depart="1329" departLane="best" departPos="0" id="Pertini_102_618" type="private"><route edges="b13[0] b14 b17[0] b29[0] "/></vehicle>  
+    <vehicle arrivalPos="-1" depart="1329" departLane="best" departPos="0" id="Pertini_102_618" type="private"><route edges="b13[0] b14 b17[0] b29[0] "/></vehicle>
     <vehicle arrivalPos="-1" depart="1330" departLane="best" departPos="0" id="Pepoli_3_776" type="ignoring"><route edges="a210 a43[0] a118 a65 a57[0] a57[1] a62 a159 a42 a39 a35 a38 a15 a14  "/></vehicle>
     <vehicle arrivalPos="-1" depart="1330" departLane="best" departPos="0" id="Silvani_7_564" type="private"><route edges="a203[0] a203[1] a203[1]b a202 a34 a113 a209 "/></vehicle>
     <vehicle arrivalPos="-1" depart="1330" departLane="best" departPos="0" id="XXI_Aprile_7_374" type="private"><route edges=" a9 a211 a45 a206 a32 a40 a41 a160 a61 a58[0] a58[1] a66 a117 a209 "/></vehicle>
@@ -4115,7 +4115,7 @@
     <vehicle arrivalPos="-1" depart="1334" departLane="best" departPos="0" id="Gandhi_60_854" type="private"><route edges="b1[0] ba1[1] b1[1] a72[0] a72[1] a69 a161 a122 a1b a1 a204a[0] a204b[0] a204[1][0] a204[1][1] "/></vehicle>
     <vehicle arrivalPos="-1" depart="1335" departLane="best" departPos="0" id="Pepoli_8_779" type="private"><route edges="a210 a43[0] a43[1] a134 a134b "/></vehicle>
     <vehicle arrivalPos="-1" depart="1335" departLane="best" departPos="0" id="Pertini_20_621" type="private"><route edges="b63[0] b63[1] b4[0] b4[1][1][0] b4[1][1][1] "/></vehicle>
-    <vehicle arrivalPos="-1" depart="1335" departLane="best" departPos="0" id="Silvani_11_566" type="private"><route edges="a203[0] b12 b56[0] b56[1][0] b56[1][1] b5[1][0]+66 b5[1][1][1] b16[0] b29[0] "/></vehicle>  
+    <vehicle arrivalPos="-1" depart="1335" departLane="best" departPos="0" id="Silvani_11_566" type="private"><route edges="a203[0] b12 b56[0] b56[1][0] b56[1][1] b5[1][0]+66 b5[1][1][1] b16[0] b29[0] "/></vehicle>
     <vehicle arrivalPos="-1" depart="1336" departLane="best" departPos="0" id="Gandhi_52_855" type="ignoring"><route edges="b1[0] b25 b23 b17[0] b30 b31 b11[1][1] b101 b35[0] b35[1][0] b35[1][1][0] b20000+35[1][1][1][0] b35[1][1][1][1] "/></vehicle>
     <vehicle arrivalPos="-1" depart="1337" departLane="best" departPos="0" id="Borgo_20_220" type="private"><route edges="b6 b100 b7 b4[1][1][1] "/></vehicle>
     <vehicle arrivalPos="-1" depart="1337" departLane="best" departPos="0" id="Costa_70_512" type="private"><route edges="a78[0] a56a a56b a77bc a77cd a53cd a53[0] a78[1][1] a189[0] a189[1][0]+20000 a189[1][1] a188 a87[0] a20001+87[1][0] a87[1][1] am90 a89[0] a20002+89[1][0] a89[1][1] a91 a186 a109[0] a109[1][0]+20003 a109[1][1] a116 a46 a113 a209 "/></vehicle>
@@ -4622,7 +4622,7 @@
     <vehicle arrivalPos="-1" depart="1500" departLane="best" departPos="0" id="Audinot_3_70" type="ignoring"><route edges="a131 a65 a57[0] a57[1] a62 a159 a42 a39 a35 a38 a15 a14  "/></vehicle>
     <vehicle arrivalPos="-1" depart="1500" departLane="best" departPos="0" id="Pepoli_8_875" type="private"><route edges="a210 a43[0] a43[1] a134 a134b "/></vehicle>
     <vehicle arrivalPos="-1" depart="1500" departLane="best" departPos="0" id="Silvani_11_636" type="private"><route edges="a203[0] b12 b56[0] b56[1][0] b56[1][1] b5[1][0]+66 b5[1][1][1] b8 b4[1][1][1] "/></vehicle>
-    <vehicle arrivalPos="-1" depart="1501" departLane="best" departPos="0" id="Pepoli_11_876" type="private"><route edges="a210 a43[0] a43[1] a201 a201c a204a[0] a124 b12 b56[0] b56[1][0] b56[1][1] b5[1][0]+66 b5[1][1][1] b16[0] b29[0] "/></vehicle> 
+    <vehicle arrivalPos="-1" depart="1501" departLane="best" departPos="0" id="Pepoli_11_876" type="private"><route edges="a210 a43[0] a43[1] a201 a201c a204a[0] a124 b12 b56[0] b56[1][0] b56[1][1] b5[1][0]+66 b5[1][1][1] b16[0] b29[0] "/></vehicle>
     <vehicle arrivalPos="-1" depart="1501" departLane="best" departPos="0" id="Pertini_20_698" type="private"><route edges="b63[0] b63[1] b4[0] b4[1][1][0] b4[1][1][1] "/></vehicle>
     <vehicle arrivalPos="-1" depart="1502" departLane="best" departPos="0" id="Borgo_20_247" type="private"><route edges="b6 b100 b7 b4[1][1][1] "/></vehicle>
     <vehicle arrivalPos="-1" depart="1502" departLane="best" departPos="0" id="Costa_70_575" type="private"><route edges="a78[0] a56a a56b a77bc a77cd a53cd a53[0] a78[1][1] a189[0] a189[1][0]+20000 a189[1][1] a188 a87[0] a20001+87[1][0] a87[1][1] am90 a89[0] a20002+89[1][0] a89[1][1] a91 a186 a109[0] a109[1][0]+20003 a109[1][1] a116 a46 a113 a209 "/></vehicle>
@@ -4759,11 +4759,11 @@
     <vehicle arrivalPos="-1" depart="1546" departLane="best" departPos="0" id="Pertini_20_719" type="private"><route edges="b63[0] b63[1] b4[0] b4[1][1][0] b4[1][1][1] "/></vehicle>
     <vehicle arrivalPos="-1" depart="1547" departLane="best" departPos="0" id="Malvasia_10_318" type="private"><route edges="b52 b51 b56[0] b56[1][0] b56[1][1] b5[1][0]+66 b5[1][1][1] b8 b10 "/></vehicle>
     <vehicle arrivalPos="-1" depart="1547" departLane="best" departPos="0" id="Prati_Capraia_10_318" type="private"><route edges="b3[0] b10 "/></vehicle>
-    <vehicle arrivalPos="-1" depart="1547" departLane="best" departPos="0" id="Silvani_11_656" type="private"><route edges="a203[0] b12 b56[0] b56[1][0] b56[1][1] b5[1][0]+66 b5[1][1][1] b16[0] b29[0] "/></vehicle> 
+    <vehicle arrivalPos="-1" depart="1547" departLane="best" departPos="0" id="Silvani_11_656" type="private"><route edges="a203[0] b12 b56[0] b56[1][0] b56[1][1] b5[1][0]+66 b5[1][1][1] b16[0] b29[0] "/></vehicle>
     <vehicle arrivalPos="-1" depart="1547" departLane="best" departPos="0" id="XXI_Aprile_12_435" type="private"><route edges=" a13 a104 a24 a22 a59 a53cd a53[0] a53[1][0] a79 a68 a11 b38[0] b38[0]a b46 b49[0] b49[1] b55 b53 b53a "/></vehicle>
     <vehicle arrivalPos="-1" depart="1548" departLane="best" departPos="0" id="Pepoli_11_903" type="private"><route edges="a210 a43[0] a43[1] a201 a201c a204a[0] a124 b12 b56[0] b56[1][0] b56[1][1] b5[1][0]+66 b5[1][1][1] b8 b3[1] b3[1]b "/></vehicle>
     <vehicle arrivalPos="-1" depart="1548" departLane="best" departPos="0" id="Pertini_20_720" type="private"><route edges="b63[0] b63[1] b4[0] b4[1][1][0] b4[1][1][1] "/></vehicle>
-    <vehicle arrivalPos="-1" depart="1549" departLane="best" departPos="0" id="Costa_11_593" type="private"><route edges="a78[0] a56a a56b a77bc a77cd a53cd a53[0] a78[1][1] a189[0] a189[1][0]+20000 a189[1][1] a188 a87[0] a20001+87[1][0] a87[1][1] am90 a171 a161 a122 a1b a1 a204a[0] a124 b12 b56[0] b56[1][0] b56[1][1] b5[1][0]+66 b5[1][1][1] b16[0] b29[0] "/></vehicle> 
+    <vehicle arrivalPos="-1" depart="1549" departLane="best" departPos="0" id="Costa_11_593" type="private"><route edges="a78[0] a56a a56b a77bc a77cd a53cd a53[0] a78[1][1] a189[0] a189[1][0]+20000 a189[1][1] a188 a87[0] a20001+87[1][0] a87[1][1] am90 a171 a161 a122 a1b a1 a204a[0] a124 b12 b56[0] b56[1][0] b56[1][1] b5[1][0]+66 b5[1][1][1] b16[0] b29[0] "/></vehicle>
     <vehicle arrivalPos="-1" depart="1549" departLane="best" departPos="0" id="Pepoli_11_904" type="private"><route edges="a210 a43[0] a43[1] a201 a201c a204a[0] a124 b12 b56[0] b56[1][0] b56[1][1] b5[1][0]+66 b5[1][1][1] b8 b3[1] b3[1]b "/></vehicle>
     <vehicle arrivalPos="-1" depart="1549" departLane="best" departPos="0" id="Silvani_11_657" type="private"><route edges="a203[0] b12 b56[0] b56[1][0] b56[1][1] b5[1][0]+66 b5[1][1][1] b8 b4[1][1][1] "/></vehicle>
     <vehicle arrivalPos="-1" depart="1550" departLane="best" departPos="0" id="Borgo_20_255" type="private"><route edges="b6 b100 b7 b4[1][1][1] "/></vehicle>
@@ -4794,7 +4794,7 @@
     <vehicle arrivalPos="-1" depart="1557" departLane="best" departPos="0" id="Silvani_7_660" type="private"><route edges="a203[0] a203[1] a203[1]b a202 a34 a113 a209 "/></vehicle>
     <vehicle arrivalPos="-1" depart="1558" departLane="best" departPos="0" id="Pepoli_2_909" type="ignoring"><route edges="a210 a43[0] a118 a65 a57[0] a57[1] a62 a159 a42 a39 a35 a38 a50 a19 a22 a59 a53cd a53[0] a53[1][0] a53[1][1][0] a77[1][0] a77[1][1] "/></vehicle>
     <vehicle arrivalPos="-1" depart="1559" departLane="best" departPos="0" id="Costa_11_597" type="private"><route edges="a78[0] a56a a56b a77bc a77cd a53cd a53[0] a78[1][1] a189[0] a189[1][0]+20000 a189[1][1] a188 a87[0] a20001+87[1][0] a87[1][1] am90 a171 a161 a122 a1b a1 a204a[0] a124 b12 b56[0] b56[1][0] b56[1][1] b70 "/></vehicle>
-    <vehicle arrivalPos="-1" depart="1559" departLane="best" departPos="0" id="Pertini_102_725" type="private"><route edges="b13[0] b14 b17[0] b29[0] "/></vehicle>  
+    <vehicle arrivalPos="-1" depart="1559" departLane="best" departPos="0" id="Pertini_102_725" type="private"><route edges="b13[0] b14 b17[0] b29[0] "/></vehicle>
     <vehicle arrivalPos="-1" depart="1559" departLane="best" departPos="0" id="Silvani_7_661" type="private"><route edges="a203[0] a203[1] a203[1]b a202 a34 a113 a209 "/></vehicle>
     <vehicle arrivalPos="-1" depart="1560" departLane="best" departPos="0" id="Pepoli_8_910" type="private"><route edges="a210 a43[0] a43[1] a134 a134b "/></vehicle>
     <vehicle arrivalPos="-1" depart="1561" departLane="best" departPos="0" id="Gandhi_60_999" type="private"><route edges="b1[0] ba1[1] b1[1] a72[0] a72[1] a69 a161 a122 a1b a1 a204a[0] a204b[0] a204[1][0] a204[1][1] "/></vehicle>
@@ -4897,7 +4897,7 @@
     <vehicle arrivalPos="-1" depart="1591" departLane="best" departPos="0" id="Gandhi_40_1018" type="private"><route edges="b1[0] ba1[1] b1[1] b38[0] b38[0]a b46 b49[0] b49[1] b55 b53 b53a "/></vehicle>
     <vehicle arrivalPos="-1" depart="1591" departLane="best" departPos="0" id="Pertini_20_740" type="private"><route edges="b63[0] b63[1] b4[0] b4[1][1][0] b4[1][1][1] "/></vehicle>
     <vehicle arrivalPos="-1" depart="1592" departLane="best" departPos="0" id="Pepoli_10_929" type="private"><route edges="a210 a43[0] a43[1] a201 a201c a204a[0] a204b[0] a204[1][0] a204[1][1] "/></vehicle>
-    <vehicle arrivalPos="-1" depart="1592" departLane="best" departPos="0" id="Silvani_11_675" type="private"><route edges="a203[0] b12 b56[0] b56[1][0] b56[1][1] b5[1][0]+66 b5[1][1][1] b16[0] b29[0] "/></vehicle>  
+    <vehicle arrivalPos="-1" depart="1592" departLane="best" departPos="0" id="Silvani_11_675" type="private"><route edges="a203[0] b12 b56[0] b56[1][0] b56[1][1] b5[1][0]+66 b5[1][1][1] b16[0] b29[0] "/></vehicle>
     <vehicle arrivalPos="-1" depart="1593" departLane="best" departPos="0" id="Borgo_20_262" type="private"><route edges="b6 b100 b7 b4[1][1][1] "/></vehicle>
     <vehicle arrivalPos="-1" depart="1593" departLane="best" departPos="0" id="Costa_12_610" type="private"><route edges="a78[0] a56a a56b a77bc a77cd a53cd a53[0] a53[1][0] a79 a68 a11 b38[0] b38[0]a b38[1][0] b38[1][1] b38[1][1]a b56[1][0] b56[1][1] b70 "/></vehicle>
     <vehicle arrivalPos="-1" depart="1593" departLane="best" departPos="0" id="Pertini_20_741" type="private"><route edges="b63[0] b63[1] b4[0] b4[1][1][0] b4[1][1][1] "/></vehicle>
@@ -4930,7 +4930,7 @@
     <vehicle arrivalPos="-1" depart="1601" departLane="best" departPos="0" id="Costa_50_613" type="private"><route edges="a78[0] a56a am1 a21b a103 a16 a37 a36 a40 a41 a160 a61 a58[0] a58[1] a200 a60 "/></vehicle>
     <vehicle arrivalPos="-1" depart="1601" departLane="best" departPos="0" id="Pepoli_11_934" type="private"><route edges="a210 a43[0] a43[1] a201 a201c a204a[0] a124 b12 b56[0] b56[1][0] b56[1][1] b5[1][0]+66 b5[1][1][1] b8 b3[1] b3[1]b "/></vehicle>
     <vehicle arrivalPos="-1" depart="1601" departLane="best" departPos="0" id="Silvani_11_679" type="private"><route edges="a203[0] b12 b56[0] b39[0] b39[1][0] b39[1][1][0] b39[1][1][1] b45 a67 a80 a127 a77[1][0] a77[1][1] "/></vehicle>
-    <vehicle arrivalPos="-1" depart="1602" departLane="best" departPos="0" id="Pepoli_11_935" type="private"><route edges="a210 a43[0] a43[1] a201 a201c a204a[0] a124 b12 b56[0] b56[1][0] b56[1][1] b5[1][0]+66 b5[1][1][1] b16[0] b29[0] "/></vehicle> 
+    <vehicle arrivalPos="-1" depart="1602" departLane="best" departPos="0" id="Pepoli_11_935" type="private"><route edges="a210 a43[0] a43[1] a201 a201c a204a[0] a124 b12 b56[0] b56[1][0] b56[1][1] b5[1][0]+66 b5[1][1][1] b16[0] b29[0] "/></vehicle>
     <vehicle arrivalPos="-1" depart="1602" departLane="best" departPos="0" id="Pertini_20_745" type="private"><route edges="b63[0] b63[1] b4[0] b4[1][1][0] b4[1][1][1] "/></vehicle>
     <vehicle arrivalPos="-1" depart="1603" departLane="best" departPos="0" id="Gandhi_60_1026" type="private"><route edges="b1[0] ba1[1] b1[1] a72[0] a72[1] a69 a161 a122 a1b a1 a204a[0] a124 b12 b56[0] b39[0] b39[1][0] b39[1][1][0] b39[1][1][1] b45 b2[0] b2[1][0] b2[1][1][0] b2[1][1][1] b2[1][1][1]b "/></vehicle>
     <vehicle arrivalPos="-1" depart="1604" departLane="best" departPos="0" id="Costa_70_614" type="private"><route edges="a78[0] a56a a56b a77bc a77cd a53cd a53[0] a78[1][1] a189[0] a189[1][0]+20000 a189[1][1] a188 a87[0] a20001+87[1][0] a87[1][1] am90 a89[0] a20002+89[1][0] a89[1][1] a91 a186 a109[0] a109[1][0]+20003 a109[1][1] a116 a46 a113 a209 "/></vehicle>
@@ -5641,7 +5641,7 @@
     <vehicle arrivalPos="-1" depart="1829" departLane="best" departPos="0" id="Pepoli_11_1067" type="private"><route edges="a210 a43[0] a43[1] a201 a201c a204a[0] a124 b12 b56[0] b56[1][0] b56[1][1] b5[1][0]+66 b5[1][1][1] b8 b10 "/></vehicle>
     <vehicle arrivalPos="-1" depart="1829" departLane="best" departPos="0" id="Prati_Capraia_100_376" type="private"><route edges="b3[0] b3[1] b3[1]b "/></vehicle>
     <vehicle arrivalPos="-1" depart="1830" departLane="best" departPos="0" id="Borgo_100_301" type="private"><route edges="b6 b100 b7 b3[1] b3[1]b "/></vehicle>
-    <vehicle arrivalPos="-1" depart="1830" departLane="best" departPos="0" id="Pepoli_11_1068" type="private"><route edges="a210 a43[0] a43[1] a201 a201c a204a[0] a124 b12 b56[0] b56[1][0] b56[1][1] b5[1][0]+66 b5[1][1][1] b16[0] b29[0] "/></vehicle> 
+    <vehicle arrivalPos="-1" depart="1830" departLane="best" departPos="0" id="Pepoli_11_1068" type="private"><route edges="a210 a43[0] a43[1] a201 a201c a204a[0] a124 b12 b56[0] b56[1][0] b56[1][1] b5[1][0]+66 b5[1][1][1] b16[0] b29[0] "/></vehicle>
     <vehicle arrivalPos="-1" depart="1830" departLane="best" departPos="0" id="Pertini_20_851" type="private"><route edges="b63[0] b63[1] b4[0] b4[1][1][0] b4[1][1][1] "/></vehicle>
     <vehicle arrivalPos="-1" depart="1830" departLane="best" departPos="0" id="Silvani_7_776" type="private"><route edges="a203[0] a203[1] a203[1]b a202 a34 a113 a209 "/></vehicle>
     <vehicle arrivalPos="-1" depart="1831" departLane="best" departPos="0" id="Costa_50_701" type="private"><route edges="a78[0] a56a am1 a21b a103 a16 a37 a36 a40 a41 a160 a61 a58[0] a58[1] a200 a60 "/></vehicle>
@@ -5885,7 +5885,7 @@
     <vehicle arrivalPos="-1" depart="1911" departLane="best" departPos="0" id="Prati_Capraia_10_393" type="private"><route edges="b3[0] b10 "/></vehicle>
     <vehicle arrivalPos="-1" depart="1912" departLane="best" departPos="0" id="Costa_1_732" type="private"><route edges="a78[0] a56a a56b a77bc a77cd a53cd a53[0] a53[1][0] a79 a68 a11 b2[0] b2[1][0] b2[1][1][0] b2[1][1][1] b2[1][1][1]b "/></vehicle>
     <vehicle arrivalPos="-1" depart="1913" departLane="best" departPos="0" id="Gandhi_60_1224" type="private"><route edges="b1[0] ba1[1] b1[1] a72[0] a72[1] a69 a161 a122 a1b a1 a204a[0] a124 b12 b56[0] b39[0] b39[1][0] b39[1][1][0] b39[1][1][1] b45 b2[0] b2[1][0] b2[1][1][0] b2[1][1][1] b2[1][1][1]b "/></vehicle>
-    <vehicle arrivalPos="-1" depart="1913" departLane="best" departPos="0" id="Pertini_102_890" type="private"><route edges="b13[0] b14 b17[0] b29[0] "/></vehicle>  
+    <vehicle arrivalPos="-1" depart="1913" departLane="best" departPos="0" id="Pertini_102_890" type="private"><route edges="b13[0] b14 b17[0] b29[0] "/></vehicle>
     <vehicle arrivalPos="-1" depart="1913" departLane="best" departPos="0" id="Silvani_11_811" type="private"><route edges="a203[0] b12 b56[0] b56[1][0] b56[1][1] b5[1][0]+66 b5[1][1][1] b8 b10 "/></vehicle>
     <vehicle arrivalPos="-1" depart="1913" departLane="best" departPos="0" id="XXI_Aprile_12_538" type="private"><route edges=" a13 a104 a24 a22 a59 a53cd a53[0] a53[1][0] a79 a68 a11 b38[0] b38[0]a b46 b49[0] b49[1] b55 b53 b53a "/></vehicle>
     <vehicle arrivalPos="-1" depart="1914" departLane="best" departPos="0" id="Costa_1_733" type="private"><route edges="a78[0] a56a a56b a77bc a77cd a53cd a53[0] a53[1][0] a79 a68 a11 b2[0] b2[1][0] b2[1][1][0] b2[1][1][1] b2[1][1][1]b "/></vehicle>
@@ -5915,7 +5915,7 @@
     <vehicle arrivalPos="-1" depart="1922" departLane="best" departPos="0" id="Costa_12_736" type="private"><route edges="a78[0] a56a a56b a77bc a77cd a53cd a53[0] a53[1][0] a79 a68 a11 b38[0] b38[0]a b38[1][0] b38[1][1] b38[1][1]a b56[1][0] b56[1][1] b70 "/></vehicle>
     <vehicle arrivalPos="-1" depart="1922" departLane="best" departPos="0" id="Gandhi_40_1230" type="private"><route edges="b1[0] ba1[1] b1[1] b38[0] b38[0]a b46 b49[0] b49[1] b55 b53 b53a "/></vehicle>
     <vehicle arrivalPos="-1" depart="1922" departLane="best" departPos="0" id="Pertini_44_894" type="ignoring"><route edges="b13[0] b14 b17[0] b17[1] b11[0] b11[1][1] b101 b35[0] b39[0] b39[1][0] b96 b49[1] b55 b53 b53a "/></vehicle>
-    <vehicle arrivalPos="-1" depart="1922" departLane="best" departPos="0" id="Silvani_11_815" type="private"><route edges="a203[0] b12 b56[0] b56[1][0] b56[1][1] b5[1][0]+66 b5[1][1][1] b16[0] b29[0] "/></vehicle>  
+    <vehicle arrivalPos="-1" depart="1922" departLane="best" departPos="0" id="Silvani_11_815" type="private"><route edges="a203[0] b12 b56[0] b56[1][0] b56[1][1] b5[1][0]+66 b5[1][1][1] b16[0] b29[0] "/></vehicle>
     <vehicle arrivalPos="-1" depart="1922" departLane="best" departPos="0" id="Turati_10_55" type="private"><route edges="a195 a61 a58[0] a58[1] a66 a119 a116 a46 a201 a201c a204a[0] a204b[0] a204[1][0] a204[1][1] "/></vehicle>
     <vehicle arrivalPos="-1" depart="1923" departLane="best" departPos="0" id="Pepoli_3_1122" type="ignoring"><route edges="a210 a43[0] a118 a65 a57[0] a57[1] a62 a159 a42 a39 a35 a38 a15 a14  "/></vehicle>
     <vehicle arrivalPos="-1" depart="1924" departLane="best" departPos="0" id="Gandhi_40_1231" type="private"><route edges="b1[0] ba1[1] b1[1] b38[0] b38[0]a b46 b49[0] b49[1] b55 b53 b53a "/></vehicle>
@@ -5954,7 +5954,7 @@
     <vehicle arrivalPos="-1" depart="1934" departLane="best" departPos="0" id="Silvani_7_820" type="private"><route edges="a203[0] a203[1] a203[1]b a202 a34 a113 a209 "/></vehicle>
     <vehicle arrivalPos="-1" depart="1935" departLane="best" departPos="0" id="Costa_70_741" type="private"><route edges="a78[0] a56a a56b a77bc a77cd a53cd a53[0] a78[1][1] a189[0] a189[1][0]+20000 a189[1][1] a188 a87[0] a20001+87[1][0] a87[1][1] am90 a89[0] a20002+89[1][0] a89[1][1] a91 a186 a109[0] a109[1][0]+20003 a109[1][1] a116 a46 a113 a209 "/></vehicle>
     <vehicle arrivalPos="-1" depart="1935" departLane="best" departPos="0" id="Gandhi_60_1238" type="private"><route edges="b1[0] ba1[1] b1[1] a72[0] a72[1] a69 a161 a122 a3 a2 a202 a34 a113 a209 "/></vehicle>
-    <vehicle arrivalPos="-1" depart="1935" departLane="best" departPos="0" id="Pepoli_11_1129" type="private"><route edges="a210 a43[0] a43[1] a201 a201c a204a[0] a124 b12 b56[0] b56[1][0] b56[1][1] b5[1][0]+66 b5[1][1][1] b16[0] b29[0] "/></vehicle> 
+    <vehicle arrivalPos="-1" depart="1935" departLane="best" departPos="0" id="Pepoli_11_1129" type="private"><route edges="a210 a43[0] a43[1] a201 a201c a204a[0] a124 b12 b56[0] b56[1][0] b56[1][1] b5[1][0]+66 b5[1][1][1] b16[0] b29[0] "/></vehicle>
     <vehicle arrivalPos="-1" depart="1935" departLane="best" departPos="0" id="Pertini_20_900" type="private"><route edges="b63[0] b63[1] b4[0] b4[1][1][0] b4[1][1][1] "/></vehicle>
     <vehicle arrivalPos="-1" depart="1935" departLane="best" departPos="0" id="XXI_Aprile_9_544" type="private"><route edges=" a13 a104 a16 a37 a36 a40 a153 a87[0] a20001+87[1][0] a87[1][1] am90 a171 a161 a122 a1b a1 a204a[0] a204b[0] a54 "/></vehicle>
     <vehicle arrivalPos="-1" depart="1936" departLane="best" departPos="0" id="Gandhi_60_1239" type="private"><route edges="b1[0] ba1[1] b1[1] a72[0] a72[1] a69 a161 a122 a1b a1 a204a[0] a204b[0] a204[1][0] a204[1][1] "/></vehicle>
@@ -5991,7 +5991,7 @@
     <vehicle arrivalPos="-1" depart="1945" departLane="best" departPos="0" id="XXI_Aprile_113_547" type="private"><route edges=" a13 a104 a24 a22 a59 a53cd a53[0] a53[1][0] a79 a74 a72[1] a69 a161 a122 a1b a1 a204a[0] a124 b12 b56[0] b56[1][0] b56[1][1] b5[1][0]+66 b5[1][1][1] b8 b3[1] b3[1]b "/></vehicle>
     <vehicle arrivalPos="-1" depart="1946" departLane="best" departPos="0" id="Costa_50_745" type="private"><route edges="a78[0] a56a am1 a21b a103 a16 a37 a36 a40 a41 a160 a61 a58[0] a58[1] a200 a60 "/></vehicle>
     <vehicle arrivalPos="-1" depart="1946" departLane="best" departPos="0" id="Gandhi_60_1245" type="private"><route edges="b1[0] ba1[1] b1[1] a72[0] a72[1] a69 a161 a122 a1b a1 a204a[0] a204b[0] a204[1][0] a204[1][1] "/></vehicle>
-    <vehicle arrivalPos="-1" depart="1946" departLane="best" departPos="0" id="Pertini_102_905" type="private"><route edges="b13[0] b14 b17[0] b29[0] "/></vehicle> 
+    <vehicle arrivalPos="-1" depart="1946" departLane="best" departPos="0" id="Pertini_102_905" type="private"><route edges="b13[0] b14 b17[0] b29[0] "/></vehicle>
     <vehicle arrivalPos="-1" depart="1946" departLane="best" departPos="0" id="Silvani_7_825" type="private"><route edges="a203[0] a203[1] a203[1]b a202 a34 a113 a209 "/></vehicle>
     <vehicle arrivalPos="-1" depart="1947" departLane="best" departPos="0" id="Gandhi_50_1246" type="ignoring"><route edges="b1[0] b25 b23 b17[0] b17[1] b11[0] b11[1][1] b101 b35[0] b35[1][0] b35[1][1][0] b20000+35[1][1][1][0] b35[1][1][1][1] "/></vehicle>
     <vehicle arrivalPos="-1" depart="1947" departLane="best" departPos="0" id="Pepoli_11_1136" type="private"><route edges="a210 a43[0] a43[1] a201 a201c a204a[0] a124 b12 b56[0] b56[1][0] b56[1][1] b5[1][0]+66 b5[1][1][1] b8 b4[1][1][1] "/></vehicle>
@@ -6042,7 +6042,7 @@
     <vehicle arrivalPos="-1" depart="1961" departLane="best" departPos="0" id="Gandhi_60_1255" type="private"><route edges="b1[0] ba1[1] b1[1] a72[0] a72[1] a69 a161 a122 a1b a1 a204a[0] a204b[0] a204[1][0] a204[1][1] "/></vehicle>
     <vehicle arrivalPos="-1" depart="1961" departLane="best" departPos="0" id="Pepoli_11_1144" type="private"><route edges="a210 a43[0] a43[1] a201 a201c a204a[0] a124 b12 b56[0] b56[1][0] b56[1][1] b5[1][0]+66 b5[1][1][1] b8 b3[1] b3[1]b "/></vehicle>
     <vehicle arrivalPos="-1" depart="1961" departLane="best" departPos="0" id="Pertini_20_912" type="private"><route edges="b63[0] b63[1] b4[0] b4[1][1][0] b4[1][1][1] "/></vehicle>
-    <vehicle arrivalPos="-1" depart="1962" departLane="best" departPos="0" id="Pepoli_11_1145" type="private"><route edges="a210 a43[0] a43[1] a201 a201c a204a[0] a124 b12 b56[0] b56[1][0] b56[1][1] b5[1][0]+66 b5[1][1][1] b16[0] b29[0] "/></vehicle>  
+    <vehicle arrivalPos="-1" depart="1962" departLane="best" departPos="0" id="Pepoli_11_1145" type="private"><route edges="a210 a43[0] a43[1] a201 a201c a204a[0] a124 b12 b56[0] b56[1][0] b56[1][1] b5[1][0]+66 b5[1][1][1] b16[0] b29[0] "/></vehicle>
     <vehicle arrivalPos="-1" depart="1962" departLane="best" departPos="0" id="Silvani_11_832" type="private"><route edges="a203[0] b12 b56[0] b39[0] b39[1][0] b39[1][1][0] b39[1][1][1] b45 b2[0] b2[1][0] b2[1][1][0] b2[1][1][1] b2[1][1][1]b "/></vehicle>
     <vehicle arrivalPos="-1" depart="1963" departLane="best" departPos="0" id="Certosa_6_54" type="private"><route edges="b22[0] b22[1] ba1[1] b1[1] a72[0] a72[1] a69 a161 a122 a1b a1 a204a[0] a204b[0] a204[1][0] a204[1][1] "/></vehicle>
     <vehicle arrivalPos="-1" depart="1963" departLane="best" departPos="0" id="Gandhi_60_1256" type="private"><route edges="b1[0] ba1[1] b1[1] a72[0] a72[1] a69 a161 a122 a1b a1 a204a[0] a204b[0] a204[1][0] a204[1][1] "/></vehicle>
@@ -6183,7 +6183,7 @@
     <vehicle arrivalPos="-1" depart="2006" departLane="best" departPos="0" id="Pertini_10_933" type="private"><route edges="b63[0] b63[1] b4[0] b4[1][1][0] b10 "/></vehicle>
     <vehicle arrivalPos="-1" depart="2007" departLane="best" departPos="0" id="Gandhi_70_1284" type="private"><route edges="b1[0] ba1[1] b1[1] a67 a80 a127 a77[1][0] a77ab a77bc a21a a21b a103 a14  "/></vehicle>
     <vehicle arrivalPos="-1" depart="2007" departLane="best" departPos="0" id="Pepoli_5_1171" type="private"><route edges="a210 a43[0] a118 a65 a200 a60 "/></vehicle>
-    <vehicle arrivalPos="-1" depart="2007" departLane="best" departPos="0" id="Silvani_11_851" type="private"><route edges="a203[0] b12 b56[0] b56[1][0] b56[1][1] b5[1][0]+66 b5[1][1][1] b16[0] b29[0] "/></vehicle>  
+    <vehicle arrivalPos="-1" depart="2007" departLane="best" departPos="0" id="Silvani_11_851" type="private"><route edges="a203[0] b12 b56[0] b56[1][0] b56[1][1] b5[1][0]+66 b5[1][1][1] b16[0] b29[0] "/></vehicle>
     <vehicle arrivalPos="-1" depart="2008" departLane="best" departPos="0" id="Costa_1_769" type="private"><route edges="a78[0] a56a a56b a77bc a77cd a53cd a53[0] a53[1][0] a79 a68 a11 b2[0] b2[1][0] b2[1][1][0] b2[1][1][1] b2[1][1][1]b "/></vehicle>
     <vehicle arrivalPos="-1" depart="2008" departLane="best" departPos="0" id="Pertini_10_934" type="private"><route edges="b63[0] b63[1] b4[0] b4[1][1][0] b10 "/></vehicle>
     <vehicle arrivalPos="-1" depart="2009" departLane="best" departPos="0" id="Malvasia_62_413" type="private"><route edges="b52 b51 b50[0] b97 b39[1][0] b39[1][1][0] b39[1][1][1] b45 b2[0] b2[1][0] b2[1][1][0] b2[1][1][1] b2[1][1][1]b "/></vehicle>
@@ -6237,7 +6237,7 @@
     <vehicle arrivalPos="-1" depart="2024" departLane="best" departPos="0" id="Borgo_100_333" type="private"><route edges="b6 b100 b7 b3[1] b3[1]b "/></vehicle>
     <vehicle arrivalPos="-1" depart="2024" departLane="best" departPos="0" id="Costa_50_775" type="private"><route edges="a78[0] a56a am1 a21b a103 a16 a37 a36 a40 a41 a160 a61 a58[0] a58[1] a200 a60 "/></vehicle>
     <vehicle arrivalPos="-1" depart="2024" departLane="best" departPos="0" id="Gandhi_40_1295" type="private"><route edges="b1[0] ba1[1] b1[1] b38[0] b38[0]a b46 b49[0] b49[1] b55 b53 b53a "/></vehicle>
-    <vehicle arrivalPos="-1" depart="2024" departLane="best" departPos="0" id="Pepoli_11_1181" type="private"><route edges="a210 a43[0] a43[1] a201 a201c a204a[0] a124 b12 b56[0] b56[1][0] b56[1][1] b5[1][0]+66 b5[1][1][1] b16[0] b29[0] "/></vehicle>  
+    <vehicle arrivalPos="-1" depart="2024" departLane="best" departPos="0" id="Pepoli_11_1181" type="private"><route edges="a210 a43[0] a43[1] a201 a201c a204a[0] a124 b12 b56[0] b56[1][0] b56[1][1] b5[1][0]+66 b5[1][1][1] b16[0] b29[0] "/></vehicle>
     <vehicle arrivalPos="-1" depart="2024" departLane="best" departPos="0" id="Silvani_7_858" type="private"><route edges="a203[0] a203[1] a203[1]b a202 a34 a113 a209 "/></vehicle>
     <vehicle arrivalPos="-1" depart="2025" departLane="best" departPos="0" id="Gandhi_40_1296" type="private"><route edges="b1[0] ba1[1] b1[1] b38[0] b38[0]a b46 b49[0] b49[1] b55 b53 b53a "/></vehicle>
     <vehicle arrivalPos="-1" depart="2025" departLane="best" departPos="0" id="Pertini_32_942" type="private"><route edges="b13[0] b14 b17[0] b17[1] b11[0] b11[1][1] b70 "/></vehicle>
@@ -6537,7 +6537,7 @@
     <vehicle arrivalPos="-1" depart="2122" departLane="best" departPos="0" id="Pepoli_11_1238" type="private"><route edges="a210 a43[0] a43[1] a201 a201c a204a[0] a124 b12 b56[0] b56[1][0] b34[0] b34[1][0] b26 b26.-170 b18 b20+19b b2[1][1][1]b "/></vehicle>
     <vehicle arrivalPos="-1" depart="2122" departLane="best" departPos="0" id="Pertini_20_987" type="private"><route edges="b63[0] b63[1] b4[0] b4[1][1][0] b4[1][1][1] "/></vehicle>
     <vehicle arrivalPos="-1" depart="2123" departLane="best" departPos="0" id="Costa_200_813" type="private"><route edges="a78[0] a56a a56b a77bc a77cd a53cd a53[0] a78[1][1] a189[0] a189[1][0]+20000 a189[1][1] a188 a87[0] a20001+87[1][0] a87[1][1] am90 a89[0] a20002+89[1][0] a89[1][1] a91 a186 a109[0] a109[1][0]+20003 a109[1][1] a116 a46 a201 a201c a204a[0] a204b[0] a204[1][0] a204[1][1] "/></vehicle>
-    <vehicle arrivalPos="-1" depart="2123" departLane="best" departPos="0" id="Silvani_11_900" type="private"><route edges="a203[0] b12 b56[0] b56[1][0] b56[1][1] b5[1][0]+66 b5[1][1][1] b16[0] b29[0] "/></vehicle>  
+    <vehicle arrivalPos="-1" depart="2123" departLane="best" departPos="0" id="Silvani_11_900" type="private"><route edges="a203[0] b12 b56[0] b56[1][0] b56[1][1] b5[1][0]+66 b5[1][1][1] b16[0] b29[0] "/></vehicle>
     <vehicle arrivalPos="-1" depart="2124" departLane="best" departPos="0" id="Gandhi_60_1359" type="private"><route edges="b1[0] ba1[1] b1[1] a72[0] a72[1] a69 a161 a122 a1b a1 a204a[0] a204b[0] a204[1][0] a204[1][1] "/></vehicle>
     <vehicle arrivalPos="-1" depart="2124" departLane="best" departPos="0" id="Nigrisoli_50_344" type="ignoring"><route edges="b65 b101 b35[0] b35[1][0] b35[1][1][0] b20000+35[1][1][1][0] b35[1][1][1][1] "/></vehicle>
     <vehicle arrivalPos="-1" depart="2124" departLane="best" departPos="0" id="Pepoli_11_1239" type="private"><route edges="a210 a43[0] a43[1] a201 a201c a204a[0] a124 b12 b56[0] b56[1][0] b56[1][1] b5[1][0]+66 b5[1][1][1] b8 b3[1] b3[1]b "/></vehicle>
@@ -6647,7 +6647,7 @@
     <vehicle arrivalPos="-1" depart="2158" departLane="best" departPos="0" id="Silvani_7_915" type="private"><route edges="a203[0] a203[1] a203[1]b a202 a34 a113 a209 "/></vehicle>
     <vehicle arrivalPos="-1" depart="2159" departLane="best" departPos="0" id="Pertini_50_1004" type="ignoring"><route edges="b63[0] b63[1] b4[0] b4[1][1][0] b9 b11[0] b11[1][1] b101 b35[0] b35[1][0] b35[1][1][0] b20000+35[1][1][1][0] b35[1][1][1][1] "/></vehicle>
     <vehicle arrivalPos="-1" depart="2159" departLane="best" departPos="0" id="XXI_Aprile_5_607" type="private"><route edges=" a9 a211 a45 a44 a36 a40 a41 a160 a61 a58[0] a58[1] a200 a60 "/></vehicle>
-    <vehicle arrivalPos="-1" depart="2160" departLane="best" departPos="0" id="Costa_11_827" type="private"><route edges="a78[0] a56a a56b a77bc a77cd a53cd a53[0] a78[1][1] a189[0] a189[1][0]+20000 a189[1][1] a188 a87[0] a20001+87[1][0] a87[1][1] am90 a171 a161 a122 a1b a1 a204a[0] a124 b12 b56[0] b56[1][0] b56[1][1] b5[1][0]+66 b5[1][1][1] b16[0] b29[0] "/></vehicle>  
+    <vehicle arrivalPos="-1" depart="2160" departLane="best" departPos="0" id="Costa_11_827" type="private"><route edges="a78[0] a56a a56b a77bc a77cd a53cd a53[0] a78[1][1] a189[0] a189[1][0]+20000 a189[1][1] a188 a87[0] a20001+87[1][0] a87[1][1] am90 a171 a161 a122 a1b a1 a204a[0] a124 b12 b56[0] b56[1][0] b56[1][1] b5[1][0]+66 b5[1][1][1] b16[0] b29[0] "/></vehicle>
     <vehicle arrivalPos="-1" depart="2160" departLane="best" departPos="0" id="Gandhi_60_1382" type="private"><route edges="b1[0] ba1[1] b1[1] a72[0] a72[1] a69 a161 a122 a1b a1 a204a[0] a204b[0] a204[1][0] a204[1][1] "/></vehicle>
     <vehicle arrivalPos="-1" depart="2160" departLane="best" departPos="0" id="Malvasia_70_444" type="private"><route edges="b52 b51 b56[0] b39[0] b39[1][0] b39[1][1][0] b39[1][1][1] b45 a67 a80 a127 a77[1][0] a77[1][1] "/></vehicle>
     <vehicle arrivalPos="-1" depart="2160" departLane="best" departPos="0" id="Pepoli_10_1260" type="private"><route edges="a210 a43[0] a43[1] a201 a201c a204a[0] a204b[0] a204[1][0] a204[1][1] "/></vehicle>
@@ -7033,7 +7033,7 @@
     <vehicle arrivalPos="-1" depart="2283" departLane="best" departPos="0" id="Pepoli_11_1332" type="private"><route edges="a210 a43[0] a43[1] a201 a201c a204a[0] a124 b12 b56[0] b56[1][0] b56[1][1] b5[1][0]+66 b5[1][1][1] b8 b3[1] b3[1]b "/></vehicle>
     <vehicle arrivalPos="-1" depart="2283" departLane="best" departPos="0" id="Pertini_20_1062" type="private"><route edges="b63[0] b63[1] b4[0] b4[1][1][0] b4[1][1][1] "/></vehicle>
     <vehicle arrivalPos="-1" depart="2283" departLane="best" departPos="0" id="Silvani_7_968" type="private"><route edges="a203[0] a203[1] a203[1]b a202 a34 a113 a209 "/></vehicle>
-    <vehicle arrivalPos="-1" depart="2283" departLane="best" departPos="0" id="XXI_Aprile_113_642" type="private"><route edges=" a13 a104 a24 a22 a59 a53cd a53[0] a53[1][0] a79 a74 a72[1] a69 a161 a122 a1b a1 a204a[0] a124 b12 b56[0] b56[1][0] b56[1][1] b5[1][0]+66 b5[1][1][1] b16[0] b29[0] "/></vehicle>   
+    <vehicle arrivalPos="-1" depart="2283" departLane="best" departPos="0" id="XXI_Aprile_113_642" type="private"><route edges=" a13 a104 a24 a22 a59 a53cd a53[0] a53[1][0] a79 a74 a72[1] a69 a161 a122 a1b a1 a204a[0] a124 b12 b56[0] b56[1][0] b56[1][1] b5[1][0]+66 b5[1][1][1] b16[0] b29[0] "/></vehicle>
     <vehicle arrivalPos="-1" depart="2285" departLane="best" departPos="0" id="Pepoli_11_1333" type="private"><route edges="a210 a43[0] a43[1] a201 a201c a204a[0] a124 b12 b56[0] b56[1][0] b56[1][1] b5[1][0]+66 b5[1][1][1] b8 b3[1] b3[1]b "/></vehicle>
     <vehicle arrivalPos="-1" depart="2285" departLane="best" departPos="0" id="Silvani_11_969" type="private"><route edges="a203[0] b12 b56[0] b39[0] b39[1][0] b39[1][1][0] b39[1][1][1] b45 a67 a80 a127 a77[1][0] a77ab a77bc a21a a21b a103 a14  "/></vehicle>
     <vehicle arrivalPos="-1" depart="2286" departLane="best" departPos="0" id="Borgo_100_376" type="private"><route edges="b6 b100 b7 b3[1] b3[1]b "/></vehicle>
@@ -7116,7 +7116,7 @@
     <vehicle arrivalPos="-1" depart="2309" departLane="best" departPos="0" id="Silvani_7_979" type="private"><route edges="a203[0] a203[1] a203[1]b a202 a34 a113 a209 "/></vehicle>
     <vehicle arrivalPos="-1" depart="2310" departLane="best" departPos="0" id="Borgo_20_380" type="private"><route edges="b6 b100 b7 b4[1][1][1] "/></vehicle>
     <vehicle arrivalPos="-1" depart="2310" departLane="best" departPos="0" id="Malvasia_100_475" type="private"><route edges="b52 b51 b56[0] b56[1][0] b56[1][1] b5[1][0]+66 b5[1][1][1] b8 b3[1] b3[1]b "/></vehicle>
-    <vehicle arrivalPos="-1" depart="2310" departLane="best" departPos="0" id="Pepoli_11_1348" type="private"><route edges="a210 a43[0] a43[1] a201 a201c a204a[0] a124 b12 b56[0] b56[1][0] b56[1][1] b5[1][0]+66 b5[1][1][1] b16[0] b29[0] "/></vehicle>  
+    <vehicle arrivalPos="-1" depart="2310" departLane="best" departPos="0" id="Pepoli_11_1348" type="private"><route edges="a210 a43[0] a43[1] a201 a201c a204a[0] a124 b12 b56[0] b56[1][0] b56[1][1] b5[1][0]+66 b5[1][1][1] b16[0] b29[0] "/></vehicle>
     <vehicle arrivalPos="-1" depart="2310" departLane="best" departPos="0" id="Prati_Capraia_100_475" type="private"><route edges="b3[0] b3[1] b3[1]b "/></vehicle>
     <vehicle arrivalPos="-1" depart="2311" departLane="best" departPos="0" id="Gandhi_60_1479" type="private"><route edges="b1[0] ba1[1] b1[1] a72[0] a72[1] a69 a161 a122 a1b a1 a204a[0] a204b[0] a204[1][0] a204[1][1] "/></vehicle>
     <vehicle arrivalPos="-1" depart="2311" departLane="best" departPos="0" id="Pertini_20_1075" type="private"><route edges="b63[0] b63[1] b4[0] b4[1][1][0] b4[1][1][1] "/></vehicle>
@@ -7185,7 +7185,7 @@
     <vehicle arrivalPos="-1" depart="2332" departLane="best" departPos="0" id="Costa_1_893" type="private"><route edges="a78[0] a56a a56b a77bc a77cd a53cd a53[0] a53[1][0] a79 a68 a11 b2[0] b2[1][0] b2[1][1][0] b2[1][1][1] b2[1][1][1]b "/></vehicle>
     <vehicle arrivalPos="-1" depart="2332" departLane="best" departPos="0" id="Gandhi_40_1492" type="private"><route edges="b1[0] ba1[1] b1[1] b38[0] b38[0]a b46 b49[0] b49[1] b55 b53 b53a "/></vehicle>
     <vehicle arrivalPos="-1" depart="2333" departLane="best" departPos="0" id="Gandhi_60_1493" type="private"><route edges="b1[0] ba1[1] b1[1] a72[0] a72[1] a69 a161 a122 a1b a1 a204a[0] a204b[0] a204[1][0] a204[1][1] "/></vehicle>
-    <vehicle arrivalPos="-1" depart="2333" departLane="best" departPos="0" id="Pepoli_11_1361" type="private"><route edges="a210 a43[0] a43[1] a201 a201c a204a[0] a124 b12 b56[0] b56[1][0] b56[1][1] b5[1][0]+66 b5[1][1][1] b16[0] b29[0] "/></vehicle>   
+    <vehicle arrivalPos="-1" depart="2333" departLane="best" departPos="0" id="Pepoli_11_1361" type="private"><route edges="a210 a43[0] a43[1] a201 a201c a204a[0] a124 b12 b56[0] b56[1][0] b56[1][1] b5[1][0]+66 b5[1][1][1] b16[0] b29[0] "/></vehicle>
     <vehicle arrivalPos="-1" depart="2333" departLane="best" departPos="0" id="Pertini_20_1085" type="private"><route edges="b63[0] b63[1] b4[0] b4[1][1][0] b4[1][1][1] "/></vehicle>
     <vehicle arrivalPos="-1" depart="2333" departLane="best" departPos="0" id="Silvani_11_989" type="private"><route edges="a203[0] b12 b56[0] b39[0] b39[1][0] b39[1][1][0] b39[1][1][1] b45 b2[0] b2[1][0] b2[1][1][0] b2[1][1][1] b2[1][1][1]b "/></vehicle>
     <vehicle arrivalPos="-1" depart="2333" departLane="best" departPos="0" id="XXI_Aprile_8_656" type="private"><route edges=" a13 a104 a16 a37 a36 a40 a153 a87[0] a20001+87[1][0] a87[1][1] am90 a89[0] a20002+89[1][0] a89[1][1] a91 a186 a109[0] a109[1][0]+20003 a109[1][1] a116 a46 a134 a134b "/></vehicle>
@@ -7326,7 +7326,7 @@
     <vehicle arrivalPos="-1" depart="2377" departLane="best" departPos="0" id="Costa_1_910" type="private"><route edges="a78[0] a56a a56b a77bc a77cd a53cd a53[0] a53[1][0] a79 a68 a11 b2[0] b2[1][0] b2[1][1][0] b2[1][1][1] b2[1][1][1]b "/></vehicle>
     <vehicle arrivalPos="-1" depart="2377" departLane="best" departPos="0" id="Gandhi_50_1521" type="ignoring"><route edges="b1[0] b25 b23 b17[0] b17[1] b11[0] b11[1][1] b101 b35[0] b35[1][0] b35[1][1][0] b20000+35[1][1][1][0] b35[1][1][1][1] "/></vehicle>
     <vehicle arrivalPos="-1" depart="2377" departLane="best" departPos="0" id="Pepoli_10_1387" type="private"><route edges="a210 a43[0] a43[1] a201 a201c a204a[0] a204b[0] a204[1][0] a204[1][1] "/></vehicle>
-    <vehicle arrivalPos="-1" depart="2377" departLane="best" departPos="0" id="Silvani_11_1008" type="private"><route edges="a203[0] b12 b56[0] b56[1][0] b56[1][1] b5[1][0]+66 b5[1][1][1] b16[0] b29[0] "/></vehicle>  
+    <vehicle arrivalPos="-1" depart="2377" departLane="best" departPos="0" id="Silvani_11_1008" type="private"><route edges="a203[0] b12 b56[0] b56[1][0] b56[1][1] b5[1][0]+66 b5[1][1][1] b16[0] b29[0] "/></vehicle>
     <vehicle arrivalPos="-1" depart="2378" departLane="best" departPos="0" id="Audinot_10_111" type="private"><route edges="a131 a119 a116 a46 a201 a201c a204a[0] a204b[0] a204[1][0] a204[1][1] "/></vehicle>
     <vehicle arrivalPos="-1" depart="2378" departLane="best" departPos="0" id="Malvasia_92_489" type="private"><route edges="b52 b51 b56[0] b56[1][0] b34[0] b34[1][0] b34[1][1] b2[1][0] b2[1][1][0] b2[1][1][1] b2[1][1][1]b "/></vehicle>
     <vehicle arrivalPos="-1" depart="2378" departLane="best" departPos="0" id="Pertini_20_1106" type="private"><route edges="b63[0] b63[1] b4[0] b4[1][1][0] b4[1][1][1] "/></vehicle>
@@ -7401,7 +7401,7 @@
     <vehicle arrivalPos="-1" depart="2401" departLane="best" departPos="0" id="XXI_Aprile_7_675" type="private"><route edges=" a9 a211 a45 a206 a32 a40 a41 a160 a61 a58[0] a58[1] a66 a117 a209 "/></vehicle>
     <vehicle arrivalPos="-1" depart="2402" departLane="best" departPos="0" id="Borgo_20_395" type="private"><route edges="b6 b100 b7 b4[1][1][1] "/></vehicle>
     <vehicle arrivalPos="-1" depart="2402" departLane="best" departPos="0" id="Gandhi_60_1537" type="private"><route edges="b1[0] ba1[1] b1[1] a72[0] a72[1] a69 a161 a122 a1b a1 a204a[0] a204b[0] a204[1][0] a204[1][1] "/></vehicle>
-    <vehicle arrivalPos="-1" depart="2402" departLane="best" departPos="0" id="Pertini_102_1117" type="private"><route edges="b13[0] b14 b17[0] b29[0] "/></vehicle> 
+    <vehicle arrivalPos="-1" depart="2402" departLane="best" departPos="0" id="Pertini_102_1117" type="private"><route edges="b13[0] b14 b17[0] b29[0] "/></vehicle>
     <vehicle arrivalPos="-1" depart="2403" departLane="best" departPos="0" id="Costa_12_920" type="private"><route edges="a78[0] a56a a56b a77bc a77cd a53cd a53[0] a53[1][0] a79 a68 a11 b38[0] b38[0]a b46 b49[0] b49[1] b55 b53 b53a "/></vehicle>
     <vehicle arrivalPos="-1" depart="2403" departLane="best" departPos="0" id="Malvasia_62_494" type="private"><route edges="b52 b51 b50[0] b97 b39[1][0] b39[1][1][0] b39[1][1][1] b45 a67 a80 a127 a77[1][0] a77[1][1] "/></vehicle>
     <vehicle arrivalPos="-1" depart="2403" departLane="best" departPos="0" id="Pepoli_3_1402" type="ignoring"><route edges="a210 a43[0] a118 a65 a57[0] a57[1] a62 a159 a42 a39 a35 a38 a15 a14  "/></vehicle>
@@ -7472,7 +7472,7 @@
     <vehicle arrivalPos="-1" depart="2423" departLane="best" departPos="0" id="Pertini_22_1127" type="private"><route edges="b13[0] b14 b17[0] b17[1] b8 b4[1][1][1] "/></vehicle>
     <vehicle arrivalPos="-1" depart="2424" departLane="best" departPos="0" id="Costa_50_928" type="private"><route edges="a78[0] a56a am1 a21b a103 a16 a37 a36 a40 a41 a160 a61 a58[0] a58[1] a200 a60 "/></vehicle>
     <vehicle arrivalPos="-1" depart="2424" departLane="best" departPos="0" id="Pepoli_10_1414" type="private"><route edges="a210 a43[0] a43[1] a201 a201c a204a[0] a204b[0] a204[1][0] a204[1][1] "/></vehicle>
-    <vehicle arrivalPos="-1" depart="2425" departLane="best" departPos="0" id="Pepoli_11_1415" type="private"><route edges="a210 a43[0] a43[1] a201 a201c a204a[0] a124 b12 b56[0] b56[1][0] b56[1][1] b5[1][0]+66 b5[1][1][1] b16[0] b29[0] "/></vehicle> 
+    <vehicle arrivalPos="-1" depart="2425" departLane="best" departPos="0" id="Pepoli_11_1415" type="private"><route edges="a210 a43[0] a43[1] a201 a201c a204a[0] a124 b12 b56[0] b56[1][0] b56[1][1] b5[1][0]+66 b5[1][1][1] b16[0] b29[0] "/></vehicle>
     <vehicle arrivalPos="-1" depart="2425" departLane="best" departPos="0" id="Pertini_20_1128" type="private"><route edges="b63[0] b63[1] b4[0] b4[1][1][0] b4[1][1][1] "/></vehicle>
     <vehicle arrivalPos="-1" depart="2425" departLane="best" departPos="0" id="Silvani_7_1028" type="private"><route edges="a203[0] a203[1] a203[1]b a202 a34 a113 a209 "/></vehicle>
     <vehicle arrivalPos="-1" depart="2426" departLane="best" departPos="0" id="Borgo_20_399" type="private"><route edges="b6 b100 b7 b4[1][1][1] "/></vehicle>
@@ -7562,7 +7562,7 @@
     <vehicle arrivalPos="-1" depart="2453" departLane="best" departPos="0" id="Pertini_20_1141" type="private"><route edges="b63[0] b63[1] b4[0] b4[1][1][0] b4[1][1][1] "/></vehicle>
     <vehicle arrivalPos="-1" depart="2453" departLane="best" departPos="0" id="Silvani_7_1040" type="private"><route edges="a203[0] a203[1] a203[1]b a202 a34 a113 a209 "/></vehicle>
     <vehicle arrivalPos="-1" depart="2454" departLane="best" departPos="0" id="Gandhi_60_1570" type="private"><route edges="b1[0] ba1[1] b1[1] a72[0] a72[1] a69 a161 a122 a3 a2 a202 a34 a113 a209 "/></vehicle>
-    <vehicle arrivalPos="-1" depart="2454" departLane="best" departPos="0" id="Pepoli_11_1432" type="private"><route edges="a210 a43[0] a43[1] a201 a201c a204a[0] a124 b12 b56[0] b56[1][0] b56[1][1] b5[1][0]+66 b5[1][1][1] b16[0] b29[0] "/></vehicle> 
+    <vehicle arrivalPos="-1" depart="2454" departLane="best" departPos="0" id="Pepoli_11_1432" type="private"><route edges="a210 a43[0] a43[1] a201 a201c a204a[0] a124 b12 b56[0] b56[1][0] b56[1][1] b5[1][0]+66 b5[1][1][1] b16[0] b29[0] "/></vehicle>
     <vehicle arrivalPos="-1" depart="2455" departLane="best" departPos="0" id="Costa_12_940" type="private"><route edges="a78[0] a56a a56b a77bc a77cd a53cd a53[0] a53[1][0] a79 a68 a11 b38[0] b38[0]a b46 b49[0] b49[1] b55 b53 b53a "/></vehicle>
     <vehicle arrivalPos="-1" depart="2455" departLane="best" departPos="0" id="Gandhi_50_1571" type="ignoring"><route edges="b1[0] b25 b23 b17[0] b17[1] b11[0] b11[1][1] b101 b35[0] b35[1][0] b35[1][1][0] b20000+35[1][1][1][0] b35[1][1][1][1] "/></vehicle>
     <vehicle arrivalPos="-1" depart="2455" departLane="best" departPos="0" id="Pertini_20_1142" type="private"><route edges="b63[0] b63[1] b4[0] b4[1][1][0] b4[1][1][1] "/></vehicle>
@@ -7678,7 +7678,7 @@
     <vehicle arrivalPos="-1" depart="2490" departLane="best" departPos="0" id="Pertini_20_1158" type="private"><route edges="b63[0] b63[1] b4[0] b4[1][1][0] b4[1][1][1] "/></vehicle>
     <vehicle arrivalPos="-1" depart="2490" departLane="best" departPos="0" id="Prati_Capraia_50_512" type="ignoring"><route edges="b3[0] b9 b11[0] b11[1][1] b101 b35[0] b35[1][0] b35[1][1][0] b20000+35[1][1][1][0] b35[1][1][1][1] "/></vehicle>
     <vehicle arrivalPos="-1" depart="2491" departLane="best" departPos="0" id="Gandhi_50_1594" type="ignoring"><route edges="b1[0] b25 b23 b17[0] b17[1] b11[0] b11[1][1] b101 b35[0] b35[1][0] b35[1][1][0] b20000+35[1][1][1][0] b35[1][1][1][1] "/></vehicle>
-    <vehicle arrivalPos="-1" depart="2491" departLane="best" departPos="0" id="Silvani_11_1056" type="private"><route edges="a203[0] b12 b56[0] b56[1][0] b56[1][1] b5[1][0]+66 b5[1][1][1] b16[0] b29[0] "/></vehicle>  
+    <vehicle arrivalPos="-1" depart="2491" departLane="best" departPos="0" id="Silvani_11_1056" type="private"><route edges="a203[0] b12 b56[0] b56[1][0] b56[1][1] b5[1][0]+66 b5[1][1][1] b16[0] b29[0] "/></vehicle>
     <vehicle arrivalPos="-1" depart="2492" departLane="best" departPos="0" id="Costa_50_954" type="private"><route edges="a78[0] a56a am1 a21b a103 a16 a37 a36 a40 a41 a160 a61 a58[0] a58[1] a200 a60 "/></vehicle>
     <vehicle arrivalPos="-1" depart="2492" departLane="best" departPos="0" id="Pepoli_10_1454" type="private"><route edges="a210 a43[0] a43[1] a201 a201c a204a[0] a204b[0] a204[1][0] a204[1][1] "/></vehicle>
     <vehicle arrivalPos="-1" depart="2492" departLane="best" departPos="0" id="Pertini_30_1159" type="private"><route edges="b13[0] b14 b17[0] b30 b31 b11[1][1] b70 "/></vehicle>
@@ -8040,7 +8040,7 @@
     <vehicle arrivalPos="-1" depart="2608" departLane="best" departPos="0" id="Pertini_20_1213" type="private"><route edges="b63[0] b63[1] b4[0] b4[1][1][0] b4[1][1][1] "/></vehicle>
     <vehicle arrivalPos="-1" depart="2609" departLane="best" departPos="0" id="Costa_50_999" type="private"><route edges="a78[0] a56a am1 a21b a103 a16 a37 a36 a40 a41 a160 a61 a58[0] a58[1] a200 a60 "/></vehicle>
     <vehicle arrivalPos="-1" depart="2609" departLane="best" departPos="0" id="Pepoli_8_1522" type="private"><route edges="a210 a43[0] a43[1] a134 a134b "/></vehicle>
-    <vehicle arrivalPos="-1" depart="2609" departLane="best" departPos="0" id="Silvani_11_1106" type="private"><route edges="a203[0] b12 b56[0] b56[1][0] b56[1][1] b5[1][0]+66 b5[1][1][1] b16[0] b29[0] "/></vehicle>  
+    <vehicle arrivalPos="-1" depart="2609" departLane="best" departPos="0" id="Silvani_11_1106" type="private"><route edges="a203[0] b12 b56[0] b56[1][0] b56[1][1] b5[1][0]+66 b5[1][1][1] b16[0] b29[0] "/></vehicle>
     <vehicle arrivalPos="-1" depart="2610" departLane="best" departPos="0" id="Gandhi_50_1670" type="ignoring"><route edges="b1[0] b25 b23 b17[0] b17[1] b11[0] b11[1][1] b101 b35[0] b35[1][0] b35[1][1][0] b20000+35[1][1][1][0] b35[1][1][1][1] "/></vehicle>
     <vehicle arrivalPos="-1" depart="2610" departLane="best" departPos="0" id="Pepoli_8_1523" type="private"><route edges="a210 a43[0] a43[1] a134 a134b "/></vehicle>
     <vehicle arrivalPos="-1" depart="2610" departLane="best" departPos="0" id="Pertini_20_1214" type="private"><route edges="b63[0] b63[1] b4[0] b4[1][1][0] b4[1][1][1] "/></vehicle>
@@ -8071,7 +8071,7 @@
     <vehicle arrivalPos="-1" depart="2618" departLane="best" departPos="0" id="XXI_Aprile_7_736" type="private"><route edges=" a9 a211 a45 a206 a32 a40 a41 a160 a61 a58[0] a58[1] a66 a117 a209 "/></vehicle>
     <vehicle arrivalPos="-1" depart="2619" departLane="best" departPos="0" id="Gandhi_60_1676" type="private"><route edges="b1[0] ba1[1] b1[1] a72[0] a72[1] a69 a161 a194 a91 a186 a109[0] a109[1][0]+20003 a109[1][1] a120 a65 a200 a60 "/></vehicle>
     <vehicle arrivalPos="-1" depart="2619" departLane="best" departPos="0" id="Pepoli_11_1528" type="private"><route edges="a210 a43[0] a43[1] a201 a201c a204a[0] a124 b12 b56[0] b39[0] b39[1][0] b39[1][1][0] b39[1][1][1] b45 b2[0] b2[1][0] b2[1][1][0] b2[1][1][1] b2[1][1][1]b "/></vehicle>
-    <vehicle arrivalPos="-1" depart="2619" departLane="best" departPos="0" id="Pertini_102_1218" type="private"><route edges="b13[0] b14 b17[0] b29[0] "/></vehicle> 
+    <vehicle arrivalPos="-1" depart="2619" departLane="best" departPos="0" id="Pertini_102_1218" type="private"><route edges="b13[0] b14 b17[0] b29[0] "/></vehicle>
     <vehicle arrivalPos="-1" depart="2620" departLane="best" departPos="0" id="Costa_70_1003" type="private"><route edges="a78[0] a56a a56b a77bc a77cd a53cd a53[0] a78[1][1] a189[0] a189[1][0]+20000 a189[1][1] a188 a87[0] a20001+87[1][0] a87[1][1] am90 a89[0] a20002+89[1][0] a89[1][1] a91 a186 a109[0] a109[1][0]+20003 a109[1][1] a116 a46 a113 a209 "/></vehicle>
     <vehicle arrivalPos="-1" depart="2620" departLane="best" departPos="0" id="Silvani_7_1111" type="private"><route edges="a203[0] a203[1] a203[1]b a202 a34 a113 a209 "/></vehicle>
     <vehicle arrivalPos="-1" depart="2621" departLane="best" departPos="0" id="Gandhi_60_1677" type="private"><route edges="b1[0] ba1[1] b1[1] a72[0] a72[1] a69 a161 a122 a1b a1 a204a[0] a204b[0] a54 "/></vehicle>
@@ -8141,7 +8141,7 @@
     <vehicle arrivalPos="-1" depart="2641" departLane="best" departPos="0" id="Malvasia_100_543" type="private"><route edges="b52 b51 b56[0] b56[1][0] b56[1][1] b5[1][0]+66 b5[1][1][1] b8 b3[1] b3[1]b "/></vehicle>
     <vehicle arrivalPos="-1" depart="2641" departLane="best" departPos="0" id="Pepoli_3_1541" type="ignoring"><route edges="a210 a43[0] a118 a65 a57[0] a57[1] a62 a159 a42 a39 a35 a38 a15 a14  "/></vehicle>
     <vehicle arrivalPos="-1" depart="2641" departLane="best" departPos="0" id="Prati_Capraia_100_543" type="private"><route edges="b3[0] b3[1] b3[1]b "/></vehicle>
-    <vehicle arrivalPos="-1" depart="2642" departLane="best" departPos="0" id="Silvani_11_1120" type="private"><route edges="a203[0] b12 b56[0] b56[1][0] b56[1][1] b5[1][0]+66 b5[1][1][1] b16[0] b29[0] "/></vehicle> 
+    <vehicle arrivalPos="-1" depart="2642" departLane="best" departPos="0" id="Silvani_11_1120" type="private"><route edges="a203[0] b12 b56[0] b56[1][0] b56[1][1] b5[1][0]+66 b5[1][1][1] b16[0] b29[0] "/></vehicle>
     <vehicle arrivalPos="-1" depart="2643" departLane="best" departPos="0" id="Costa_1_1012" type="private"><route edges="a78[0] a56a a56b a77bc a77cd a53cd a53[0] a53[1][0] a79 a68 a11 b2[0] b2[1][0] b2[1][1][0] b2[1][1][1] b2[1][1][1]b "/></vehicle>
     <vehicle arrivalPos="-1" depart="2643" departLane="best" departPos="0" id="Gandhi_60_1691" type="private"><route edges="b1[0] ba1[1] b1[1] a72[0] a72[1] a69 a161 a122 a1b a1 a204a[0] a204b[0] a204[1][0] a204[1][1] "/></vehicle>
     <vehicle arrivalPos="-1" depart="2643" departLane="best" departPos="0" id="Pepoli_11_1542" type="private"><route edges="a210 a43[0] a43[1] a201 a201c a204a[0] a124 b12 b56[0] b56[1][0] b56[1][1] b5[1][0]+66 b5[1][1][1] b8 b3[1] b3[1]b "/></vehicle>
@@ -8372,7 +8372,7 @@
     <vehicle arrivalPos="-1" depart="2718" departLane="best" departPos="0" id="Borgo_100_447" type="private"><route edges="b6 b100 b7 b3[1] b3[1]b "/></vehicle>
     <vehicle arrivalPos="-1" depart="2718" departLane="best" departPos="0" id="Gandhi_40_1739" type="private"><route edges="b1[0] ba1[1] b1[1] b38[0] b38[0]a b46 b49[0] b49[1] b55 b53 b53a "/></vehicle>
     <vehicle arrivalPos="-1" depart="2718" departLane="best" departPos="0" id="Pepoli_11_1586" type="private"><route edges="a210 a43[0] a43[1] a201 a201c a204a[0] a124 b12 b56[0] b56[1][0] b56[1][1] b5[1][0]+66 b5[1][1][1] b8 b10 "/></vehicle>
-    <vehicle arrivalPos="-1" depart="2718" departLane="best" departPos="0" id="Pertini_102_1264" type="private"><route edges="b13[0] b14 b17[0] b29[0] "/></vehicle>  
+    <vehicle arrivalPos="-1" depart="2718" departLane="best" departPos="0" id="Pertini_102_1264" type="private"><route edges="b13[0] b14 b17[0] b29[0] "/></vehicle>
     <vehicle arrivalPos="-1" depart="2719" departLane="best" departPos="0" id="Costa_70_1041" type="private"><route edges="a78[0] a56a a56b a77bc a77cd a53cd a53[0] a78[1][1] a189[0] a189[1][0]+20000 a189[1][1] a188 a87[0] a20001+87[1][0] a87[1][1] am90 a89[0] a20002+89[1][0] a89[1][1] a91 a186 a109[0] a109[1][0]+20003 a109[1][1] a116 a46 a113 a209 "/></vehicle>
     <vehicle arrivalPos="-1" depart="2719" departLane="best" departPos="0" id="Malvasia_94_559" type="private"><route edges="b52 b51 b50[0] b97 b39[1][0] b39[1][1][0] b39[1][1][1] b45 b2[0] b2[1][0] b2[1][1][0] b2[1][1][1] b2[1][1][1]b "/></vehicle>
     <vehicle arrivalPos="-1" depart="2719" departLane="best" departPos="0" id="Prati_Capraia_10_559" type="private"><route edges="b3[0] b10 "/></vehicle>
@@ -8582,7 +8582,7 @@
     <vehicle arrivalPos="-1" depart="2787" departLane="best" departPos="0" id="Prati_Capraia_100_573" type="private"><route edges="b3[0] b3[1] b3[1]b "/></vehicle>
     <vehicle arrivalPos="-1" depart="2788" departLane="best" departPos="0" id="Silvani_11_1182" type="private"><route edges="a203[0] b12 b56[0] b39[0] b39[1][0] b98 b34[1][0] b26 b26.-170 b18 b20+19b b2[1][1][1]b "/></vehicle>
     <vehicle arrivalPos="-1" depart="2788" departLane="best" departPos="0" id="XXI_Aprile_12_784" type="private"><route edges=" a13 a104 a24 a22 a59 a53cd a53[0] a53[1][0] a79 a68 a11 b38[0] b38[0]a b46 b49[0] b49[1] b55 b53 b53a "/></vehicle>
-    <vehicle arrivalPos="-1" depart="2789" departLane="best" departPos="0" id="Pepoli_11_1627" type="private"><route edges="a210 a43[0] a43[1] a201 a201c a204a[0] a124 b12 b56[0] b56[1][0] b56[1][1] b5[1][0]+66 b5[1][1][1] b16[0] b29[0] "/></vehicle>  
+    <vehicle arrivalPos="-1" depart="2789" departLane="best" departPos="0" id="Pepoli_11_1627" type="private"><route edges="a210 a43[0] a43[1] a201 a201c a204a[0] a124 b12 b56[0] b56[1][0] b56[1][1] b5[1][0]+66 b5[1][1][1] b16[0] b29[0] "/></vehicle>
     <vehicle arrivalPos="-1" depart="2790" departLane="best" departPos="0" id="Gandhi_60_1785" type="private"><route edges="b1[0] ba1[1] b1[1] a72[0] a72[1] a69 a161 a122 a3 a2 a202 a34 a113 a209 "/></vehicle>
     <vehicle arrivalPos="-1" depart="2790" departLane="best" departPos="0" id="Pepoli_11_1628" type="private"><route edges="a210 a43[0] a43[1] a201 a201c a204a[0] a124 b12 b56[0] b56[1][0] b56[1][1] b5[1][0]+66 b5[1][1][1] b8 b3[1] b3[1]b "/></vehicle>
     <vehicle arrivalPos="-1" depart="2790" departLane="best" departPos="0" id="Silvani_11_1183" type="private"><route edges="a203[0] b12 b56[0] b56[1][0] b56[1][1] b5[1][0]+66 b5[1][1][1] b8 b3[1] b3[1]b "/></vehicle>
@@ -8603,7 +8603,7 @@
     <vehicle arrivalPos="-1" depart="2795" departLane="best" departPos="0" id="Pertini_30_1300" type="private"><route edges="b13[0] b14 b17[0] b30 b31 b11[1][1] b70 "/></vehicle>
     <vehicle arrivalPos="-1" depart="2795" departLane="best" departPos="0" id="Silvani_11_1185" type="private"><route edges="a203[0] b12 b56[0] b56[1][0] b56[1][1] b5[1][0]+66 b5[1][1][1] b8 b4[1][1][1] "/></vehicle>
     <vehicle arrivalPos="-1" depart="2796" departLane="best" departPos="0" id="Gandhi_60_1789" type="private"><route edges="b1[0] ba1[1] b1[1] a72[0] a72[1] a69 a161 a122 a1b a1 a204a[0] a204b[0] a204[1][0] a204[1][1] "/></vehicle>
-    <vehicle arrivalPos="-1" depart="2796" departLane="best" departPos="0" id="Pepoli_11_1631" type="private"><route edges="a210 a43[0] a43[1] a201 a201c a204a[0] a124 b12 b56[0] b56[1][0] b56[1][1] b5[1][0]+66 b5[1][1][1] b16[0] b29[0] "/></vehicle>  
+    <vehicle arrivalPos="-1" depart="2796" departLane="best" departPos="0" id="Pepoli_11_1631" type="private"><route edges="a210 a43[0] a43[1] a201 a201c a204a[0] a124 b12 b56[0] b56[1][0] b56[1][1] b5[1][0]+66 b5[1][1][1] b16[0] b29[0] "/></vehicle>
     <vehicle arrivalPos="-1" depart="2796" departLane="best" departPos="0" id="Turati_1_80" type="ignoring"><route edges="a195 a159 a42 a39 a35 a38 a50 a19 a22 a59 a53cd a53[0] a53[1][0] a79 a68 a11 b2[0] b2[1][0] b2[1][1][0] b2[1][1][1] b2[1][1][1]b "/></vehicle>
     <vehicle arrivalPos="-1" depart="2797" departLane="best" departPos="0" id="Costa_70_1071" type="private"><route edges="a78[0] a56a a56b a77bc a77cd a53cd a53[0] a78[1][1] a189[0] a189[1][0]+20000 a189[1][1] a188 a87[0] a20001+87[1][0] a87[1][1] am90 a89[0] a20002+89[1][0] a89[1][1] a91 a186 a109[0] a109[1][0]+20003 a109[1][1] a116 a46 a113 a209 "/></vehicle>
     <vehicle arrivalPos="-1" depart="2797" departLane="best" departPos="0" id="Malvasia_100_575" type="private"><route edges="b52 b51 b56[0] b56[1][0] b56[1][1] b5[1][0]+66 b5[1][1][1] b8 b3[1] b3[1]b "/></vehicle>
@@ -9052,7 +9052,7 @@
     <vehicle arrivalPos="-1" depart="2936" departLane="best" departPos="0" id="Costa_70_1124" type="private"><route edges="a78[0] a56a a56b a77bc a77cd a53cd a53[0] a78[1][1] a189[0] a189[1][0]+20000 a189[1][1] a188 a87[0] a20001+87[1][0] a87[1][1] am90 a89[0] a20002+89[1][0] a89[1][1] a91 a186 a109[0] a109[1][0]+20003 a109[1][1] a116 a46 a113 a209 "/></vehicle>
     <vehicle arrivalPos="-1" depart="2936" departLane="best" departPos="0" id="Pepoli_2_1713" type="ignoring"><route edges="a210 a43[0] a118 a65 a57[0] a57[1] a62 a159 a42 a39 a35 a38 a50 a19 a22 a59 a53cd a53[0] a53[1][0] a53[1][1][0] a77[1][0] a77[1][1] "/></vehicle>
     <vehicle arrivalPos="-1" depart="2937" departLane="best" departPos="0" id="Borgo_100_483" type="private"><route edges="b6 b100 b7 b3[1] b3[1]b "/></vehicle>
-    <vehicle arrivalPos="-1" depart="2937" departLane="best" departPos="0" id="Pertini_102_1366" type="private"><route edges="b13[0] b14 b17[0] b29[0] "/></vehicle>  
+    <vehicle arrivalPos="-1" depart="2937" departLane="best" departPos="0" id="Pertini_102_1366" type="private"><route edges="b13[0] b14 b17[0] b29[0] "/></vehicle>
     <vehicle arrivalPos="-1" depart="2937" departLane="best" departPos="0" id="Silvani_11_1245" type="private"><route edges="a203[0] b12 b56[0] b39[0] b39[1][0] b39[1][1][0] b39[1][1][1] b45 a67 a80 a127 a77[1][0] a77[1][1] "/></vehicle>
     <vehicle arrivalPos="-1" depart="2938" departLane="best" departPos="0" id="Gandhi_40_1880" type="private"><route edges="b1[0] ba1[1] b1[1] b38[0] b38[0]a b46 b49[0] b49[1] b55 b53 b53a "/></vehicle>
     <vehicle arrivalPos="-1" depart="2938" departLane="best" departPos="0" id="Malvasia_100_604" type="private"><route edges="b52 b51 b56[0] b56[1][0] b56[1][1] b5[1][0]+66 b5[1][1][1] b8 b3[1] b3[1]b "/></vehicle>
@@ -9203,7 +9203,7 @@
     <vehicle arrivalPos="-1" depart="2985" departLane="best" departPos="0" id="Borgo_100_491" type="private"><route edges="b6 b100 b7 b3[1] b3[1]b "/></vehicle>
     <vehicle arrivalPos="-1" depart="2985" departLane="best" departPos="0" id="Gandhi_60_1910" type="private"><route edges="b1[0] ba1[1] b1[1] a72[0] a72[1] a69 a161 a122 a1b a1 a204a[0] a204b[0] a204[1][0] a204[1][1] "/></vehicle>
     <vehicle arrivalPos="-1" depart="2986" departLane="best" departPos="0" id="Costa_70_1143" type="private"><route edges="a78[0] a56a a56b a77bc a77cd a53cd a53[0] a78[1][1] a189[0] a189[1][0]+20000 a189[1][1] a188 a87[0] a20001+87[1][0] a87[1][1] am90 a89[0] a20002+89[1][0] a89[1][1] a91 a186 a109[0] a109[1][0]+20003 a109[1][1] a116 a46 a113 a209 "/></vehicle>
-    <vehicle arrivalPos="-1" depart="2986" departLane="best" departPos="0" id="Pepoli_11_1742" type="private"><route edges="a210 a43[0] a43[1] a201 a201c a204a[0] a124 b12 b56[0] b56[1][0] b56[1][1] b5[1][0]+66 b5[1][1][1] b16[0] b29[0] "/></vehicle> 
+    <vehicle arrivalPos="-1" depart="2986" departLane="best" departPos="0" id="Pepoli_11_1742" type="private"><route edges="a210 a43[0] a43[1] a201 a201c a204a[0] a124 b12 b56[0] b56[1][0] b56[1][1] b5[1][0]+66 b5[1][1][1] b16[0] b29[0] "/></vehicle>
     <vehicle arrivalPos="-1" depart="2986" departLane="best" departPos="0" id="Silvani_11_1266" type="private"><route edges="a203[0] b12 b53 b53a "/></vehicle>
     <vehicle arrivalPos="-1" depart="2987" departLane="best" departPos="0" id="Gandhi_40_1911" type="private"><route edges="b1[0] ba1[1] b1[1] b38[0] b38[0]a b46 b49[0] b49[1] b55 b53 b53a "/></vehicle>
     <vehicle arrivalPos="-1" depart="2987" departLane="best" departPos="0" id="Malvasia_100_614" type="private"><route edges="b52 b51 b56[0] b56[1][0] b56[1][1] b5[1][0]+66 b5[1][1][1] b8 b3[1] b3[1]b "/></vehicle>
@@ -9652,7 +9652,7 @@
     <vehicle arrivalPos="-1" depart="3133" departLane="best" departPos="0" id="XXI_Aprile_5_881" type="private"><route edges=" a9 a211 a45 a44 a36 a40 a41 a160 a61 a58[0] a58[1] a200 a60 "/></vehicle>
     <vehicle arrivalPos="-1" depart="3134" departLane="best" departPos="0" id="Costa_70_1200" type="private"><route edges="a78[0] a56a a56b a77bc a77cd a53cd a53[0] a78[1][1] a189[0] a189[1][0]+20000 a189[1][1] a188 a87[0] a20001+87[1][0] a87[1][1] am90 a89[0] a20002+89[1][0] a89[1][1] a91 a186 a109[0] a109[1][0]+20003 a109[1][1] a116 a46 a113 a209 "/></vehicle>
     <vehicle arrivalPos="-1" depart="3134" departLane="best" departPos="0" id="Gandhi_80_2005" type="private"><route edges="b1[0] b21 "/></vehicle>
-    <vehicle arrivalPos="-1" depart="3135" departLane="best" departPos="0" id="Pepoli_11_1829" type="private"><route edges="a210 a43[0] a43[1] a201 a201c a204a[0] a124 b12 b56[0] b56[1][0] b56[1][1] b5[1][0]+66 b5[1][1][1] b16[0] b29[0] "/></vehicle> 
+    <vehicle arrivalPos="-1" depart="3135" departLane="best" departPos="0" id="Pepoli_11_1829" type="private"><route edges="a210 a43[0] a43[1] a201 a201c a204a[0] a124 b12 b56[0] b56[1][0] b56[1][1] b5[1][0]+66 b5[1][1][1] b16[0] b29[0] "/></vehicle>
     <vehicle arrivalPos="-1" depart="3135" departLane="best" departPos="0" id="Pertini_30_1458" type="private"><route edges="b13[0] b14 b17[0] b30 b31 b11[1][1] b70 "/></vehicle>
     <vehicle arrivalPos="-1" depart="3135" departLane="best" departPos="0" id="Silvani_11_1329" type="private"><route edges="a203[0] b12 b56[0] b56[1][0] b56[1][1] b5[1][0]+66 b5[1][1][1] b8 b10 "/></vehicle>
 <!--    <vehicle arrivalPos="-1" depart="3136" departLane="best" departPos="0" id="Nigrisoli_92_508" type="private"><route edges="b65 b67 b32 b16[1] b18 b20+19b b2[1][1][1]b "/></vehicle>  -->
@@ -9714,7 +9714,7 @@
     <vehicle arrivalPos="-1" depart="3154" departLane="best" departPos="0" id="Gandhi_60_2018" type="private"><route edges="b1[0] ba1[1] b1[1] a72[0] a72[1] a69 a161 a122 a1b a1 a204a[0] a204b[0] a204[1][0] a204[1][1] "/></vehicle>
     <vehicle arrivalPos="-1" depart="3154" departLane="best" departPos="0" id="Pepoli_11_1840" type="private"><route edges="a210 a43[0] a43[1] a201 a201c a204a[0] a124 b12 b56[0] b56[1][0] b56[1][1] b5[1][0]+66 b5[1][1][1] b8 b3[1] b3[1]b "/></vehicle>
     <vehicle arrivalPos="-1" depart="3154" departLane="best" departPos="0" id="Pertini_62_1467" type="private"><route edges="b63[0] b63[1] b4[0] b28 b28a b16[1] b18 b20+19a ba1[1] b1[1] a72[0] a72[1] a69 a161 a122 a1b a1 a204a[0] a204b[0] a204[1][0] a204[1][1] "/></vehicle>
-    <vehicle arrivalPos="-1" depart="3154" departLane="best" departPos="0" id="Silvani_11_1337" type="private"><route edges="a203[0] b12 b56[0] b56[1][0] b56[1][1] b5[1][0]+66 b5[1][1][1] b16[0] b29[0] "/></vehicle> 
+    <vehicle arrivalPos="-1" depart="3154" departLane="best" departPos="0" id="Silvani_11_1337" type="private"><route edges="a203[0] b12 b56[0] b56[1][0] b56[1][1] b5[1][0]+66 b5[1][1][1] b16[0] b29[0] "/></vehicle>
     <vehicle arrivalPos="-1" depart="3155" departLane="best" departPos="0" id="Costa_50_1208" type="private"><route edges="a78[0] a56a am1 a21b a103 a16 a37 a36 a40 a41 a160 a61 a58[0] a58[1] a200 a60 "/></vehicle>
     <vehicle arrivalPos="-1" depart="3155" departLane="best" departPos="0" id="XXI_Aprile_1_887" type="private"><route edges=" a13 a104 a24 a22 a59 a53cd a53[0] a53[1][0] a79 a68 a11 b2[0] b2[1][0] b2[1][1][0] b2[1][1][1] b2[1][1][1]b "/></vehicle>
     <vehicle arrivalPos="-1" depart="3156" departLane="best" departPos="0" id="Gandhi_80_2019" type="private"><route edges="b1[0] b21 "/></vehicle>
@@ -9783,7 +9783,7 @@
     <vehicle arrivalPos="-1" depart="3176" departLane="best" departPos="0" id="Prati_Capraia_100_653" type="private"><route edges="b3[0] b3[1] b3[1]b "/></vehicle>
     <vehicle arrivalPos="-1" depart="3176" departLane="best" departPos="0" id="XXI_Aprile_2_893" type="private"><route edges=" a13 a104 a24 a22 a59 a53cd a53[0] a53[1][0] a53[1][1][0] a77[1][0] a77[1][1] "/></vehicle>
     <vehicle arrivalPos="-1" depart="3177" departLane="best" departPos="0" id="Gandhi_60_2033" type="private"><route edges="b1[0] ba1[1] b1[1] a72[0] a72[1] a69 a161 a122 a1b a1 a204a[0] a204b[0] a204[1][0] a204[1][1] "/></vehicle>
-    <vehicle arrivalPos="-1" depart="3177" departLane="best" departPos="0" id="Silvani_11_1347" type="private"><route edges="a203[0] b12 b56[0] b56[1][0] b56[1][1] b5[1][0]+66 b5[1][1][1] b16[0] b29[0] "/></vehicle> 
+    <vehicle arrivalPos="-1" depart="3177" departLane="best" departPos="0" id="Silvani_11_1347" type="private"><route edges="a203[0] b12 b56[0] b56[1][0] b56[1][1] b5[1][0]+66 b5[1][1][1] b16[0] b29[0] "/></vehicle>
     <vehicle arrivalPos="-1" depart="3178" departLane="best" departPos="0" id="Pepoli_10_1854" type="private"><route edges="a210 a43[0] a43[1] a201 a201c a204a[0] a204b[0] a204[1][0] a204[1][1] "/></vehicle>
     <vehicle arrivalPos="-1" depart="3178" departLane="best" departPos="0" id="Pertini_20_1478" type="private"><route edges="b63[0] b63[1] b4[0] b4[1][1][0] b4[1][1][1] "/></vehicle>
     <vehicle arrivalPos="-1" depart="3179" departLane="best" departPos="0" id="Costa_12_1217" type="private"><route edges="a78[0] a56a a56b a77bc a77cd a53cd a53[0] a53[1][0] a79 a68 a11 b38[0] b38[0]a b46 b49[0] b49[1] b55 b53 b53a "/></vehicle>
@@ -9813,7 +9813,7 @@
     <vehicle arrivalPos="-1" depart="3186" departLane="best" departPos="0" id="Prati_Capraia_100_655" type="private"><route edges="b3[0] b3[1] b3[1]b "/></vehicle>
     <vehicle arrivalPos="-1" depart="3187" departLane="best" departPos="0" id="Costa_12_1220" type="private"><route edges="a78[0] a56a a56b a77bc a77cd a53cd a53[0] a53[1][0] a79 a68 a11 b38[0] b38[0]a b46 b49[0] b49[1] b55 b53 b53a "/></vehicle>
     <vehicle arrivalPos="-1" depart="3187" departLane="best" departPos="0" id="Gandhi_60_2039" type="private"><route edges="b1[0] ba1[1] b1[1] a72[0] a72[1] a69 a161 a122 a1b a1 a204a[0] a204b[0] a204[1][0] a204[1][1] "/></vehicle>
-    <vehicle arrivalPos="-1" depart="3187" departLane="best" departPos="0" id="Pertini_102_1482" type="private"><route edges="b13[0] b14 b17[0] b29[0] "/></vehicle> 
+    <vehicle arrivalPos="-1" depart="3187" departLane="best" departPos="0" id="Pertini_102_1482" type="private"><route edges="b13[0] b14 b17[0] b29[0] "/></vehicle>
     <vehicle arrivalPos="-1" depart="3187" departLane="best" departPos="0" id="Silvani_11_1351" type="private"><route edges="a203[0] b12 b56[0] b39[0] b39[1][0] b39[1][1][0] b39[1][1][1] b45 a67 a80 a127 a77[1][0] a77ab a77bc a21a a21b a103 a14  "/></vehicle>
     <vehicle arrivalPos="-1" depart="3188" departLane="best" departPos="0" id="Gandhi_50_2040" type="ignoring"><route edges="b1[0] b25 b23 b17[0] b17[1] b11[0] b11[1][1] b101 b35[0] b35[1][0] b35[1][1][0] b20000+35[1][1][1][0] b35[1][1][1][1] "/></vehicle>
     <vehicle arrivalPos="-1" depart="3188" departLane="best" departPos="0" id="Pepoli_11_1860" type="private"><route edges="a210 a43[0] a43[1] a201 a201c a204a[0] a124 b12 b56[0] b39[0] b39[1][0] b39[1][1][0] b39[1][1][1] b45 b2[0] b2[1][0] b2[1][1][0] b2[1][1][1] b2[1][1][1]b "/></vehicle>
@@ -9932,7 +9932,7 @@
     <vehicle arrivalPos="-1" depart="3227" departLane="best" departPos="0" id="Gandhi_80_2065" type="private"><route edges="b1[0] b21 "/></vehicle>
     <vehicle arrivalPos="-1" depart="3227" departLane="best" departPos="0" id="Pertini_20_1501" type="private"><route edges="b63[0] b63[1] b4[0] b4[1][1][0] b4[1][1][1] "/></vehicle>
     <vehicle arrivalPos="-1" depart="3227" departLane="best" departPos="0" id="Silvani_11_1368" type="private"><route edges="a203[0] b12 b56[0] b39[0] b39[1][0] b39[1][1][0] b39[1][1][1] b45 a67 a80 a127 a77[1][0] a77[1][1] "/></vehicle>
-    <vehicle arrivalPos="-1" depart="3228" departLane="best" departPos="0" id="Pepoli_11_1883" type="private"><route edges="a210 a43[0] a43[1] a201 a201c a204a[0] a124 b12 b56[0] b56[1][0] b56[1][1] b5[1][0]+66 b5[1][1][1] b16[0] b29[0] "/></vehicle> 
+    <vehicle arrivalPos="-1" depart="3228" departLane="best" departPos="0" id="Pepoli_11_1883" type="private"><route edges="a210 a43[0] a43[1] a201 a201c a204a[0] a124 b12 b56[0] b56[1][0] b56[1][1] b5[1][0]+66 b5[1][1][1] b16[0] b29[0] "/></vehicle>
     <vehicle arrivalPos="-1" depart="3229" departLane="best" departPos="0" id="Borgo_100_531" type="private"><route edges="b6 b100 b7 b3[1] b3[1]b "/></vehicle>
     <vehicle arrivalPos="-1" depart="3229" departLane="best" departPos="0" id="Costa_50_1236" type="private"><route edges="a78[0] a56a am1 a21b a103 a16 a37 a36 a40 a41 a160 a61 a58[0] a58[1] a200 a60 "/></vehicle>
     <vehicle arrivalPos="-1" depart="3229" departLane="best" departPos="0" id="Gandhi_60_2066" type="private"><route edges="b1[0] ba1[1] b1[1] a72[0] a72[1] a69 a161 a122 a1b a1 a204a[0] a204b[0] a204[1][0] a204[1][1] "/></vehicle>
@@ -10368,7 +10368,7 @@
     <vehicle arrivalPos="-1" depart="3370" departLane="best" departPos="0" id="Pepoli_8_1966" type="private"><route edges="a210 a43[0] a43[1] a134 a134b "/></vehicle>
     <vehicle arrivalPos="-1" depart="3371" departLane="best" departPos="0" id="Malvasia_95_693" type="private"><route edges="b52 b51 b50[0] b97 b39[1][0] b39[1][1][0] b37 b34[1][1] b2[1][0] b2[1][1][0] b2[1][1][1] b2[1][1][1]b "/></vehicle>
     <vehicle arrivalPos="-1" depart="3371" departLane="best" departPos="0" id="Prati_Capraia_100_693" type="private"><route edges="b3[0] b3[1] b3[1]b "/></vehicle>
-    <vehicle arrivalPos="-1" depart="3371" departLane="best" departPos="0" id="Silvani_11_1429" type="private"><route edges="a203[0] b12 b56[0] b56[1][0] b56[1][1] b5[1][0]+66 b5[1][1][1] b16[0] b29[0] "/></vehicle> 
+    <vehicle arrivalPos="-1" depart="3371" departLane="best" departPos="0" id="Silvani_11_1429" type="private"><route edges="a203[0] b12 b56[0] b56[1][0] b56[1][1] b5[1][0]+66 b5[1][1][1] b16[0] b29[0] "/></vehicle>
     <vehicle arrivalPos="-1" depart="3372" departLane="best" departPos="0" id="Costa_200_1291" type="private"><route edges="a78[0] a56a a56b a77bc a77cd a53cd a53[0] a78[1][1] a189[0] a189[1][0]+20000 a189[1][1] a188 a87[0] a20001+87[1][0] a87[1][1] am90 a89[0] a20002+89[1][0] a89[1][1] a91 a186 a109[0] a109[1][0]+20003 a109[1][1] a116 a46 a201 a201c a204a[0] a204b[0] a204[1][0] a204[1][1] "/></vehicle>
     <vehicle arrivalPos="-1" depart="3372" departLane="best" departPos="0" id="Pepoli_11_1967" type="private"><route edges="a210 a43[0] a43[1] a201 a201c a204a[0] a124 b12 b56[0] b56[1][0] b56[1][1] b5[1][0]+66 b5[1][1][1] b8 b3[1] b3[1]b "/></vehicle>
     <vehicle arrivalPos="-1" depart="3372" departLane="best" departPos="0" id="Pertini_20_1568" type="private"><route edges="b63[0] b63[1] b4[0] b4[1][1][0] b4[1][1][1] "/></vehicle>
@@ -10425,7 +10425,7 @@
     <vehicle arrivalPos="-1" depart="3387" departLane="best" departPos="0" id="Silvani_11_1436" type="private"><route edges="a203[0] b12 b56[0] b56[1][0] b56[1][1] b5[1][0]+66 b5[1][1][1] b16[0] b16[1] b18 b20+19b b2[1][1][1]b "/></vehicle>
     <vehicle arrivalPos="-1" depart="3388" departLane="best" departPos="0" id="Costa_50_1297" type="private"><route edges="a78[0] a56a am1 a21b a103 a16 a37 a36 a40 a41 a160 a61 a58[0] a58[1] a200 a60 "/></vehicle>
     <vehicle arrivalPos="-1" depart="3388" departLane="best" departPos="0" id="Gandhi_60_2168" type="private"><route edges="b1[0] ba1[1] b1[1] a72[0] a72[1] a69 a161 a122 a1b a1 a204a[0] a204b[0] a204[1][0] a204[1][1] "/></vehicle>
-    <vehicle arrivalPos="-1" depart="3389" departLane="best" departPos="0" id="Pepoli_11_1977" type="private"><route edges="a210 a43[0] a43[1] a201 a201c a204a[0] a124 b12 b56[0] b56[1][0] b56[1][1] b5[1][0]+66 b5[1][1][1] b16[0] b29[0] "/></vehicle> 
+    <vehicle arrivalPos="-1" depart="3389" departLane="best" departPos="0" id="Pepoli_11_1977" type="private"><route edges="a210 a43[0] a43[1] a201 a201c a204a[0] a124 b12 b56[0] b56[1][0] b56[1][1] b5[1][0]+66 b5[1][1][1] b16[0] b29[0] "/></vehicle>
     <vehicle arrivalPos="-1" depart="3389" departLane="best" departPos="0" id="Pertini_20_1576" type="private"><route edges="b63[0] b63[1] b4[0] b4[1][1][0] b4[1][1][1] "/></vehicle>
     <vehicle arrivalPos="-1" depart="3390" departLane="best" departPos="0" id="Gandhi_60_2169" type="private"><route edges="b1[0] ba1[1] b1[1] a72[0] a72[1] a69 a161 a122 a1b a1 a204a[0] a204b[0] a204[1][0] a204[1][1] "/></vehicle>
     <vehicle arrivalPos="-1" depart="3390" departLane="best" departPos="0" id="Malvasia_92_697" type="private"><route edges="b52 b51 b56[0] b56[1][0] b34[0] b34[1][0] b34[1][1] b2[1][0] b2[1][1][0] b2[1][1][1] b2[1][1][1]b "/></vehicle>
@@ -10681,7 +10681,7 @@
     <vehicle arrivalPos="-1" depart="3470" departLane="best" departPos="0" id="Pertini_20_1614" type="private"><route edges="b63[0] b63[1] b4[0] b4[1][1][0] b4[1][1][1] "/></vehicle>
     <vehicle arrivalPos="-1" depart="3470" departLane="best" departPos="0" id="Silvani_7_1471" type="private"><route edges="a203[0] a203[1] a203[1]b a202 a34 a113 a209 "/></vehicle>
     <vehicle arrivalPos="-1" depart="3471" departLane="best" departPos="0" id="Costa_50_1329" type="private"><route edges="a78[0] a56a am1 a21b a103 a16 a37 a36 a40 a41 a160 a61 a58[0] a58[1] a200 a60 "/></vehicle>
-    <vehicle arrivalPos="-1" depart="3471" departLane="best" departPos="0" id="Gandhi_60_2221" type="private"><route edges="b1[0] ba1[1] b1[1] a72[0] a72[1] a69 a161 a122 a1b a1 a204a[0] a124 b12 b56[0] b56[1][0] b56[1][1] b5[1][0]+66 b5[1][1][1] b16[0] b29[0] "/></vehicle> 
+    <vehicle arrivalPos="-1" depart="3471" departLane="best" departPos="0" id="Gandhi_60_2221" type="private"><route edges="b1[0] ba1[1] b1[1] a72[0] a72[1] a69 a161 a122 a1b a1 a204a[0] a124 b12 b56[0] b56[1][0] b56[1][1] b5[1][0]+66 b5[1][1][1] b16[0] b29[0] "/></vehicle>
     <vehicle arrivalPos="-1" depart="3471" departLane="best" departPos="0" id="Pepoli_10_2025" type="private"><route edges="a210 a43[0] a43[1] a201 a201c a204a[0] a204b[0] a204[1][0] a204[1][1] "/></vehicle>
     <vehicle arrivalPos="-1" depart="3471" departLane="best" departPos="0" id="XXI_Aprile_7_976" type="private"><route edges=" a9 a211 a45 a206 a32 a40 a41 a160 a61 a58[0] a58[1] a66 a117 a209 "/></vehicle>
     <vehicle arrivalPos="-1" depart="3472" departLane="best" departPos="0" id="Borgo_20_571" type="private"><route edges="b6 b100 b7 b4[1][1][1] "/></vehicle>
@@ -10696,7 +10696,7 @@
     <vehicle arrivalPos="-1" depart="3474" departLane="best" departPos="0" id="Silvani_7_1473" type="private"><route edges="a203[0] a203[1] a203[1]b a202 a34 a113 a209 "/></vehicle>
     <vehicle arrivalPos="-1" depart="3475" departLane="best" departPos="0" id="Pertini_20_1616" type="private"><route edges="b63[0] b63[1] b4[0] b4[1][1][0] b4[1][1][1] "/></vehicle>
     <vehicle arrivalPos="-1" depart="3476" departLane="best" departPos="0" id="Gandhi_60_2224" type="private"><route edges="b1[0] ba1[1] b1[1] a72[0] a72[1] a69 a161 a122 a1b a1 a204a[0] a204b[0] a204[1][0] a204[1][1] "/></vehicle>
-    <vehicle arrivalPos="-1" depart="3476" departLane="best" departPos="0" id="Pepoli_11_2028" type="private"><route edges="a210 a43[0] a43[1] a201 a201c a204a[0] a124 b12 b56[0] b56[1][0] b56[1][1] b5[1][0]+66 b5[1][1][1] b16[0] b29[0] "/></vehicle> 
+    <vehicle arrivalPos="-1" depart="3476" departLane="best" departPos="0" id="Pepoli_11_2028" type="private"><route edges="a210 a43[0] a43[1] a201 a201c a204a[0] a124 b12 b56[0] b56[1][0] b56[1][1] b5[1][0]+66 b5[1][1][1] b16[0] b29[0] "/></vehicle>
     <vehicle arrivalPos="-1" depart="3477" departLane="best" departPos="0" id="Costa_70_1331" type="private"><route edges="a78[0] a56a a56b a77bc a77cd a53cd a53[0] a78[1][1] a189[0] a189[1][0]+20000 a189[1][1] a188 a87[0] a20001+87[1][0] a87[1][1] am90 a89[0] a20002+89[1][0] a89[1][1] a91 a186 a109[0] a109[1][0]+20003 a109[1][1] a116 a46 a113 a209 "/></vehicle>
     <vehicle arrivalPos="-1" depart="3477" departLane="best" departPos="0" id="Pertini_30_1617" type="private"><route edges="b13[0] b14 b17[0] b30 b31 b11[1][1] b70 "/></vehicle>
     <vehicle arrivalPos="-1" depart="3477" departLane="best" departPos="0" id="Silvani_7_1474" type="private"><route edges="a203[0] a203[1] a203[1]b a202 a34 a113 a209 "/></vehicle>
@@ -10806,7 +10806,7 @@
     <vehicle arrivalPos="-1" depart="3511" departLane="best" departPos="0" id="Pertini_20_1633" type="private"><route edges="b63[0] b63[1] b4[0] b4[1][1][0] b4[1][1][1] "/></vehicle>
     <vehicle arrivalPos="-1" depart="3511" departLane="best" departPos="0" id="XXI_Aprile_113_987" type="private"><route edges=" a13 a104 a24 a22 a59 a53cd a53[0] a53[1][0] a79 a74 a72[1] a69 a161 a122 a1b a1 a204a[0] a124 b12 b56[0] b56[1][0] b56[1][1] b5[1][0]+66 b5[1][1][1] b8 b3[1] b3[1]b "/></vehicle>
     <vehicle arrivalPos="-1" depart="3512" departLane="best" departPos="0" id="Malvasia_100_722" type="private"><route edges="b52 b51 b56[0] b56[1][0] b56[1][1] b5[1][0]+66 b5[1][1][1] b8 b3[1] b3[1]b "/></vehicle>
-    <vehicle arrivalPos="-1" depart="3512" departLane="best" departPos="0" id="Pepoli_11_2049" type="private"><route edges="a210 a43[0] a43[1] a201 a201c a204a[0] a124 b12 b56[0] b56[1][0] b56[1][1] b5[1][0]+66 b5[1][1][1] b16[0] b29[0] "/></vehicle>  
+    <vehicle arrivalPos="-1" depart="3512" departLane="best" departPos="0" id="Pepoli_11_2049" type="private"><route edges="a210 a43[0] a43[1] a201 a201c a204a[0] a124 b12 b56[0] b56[1][0] b56[1][1] b5[1][0]+66 b5[1][1][1] b16[0] b29[0] "/></vehicle>
     <vehicle arrivalPos="-1" depart="3512" departLane="best" departPos="0" id="Prati_Capraia_100_722" type="private"><route edges="b3[0] b3[1] b3[1]b "/></vehicle>
     <vehicle arrivalPos="-1" depart="3512" departLane="best" departPos="0" id="Silvani_7_1489" type="private"><route edges="a203[0] a203[1] a203[1]b a202 a34 a113 a209 "/></vehicle>
     <vehicle arrivalPos="-1" depart="3513" departLane="best" departPos="0" id="Costa_1_1345" type="private"><route edges="a78[0] a56a a56b a77bc a77cd a53cd a53[0] a53[1][0] a79 a68 a11 b2[0] b2[1][0] b2[1][1][0] b2[1][1][1] b2[1][1][1]b "/></vehicle>
@@ -10921,7 +10921,7 @@
     <vehicle arrivalPos="-1" depart="3547" departLane="best" departPos="0" id="Costa_50_1358" type="private"><route edges="a78[0] a56a am1 a21b a103 a16 a37 a36 a40 a41 a160 a61 a58[0] a58[1] a200 a60 "/></vehicle>
     <vehicle arrivalPos="-1" depart="3548" departLane="best" departPos="0" id="Gandhi_60_2270" type="private"><route edges="b1[0] ba1[1] b1[1] a72[0] a72[1] a69 a161 a122 a1b a1 a204a[0] a204b[0] a204[1][0] a204[1][1] "/></vehicle>
     <vehicle arrivalPos="-1" depart="3548" departLane="best" departPos="0" id="Pertini_73_1650" type="ignoring"><route edges="b13[0] b14 b27 b36 b39[1][1][1] b45 a67 a80 a127 a77[1][0] a77[1][1] "/></vehicle>
-    <vehicle arrivalPos="-1" depart="3548" departLane="best" departPos="0" id="Silvani_11_1504" type="private"><route edges="a203[0] b12 b56[0] b56[1][0] b56[1][1] b5[1][0]+66 b5[1][1][1] b16[0] b29[0] "/></vehicle> 
+    <vehicle arrivalPos="-1" depart="3548" departLane="best" departPos="0" id="Silvani_11_1504" type="private"><route edges="a203[0] b12 b56[0] b56[1][0] b56[1][1] b5[1][0]+66 b5[1][1][1] b16[0] b29[0] "/></vehicle>
     <vehicle arrivalPos="-1" depart="3549" departLane="best" departPos="0" id="Gandhi_60_2271" type="private"><route edges="b1[0] ba1[1] b1[1] a72[0] a72[1] a69 a161 a122 a1b a1 a204a[0] a204b[0] a204[1][0] a204[1][1] "/></vehicle>
     <vehicle arrivalPos="-1" depart="3550" departLane="best" departPos="0" id="Costa_1_1359" type="private"><route edges="a78[0] a56a a56b a77bc a77cd a53cd a53[0] a53[1][0] a79 a68 a11 b2[0] b2[1][0] b24 b23 b17[0] b17[1] b8 b4[1][1][1] "/></vehicle>
     <vehicle arrivalPos="-1" depart="3550" departLane="best" departPos="0" id="Nigrisoli_100_575" type="private"><route edges="b65 b5[1][0]+66 b5[1][1][1] b8 b3[1] b3[1]b "/></vehicle>
@@ -10969,12 +10969,12 @@
     <vehicle arrivalPos="-1" depart="3563" departLane="best" departPos="0" id="Costa_50_1364" type="private"><route edges="a78[0] a56a am1 a21b a103 a16 a37 a36 a40 a41 a160 a61 a58[0] a58[1] a200 a60 "/></vehicle>
     <vehicle arrivalPos="-1" depart="3563" departLane="best" departPos="0" id="Pertini_20_1657" type="private"><route edges="b63[0] b63[1] b4[0] b4[1][1][0] b4[1][1][1] "/></vehicle>
     <vehicle arrivalPos="-1" depart="3564" departLane="best" departPos="0" id="Gandhi_60_2280" type="private"><route edges="b1[0] ba1[1] b1[1] a72[0] a72[1] a69 a161 a122 a3 a2 a202 a34 a113 a209 "/></vehicle>
-    <vehicle arrivalPos="-1" depart="3564" departLane="best" departPos="0" id="Pepoli_11_2079" type="private"><route edges="a210 a43[0] a43[1] a201 a201c a204a[0] a124 b12 b56[0] b56[1][0] b56[1][1] b5[1][0]+66 b5[1][1][1] b16[0] b29[0] "/></vehicle> 
+    <vehicle arrivalPos="-1" depart="3564" departLane="best" departPos="0" id="Pepoli_11_2079" type="private"><route edges="a210 a43[0] a43[1] a201 a201c a204a[0] a124 b12 b56[0] b56[1][0] b56[1][1] b5[1][0]+66 b5[1][1][1] b16[0] b29[0] "/></vehicle>
     <vehicle arrivalPos="-1" depart="3564" departLane="best" departPos="0" id="Silvani_11_1511" type="private"><route edges="a203[0] b12 b56[0] b39[0] b39[1][0] b39[1][1][0] b39[1][1][1] b45 a67 a80 a127 a77[1][0] a77[1][1] "/></vehicle>
     <vehicle arrivalPos="-1" depart="3565" departLane="best" departPos="0" id="Gandhi_60_2281" type="private"><route edges="b1[0] ba1[1] b1[1] a72[0] a72[1] a69 a161 a122 a1b a1 a204a[0] a204b[0] a204[1][0] a204[1][1] "/></vehicle>
     <vehicle arrivalPos="-1" depart="3565" departLane="best" departPos="0" id="Malvasia_94_733" type="private"><route edges="b52 b51 b50[0] b97 b39[1][0] b39[1][1][0] b39[1][1][1] b45 b2[0] b2[1][0] b2[1][1][0] b2[1][1][1] b2[1][1][1]b "/></vehicle>
     <vehicle arrivalPos="-1" depart="3565" departLane="best" departPos="0" id="Pepoli_8_2080" type="private"><route edges="a210 a43[0] a43[1] a134 a134b "/></vehicle>
-    <vehicle arrivalPos="-1" depart="3565" departLane="best" departPos="0" id="Pertini_102_1658" type="private"><route edges="b13[0] b14 b17[0] b29[0] "/></vehicle> 
+    <vehicle arrivalPos="-1" depart="3565" departLane="best" departPos="0" id="Pertini_102_1658" type="private"><route edges="b13[0] b14 b17[0] b29[0] "/></vehicle>
     <vehicle arrivalPos="-1" depart="3565" departLane="best" departPos="0" id="Prati_Capraia_100_733" type="private"><route edges="b3[0] b3[1] b3[1]b "/></vehicle>
     <vehicle arrivalPos="-1" depart="3565" departLane="best" departPos="0" id="Turati_10_102" type="private"><route edges="a195 a61 a58[0] a58[1] a66 a119 a116 a46 a201 a201c a204a[0] a204b[0] a204[1][0] a204[1][1] "/></vehicle>
     <vehicle arrivalPos="-1" depart="3566" departLane="best" departPos="0" id="Costa_50_1365" type="private"><route edges="a78[0] a56a am1 a21b a103 a16 a37 a36 a40 a41 a160 a61 a58[0] a58[1] a200 a60 "/></vehicle>
