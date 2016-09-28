@@ -19,16 +19,13 @@ void BaseWaveApplLayer::initialize_default_veins_TraCI(int stage) {
         myId = getParentModule()->getIndex();
 
         headerLength = par("headerLength").longValue();
-        cout  << "headerLength: " << headerLength << endl;
         double maxOffset = par("maxOffset").doubleValue();
         sendBeacons = par("sendBeacons").boolValue();
         beaconLengthBits = par("beaconLengthBits").longValue();
-        cout  << "beaconLengthBits: " << beaconLengthBits << endl;
         beaconPriority = par("beaconPriority").longValue();
 
         sendData = par("sendData").boolValue();
         dataLengthBits = par("dataLengthBits").longValue();
-        cout  << "dataLengthBits: " << dataLengthBits << endl << endl;
         dataOnSch = par("dataOnSch").boolValue();
         dataPriority = par("dataPriority").longValue();
 
@@ -232,6 +229,10 @@ void BaseWaveApplLayer::generalInitializeVariables_executionByExpNumberVehDist()
         SprojectInfo += texTmp + " timeLimitGenerateMessage: " + to_string(StimeLimitGenerateBeaconMessage) + " s";
         SprojectInfo += texTmp + " beaconMessageHopLimit: " + to_string(SbeaconMessageHopLimit);
         SprojectInfo += texTmp + " expSendbyDSCR: " + to_string(SexpSendbyDSCR);
+        SprojectInfo += texTmp;
+        SprojectInfo += texTmp + " beaconLengthBits: " + to_string(beaconLengthBits);
+        SprojectInfo += texTmp + " headerLength: " + to_string(headerLength);
+        SprojectInfo += texTmp + " dataLengthBits: " + to_string(dataLengthBits);
         SprojectInfo += texTmp + "\n";
 
         SprojectInfo += texTmp;
