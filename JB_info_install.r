@@ -41,4 +41,4 @@ veins_RunExperiment() {
     echo -e "Experiment ends date: `date`\n" # End of runing experiment
 }
 alias opp-exc=veins_RunExperiment
-alias opp-exc-res="veins_RunExperiment > runExperimentOuptut.r"
+alias opp-exc-res="veins_RunExperiment > results/ExperimentOutput.r"
