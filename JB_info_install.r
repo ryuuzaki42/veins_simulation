@@ -14,8 +14,31 @@ alias veins_folder_cd='cd /media/sda4/prog/veins_simulation/'
 export TCL_LIBRARY=/usr/lib64/tcl8.6
 
 # Not change
-alias veins_make='veins_folder_cd; make; cd -'
-alias opp-exc='veins_make; opp_run -r 0 -n ../../src/veins/ -u Cmdenv -l ../../out/gcc-debug/src/libveins_simulation.so'
-alias opp-exc-res='veins_make; opp_run -r 0 -n ../../src/veins/ -u Cmdenv -l ../../out/gcc-debug/src/libveins_simulation.so '$1' > veins_run_output.r'
-alias opp-exc-all='veins_make; opp_run -n ../../src/veins/ -u Cmdenv -l ../../out/gcc-debug/src/libveins_simulation.so'
-alias opp-exc-all-res='veins_make; opp_run -n ../../src/veins/ -u Cmdenv -l ../../out/gcc-debug/src/libveins_simulation.so '$1' > veins_run_output.r'
+veins_RunExperiment() {
+    dateStart=`date` # Start runing experiment
+    echo -e "\nExperiments staring at: $dateStart"
+
+    # get inital variables
+    iniFile=$1
+    runExperimentI=$2
+    runExperimentF=$3
+
+    # cd veins folder, make and go back
+    veins_folder_cd
+    echo -e "\nMake the files in the folder `pwd`\n"
+    make
+    cd -
+
+    if [ "$runExperimentI" == "" ]; then # test the input, if is "" will run -r 0, if is valid, run -r I..F
+        runExperimentI=0
+        runExperimentF=0
+    fi
+
+    echo -e "\nRunning: opp_run -r $runExperimentI..$runExperimentF -n ../../src/veins/ -u Cmdenv -l ../../out/gcc-debug/src/libveins_simulation.so "$iniFile"\n"
+    opp_run -r $runExperimentI..$runExperimentF -n ../../src/veins/ -u Cmdenv -l ../../out/gcc-debug/src/libveins_simulation.so "$iniFile"
+
+    echo -e "\n\nExperiment starts date: $dateStart"
+    echo -e "Experiment ends date: `date`\n" # End of runing experiment
+}
+alias opp-exc=veins_RunExperiment
+alias opp-exc-res="veins_RunExperiment > runExperimentOuptut.r"
