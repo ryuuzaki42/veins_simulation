@@ -81,8 +81,8 @@ void vehDist::onBeaconMessage(WaveShortMessage* wsm) {
                         cout << source << " message (" << wsm->getGlobalMessageIdentificaton() << ") is on the buffer at: " << simTime() << endl;
                     }
                 } else { // wsm->getHopCount() < 0
-                    cout << "Error: received message with hopCount < 0, hopCount: " << wsm->getHopCount() << " at: " << simTime() << endl;
-                    exit(2);
+                    cout << "JBe - Error: received message with hopCount < 0, hopCount: " << wsm->getHopCount() << " at: " << simTime() << " - " << endl;
+                    ASSERT2(0, "JBe - Error: received message with hopCount < 0 -");
                 }
             }
         } else {
@@ -375,8 +375,8 @@ string vehDist::neighborWithShortestDistanceToTarge(string idMessage) {
                         sD.distanceToTargetCategory = sD.distanceToTargetNow + sD.distanceToTargetNow * 0.3;
                         MeetCatP =1;
                     } else {
-                        cout << "Error category unknown" << endl;
-                        exit(3);
+                        cout << endl << "JBe - Error category unknown -" << endl;
+                        ASSERT2(0, "JBe - Error category unknown -");
                     }
 
                     sD.decisionValueDistanceSpeed = sD.distanceToTargetNow - (sD.speedVeh);
@@ -486,9 +486,8 @@ string vehDist::neighborWithShortestDistanceToTarge(string idMessage) {
                 vehId = chosenByDistance_Speed_Category_RateTimeToSend(vehShortestDistanceToTarget, SpercentP);
                 break;
             default:
-                cout << "Error! expSendbyDSCR: " << SexpSendbyDSCR << "not defined, class in vehDist.cc";
-                DBG << "Error! expSendbyDSCR: " << SexpSendbyDSCR << "not defined, class in vehDist.cc";
-                exit(1);
+                cout << "JBe - Error! expSendbyDSCR: " << SexpSendbyDSCR << "not defined, class in vehDist.cc -";
+                ASSERT2(0, "JBe - Error expSendbyDSCR value not defined -");
             }
     }
 
@@ -700,8 +699,8 @@ void vehDist::sendMessageToOneNeighborTarget(string beaconSource) {
             if (it != messagesOrderReceivedVehDist.end()) {
                 messagesOrderReceivedVehDist.erase(it);
             } else {
-                cout << source <<  "Error in messagesOrderReceived, need to have the same entries as messagesBuffer" << endl;
-                exit(1);
+                cout << endl << source << "JBe - Error in messagesOrderReceived, need to have the same entries as messagesBuffer -" << endl;
+                ASSERT2(0, "JBe - Error in messagesOrderReceived, need to have the same entries as messagesBuffer -");
             }
             colorCarryMessageVehDist(messagesBufferVehDist);
         } else {
@@ -741,9 +740,8 @@ void vehDist::handleLowerMsg(cMessage* msg) {
     } else if (wsm->getType() == 2) {
         onBeaconMessage(wsm);
     } else {
-        DBG << "unknown message (" << wsm->getName() << ") received" << endl;
-        cout << "unknown message (" << wsm->getName() << ") received" << endl;
-        exit(22);
+        cout << endl << "JBe - Error unknown message (" << wsm->getName() << ") received - " << endl;
+        ASSERT2(0, "JBe - Error unknown message received -");
     }
 
     delete(msg);

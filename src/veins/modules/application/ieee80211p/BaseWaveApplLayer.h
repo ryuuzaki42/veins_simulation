@@ -60,6 +60,7 @@ class BaseWaveApplLayer : public BaseApplLayer {
         void toFinishRSU();
         void toFinishVeh();
         string boolToString(bool value);
+        string constCharToString(const char *s);
 
         void restartFilesResultRSU(string folderResult);
         void restartFilesResultVeh(string projectInfo, Coord initialPos);

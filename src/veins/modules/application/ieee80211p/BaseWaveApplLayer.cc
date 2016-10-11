@@ -87,6 +87,7 @@ void BaseWaveApplLayer::vehInitializeValuesVehDist(string category, Coord positi
 
     vehOffSet = double(myId)/1000; // Simulate asynchronous channel access. Values between 0.001, 0.002
     SnumVehicles.push_back(source);
+    cout << "Count of vehicle in the scenario: " << SnumVehicles.size() << endl;
     ScountVehicleAll++;
 
     vehCategory = category;
@@ -108,7 +109,7 @@ void BaseWaveApplLayer::vehInitializeValuesVehDist(string category, Coord positi
         }
     }
 
-    cout << endl << source << " (" << MACToInteger() << ") cat: " << category << " entered in the scenario at " << simTime() << " whit OffSet: " << vehOffSet << endl;
+    cout << endl << source << " (MACint: " << MACToInteger() << ") category: " << category << " entered in the scenario at: " << simTime() << " whit OffSet: " << vehOffSet << endl;
 }
 
 void BaseWaveApplLayer::rsuInitializeValuesVehDist() {
@@ -197,8 +198,8 @@ void BaseWaveApplLayer::generalInitializeVariables_executionByExpNumberVehDist()
             SttlBeaconMessage = par("ttlBeaconMessage_two").longValue();
             ScountGenerateBeaconMessage = par("countGenerateBeaconMessage_two").longValue();
         } else {
-            cout << "Error: Number of experiment not configured. Go to BaseWaveApplLayer.cc line 155" << endl;
-            exit(33);
+            cout << "Error: Number of experiment not configured, class BaseWaveApplLayer.cc" << endl;
+            ASSERT2(0, "JBe - Error: Number of experiment not configured -");
         }
 
         ScountMesssageDrop = ScountMsgPacketSend = SmsgBufferUseGeneral = ScountVehicleAll = 0;
@@ -269,6 +270,10 @@ string BaseWaveApplLayer::boolToString(bool value) {
     }
 }
 
+string BaseWaveApplLayer::constCharToString(const char *s) {
+    return (string)s;
+}
+
 string BaseWaveApplLayer::getFolderResultVehDist(unsigned short int expSendbyDSCR) {
     string expSendbyDSCRText;
     switch (expSendbyDSCR) {
@@ -294,8 +299,8 @@ string BaseWaveApplLayer::getFolderResultVehDist(unsigned short int expSendbyDSC
             expSendbyDSCRText = "0099_epidemic";
             break;
         default:
-            cout << "Error, expSendbyDSCR: " << expSendbyDSCR << " not defined, class in BaseWaveApplLayer.cc line 183";
-            exit(1);
+            cout << "JBe - Error, expSendbyDSCR: " << expSendbyDSCR << " not defined, class in BaseWaveApplLayer.cc";
+            ASSERT2(0, "JBe - Error expSendbyDSCR value not defined -");
     }
 
     string resultFolderPart = "results/";
@@ -536,10 +541,11 @@ void BaseWaveApplLayer:: toFinishVeh() {
     auto itVeh = find(SnumVehicles.begin(), SnumVehicles.end(), source);
     if (itVeh != SnumVehicles.end()) {
         SnumVehicles.erase(itVeh);
+        cout << "Count of vehicle in the scenario: " << SnumVehicles.size() << endl;
         SvehScenario.erase(source);
     } else {
-        cout << "Error in vehDist::numVehicles, need to have the same entries as the number of vehicles" << endl;
-        exit (1);
+        cout << "JBe - Error in vehDist::numVehicles, need to have the same entries as the number of vehicles" << endl;
+        ASSERT2(0, "JBe - Error in vehDist::numVehicles, need to have the same entries as the number of vehicles -");
     }
 }
 
@@ -602,9 +608,9 @@ void BaseWaveApplLayer::selectVehGenerateMessage() {
                         cout << source << " selected " << vehSelectedId << " to generate " << SbeaconMessageId;
                         cout << " message, but has Timestamp: " << SvehScenario[vehSelectedId] <<" at " << simTime() << endl;
                         if (trySelectVeh > (SvehScenario.size() * 4)) {
-                            cout << "Error loop in select vehicle to generate message, go to vehDist.cc line 941" << endl;
-                            cout << "trySelectVeh: " << trySelectVeh << " vehDist::vehScenario.size(): " << SvehScenario.size() << endl;
-                            exit(3);
+                            cout << endl << "JBe - Error loop in select vehicle to generate message, class BaseWaveApplLayer.cc";
+                            cout << endl << "trySelectVeh: " << trySelectVeh << " vehDist::vehScenario.size(): " << SvehScenario.size() << endl;
+                            ASSERT2(0, "JBe - Error loop in select vehicle to generate message -");
                         }
                         trySelectVeh++;
                     }
