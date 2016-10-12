@@ -143,7 +143,7 @@ class BaseWaveApplLayer : public BaseApplLayer {
         //## Used to another projects
         cMessage* sendGenerateBeaconMessageEvt;
 
-        mt19937 mt_veh;
+        static mt19937 mt_veh;
 
         double vehOffSet;
 
