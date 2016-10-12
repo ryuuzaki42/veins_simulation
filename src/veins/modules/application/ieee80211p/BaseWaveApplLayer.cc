@@ -535,7 +535,7 @@ void BaseWaveApplLayer::printCountBeaconMessagesDropVeh() {
     myfile.close();
 }
 
-void BaseWaveApplLayer:: toFinishVeh() {
+void BaseWaveApplLayer::toFinishVeh() {
     printCountBeaconMessagesDropVeh();
 
     auto itVeh = find(SnumVehicles.begin(), SnumVehicles.end(), source);
