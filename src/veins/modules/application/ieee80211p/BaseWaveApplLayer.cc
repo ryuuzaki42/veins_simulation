@@ -208,7 +208,7 @@ void BaseWaveApplLayer::generalInitializeVariables_executionByExpNumberVehDist()
         SbeaconMessageId = 1;
 
         // Initialize random seed (Seed the RNG) # Inside of IF because must be executed one time (the seed is "static")
-        mt_veh.seed(SrepeatNumber); // Instead another value, for make the experiment more reproducible, so seed = reapeatNumber
+        mtSelectVehicleGenarateMessage.seed(SrepeatNumber); // Instead another value, for make the experiment more reproducible, so seed = reapeatNumber
         srand(SrepeatNumber + 1); // repeatNumber + 1, because srand(0) == srand(1)
 
         // To run with different routes files use only one seed
@@ -468,7 +468,7 @@ void BaseWaveApplLayer::generateBeaconMessageVehDist() {
     wsm->setWsmData(wsmDataTmp.c_str());
 
     myfile.open(fileMessagesGenerated, std::ios_base::app); // Save info (Id and vehicle generate) on fileMessagesGenerated
-    myfile << "                                                                     ";
+    myfile << "                                                                    ";
     if (SbeaconMessageId < 10) {
         string msgIdTmp = "00" + to_string(SbeaconMessageId);
         wsm->setGlobalMessageIdentificaton(msgIdTmp.c_str()); // Id 01 to 09
@@ -566,6 +566,11 @@ void BaseWaveApplLayer::colorCarryMessageVehDist(unordered_map <string, WaveShor
     }
 }
 
+int BaseWaveApplLayer::mt19937GetRandomValue(int upperLimmit) {
+    uniform_int_distribution <int> dist(0, (upperLimmit - 1)); // generate a value, e.g, dist(0, 10), will be 0, 1, ... 10
+    return dist(mtSelectVehicleGenarateMessage);
+}
+
 void BaseWaveApplLayer::selectVehGenerateMessage() {
     if (myId == 0) { // If true, some vehicle has (in past) selected the vehicle to generate messages
         if (simTime() <= StimeLimitGenerateBeaconMessage) { // Modify the generate message and test vehDist::timeLimitGenerateBeaconMessage
@@ -574,17 +579,9 @@ void BaseWaveApplLayer::selectVehGenerateMessage() {
             unsigned short int vehSelected;
             myfile.open(fileMessagesGenerated, std::ios_base::app); // To save info (Id and vehicle generate) on fileMessagesGenerated
             unsigned short int trySelectVeh = 0;
-            for (unsigned short int i = 0; i < ScountGenerateBeaconMessage;) { // select <countGenerateBeaconMessage> distinct vehicle to generate messages
-                //vehSelected = intuniform(1, (vehDist::numVehicles -1), repeatNumber); // Get random number
-                //cout << getRNG(0) << endl; // Get seed used on random number
-
-                //uniform_int_distribution <int> dist(0, (vehDist::numVehicles.size() - 1));
-
-                // TODO Need of new way to generate messages
-                //uniform_int_distribution <int> dist(0, 9);
-                uniform_int_distribution <int> dist(0, (SnumVehicles.size() - 1));
-                vehSelected = dist(mt_veh);
-                string vehSelectedId = SnumVehicles[vehSelected];
+            for (unsigned short int i = 0; i < ScountGenerateBeaconMessage;) { // select vehicle to generate messages
+                vehSelected = mt19937GetRandomValue(SnumVehicles.size()); // return a number from 0 to (SnumVehicles.size() - 1), the index vector
+                string vehSelectedId = SnumVehicles[vehSelected]; // Get the vehicle name
 
                 if (SselectFromAllVehicles) {
                     auto itVehSelected = find(SvehGenerateMessage.begin(), SvehGenerateMessage.end(), vehSelectedId);
@@ -595,8 +592,7 @@ void BaseWaveApplLayer::selectVehGenerateMessage() {
                         i++;
                     }
                 } else {
-                    //if ((SvehScenario[vehSelectedId].getTimestamp() + SvehTimeLimitToAcceptGenerateMgs) >= simTime()) { // Test if vehicle are less than 60 s in the scenario
-                    if (((SvehScenario[vehSelectedId].getTimestamp() + SvehTimeLimitToAcceptGenerateMgs) >= simTime()) || (strcmp(SvehScenario[vehSelectedId].getCategory(), "T") == 0)) { // Test if vehicle are less than 60 s in the scenario
+                    if ((SvehScenario[vehSelectedId].getTimestamp() + SvehTimeLimitToAcceptGenerateMgs) >= simTime()) { // Test if vehicle are less than 60 s in the scenario
                         auto itVehSelected = find(SvehGenerateMessage.begin(), SvehGenerateMessage.end(), vehSelectedId);
                         if (itVehSelected == SvehGenerateMessage.end()) {
                             SvehGenerateMessage.push_back(vehSelectedId);
@@ -976,7 +972,7 @@ void BaseWaveApplLayer::generateMessageEpidemic() { //Generate a message in orde
     wsm->setHopCount(SbeaconMessageHopLimit + 1);
 
     myfile.open(fileMessagesGenerated, std::ios_base::app); // Save info (Id and vehicle generate) on fileMessagesGenerated
-    myfile << "                                                                     ";
+    myfile << "                                                                    ";
     if (SbeaconMessageId < 10) {
         string msgIdTmp = "00" + to_string(SbeaconMessageId);
         wsm->setGlobalMessageIdentificaton(msgIdTmp.c_str()); // Id 001 to 009

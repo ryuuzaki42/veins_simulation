@@ -114,6 +114,6 @@ bool BaseWaveApplLayer::SvehDistTrueEpidemicFalse, BaseWaveApplLayer::SusePathHi
 bool BaseWaveApplLayer::SvehSendWhileParking, BaseWaveApplLayer::SselectFromAllVehicles, BaseWaveApplLayer::SuseMessagesSendLog;
 bool BaseWaveApplLayer::SvehDistCreateEventGenerateMessage, BaseWaveApplLayer::SuseRateTimeToSend;
 
-mt19937 BaseWaveApplLayer::mt_veh;
+mt19937 BaseWaveApplLayer::mtSelectVehicleGenarateMessage;
 
 #endif

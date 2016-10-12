@@ -85,6 +85,7 @@ class BaseWaveApplLayer : public BaseApplLayer {
 
         void vehInitializeValuesVehDist(string category, Coord position);
         void rsuInitializeValuesVehDist();
+        int mt19937GetRandomValue(int upperLimmit);
 //######################################### vehDist #########################################
 
 //######################################### Epidemic #########################################
@@ -143,7 +144,7 @@ class BaseWaveApplLayer : public BaseApplLayer {
         //## Used to another projects
         cMessage* sendGenerateBeaconMessageEvt;
 
-        static mt19937 mt_veh;
+        static mt19937 mtSelectVehicleGenarateMessage;
 
         double vehOffSet;
 
