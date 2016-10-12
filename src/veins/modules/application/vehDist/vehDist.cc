@@ -670,7 +670,7 @@ string vehDist::chosenByDistance_Speed_Category_RateTimeToSend(unordered_map <st
     }
 }
 
-void vehDist:: finish() {
+void vehDist::finish() {
     toFinishVeh();
 }
 
