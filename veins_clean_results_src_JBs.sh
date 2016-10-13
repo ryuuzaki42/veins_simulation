@@ -19,6 +19,7 @@
 # junto com este programa, se não, escreva para a Fundação do Software
 #
 # Livre(FSF) Inc., 51 Franklin St, Fifth Floor, Boston, MA 02110-1301 USA
+#
 # Script: limpa o histórico de resultados de execução do framework Veins
 #
 # Última atualização: 26/09/2016
