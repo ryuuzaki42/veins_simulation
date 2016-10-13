@@ -18,6 +18,9 @@
 #include <algorithm> // std::find
 #include <unordered_map>
 
+// To use Veins::TraCIScenarioManagerLaunchdAccess()
+#include "veins/modules/mobility/traci/TraCIScenarioManagerLaunchd.h"
+
 using namespace std;
 
 #ifndef DBG

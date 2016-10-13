@@ -230,6 +230,7 @@ void BaseWaveApplLayer::generalInitializeVariables_executionByExpNumberVehDist()
         SprojectInfo += texTmp + " timeLimitGenerateMessage: " + to_string(StimeLimitGenerateBeaconMessage) + " s";
         SprojectInfo += texTmp + " beaconMessageHopLimit: " + to_string(SbeaconMessageHopLimit);
         SprojectInfo += texTmp + " expSendbyDSCR: " + to_string(SexpSendbyDSCR);
+        SprojectInfo += texTmp + " penetrationRateValue: " + to_string(Veins::TraCIScenarioManagerLaunchdAccess().get()->par("penetrationRate").doubleValue());
         SprojectInfo += texTmp;
         SprojectInfo += texTmp + " beaconLengthBits: " + to_string(beaconLengthBits);
         SprojectInfo += texTmp + " headerLength: " + to_string(headerLength);
