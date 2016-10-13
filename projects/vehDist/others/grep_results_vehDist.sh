@@ -1,7 +1,7 @@
 #!/bin/bash
 #
 # Autor= João Batista Ribeiro
-# Bugs, Agradecimentos, Criticas "construtiva"
+# Bugs, Agradecimentos, Críticas "construtivas"
 # Mande me um e-mail. Ficarei Grato!
 # e-mail: joao42lbatista@gmail.com
 #
@@ -96,5 +96,4 @@ while [ $continueFlag == 1 ]; do
     fi
 done
 
-echo -e "\n               ## End of script\n"
-#
+echo -e "\n## End of script ##\n"

@@ -1,7 +1,7 @@
 #!/bin/bash
 #
 # Autor= João Batista Ribeiro
-# Bugs, Agradecimentos, Criticas "construtiva"
+# Bugs, Agradecimentos, Críticas "construtivas"
 # Mande me um e-mail. Ficarei Grato!
 # e-mail: joao42lbatista@gmail.com
 #
@@ -19,7 +19,7 @@
 # junto com este programa, se não, escreva para a Fundação do Software
 #
 # Livre(FSF) Inc., 51 Franklin St, Fifth Floor, Boston, MA 02110-1301 USA
-# 
+#
 # Script: Convert the values from a grid with 3 km (12 edges 0 to 12)
 # to use just one character in the edges
 #
@@ -80,4 +80,3 @@ while [ $countGridTmp -lt $countGrid ]; do
 done
 
 echo -e "\nConverting finished\n"
-#

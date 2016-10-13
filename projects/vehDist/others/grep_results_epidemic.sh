@@ -1,7 +1,7 @@
 #!/bin/bash
 #
 # Autor= João Batista Ribeiro
-# Bugs, Agradecimentos, Criticas "construtiva"
+# Bugs, Agradecimentos, Críticas "construtivas"
 # Mande me um e-mail. Ficarei Grato!
 # e-mail: joao42lbatista@gmail.com
 #
@@ -76,5 +76,4 @@ while [ $i -lt $numExpF_1to8 ]; do
     ((i++))
 done
 
-echo -e "\n               ## End of script\n"
-#
+echo -e "\n## End of script\n"
