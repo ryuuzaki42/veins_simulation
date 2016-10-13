@@ -1,4 +1,8 @@
-
+#
+# script to run opp_run with multiple by time.
+# don't use this script
+# use the command opp_runall and the script veins_opp_runall.sh
+#
 run_end=$1
 if [ "$run_end" == '' ]; then
     run_end=1
@@ -19,7 +23,7 @@ while [ $run -lt $run_end ]; do
         mv vehDist.rou$runFile.xml vehDist.rou.xml
     fi
 
-    opp_run -r $run -n ../../src/veins/ -u Cmdenv -l ../../out/gcc-debug/src/libveins.so vehDist.ini >> run.r #run_$run.r 
+    opp_run -r $run -n ../../src/veins/ -u Cmdenv -l ../../out/gcc-debug/src/libveins.so vehDist.ini >> run_$run.r
 
     ((run++))
     ((runFile++))
@@ -28,4 +32,3 @@ while [ $run -lt $run_end ]; do
         runFile=0;
     fi
 done
-#
