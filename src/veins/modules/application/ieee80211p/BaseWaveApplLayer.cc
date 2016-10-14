@@ -315,6 +315,8 @@ string BaseWaveApplLayer::getFolderResultVehDist(unsigned short int expSendbyDSC
     resultFolderPart += to_string(expPartOneOrTwo) + "/" + expSendbyDSCRText + "/" + "E" + to_string(SexpNumber) + "_";
     resultFolderPart += to_string(SttlBeaconMessage) + "_" + to_string(ScountGenerateBeaconMessage) +"/";
 
+    string seedNumber = ev.getConfig()->getConfigValue("seed-set");
+    resultFolderPart += "run_" +seedNumber + "/";
     return resultFolderPart;
 }
 
