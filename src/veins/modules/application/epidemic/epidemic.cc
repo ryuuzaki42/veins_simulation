@@ -25,6 +25,13 @@ void epidemic::vehInitializeVariablesEpidemicVeh() {
 
 void epidemic::onBeacon(WaveShortMessage* wsm) {
     receivedOnBeaconEpidemic(wsm);
+
+    // Another way to finish the simulation
+    // Has the "sim-time-limit = 600s" from the ini file
+    // and with endSimulation() you terminate in any time
+    //if (simTime() > 100) {
+    //    endSimulation();
+    //}
 }
 
 void epidemic::onData(WaveShortMessage* wsm) {
