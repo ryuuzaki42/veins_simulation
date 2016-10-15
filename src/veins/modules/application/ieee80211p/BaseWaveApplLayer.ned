@@ -33,7 +33,7 @@ simple BaseWaveApplLayer like IBaseApplLayer {
         int timeGenerateBeaconMessage @unit("s") = default(0s); // Time for generate messages
 
         int expNumber = default(1); // Experiment number by table 2^k, number to use _one or _two variables
-        int expPart_one_or_two = default(1); // Experiment part, can be 1 or 2, to use 4 values of ttlBM
+        int expPart_one_or_two = default(1); // Experiment part, can be 1 or 2, to use 4 values of ttlBeaconMessage
         int timeLimitGenerateBeaconMessage @unit("s") = default(0s); // ttl beacon message
 
         int ttlBeaconMessage_one @unit("s") = default(0s); // ttl beacon message
