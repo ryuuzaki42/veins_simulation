@@ -77,9 +77,9 @@ if ls -l | grep -q "\.ini"; then
     echo -e "\n## Script to collect the simulation results in one place ##"
 
     if [ "$experimentName" == "vehDist" ]; then
-        pathFolder="../results/vehDist_resultsEnd_$part"
+        pathFolder="results/vehDist_resultsEnd_$part"
     elif [ "$experimentName" == "epidemic" ]; then
-        pathFolder="../results/epidemic_resultsEnd_$part"
+        pathFolder="results/epidemic_resultsEnd_$part"
         numExpF_DSCR=1
         experiment="0099_epidemic"
     fi
@@ -105,10 +105,28 @@ if ls -l | grep -q "\.ini"; then
         echo -e "## Values from experiment $experiment ##"
         i=$numExpI_1to8
         while [ $i -lt $numExpF_1to8 ]; do
-            echo -e "               ## Experiment $i ##\n"
-            cat $pathFolder/$experiment/E$i_*/$rsu0File | grep -E "Exp: $i"
-            echo
-            cat $pathFolder/$experiment/E$i_*/$vehiclesFile | grep -E "Exp: $i"
+            j=0
+            continueFlag2=1
+
+            while [ $continueFlag2 == 1 ]; do
+                echo -e "\n\t\t## Experiment $experiment $i run_$j ##"
+
+                fileRSU=`ls $pathFolder/$experiment/E"$i"_*/run_$j/$rsu0File`
+                echo -e "\t\t\tFile: $fileRSU\n"
+
+                cat $pathFolder/$experiment/E"$i"_*/run_$j/$rsu0File | grep -E "Exp: "$i""
+                echo
+
+                fileVeh=`ls $pathFolder/$experiment/E"$i"_*/run_$j/$vehiclesFile`
+                echo -e "\t\t\tFile: $fileVeh\n"
+
+                cat $pathFolder/$experiment/E"$i"_*/run_$j/$vehiclesFile | grep -E "Exp: $i"
+                ((j++))
+
+                if [ -e $pathFolder/$experiment/E$i_*/run_$j/$rsu0File ]; then
+                    continueFlag2=0
+                fi
+            done
             ((i++))
         done
 
