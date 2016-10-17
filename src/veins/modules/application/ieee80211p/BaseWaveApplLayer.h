@@ -173,6 +173,7 @@ class BaseWaveApplLayer : public BaseApplLayer {
 
         static vector <string> SnumVehicles, SvehGenerateMessage;
 
+        static unordered_map <string, int> SvehCategoryCount;
         static unordered_map <string, WaveShortMessage> SvehScenario;
         static bool SvehDistTrueEpidemicFalse, SusePathHistory, SallowMessageCopy, SvehSendWhileParking;
         static bool SselectFromAllVehicles, SuseMessagesSendLog, SvehDistCreateEventGenerateMessage, SuseRateTimeToSend;

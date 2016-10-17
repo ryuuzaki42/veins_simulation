@@ -95,6 +95,7 @@ class vehDist : public BaseWaveApplLayer {
 
 vector <string> BaseWaveApplLayer::SnumVehicles, BaseWaveApplLayer::SvehGenerateMessage;
 
+unordered_map <string, int> BaseWaveApplLayer::SvehCategoryCount;
 unordered_map <string, WaveShortMessage> BaseWaveApplLayer::SvehScenario;
 
 unsigned short int BaseWaveApplLayer::SmsgDroppedbyTTL, BaseWaveApplLayer::SmsgDroppedbyCopy, BaseWaveApplLayer::SmsgDroppedbyBuffer;
