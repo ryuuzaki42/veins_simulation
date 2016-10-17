@@ -1,7 +1,7 @@
 #!/bin/bash
 #
 # Autor= João Batista Ribeiro
-# Bugs, Agradecimentos, Criticas "construtiva"
+# Bugs, Agradecimentos, Críticas "construtivas"
 # Mande me um e-mail. Ficarei Grato!
 # e-mail: joao42lbatista@gmail.com
 #
@@ -22,7 +22,7 @@
 #
 # Script: Create the run line to run in the opp_runall
 #
-# Última atualização: 13/10/2016
+# last update: 13/10/2016
 #
 if [ $# -lt 3 ]; then # Test at least tree oarametrs
     echo "Error in the parrametrs"

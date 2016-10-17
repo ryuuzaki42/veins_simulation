@@ -1,7 +1,7 @@
 #!/bin/bash
 #
 # Autor= João Batista Ribeiro
-# Bugs, Agradecimentos, Criticas "construtiva"
+# Bugs, Agradecimentos, Críticas "construtivas"
 # Mande me um e-mail. Ficarei Grato!
 # e-mail: joao42lbatista@gmail.com
 #
@@ -22,7 +22,7 @@
 #
 # Script: limpa o histórico de resultados de execução do framework Veins
 #
-# Última atualização: 26/09/2016
+# Last update: 26/09/2016
 #
 # Pasta do Veins (altere se a sua for diferente)
 cd /media/sda4/prog/veins_simulation/

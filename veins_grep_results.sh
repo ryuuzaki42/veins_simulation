@@ -22,7 +22,7 @@
 #
 # Script: Script to collect the simulation result in one place
 #
-# Última atualização: 14/10/2016
+# last update: 14/10/2016
 #
 ## Local my pc folder
 if ls -l | grep -q "\.ini"; then
