@@ -24,7 +24,7 @@
 #
 # last update: 13/10/2016
 #
-if [ $# -lt 3 ]; then # Test at least tree oarametrs
+if [ $# -lt 3 ]; then # Test at least tree parameters
     echo "Error in the parrametrs"
     echo "To run: opp_runall -j2 veins_opp_runall.sh omnet.ini -r 0..1"
     echo " opp_runall - opp_runall command"
@@ -39,11 +39,11 @@ else
     fileResult="results/run_"$runNumber".r"
     mkdir results 2> /dev/null # create the results folder if not exists
 
-    dateStart=`date` # Start runing experiment
+    dateStart=`date` # Start running experiment
     echo -e "Experiments staring at: $dateStart" > $fileResult
     echo -e "\nRunning: opp_run -u Cmdenv -n ../../src/veins/ -l ../../src/libveins_simulation.so -f $iniFile -r $runNumber >> $fileResult\n" | tee -a $fileResult
 
-    opp_run -u Cmdenv -n ../../src/veins/ -l ../../src/libveins_simulation.so -f $iniFile -r $runNumber >> $fileResult # runing experiment
+    opp_run -u Cmdenv -n ../../src/veins/ -l ../../src/libveins_simulation.so -f $iniFile -r $runNumber >> $fileResult # running experiment
 
     echo -e "\n\nExperiment run $runNumber starts date: $dateStart" | tee -a $fileResult
     echo -e "Experiment run $runNumber ends date: `date`\n" | tee -a $fileResult
