@@ -371,11 +371,14 @@ string vehDist::neighborWithShortestDistanceToTarge(string idMessage) {
                     if (sD.categoryVeh.compare("T") == 0) {
                         sD.distanceToTargetCategory = sD.distanceToTargetNow + sD.distanceToTargetNow * 0.1;
                         MeetCatT = 1;
+                    } else if (sD.categoryVeh.compare("B") == 0) {
+                        sD.distanceToTargetCategory = sD.distanceToTargetNow + sD.distanceToTargetNow * 0.1;
+                        MeetCatT = 1;
                     } else if (sD.categoryVeh.compare("P") == 0) {
                         sD.distanceToTargetCategory = sD.distanceToTargetNow + sD.distanceToTargetNow * 0.3;
-                        MeetCatP =1;
+                        MeetCatP = 1;
                     } else {
-                        cout << endl << "JBe - Error category unknown -" << endl;
+                        cout << endl << "JBe - Error category unknown -" << source << " category: " << sD.categoryVeh << endl;
                         ASSERT2(0, "JBe - Error category unknown -");
                     }
 
