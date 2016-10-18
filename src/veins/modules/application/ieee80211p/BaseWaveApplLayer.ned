@@ -23,10 +23,6 @@ simple BaseWaveApplLayer like IBaseApplLayer {
         int sendSummaryVectorInterval @unit("s") = default(0s); //define the minimum slide window length among contacts to send new version of summary vector
         int maximumEpidemicBufferSize = default(0); //define the maximum buffer size (in number of messages) that a node is willing to allocate for epidemic messages.
 
-        // Jonh added
-        int vehBeaconMessageTarget_x = default(0);
-        int vehBeaconMessageTarget_y = default(0);
-
         int beaconMessageBufferSize = default(0);
         int beaconMessageInterval @unit("s") = default(0s); // Interval to try send message(s)
         int beaconMessageHopLimit = default(0); // Limit of hops
@@ -58,7 +54,8 @@ simple BaseWaveApplLayer like IBaseApplLayer {
 
         bool useRateTimeToSend = default(false); // Use or not the rateTimeToSend
         double normalTimeSendMessage @unit("s") = default(0s); // Time will send a message whe useRateTimeToSend is false.
-        string folderPathSed;
+        string folderPathSed = default("");
+        bool disableCout = default(false);
 
     gates:
         input lowerLayerIn; // from mac layer
