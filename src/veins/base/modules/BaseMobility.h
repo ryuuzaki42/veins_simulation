@@ -69,6 +69,9 @@ class MIXIM_API BaseMobility : public BatteryAccess
      *
      * @sa handleIfOutside()
      */
+
+    Coord getInitialPositionFromIniFileRSU();
+
     enum BorderPolicy {
         REFLECT,       ///< reflect off the wall
         WRAP,          ///< reappear at the opposite edge (torus)

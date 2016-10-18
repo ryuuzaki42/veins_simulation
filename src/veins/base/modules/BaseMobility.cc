@@ -63,6 +63,10 @@ BaseMobility::BaseMobility(unsigned stacksize):
 		origIconSize(0)
 {}
 
+Coord BaseMobility::getInitialPositionFromIniFileRSU() { // Get *.rsu[*].mobility.(x,y,z)
+    return Coord(par("x").doubleValue(), par("y").doubleValue(), par("z").doubleValue());
+}
+
 void BaseMobility::initialize(int stage)
 {
     BaseModule::initialize(stage);
