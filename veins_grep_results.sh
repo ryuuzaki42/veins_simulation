@@ -140,4 +140,4 @@ if ls -l | grep -q "\.ini"; then
 else
     echo -e "\nError: ($PWD) is not a OMNet++ project folder.\nPlease go the folder with a ini file"
 fi
-echo -e "\n               ## End of script ##\n"
+echo -e "\n\t\t## End of script ##\n"
