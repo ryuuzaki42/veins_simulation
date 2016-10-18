@@ -20,7 +20,8 @@ void vehDist::initialize(int stage) {
 void vehDist::vehInitializeVariablesVehDistVeh() {
     vehCreateUpdateRateTimeToSendEvent(); // Create Event to update the rateTimeToSend (Only VehDist)
 
-    vehInitializeValuesVehDist(traciVehicle->getTypeId(), mobility->getPositionAt(simTime() + 0.1)); // The same for Epidemic and VehDist
+    curPosition = mobility->getPositionAt(simTime() + 0.1);
+    vehInitializeValuesVehDist(traciVehicle->getTypeId(), curPosition); // The same for Epidemic and VehDist
 
     vehCreateEventTrySendBeaconMessage(); // Create one Event to try send messages in buffer (Only VehDist)
 }
