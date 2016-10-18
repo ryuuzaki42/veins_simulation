@@ -156,6 +156,7 @@ class BaseWaveApplLayer : public BaseApplLayer {
         ofstream myfile; // record in file
 
         unsigned short int target_x, target_y;
+        static Coord rsu0Position;
         unsigned int msgBufferUse;
 
         string fileMessagesUnicast, fileMessagesBroadcast, fileMessagesCount, fileMessagesDrop, fileMessagesGenerated;
