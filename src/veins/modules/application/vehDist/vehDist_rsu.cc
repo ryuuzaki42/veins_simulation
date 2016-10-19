@@ -16,6 +16,14 @@ void vehDist_rsu::initialize(int stage) {
 
 void vehDist_rsu::rsuInitializeVariables() {
     rsuInitializeValuesVehDist();
+
+    if (source.compare("rsu[0]") == 0) {
+        rsu0Position = mobi->getInitialPositionFromIniFileRSU();
+        cout << " position: " << rsu0Position << endl;
+    } else {
+        cout << source << " JBe - configuration to another RSU not implemented - " << endl;
+        ASSERT2(0, "JBe - configuration to another RSU not implemented -");
+    }
 }
 
 void vehDist_rsu::handleLowerMsg(cMessage* msg) {
@@ -61,7 +69,7 @@ void vehDist_rsu::handleSelfMsg(cMessage* msg) {
         default: {
             if (msg) {
                 DBG << "APP: Error: Got Self Message of unknown kind! Name: " << msg->getName() << endl;
-                exit(2);
+                ASSERT2(0, "JBe - APP: Error: Got Self Message of unknown kind! -");
             }
             break;
         }
