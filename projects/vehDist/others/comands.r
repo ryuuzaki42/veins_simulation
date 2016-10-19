@@ -1,6 +1,9 @@
 ## randomTrips
     http://sumo.dlr.de/wiki/Tools/Trip
-    python /media/sda4/prog/sumo-0.25.0/tools/randomTrips.py --help
+    SUMO older tool folder: /media/sda4/prog/sumo-0.25.0/tools
+    SUMO tool folder: /opt/sumo-0.25.0/tools/
+
+    python /opt/sumo-0.25.0/tools/randomTrips.py --help
     http://sumo.dlr.de/wiki/FAQ#How_do_I_generate_random_routes.3F
 
 ## km^2, grid: (1, 5) (4, 9) (9, 13) (16, 17) (25, 21) (36, 25)
@@ -27,9 +30,9 @@
 
 ## Generate the trips and the routes (with various distance)
     # Geneate 3 M routes
-    python /media/sda4/prog/sumo-0.25.0/tools/randomTrips.py -n vehDist.net.xml --min-distance=100000 -b 0 -e 3000 -i 200 -s 1 -r vehDist_tmp.rou.xml
+    python /opt/sumo-0.25.0/tools/randomTrips.py -n vehDist.net.xml --min-distance=100000 -b 0 -e 3000 -i 200 -s 1 -r vehDist_tmp.rou.xml
     # Geneate 30 M routes
-    python /media/sda4/prog/sumo-0.25.0/tools/randomTrips.py -n vehDist.net.xml --min-distance=100000 -b 0 -e 30000 -i 200 -s 1 -r vehDist_tmp.rou.xml
+    python /opt/sumo-0.25.0/tools/randomTrips.py -n vehDist.net.xml --min-distance=100000 -b 0 -e 30000 -i 200 -s 1 -r vehDist_tmp.rou.xml
         # The -s (seed) 1, for generate the same routes every time that run the command
 
 ## To test "is the same routes?"
@@ -104,5 +107,3 @@ i=1; cat file.r | grep -E "Exp: $i|Values" | grep -E "send|Values" | sed 's/Exp:
     To make sure that the bookkeeping is correct, it compares its own count against SUMO''s reported number of active vehicles.
     I do not know why the numbers do not match sometimes. It only seems to occur in large congested networks.
     # Link: http://stackoverflow.com/questions/31605511/assert-condition-for-driving-vehicles-in-veins-failed
-
-#
