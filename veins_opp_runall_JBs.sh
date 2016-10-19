@@ -22,29 +22,45 @@
 #
 # Script: Create the run line to run in the opp_runall
 #
-# last update: 13/10/2016
+# last update: 19/10/2016
 #
-if [ $# -lt 3 ]; then # Test at least tree parameters
-    echo "Error in the parrametrs"
-    echo "To run: opp_runall -j2 veins_opp_runall.sh omnet.ini -r 0..1"
+if [ $# -lt 4 ]; then # Test at least tree parameters
+    echo "Error in the parameters"
+    echo "To run: opp_runall -j3 veins_opp_runall_JBs.sh -f omnet.ini -r 0..2"
     echo " opp_runall - opp_runall command"
     echo " -j\"count of cores\" - number of cores to run"
     echo " veins_opp_runall.sh - this script"
-    echo " omnet.ini - ini file of configuration"
+    echo " -f omnet.ini - ini file of configuration"
     echo " -r runSart..runEnd, like -r 0..1 or -r 0..3,6..9"
 else
-    iniFile=$1
-    #$2 is -r
-    runNumber=$3
-    fileResult="results/run_"$runNumber".r"
-    mkdir results 2> /dev/null # create the results folder if not exists
+    #$1 is -f
+    iniFile=$2
+    #$3 is -r
+    runNumber=$4
 
-    dateStart=`date` # Start running experiment
-    echo -e "Experiments staring at: $dateStart" > $fileResult
-    echo -e "\nRunning: opp_run -u Cmdenv -n ../../src/veins/ -l ../../src/libveins_simulation.so -f $iniFile -r $runNumber >> $fileResult\n" | tee -a $fileResult
+    if [ -e $iniFile ]; then
+        export TZ=America/Sao_Paulo
 
-    opp_run -u Cmdenv -n ../../src/veins/ -l ../../src/libveins_simulation.so -f $iniFile -r $runNumber >> $fileResult # running experiment
+        fileResult="results/run_"$runNumber".r"
+        mkdir results 2> /dev/null # create the results folder if not exists
 
-    echo -e "\n\nExperiment run $runNumber starts date: $dateStart" | tee -a $fileResult
-    echo -e "Experiment run $runNumber ends date: `date`\n" | tee -a $fileResult
+        dateStart=`date` # Start running experiment
+        dateStartSeconds=`date +%s`
+        echo -e "\nExperiment run $runNumber staring at: $dateStart" | tee $fileResult
+
+        echo -e "\nRunning: opp_run -u Cmdenv -n ../../src/veins/ -l ../../src/libveins_simulation.so -f $iniFile -r $runNumber >> $fileResult\n" | tee -a $fileResult
+        opp_run -u Cmdenv -n ../../src/veins/ -l ../../src/libveins_simulation.so -f $iniFile -r $runNumber >> $fileResult # running experiment
+
+        dateEnd=`date` # End running experiment
+        echo -e "\nExperiment run $runNumber starts at: $dateStart" | tee -a $fileResult
+        echo -e "Experiment run $runNumber ends at: $dateEnd" | tee -a $fileResult
+
+        dateEndSeconds=`date +%s`
+        dateDiffSeconds=`echo "($dateEndSeconds - $dateStartSeconds)" | bc`
+        dateDiffMin=`echo "scale=2; $dateDiffSeconds/60" | bc`
+        dateDiffHour=`echo "scale=2; $dateDiffSeconds/(60*60)" | bc`
+        echo -e "Time spent in run $runNumber: $dateDiffSeconds s - or $dateDiffMin min - or $dateDiffHour h\n" | tee -a $fileResult
+    else
+        echo -e "\nError: $iniFile not exists\n" | tee $fileResult
+    fi
 fi
