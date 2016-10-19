@@ -87,14 +87,25 @@ void BaseWaveApplLayer::vehInitializeValuesVehDist(string category, Coord positi
 
     vehOffSet = double(myId)/1000; // Simulate asynchronous channel access. Values between 0.001, 0.002
     SnumVehicles.push_back(source);
-    cout << "Count of vehicle in the scenario: " << SnumVehicles.size() << endl;
+    cout << endl << "Count of vehicle in the scenario: " << SnumVehicles.size() << endl;
     ScountVehicleAll++;
 
-    vehCategory = category;
+    if ((count(category.begin(), category.end(), 't') > 0) || (count(category.begin(), category.end(), 'T') > 0)) {
+        vehCategory = 'T'; // Set 'T' to "taxi"
+    } else if ((count(category.begin(), category.end(), 'p') > 0) || (count(category.begin(), category.end(), 'P') > 0)) {
+        vehCategory = 'P'; // Set 'P' to "passenger"
+    } else if ((count(category.begin(), category.end(), 'b') > 0) || (count(category.begin(), category.end(), 'B') > 0)) {
+        vehCategory = 'B'; // Set 'B' to "bus"
+    } else if ((count(category.begin(), category.end(), 'i') > 0) || (count(category.begin(), category.end(), 'I') > 0)) {
+        vehCategory = 'P'; // Set 'P' to "ignoring"
+    } else {
+        cout << "JBe - Initial category: " << category << endl;
+        ASSERT2(0, "JBe - Initial category is unknown - ");
+    }
 
     WaveShortMessage wsmTmp;
     wsmTmp.setTimestamp(simTime());
-    wsmTmp.setCategory(category.c_str());
+    wsmTmp.setCategory(vehCategory.c_str());
     SvehScenario.insert(make_pair(source, wsmTmp));
 
     restartFilesResultVeh(SprojectInfo, position);
@@ -109,7 +120,8 @@ void BaseWaveApplLayer::vehInitializeValuesVehDist(string category, Coord positi
         }
     }
 
-    cout << endl << source << " (MACint: " << MACToInteger() << ") category: " << category << " entered in the scenario at: " << simTime() << " whit OffSet: " << vehOffSet << endl;
+    cout << endl << source << " (MACint: " << MACToInteger() << ") category: " << vehCategory << " (initial: " << category;
+    cout << ") entered in the scenario (position: " << curPosition << ") at: " << simTime() << " whit OffSet: " << vehOffSet << endl;
 }
 
 void BaseWaveApplLayer::rsuInitializeValuesVehDist() {
@@ -117,8 +129,7 @@ void BaseWaveApplLayer::rsuInitializeValuesVehDist() {
 
     restartFilesResultRSU(getFolderResultVehDist(SexpSendbyDSCR));
 
-   cout << endl << source << " (" << MACToInteger() << ") entered in the scenario at " << simTime() << endl;
-
+   cout << endl << source << " (MACint: " << MACToInteger() << ") entered in the scenario at: " << simTime();
 }
 
 void BaseWaveApplLayer::openFileAndClose(string fileName, bool justForAppend) {
@@ -162,6 +173,11 @@ void BaseWaveApplLayer::generalInitializeVariables_executionByExpNumberVehDist()
     }
 
     if (source.compare("rsu[0]") == 0) { // Static values inside of the if, that are the same for vehicle(s) and RSU(s)
+        if (par("disableCout").boolValue()) {
+            cout.setstate(std::ios_base::failbit); // "Disable" the cout
+            //cout.clear(); // "Enable" the cout
+        }
+
         SbeaconMessageHopLimit = par("beaconMessageHopLimit").longValue();
         string seedNumber = ev.getConfig()->getConfigValue("seed-set");
         SrepeatNumber = atoi(seedNumber.c_str()); // Number of execution (${repetition})
@@ -434,8 +450,8 @@ void BaseWaveApplLayer::vehGenerateBeaconMessageAfterBeginVeh() {
 
 void BaseWaveApplLayer::generateTarget() { // Set the target node to who the message has to be delivered
     target = "rsu[0]";
-    target_x = par("vehBeaconMessageTarget_x").longValue();
-    target_y = par("vehBeaconMessageTarget_y").longValue();
+    target_x = rsu0Position.x;
+    target_y = rsu0Position.y;
 }
 
 void BaseWaveApplLayer::generateBeaconMessageVehDist() {
@@ -460,7 +476,7 @@ void BaseWaveApplLayer::generateBeaconMessageVehDist() {
     wsm->setTimestamp(simTime());
 
     wsm->setSource(source.c_str());
-    generateTarget(); // target = rsu[0], rsu[1] or car[*] and the respective position.
+    generateTarget(); // target = rsu[0] and respective position
     wsm->setTarget(target.c_str());
     wsm->setTargetPos(Coord(target_x, target_y, 3));
     wsm->setSenderAddressTemporary(source.c_str());
@@ -544,11 +560,17 @@ void BaseWaveApplLayer::toFinishVeh() {
     auto itVeh = find(SnumVehicles.begin(), SnumVehicles.end(), source);
     if (itVeh != SnumVehicles.end()) {
         SnumVehicles.erase(itVeh);
-        cout << "Count of vehicle in the scenario: " << SnumVehicles.size() << endl;
+        cout << endl << "Count of vehicle in the scenario: " << SnumVehicles.size() << endl;
         SvehScenario.erase(source);
     } else {
         cout << "JBe - Error in vehDist::numVehicles, need to have the same entries as the number of vehicles" << endl;
         ASSERT2(0, "JBe - Error in vehDist::numVehicles, need to have the same entries as the number of vehicles -");
+    }
+
+    if (SvehCategoryCount.empty() || (SvehCategoryCount.find(vehCategory) == SvehCategoryCount.end())) {
+        SvehCategoryCount.insert(make_pair(vehCategory, 1));
+    }else {
+        SvehCategoryCount[vehCategory]++;
     }
 }
 
@@ -727,6 +749,17 @@ void BaseWaveApplLayer::printCountMessagesReceivedRSU() {
         myfile << "messagesReceived from " << source << " is empty" << endl;
         myfile << endl << "Exp: " << SexpNumber << " ### Count messages received: " << 0 << endl;
     }
+
+    if (SnumVehicles.size() == 0) {
+        myfile << endl << endl << "## Count of vehicle by category" << endl;
+        cout << endl << endl << "## Count of vehicle by category" << endl;
+        for (auto& x: SvehCategoryCount) {
+            myfile << "    Category: " << x.first << " count: " << x.second << endl;
+            cout << "    Category: " << x.first << " count: " << x.second << endl;
+        }
+    }
+
+    myfile << endl << "This simulation run terminated correctly" << endl;
     myfile.close();
 }
 
