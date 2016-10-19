@@ -7,10 +7,12 @@ Setar no ~/.bashrc
 
 ## veins .bashrc
 # Can be different in your PC
-export PATH=$PATH:/media/sda4/prog/omnetpp-4.6/bin
-export PATH=$PATH:/media/sda4/prog/veins_simulation/
-export SUMO_HOME=/media/sda4/prog/sumo-0.25.0
-alias veins_folder_cd='cd /media/sda4/prog/veins_simulation/'
+export SUMO_HOME=/opt/sumo-0.25.0
+export PATH=$PATH:/opt/omnetpp-4.6/bin
+
+veinsFolder="/media/sda4/prog/veins_simulation/"
+export PATH=$PATH:$veinsFolder
+alias veins_folder_cd='cd $veinsFolder'
 export TCL_LIBRARY=/usr/lib64/tcl8.6
 
 # Not change
