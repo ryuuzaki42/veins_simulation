@@ -22,15 +22,15 @@
 #
 # Script: Create the run a easy line to run in the opp_runall
 #
-# last update: 19/10/2016
+# last update: 20/10/2016
 #
 if [ $# -lt 5 ]; then # Test at least tree parameters
     echo "Error in the parameters"
-    echo "To run: veins_opp_runall_easy_JBs.sh -j3 -f omnet.ini -r 0..3"
+    echo "To run: veins_opp_runall_easy_JBs.sh -j3 -f omnet.ini -r 0..2"
     echo " veins_opp_runall_easy_JBs.sh - this script"
     echo " -j\"count of cores\" - number of cores to run"
     echo " -f omnet.ini - ini file of configuration"
-    echo " -r runSart..runEnd, like -r 0..1 or -r 0..3,6..9"
+    echo " -r 0..2 or -r runSart..runEnd, like -r 0..1 or -r 0..3,6..9"
 else
     coreNumber=$1 # Like -j3 with 3 cores
     #$2 is -f

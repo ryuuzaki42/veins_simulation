@@ -22,7 +22,7 @@
 #
 # Script: Create the run line to run in the opp_runall
 #
-# last update: 19/10/2016
+# last update: 20/10/2016
 #
 if [ $# -lt 4 ]; then # Test at least tree parameters
     echo "Error in the parameters"
@@ -31,7 +31,7 @@ if [ $# -lt 4 ]; then # Test at least tree parameters
     echo " -j\"count of cores\" - number of cores to run"
     echo " veins_opp_runall.sh - this script"
     echo " -f omnet.ini - ini file of configuration"
-    echo " -r runSart..runEnd, like -r 0..1 or -r 0..3,6..9"
+    echo " -r 0..2 or -r runSart..runEnd, like -r 0..1 or -r 0..3,6..9"
 else
     #$1 is -f
     iniFile=$2
