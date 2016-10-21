@@ -43,7 +43,7 @@ cd ../
 rm $dropboxFolderD/$veinsVersion.zip # Delete older $veinsVersion.zip
 
 echo "Zip the veins_simulation in $veinsVersion.zip"
-zip -r $dropboxFolderD/$veinsVersion.zip veins_simulation/ -x *.zip\* veins_simulation/.git\* veins_simulation/out\* veins_simulation/projects/*.zip veins_simulation/projects/default_veins/\* veins_simulation/projects/range/\* veins_simulation/projects/*/results\* veins_simulation/projects/*/others\*
+zip -r $dropboxFolderD/$veinsVersion.zip veins_simulation/ -x *.zip\* *.tkenvrc\* *_JBs.sh\* *_JBc.sh\* veins_simulation/.git\* veins_simulation/out\* veins_simulation/projects/default_veins/\* veins_simulation/projects/range/\* veins_simulation/projects/*/results\* veins_simulation/projects/*/others\*
 
 cd $dropboxFolderD
 
