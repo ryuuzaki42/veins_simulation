@@ -26,10 +26,10 @@
 #
 if [ $# -lt 4 ]; then # Test at least tree parameters
     echo "Error in the parameters"
-    echo "To run: opp_runall -j3 veins_opp_runall_JBs.sh -f omnet.ini -r 0..2"
+    echo "To run: opp_runall -j3 veins_opp_runall_JBr.sh -f omnet.ini -r 0..2"
     echo " opp_runall - opp_runall command"
     echo " -j\"count of cores\" - number of cores to run"
-    echo " veins_opp_runall.sh - this script"
+    echo " veins_opp_runall_JBr.sh - this script"
     echo " -f omnet.ini - ini file of configuration"
     echo " -r 0..2 or -r runSart..runEnd, like -r 0..1 or -r 0..3,6..9"
 else

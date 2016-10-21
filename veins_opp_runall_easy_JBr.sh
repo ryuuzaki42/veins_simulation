@@ -26,8 +26,8 @@
 #
 if [ $# -lt 5 ]; then # Test at least tree parameters
     echo "Error in the parameters"
-    echo "To run: veins_opp_runall_easy_JBs.sh -j3 -f omnet.ini -r 0..2"
-    echo " veins_opp_runall_easy_JBs.sh - this script"
+    echo "To run: veins_opp_runall_easy_JBr.sh -j3 -f omnet.ini -r 0..2"
+    echo " veins_opp_runall_easy_JBr.sh - this script"
     echo " -j\"count of cores\" - number of cores to run"
     echo " -f omnet.ini - ini file of configuration"
     echo " -r 0..2 or -r runSart..runEnd, like -r 0..1 or -r 0..3,6..9"
@@ -48,10 +48,10 @@ else
         SimulationStartSeconds=`date +%s`
         echo -e "\nSimulation staring at: $SimulationStart\n" | tee $fileResultGeneral
 
-        opp_runall $coreNumber veins_opp_runall_JBs.sh -f $iniFile -r $runNumber
+        opp_runall $coreNumber veins_opp_runall_JBr.sh -f $iniFile -r $runNumber
 
-        #opp_runall -j3 veins_opp_runall_JBs.sh -f omnet.ini -r 0..2
-        #opp_runall command, -j3 number cores, veins_opp_runall_JBs script to run opp_runall, -f omnet.ini file, -r 0..2 run to execute
+        #opp_runall -j3 veins_opp_runall_JBr.sh -f omnet.ini -r 0..2
+        #opp_runall command, -j3 number cores, veins_opp_runall_JBr script to run opp_runall, -f omnet.ini file, -r 0..2 run to execute
 
         SimulationEnd=`date` # End simulation
         echo -e "Simulation ends at: $SimulationEnd" | tee -a $fileResultGeneral
