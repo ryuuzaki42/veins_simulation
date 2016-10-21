@@ -23,25 +23,42 @@
 # Script: Cria um versão zipada do pasta veins_simulation em um pasta
 # no Dropbox (dropboxFolderD)
 #
-# Last update: 20/10/2016
+# Last update: 21/10/2016
 #
+echo -e "\nThis script create a \"veins_simulation\"(.zip) ($veinsFolderO) in one"
+echo -e "Dropbox folder ($dropboxFolderD) with out log files\n"
+
 initialFolder=$PWD # Get the initial folder
 
-dropboxFolderD="/media/sda4/prog/Dropbox/z_tmp_cemeai/veins_v01" # Dropbox destination folder
+dropboxFolderD="/media/sda4/prog/Dropbox/z_tmp_cemeai" # Dropbox destination folder
 veinsFolderO="/media/sda4/prog/veins_simulation" # Veins origin folder
+veinsVersion="veins_v01"
 
-cd $veinsFolderO
+cd $veinsFolderO # Go to veinsFolderO
 
 make clean # Clean compiled files
 
 cd ../
 
-echo -e "\nThis script create a \"veins_simulation\"(.zip) ($veinsFolderO) in one"
-echo -e "Dropbox folder ($dropboxFolderD) with out log files\n"
+rm $dropboxFolderD/$veinsVersion.zip # Delete older $veinsVersion.zip
 
-rm $dropboxFolderD.zip # Delete older veins_v01.zip
+echo "Zip the veins_simulation in $veinsVersion.zip"
+zip -r $dropboxFolderD/$veinsVersion.zip veins_simulation/ -x *.zip\* veins_simulation/.git\* veins_simulation/out\* veins_simulation/projects/*.zip veins_simulation/projects/default_veins/\* veins_simulation/projects/range/\* veins_simulation/projects/*/results\* veins_simulation/projects/*/others\*
 
-echo "Zip the veins_simulation in veins_v001.zip"
-zip -r $dropboxFolderD.zip veins_simulation/ -x *.zip\* veins_simulation/.git\* veins_simulation/out\* veins_simulation/projects/*.zip veins_simulation/projects/default_veins/\* veins_simulation/projects/range/\* veins_simulation/projects/*/results\* veins_simulation/projects/*/others\*
+cd $dropboxFolderD
+
+rm -r veins_simulation # Delete the older veins_simulation
+
+unzip $veinsVersion.zip # Unzip/Extract the $veinsVersion.zip in the Dropbox folder
+
+rm $veinsVersion.zip # Delete the last $veinsVersion.zip
+
+mv veins_simulation $veinsVersion # Rename the folder to veinsVersion
+
+zip -r $veinsVersion.zip $veinsVersion # Zip $veinsVersion in $veinsVersion.zip
+
+rm -r $veinsVersion # Delete de $veinsVersion folder
 
 cd - $initialFolder > /dev/null # Back to initial folder
+
+echo -e "\n\n\tEnd script\n"
