@@ -8,6 +8,7 @@ Setar no ~/.bashrc
 ## veins .bashrc
 # Can be different in your PC
 export SUMO_HOME=/opt/sumo-0.25.0
+export PATH=$PATH:/opt/sumo-0.25.0/bin
 export PATH=$PATH:/opt/omnetpp-4.6/bin
 
 veinsFolder="/media/sda4/prog/veins_simulation/"
