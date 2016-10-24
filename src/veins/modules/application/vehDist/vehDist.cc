@@ -841,7 +841,7 @@ void vehDist::handleSelfMsg(cMessage* msg) {
     switch (msg->getKind()) {
         case SEND_BEACON_EVT: {
             sendWSM(prepareBeaconStatusWSM("beaconStatus", beaconLengthBits, type_CCH, beaconPriority, -1));
-            scheduleAt((simTime() + par("beaconInterval").doubleValue()), sendBeaconEvt);
+            scheduleAt(simTime() + par("beaconInterval").doubleValue(), sendBeaconEvt);
             break;
         }
         case SendEvtBeaconMessage: {
@@ -850,12 +850,12 @@ void vehDist::handleSelfMsg(cMessage* msg) {
         }
         case SendEvtUpdateRateTimeToSendVeh: {
             vehUpdateRateTimeToSend();
-            scheduleAt((simTime() + rateTimeToSendUpdateTime), sendUpdateRateTimeToSendVeh);
+            scheduleAt(simTime() + rateTimeToSendUpdateTime, sendUpdateRateTimeToSendVeh);
             break;
         }
         case SendEvtGenerateBeaconMessage: {
             vehGenerateBeaconMessageAfterBeginVeh();
-            scheduleAt((simTime() + par("timeGenerateBeaconMessage").doubleValue()), sendGenerateBeaconMessageEvt);
+            scheduleAt(simTime() + par("timeGenerateBeaconMessage").doubleValue(), sendGenerateBeaconMessageEvt);
             break;
         }
         default: {
