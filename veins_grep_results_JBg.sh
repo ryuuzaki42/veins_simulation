@@ -22,7 +22,7 @@
 #
 # Script: Script to collect the simulation result in one place
 #
-# last update: 17/10/2016
+# last update: 25/10/2016
 #
 if ls -l | grep -q "\.ini"; then
     echo -e "\nGreat is a OMNet project folder (with a ini file)"
@@ -39,11 +39,6 @@ if ls -l | grep -q "\.ini"; then
     fi
 
     if [ "$experimentName" != '' ]; then
-        #cd /media/sda4/prog/simulation_veins/projects/vehDist/others/
-        # or
-        ## Cluster folder, change de v001 for the veins version
-        #cd /mnt/nfs/home/luz.marina/0_jonh/veins_v00$part/projects/vehDist$part/others/
-
         part=$1
         if [ "$part" == '' ]; then # result_part
             echo -e "\nError, you need pass the result_part value, e.g., $0 \"1\" 1 1\n"
@@ -85,7 +80,7 @@ if ls -l | grep -q "\.ini"; then
         fi
         echo -e "\n\t## Results from $pathFolder ##\n"
 
-        rsu0File="rsu\[0\]_Count_Messages_Received.r"
+        rsu0File="rsu[0]_Count_Messages_Received.r"
         vehiclesFile="Veh_Messages_Drop.r"
 
         experimentNumber=1
@@ -103,31 +98,26 @@ if ls -l | grep -q "\.ini"; then
             fi
 
             echo -e "## Values from experiment $experiment ##"
-            i=$numExpI_1to8
-            while [ $i -lt $numExpF_1to8 ]; do
-                j=0
-                continueFlag2=1
 
-                while [ $continueFlag2 == 1 ]; do
-                    echo -e "\n\t\t## Experiment $experiment $i run_$j ##"
+            for folderExpRun in `ls -vA $pathFolder/$experiment/`; do
 
-                    fileRSU=`ls $pathFolder/$experiment/E"$i"_*/run_$j/$rsu0File`
+                for folderRun in `ls -vA $pathFolder/$experiment/$folderExpRun/`; do
+                    echo "Working in the folder: $pathFolder/$experiment/$folderExpRun/"
+
+                    fileRSU=`ls $pathFolder/$experiment/$folderExpRun/$folderRun/$rsu0File`
+                    fileVeh=`ls $pathFolder/$experiment/$folderExpRun/$folderRun/$vehiclesFile`
+
+                    echo -e "\n\t\t## Experiment $experiment $folderExpRun $folderRun ##"
+
                     echo -e "\t\t\tFile: $fileRSU\n"
 
-                    cat $pathFolder/$experiment/E"$i"_*/run_$j/$rsu0File | grep -E "Exp: "$i""
+                    cat $fileRSU | grep -E "Exp: "$i""
                     echo
 
-                    fileVeh=`ls $pathFolder/$experiment/E"$i"_*/run_$j/$vehiclesFile`
                     echo -e "\t\t\tFile: $fileVeh\n"
 
-                    cat $pathFolder/$experiment/E"$i"_*/run_$j/$vehiclesFile | grep -E "Exp: $i"
-                    ((j++))
-
-                    if [ -e $pathFolder/$experiment/E$i_*/run_$j/$rsu0File ]; then
-                        continueFlag2=0
-                    fi
+                    cat $fileVeh | grep -E "Exp: $i"
                 done
-                ((i++))
             done
 
             echo "experimentNumber $experimentNumber numExpF_DSCR $numExpF_DSCR"
@@ -138,6 +128,6 @@ if ls -l | grep -q "\.ini"; then
         done
     fi
 else
-    echo -e "\nError: ($PWD) is not a OMNet++ project folder.\nPlease go the folder with a ini file"
+    echo -e "\nError: ($PWD) is not a OMNet++ project folder\nPlease go the folder with a ini file"
 fi
 echo -e "\n\t\t## End of script ##\n"
