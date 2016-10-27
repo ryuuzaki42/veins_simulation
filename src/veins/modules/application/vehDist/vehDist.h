@@ -97,6 +97,7 @@ vector <string> BaseWaveApplLayer::SnumVehicles, BaseWaveApplLayer::SvehGenerate
 
 unordered_map <string, int> BaseWaveApplLayer::SvehCategoryCount;
 unordered_map <string, WaveShortMessage> BaseWaveApplLayer::SvehScenario;
+map <string, struct BaseWaveApplLayer::traffic> BaseWaveApplLayer::SvehTraffic;
 
 Coord BaseWaveApplLayer::rsu0Position;
 
@@ -115,7 +116,7 @@ unsigned short int BaseWaveApplLayer::StimeLimitGenerateBeaconMessage, BaseWaveA
 string BaseWaveApplLayer::SprojectInfo;
 bool BaseWaveApplLayer::SvehDistTrueEpidemicFalse, BaseWaveApplLayer::SusePathHistory, BaseWaveApplLayer::SallowMessageCopy;
 bool BaseWaveApplLayer::SvehSendWhileParking, BaseWaveApplLayer::SselectFromAllVehicles, BaseWaveApplLayer::SuseMessagesSendLog;
-bool BaseWaveApplLayer::SvehDistCreateEventGenerateMessage, BaseWaveApplLayer::SuseRateTimeToSend;
+bool BaseWaveApplLayer::SvehDistCreateEventGenerateMessage, BaseWaveApplLayer::SuseRateTimeToSend, BaseWaveApplLayer::ScreateVehTraffic;;
 
 mt19937 BaseWaveApplLayer::mtSelectVehicleGenarateMessage;
 

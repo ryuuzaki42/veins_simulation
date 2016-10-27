@@ -87,7 +87,7 @@ void BaseWaveApplLayer::vehInitializeValuesVehDist(string category, Coord positi
 
     vehOffSet = double(myId)/1000; // Simulate asynchronous channel access. Values between 0.001, 0.002
     SnumVehicles.push_back(source);
-    cout << endl << "Count of vehicle in the scenario: " << SnumVehicles.size() << endl;
+    cout << endl << "Count of vehicle in the scenario at: " << simTime() << " - " << SnumVehicles.size() << endl;
     ScountVehicleAll++;
 
     if ((count(category.begin(), category.end(), 't') > 0) || (count(category.begin(), category.end(), 'T') > 0)) {
@@ -122,6 +122,35 @@ void BaseWaveApplLayer::vehInitializeValuesVehDist(string category, Coord positi
 
     cout << endl << source << " (MACint: " << MACToInteger() << ") category: " << vehCategory << " (initial: " << category;
     cout << ") entered in the scenario (position: " << curPosition << ") at: " << simTime() << " whit OffSet: " << vehOffSet << endl;
+
+    ScreateVehTraffic = true; // Create or not the vehicle traffic in one .csv file
+    //ScreateVehTraffic = false;
+    if (ScreateVehTraffic) {
+        insertVehTraffic();
+    }
+}
+void BaseWaveApplLayer::insertVehTraffic() {
+    traffic traf;
+    traf.source= source;
+    traf.entryTime= simTime();
+
+    SvehTraffic.insert(make_pair(getStringId(), traf));
+}
+
+string BaseWaveApplLayer::getStringId() {
+    string stringId;
+
+    if (myId < 10){
+        stringId = "000" + to_string(myId);
+    } else if (myId < 100) {
+        stringId = "00" + to_string(myId);
+    } else if (myId < 1000) {
+        stringId = '0' + to_string(myId);
+    } else {
+        stringId = to_string(myId);
+    }
+
+    return stringId;
 }
 
 void BaseWaveApplLayer::rsuInitializeValuesVehDist() {
@@ -560,7 +589,7 @@ void BaseWaveApplLayer::toFinishVeh() {
     auto itVeh = find(SnumVehicles.begin(), SnumVehicles.end(), source);
     if (itVeh != SnumVehicles.end()) {
         SnumVehicles.erase(itVeh);
-        cout << endl << "Count of vehicle in the scenario: " << SnumVehicles.size() << endl;
+        cout << endl << "Count of vehicle in the scenario at: " << simTime() << " - " << SnumVehicles.size() << endl;
         SvehScenario.erase(source);
     } else {
         cout << "JBe - Error in vehDist::numVehicles, need to have the same entries as the number of vehicles" << endl;
@@ -571,6 +600,119 @@ void BaseWaveApplLayer::toFinishVeh() {
         SvehCategoryCount.insert(make_pair(vehCategory, 1));
     }else {
         SvehCategoryCount[vehCategory]++;
+    }
+
+    if (ScreateVehTraffic) {
+        if (SvehTraffic.find(getStringId()) != SvehTraffic.end()) {
+            SvehTraffic[getStringId()].exitTime = simTime();
+        } else {
+            cout << "JBe - Error in vehDist::numVehicles, need to have the same entries as the number of vehicles" << endl;
+            ASSERT2(0, "JBe - Error in vehDist::numVehicles, need to have the same entries as the number of vehicles -");
+        }
+
+        printVehTraffic();
+    }
+}
+
+void BaseWaveApplLayer::printVehTraffic() {
+    if (SnumVehicles.size() == 0) {
+        int valueEntry[10], valueExit[10];
+        for (int i = 0; i < 10; i++) {
+            valueEntry[i] = 0;
+            valueExit[i] = 0;
+        }
+
+        myfile.open("results/vehTraffic.csv");
+        myfile << "numValue,myId,Source,entryTime (s),exitTime (s),timeInsideScenario (s),timeInsideScenarioIMin (min)" << endl;
+
+        double sumTimeSecond, sumTimeMin, diffTimeVeh;
+        sumTimeSecond = sumTimeMin = 0;
+
+        int numValue = 1;
+        map <string, struct traffic>::iterator itVehTraffic;
+        for (itVehTraffic = SvehTraffic.begin(); itVehTraffic != SvehTraffic.end(); itVehTraffic++) {
+            diffTimeVeh = itVehTraffic->second.exitTime.dbl() - itVehTraffic->second.entryTime.dbl();
+
+            sumTimeSecond += diffTimeVeh;
+            sumTimeMin += (diffTimeVeh/60);
+
+            myfile << numValue << "," << itVehTraffic->first << "," << itVehTraffic->second.source << ",";
+            myfile << itVehTraffic->second.entryTime << "," << itVehTraffic->second.exitTime << ",";
+            myfile << diffTimeVeh << "," << (diffTimeVeh/60) << endl;
+
+            if (itVehTraffic->second.entryTime < 60) {
+                valueEntry[0]++;
+            } else if (itVehTraffic->second.entryTime < 120) {
+                valueEntry[1]++;
+            } else if (itVehTraffic->second.entryTime < 180) {
+                valueEntry[2]++;
+            } else if (itVehTraffic->second.entryTime < 240) {
+                valueEntry[3]++;
+            } else if (itVehTraffic->second.entryTime < 300) {
+                valueEntry[4]++;
+            } else if (itVehTraffic->second.entryTime < 360) {
+                valueEntry[5]++;
+            } else if (itVehTraffic->second.entryTime < 420) {
+                valueEntry[6]++;
+            } else if (itVehTraffic->second.entryTime < 480) {
+                valueEntry[7]++;
+            } else if (itVehTraffic->second.entryTime < 540) {
+                valueEntry[8]++;
+            } else if (itVehTraffic->second.entryTime < 600) {
+                valueEntry[9]++;
+            }
+
+            if (itVehTraffic->second.exitTime < 60) {
+                valueExit[0]++;
+            } else if (itVehTraffic->second.exitTime < 120) {
+                valueExit[1]++;
+            } else if (itVehTraffic->second.exitTime < 180) {
+                valueExit[2]++;
+            } else if (itVehTraffic->second.exitTime < 240) {
+                valueExit[3]++;
+            } else if (itVehTraffic->second.exitTime < 300) {
+                valueExit[4]++;
+            } else if (itVehTraffic->second.exitTime < 360) {
+                valueExit[5]++;
+            } else if (itVehTraffic->second.exitTime < 420) {
+                valueExit[6]++;
+            } else if (itVehTraffic->second.exitTime < 480) {
+                valueExit[7]++;
+            } else if (itVehTraffic->second.exitTime < 540) {
+                valueExit[8]++;
+            } else if (itVehTraffic->second.exitTime < 600) {
+                valueExit[9]++;
+            }
+
+            numValue++;
+        }
+
+        myfile << endl << endl << endl << endl;
+        myfile << "Time,Entry,Exit,Inside" << endl;
+        myfile << "0,0,0,0" << endl;
+
+        int j, sumValuesEntry, sumValuesExit;
+
+        j = 60;
+        sumValuesEntry = sumValuesExit = 0;
+        for (int i = 0; i < 10; i++) {
+            sumValuesEntry += valueEntry[i];
+            sumValuesExit += valueExit[i];
+
+            myfile << j << "," << sumValuesEntry << "," << sumValuesExit << ",";
+            myfile << (sumValuesEntry - sumValuesExit) << endl;
+
+            j += 60;
+        }
+
+        myfile << endl << endl << endl << endl;
+        myfile << "Total of vehicles," << SvehTraffic.size() << endl;
+        myfile << "sumTimeSecond," << sumTimeSecond << ",s" << endl;
+        myfile << "average Second," << sumTimeSecond/SvehTraffic.size() << ",s"  << endl;
+        myfile << "sumTimeMin," << sumTimeMin << ",min"  << endl;
+        myfile << "average Min," << sumTimeMin/SvehTraffic.size() << ",min" << endl;
+
+        myfile.close();
     }
 }
 

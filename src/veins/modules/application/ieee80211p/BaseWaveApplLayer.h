@@ -119,6 +119,9 @@ class BaseWaveApplLayer : public BaseApplLayer {
         void createEpidemicRemoteSummaryVector(string s);
 
         void generateMessageEpidemic();
+        string getStringId();
+        void printVehTraffic();
+        void insertVehTraffic();
 //######################################### Epidemic #########################################
 
         virtual void sendWSM(WaveShortMessage* wsm);
@@ -173,6 +176,13 @@ class BaseWaveApplLayer : public BaseApplLayer {
         static string SprojectInfo;
 
         static vector <string> SnumVehicles, SvehGenerateMessage;
+
+        static bool ScreateVehTraffic;
+        struct traffic {
+            string source;
+            simtime_t entryTime, exitTime;
+        };
+        static map <string, struct traffic> SvehTraffic;
 
         static unordered_map <string, int> SvehCategoryCount;
         static unordered_map <string, WaveShortMessage> SvehScenario;
