@@ -58,7 +58,7 @@ simple BaseWaveApplLayer like IBaseApplLayer {
         bool disableCout = default(false);
 
         bool generateTraffic = default(false); // Generate a csv file with the (in, out) of vehicles
-        int trafficGranularitySum @unit("s") = default(60s); // 60 => 60 s
+        int trafficGranularitySum @unit("s") = default(60s);
 
     gates:
         input lowerLayerIn; // from mac layer
