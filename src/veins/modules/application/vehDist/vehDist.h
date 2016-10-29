@@ -116,7 +116,7 @@ unsigned short int BaseWaveApplLayer::StimeLimitGenerateBeaconMessage, BaseWaveA
 string BaseWaveApplLayer::SprojectInfo;
 bool BaseWaveApplLayer::SvehDistTrueEpidemicFalse, BaseWaveApplLayer::SusePathHistory, BaseWaveApplLayer::SallowMessageCopy;
 bool BaseWaveApplLayer::SvehSendWhileParking, BaseWaveApplLayer::SselectFromAllVehicles, BaseWaveApplLayer::SuseMessagesSendLog;
-bool BaseWaveApplLayer::SvehDistCreateEventGenerateMessage, BaseWaveApplLayer::SuseRateTimeToSend, BaseWaveApplLayer::ScreateVehTraffic;;
+bool BaseWaveApplLayer::SvehDistCreateEventGenerateMessage, BaseWaveApplLayer::SuseRateTimeToSend;
 
 mt19937 BaseWaveApplLayer::mtSelectVehicleGenarateMessage;
 

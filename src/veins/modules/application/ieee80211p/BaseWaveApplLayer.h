@@ -177,7 +177,6 @@ class BaseWaveApplLayer : public BaseApplLayer {
 
         static vector <string> SnumVehicles, SvehGenerateMessage;
 
-        static bool ScreateVehTraffic;
         struct traffic {
             string source;
             simtime_t entryTime, exitTime;
