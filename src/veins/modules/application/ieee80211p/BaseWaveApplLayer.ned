@@ -57,6 +57,9 @@ simple BaseWaveApplLayer like IBaseApplLayer {
         string folderPathSed = default("");
         bool disableCout = default(false);
 
+        bool generateTraffic = default(false); // Generate a csv file with the (in, out) of vehicles
+        int trafficGranularitySum @unit("s") = default(60s); // 60 => 60 s
+
     gates:
         input lowerLayerIn; // from mac layer
         output lowerLayerOut; // to mac layer
