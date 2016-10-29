@@ -123,10 +123,8 @@ void BaseWaveApplLayer::vehInitializeValuesVehDist(string category, Coord positi
     cout << endl << source << " (MACint: " << MACToInteger() << ") category: " << vehCategory << " (initial: " << category;
     cout << ") entered in the scenario (position: " << curPosition << ") at: " << simTime() << " whit OffSet: " << vehOffSet << endl;
 
-    ScreateVehTraffic = true; // Create or not the vehicle traffic in one .csv file
-    //ScreateVehTraffic = false;
-    if (ScreateVehTraffic) {
-        insertVehTraffic();
+    if (par("generateTraffic").boolValue()) {
+        insertVehTraffic(); // Create or not the vehicle traffic in one .csv file
     }
 }
 void BaseWaveApplLayer::insertVehTraffic() {
@@ -602,7 +600,7 @@ void BaseWaveApplLayer::toFinishVeh() {
         SvehCategoryCount[vehCategory]++;
     }
 
-    if (ScreateVehTraffic) {
+    if (par("generateTraffic").boolValue()) {
         if (SvehTraffic.find(getStringId()) != SvehTraffic.end()) {
             SvehTraffic[getStringId()].exitTime = simTime();
         } else {
@@ -616,8 +614,13 @@ void BaseWaveApplLayer::toFinishVeh() {
 
 void BaseWaveApplLayer::printVehTraffic() {
     if (SnumVehicles.size() == 0) {
-        int valueEntry[10], valueExit[10];
-        for (int i = 0; i < 10; i++) {
+        int simulationLimit = atoi(ev.getConfig()->getConfigValue("sim-time-limit"));
+        int trafficGranularitySum = par("trafficGranularitySum");
+
+        int countValue = simulationLimit/trafficGranularitySum + 1; // e.g., 600/60 + 1 => 11, or 310/30 +1 = 11
+
+        int valueEntry[countValue], valueExit[countValue];
+        for (int i = 0; i < countValue; i++) {
             valueEntry[i] = 0;
             valueExit[i] = 0;
         }
@@ -640,69 +643,53 @@ void BaseWaveApplLayer::printVehTraffic() {
             myfile << itVehTraffic->second.entryTime << "," << itVehTraffic->second.exitTime << ",";
             myfile << diffTimeVeh << "," << (diffTimeVeh/60) << endl;
 
-            if (itVehTraffic->second.entryTime < 60) {
-                valueEntry[0]++;
-            } else if (itVehTraffic->second.entryTime < 120) {
-                valueEntry[1]++;
-            } else if (itVehTraffic->second.entryTime < 180) {
-                valueEntry[2]++;
-            } else if (itVehTraffic->second.entryTime < 240) {
-                valueEntry[3]++;
-            } else if (itVehTraffic->second.entryTime < 300) {
-                valueEntry[4]++;
-            } else if (itVehTraffic->second.entryTime < 360) {
-                valueEntry[5]++;
-            } else if (itVehTraffic->second.entryTime < 420) {
-                valueEntry[6]++;
-            } else if (itVehTraffic->second.entryTime < 480) {
-                valueEntry[7]++;
-            } else if (itVehTraffic->second.entryTime < 540) {
-                valueEntry[8]++;
-            } else if (itVehTraffic->second.entryTime < 600) {
-                valueEntry[9]++;
+            //valueEntry
+            int tmpCount = trafficGranularitySum;
+            int vectorIndex = 0;
+            bool flagContinue = true;
+            while (flagContinue) {
+                if (itVehTraffic->second.entryTime < tmpCount) {
+                    valueEntry[vectorIndex]++;
+                    flagContinue = false;
+                } else {
+                    vectorIndex++;
+                    tmpCount += trafficGranularitySum;
+                }
             }
 
-            if (itVehTraffic->second.exitTime < 60) {
-                valueExit[0]++;
-            } else if (itVehTraffic->second.exitTime < 120) {
-                valueExit[1]++;
-            } else if (itVehTraffic->second.exitTime < 180) {
-                valueExit[2]++;
-            } else if (itVehTraffic->second.exitTime < 240) {
-                valueExit[3]++;
-            } else if (itVehTraffic->second.exitTime < 300) {
-                valueExit[4]++;
-            } else if (itVehTraffic->second.exitTime < 360) {
-                valueExit[5]++;
-            } else if (itVehTraffic->second.exitTime < 420) {
-                valueExit[6]++;
-            } else if (itVehTraffic->second.exitTime < 480) {
-                valueExit[7]++;
-            } else if (itVehTraffic->second.exitTime < 540) {
-                valueExit[8]++;
-            } else if (itVehTraffic->second.exitTime < 600) {
-                valueExit[9]++;
+            //valueExit
+            tmpCount = trafficGranularitySum;
+            vectorIndex = 0;
+            flagContinue = true;
+            while (flagContinue) {
+                if (itVehTraffic->second.exitTime < tmpCount) {
+                    valueExit[vectorIndex]++;
+                    flagContinue = false;
+                } else {
+                    vectorIndex++;
+                    tmpCount += trafficGranularitySum;
+                }
             }
 
             numValue++;
         }
 
-        myfile << endl << endl << endl << endl;
-        myfile << "Time,Entry,Exit,Inside" << endl;
-        myfile << "0,0,0,0" << endl;
-
         int j, sumValuesEntry, sumValuesExit;
-
-        j = 60;
+        j = trafficGranularitySum;
         sumValuesEntry = sumValuesExit = 0;
-        for (int i = 0; i < 10; i++) {
+
+        myfile << endl << endl << endl << endl;
+        myfile << "Time (s),Time (min),Entry (s),Exit (s),Inside (int)" << endl;
+        myfile << "0,0,0,0,0" << endl;
+
+        for (int i = 0; i < countValue; i++) {
             sumValuesEntry += valueEntry[i];
             sumValuesExit += valueExit[i];
 
-            myfile << j << "," << sumValuesEntry << "," << sumValuesExit << ",";
+            myfile << j << "," << (double)j/60 << "," << sumValuesEntry << "," << sumValuesExit << ",";
             myfile << (sumValuesEntry - sumValuesExit) << endl;
 
-            j += 60;
+            j += trafficGranularitySum;
         }
 
         myfile << endl << endl << endl << endl;
