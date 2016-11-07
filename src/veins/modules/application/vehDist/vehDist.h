@@ -4,7 +4,6 @@
 #define vehDist_H
 
 #include "veins/modules/mobility/traci/TraCIMobility.h"
-#include "veins/modules/mobility/traci/TraCICommandInterface.h"
 #include "veins/modules/application/ieee80211p/BaseWaveApplLayer.h"
 
 using Veins::TraCIMobility;

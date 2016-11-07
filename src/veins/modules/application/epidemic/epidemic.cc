@@ -4,7 +4,6 @@
 
 using Veins::TraCIMobilityAccess;
 using Veins::AnnotationManagerAccess;
-using namespace std;
 
 Define_Module(epidemic);
 
