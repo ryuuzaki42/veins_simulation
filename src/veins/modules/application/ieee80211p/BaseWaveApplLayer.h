@@ -89,6 +89,7 @@ class BaseWaveApplLayer : public BaseApplLayer {
         void vehInitializeValuesVehDist(string category, Coord position);
         void rsuInitializeValuesVehDist();
         int mt19937GetRandomValue(int upperLimmit);
+        string getCFGVAR();
 //######################################### vehDist #########################################
 
 //######################################### Epidemic #########################################

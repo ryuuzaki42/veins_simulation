@@ -258,52 +258,105 @@ void BaseWaveApplLayer::generalInitializeVariables_executionByExpNumberVehDist()
         //mt_veh.seed(1);
         //srand(1);
 
-        string texTmp = "\nExp: " + to_string(SexpNumber);
+        string texTmp = "\nExp: " + to_string(SexpNumber) + "_ ";
         SprojectInfo = texTmp;
-        SprojectInfo += texTmp + " Project information:";
-        SprojectInfo += texTmp + " vehDistTrueEpidemicFalse: " + boolToString(SvehDistTrueEpidemicFalse);
-        SprojectInfo += texTmp + " vehDistCreateEventGenerateMessage: " + boolToString(SvehDistCreateEventGenerateMessage);
-        SprojectInfo += texTmp + " Experiment: " + to_string(SexpNumber);
-        SprojectInfo += texTmp + " repeatNumber: " + to_string(SrepeatNumber);
-        SprojectInfo += texTmp + " ttlBeaconMessage: " + to_string(SttlBeaconMessage) + " s";
-        SprojectInfo += texTmp + " countGenerateBeaconMessage: " + to_string(ScountGenerateBeaconMessage);
-        SprojectInfo += texTmp + " allowMessageCopy: " + boolToString(SallowMessageCopy);
-        SprojectInfo += texTmp + " sendWhileParking: " + boolToString(SvehSendWhileParking);
-        SprojectInfo += texTmp + " selectFromAllVehicles: " + boolToString(SselectFromAllVehicles);
-        SprojectInfo += texTmp + " timeLimitGenerateMessage: " + to_string(StimeLimitGenerateBeaconMessage) + " s";
-        SprojectInfo += texTmp + " beaconMessageHopLimit: " + to_string(SbeaconMessageHopLimit);
-        SprojectInfo += texTmp + " expSendbyDSCR: " + to_string(SexpSendbyDSCR);
-        SprojectInfo += texTmp + " penetrationRateValue: " + to_string(Veins::TraCIScenarioManagerLaunchdAccess().get()->par("penetrationRate").doubleValue());
+        SprojectInfo += texTmp + "Project information";
+        SprojectInfo += texTmp + "vehDistTrueEpidemicFalse:_ " + boolToString(SvehDistTrueEpidemicFalse);
+        SprojectInfo += texTmp + "vehDistCreateEventGenerateMessage:_ " + boolToString(SvehDistCreateEventGenerateMessage);
+        SprojectInfo += texTmp + "Experiment:_ " + to_string(SexpNumber);
+        SprojectInfo += texTmp + "repeatNumber:_ " + to_string(SrepeatNumber);
+        SprojectInfo += texTmp + "ttlBeaconMessage:_ " + to_string(SttlBeaconMessage) + " s";
+        SprojectInfo += texTmp + "countGenerateBeaconMessage:_ " + to_string(ScountGenerateBeaconMessage);
+        SprojectInfo += texTmp + "allowMessageCopy:_ " + boolToString(SallowMessageCopy);
+        SprojectInfo += texTmp + "sendWhileParking:_ " + boolToString(SvehSendWhileParking);
+        SprojectInfo += texTmp + "selectFromAllVehicles:_ " + boolToString(SselectFromAllVehicles);
+        SprojectInfo += texTmp + "timeLimitGenerateMessage:_ " + to_string(StimeLimitGenerateBeaconMessage) + " s";
+        SprojectInfo += texTmp + "beaconMessageHopLimit:_ " + to_string(SbeaconMessageHopLimit);
+        SprojectInfo += texTmp + "expSendbyDSCR:_ " + to_string(SexpSendbyDSCR);
+        SprojectInfo += texTmp + "penetrationRateValue:_ " + to_string(Veins::TraCIScenarioManagerLaunchdAccess().get()->par("penetrationRate").doubleValue());
         SprojectInfo += texTmp;
-        SprojectInfo += texTmp + " beaconLengthBits: " + to_string(beaconLengthBits);
-        SprojectInfo += texTmp + " headerLength: " + to_string(headerLength);
-        SprojectInfo += texTmp + " dataLengthBits: " + to_string(dataLengthBits);
+        SprojectInfo += texTmp + "beaconLengthBits:_ " + to_string(beaconLengthBits);
+        SprojectInfo += texTmp + "headerLength:_ " + to_string(headerLength);
+        SprojectInfo += texTmp + "dataLengthBits:_ " + to_string(dataLengthBits);
+        SprojectInfo += texTmp + "iterationvars:_ " + cSimulation::getActiveSimulation()->getEnvir()->getConfigEx()->getVariable(CFGVAR_ITERATIONVARS2);
         SprojectInfo += texTmp + "\n";
 
         SprojectInfo += texTmp;
         if (SvehDistTrueEpidemicFalse) {
-            SprojectInfo += texTmp + " useRateTimeToSend: " + boolToString(SuseRateTimeToSend);
+            SprojectInfo += texTmp + "useRateTimeToSend:_ " + boolToString(SuseRateTimeToSend);
             if (!SuseRateTimeToSend) {
                 stringstream ss;
                 ss << fixed << setprecision(1) << par("normalTimeSendMessage").doubleValue();
-                SprojectInfo += texTmp + " normalTimeSendMessage: " + ss.str() + " s";
+                SprojectInfo += texTmp + "normalTimeSendMessage:_ " + ss.str() + " s";
             }
 
-            SprojectInfo += texTmp + " ttlBeaconStatus: " + to_string(SttlBeaconStatus) + " s";
-            SprojectInfo += texTmp + " beaconMessageBufferSize: " + to_string(SbeaconMessageBufferSize);
-            SprojectInfo += texTmp + " beaconStatusBufferSize:" + to_string(SbeaconStatusBufferSize);
-            SprojectInfo += texTmp + " percentP: " + to_string(SpercentP) + " %";
-            SprojectInfo += texTmp + " usePathHistory: " + boolToString(SusePathHistory);
-            SprojectInfo += texTmp + " useMessagesSendLog " + boolToString(SuseMessagesSendLog);
-            SprojectInfo += texTmp + " timeToUpdatePosition: " + to_string(StimeToUpdatePosition) + " s";
+            SprojectInfo += texTmp + "ttlBeaconStatus:_ " + to_string(SttlBeaconStatus) + " s";
+            SprojectInfo += texTmp + "beaconMessageBufferSize:_ " + to_string(SbeaconMessageBufferSize);
+            SprojectInfo += texTmp + "beaconStatusBufferSize:_ " + to_string(SbeaconStatusBufferSize);
+            SprojectInfo += texTmp + "percentP:_ " + to_string(SpercentP) + " %";
+            SprojectInfo += texTmp + "usePathHistory:_ " + boolToString(SusePathHistory);
+            SprojectInfo += texTmp + "useMessagesSendLog:_ " + boolToString(SuseMessagesSendLog);
+            SprojectInfo += texTmp + "timeToUpdatePosition:_ " + to_string(StimeToUpdatePosition) + " s";
         } else {
-            SprojectInfo += texTmp + " sendSummaryVectorInterval: " + to_string(sendSummaryVectorInterval) + " s";
-            SprojectInfo += texTmp + " maximumEpidemicBufferSize: " + to_string(maximumEpidemicBufferSize);
+            SprojectInfo += texTmp + "sendSummaryVectorInterval:_ " + to_string(sendSummaryVectorInterval) + " s";
+            SprojectInfo += texTmp + "maximumEpidemicBufferSize:_ " + to_string(maximumEpidemicBufferSize);
         }
 
-        SprojectInfo += texTmp + "\n";
+        SprojectInfo += "\n\n\n";
+        SprojectInfo += getCFGVAR();
+
         cout << endl << SprojectInfo << endl;
     }
+}
+
+string BaseWaveApplLayer::getCFGVAR() { // Variables from: omnetpp-4.6/include/cconfiguration.h
+    int simulationLimit = atoi(ev.getConfig()->getConfigValue("sim-time-limit"));
+    int trafficGranularitySum = par("trafficGranularitySum");
+
+    string texTmp = "\nExp: " + to_string(SexpNumber) + "_ ";
+
+    string getAll = texTmp + "simulationLimit:_ " + to_string(simulationLimit) + string("s");
+    getAll += texTmp + "trafficGranularitySum:_ " + to_string(trafficGranularitySum) + string("s");
+
+    double penetrationRateValueScenario = Veins::TraCIScenarioManagerLaunchdAccess().get()->par("penetrationRate").doubleValue();
+    penetrationRateValueScenario *= 100;
+    getAll += texTmp + "penetrationRateValueScenario:_ " + to_string(penetrationRateValueScenario) + string("%");
+
+    int seedScenarioManager = Veins::TraCIScenarioManagerLaunchdAccess().get()->par("seed");
+    getAll += texTmp + "seedScenario (*.manager.seed):_ " + to_string(seedScenarioManager) + string("_if -1 will use CFGVAR_RUNNUMBER");
+
+    string seedScenarioManager2 = cSimulation::getActiveSimulation()->getEnvir()->getConfigEx()->getVariable(CFGVAR_RUNNUMBER);
+    getAll += texTmp + "seedScenarioManager2 (*.manager.seed):_ " + seedScenarioManager2 + string("_CFGVAR_RUNNUMBER value");
+
+    string seedNumberSet = ev.getConfig()->getConfigValue("seed-set");
+    getAll += texTmp + "seedScenario (seed-set):_ " + to_string(atoi(seedNumberSet.c_str()));
+
+    string folderStartScenario = cSimulation::getActiveSimulation()->getEnvir()->getConfig()->getConfigEntry("network").getBaseDirectory();
+    getAll += texTmp + "Folder scenario start:_ " + folderStartScenario;
+
+    cXMLElement* launchConfigScenario = Veins::TraCIScenarioManagerLaunchdAccess().get()->par("launchConfig").xmlValue();
+    string folderScenarioLaunch = launchConfigScenario->getSourceLocation();
+    getAll += texTmp + "folderScenarioLaunch:_ " + folderScenarioLaunch;
+    getAll += "\n\n\n";
+
+    getAll += texTmp + "runid:_ " + cSimulation::getActiveSimulation()->getEnvir()->getConfigEx()->getVariable(CFGVAR_RUNID);
+    getAll += texTmp + "inifile:_ " + cSimulation::getActiveSimulation()->getEnvir()->getConfigEx()->getVariable(CFGVAR_INIFILE);
+    getAll += texTmp + "configname:_ " + cSimulation::getActiveSimulation()->getEnvir()->getConfigEx()->getVariable(CFGVAR_CONFIGNAME);
+    getAll += texTmp + "runnumber:_ " + cSimulation::getActiveSimulation()->getEnvir()->getConfigEx()->getVariable(CFGVAR_RUNNUMBER);
+    getAll += texTmp + "network:_ " + cSimulation::getActiveSimulation()->getEnvir()->getConfigEx()->getVariable(CFGVAR_NETWORK);
+    getAll += texTmp + "experiment:_ " + cSimulation::getActiveSimulation()->getEnvir()->getConfigEx()->getVariable(CFGVAR_EXPERIMENT);
+    getAll += texTmp + "measurement:_ " + cSimulation::getActiveSimulation()->getEnvir()->getConfigEx()->getVariable(CFGVAR_MEASUREMENT);
+    getAll += texTmp + "replication:_ " + cSimulation::getActiveSimulation()->getEnvir()->getConfigEx()->getVariable(CFGVAR_REPLICATION);
+    getAll += texTmp + "processid:_ " + cSimulation::getActiveSimulation()->getEnvir()->getConfigEx()->getVariable(CFGVAR_PROCESSID);
+    getAll += texTmp + "datetime:_ " + cSimulation::getActiveSimulation()->getEnvir()->getConfigEx()->getVariable(CFGVAR_DATETIME);
+    getAll += texTmp + "resultdir:_ " + cSimulation::getActiveSimulation()->getEnvir()->getConfigEx()->getVariable(CFGVAR_RESULTDIR);
+    getAll += texTmp + "repetition:_ " + cSimulation::getActiveSimulation()->getEnvir()->getConfigEx()->getVariable(CFGVAR_REPETITION);
+    getAll += texTmp + "seedset:_ " + cSimulation::getActiveSimulation()->getEnvir()->getConfigEx()->getVariable(CFGVAR_SEEDSET);
+    getAll += texTmp + "iterationvars - without $repetition:_ " + cSimulation::getActiveSimulation()->getEnvir()->getConfigEx()->getVariable(CFGVAR_ITERATIONVARS);;
+    getAll += texTmp + "iterationvars2 - with $repetition:_ " + cSimulation::getActiveSimulation()->getEnvir()->getConfigEx()->getVariable(CFGVAR_ITERATIONVARS2);
+    getAll += "\n\n\n";
+
+    return getAll;
 }
 
 string BaseWaveApplLayer::boolToString(bool value) {
@@ -359,7 +412,7 @@ string BaseWaveApplLayer::getFolderResultVehDist(unsigned short int expSendbyDSC
     resultFolderPart += to_string(SttlBeaconMessage) + "_" + to_string(ScountGenerateBeaconMessage) +"/";
 
     string seedNumber = ev.getConfig()->getConfigValue("seed-set");
-    resultFolderPart += "run_" +seedNumber + "/";
+    resultFolderPart += "run_" + seedNumber + "/";
     return resultFolderPart;
 }
 
@@ -406,7 +459,7 @@ void BaseWaveApplLayer::restartFilesResultRSU(string folderResult) {
 
 void BaseWaveApplLayer::restartFilesResultVeh(string projectInfo, Coord initialPos) {
     string resultFolder = getFolderResultVehDist(SexpSendbyDSCR);
-    saveVehStartPositionVeh(resultFolder, initialPos); // Save the start position of vehicle. Just for test of the seed.
+    saveVehStartPositionVeh(resultFolder, initialPos); // Save the start position of vehicle. Just for test of the seed
 
     fileMessagesUnicast = fileMessagesDrop = fileMessagesGenerated = resultFolder;
     fileMessagesUnicast += "Veh_Unicast_Messages.r";
@@ -625,13 +678,17 @@ void BaseWaveApplLayer::printVehTraffic() {
             valueExit[i] = 0;
         }
 
-        myfile.open("results/vehTraffic.csv");
-        myfile << "numValue,myId,Source,entryTime (s),exitTime (s),timeInsideScenario (s),timeInsideScenarioIMin (min)" << endl;
+        string fileName="results/vehTraffic_simLimt" + to_string(simulationLimit) + "s_gran_"+ to_string(trafficGranularitySum) + "s_.csv";
+        myfile.open(fileName);
+        myfile << endl << "_This CVS file is separated by underscore\n\n\n";
+
+        myfile << SprojectInfo;
 
         double sumTimeSecond, sumTimeMin, diffTimeVeh;
         sumTimeSecond = sumTimeMin = 0;
 
         int numValue = 1;
+        myfile << "numValue_myId_Source_entryTime (s)_exitTime (s)_timeInsideScenario (s)_timeInsideScenarioIMin (min)" << endl;
         map <string, struct traffic>::iterator itVehTraffic;
         for (itVehTraffic = SvehTraffic.begin(); itVehTraffic != SvehTraffic.end(); itVehTraffic++) {
             diffTimeVeh = itVehTraffic->second.exitTime.dbl() - itVehTraffic->second.entryTime.dbl();
@@ -639,9 +696,9 @@ void BaseWaveApplLayer::printVehTraffic() {
             sumTimeSecond += diffTimeVeh;
             sumTimeMin += (diffTimeVeh/60);
 
-            myfile << numValue << "," << itVehTraffic->first << "," << itVehTraffic->second.source << ",";
-            myfile << itVehTraffic->second.entryTime << "," << itVehTraffic->second.exitTime << ",";
-            myfile << diffTimeVeh << "," << (diffTimeVeh/60) << endl;
+            myfile << numValue << "_" << itVehTraffic->first << "_" << itVehTraffic->second.source << "_";
+            myfile << itVehTraffic->second.entryTime << "_" << itVehTraffic->second.exitTime << "_";
+            myfile << diffTimeVeh << "_" << (diffTimeVeh/60) << endl;
 
             //valueEntry
             int tmpCount = trafficGranularitySum;
@@ -678,26 +735,25 @@ void BaseWaveApplLayer::printVehTraffic() {
         j = trafficGranularitySum;
         sumValuesEntry = sumValuesExit = 0;
 
-        myfile << endl << endl << endl << endl;
-        myfile << "Time (s),Time (min),Entry (s),Exit (s),Inside (int)" << endl;
-        myfile << "0,0,0,0,0" << endl;
+        myfile << endl << endl << endl;
+        myfile << "Time (s)_Time (min)_Entry (s)_Exit (s)_Inside (int)" << endl;
+        myfile << "0_0_0_0_0" << endl;
 
         for (int i = 0; i < countValue; i++) {
             sumValuesEntry += valueEntry[i];
             sumValuesExit += valueExit[i];
 
-            myfile << j << "," << (double)j/60 << "," << sumValuesEntry << "," << sumValuesExit << ",";
-            myfile << (sumValuesEntry - sumValuesExit) << endl;
+            myfile << j << "_" << (double)j/60 << "_" << sumValuesEntry << "_" << sumValuesExit << "_" << (sumValuesEntry - sumValuesExit) << endl;
 
             j += trafficGranularitySum;
         }
 
-        myfile << endl << endl << endl << endl;
-        myfile << "Total of vehicles," << SvehTraffic.size() << endl;
-        myfile << "sumTimeSecond," << sumTimeSecond << ",s" << endl;
-        myfile << "average Second," << sumTimeSecond/SvehTraffic.size() << ",s"  << endl;
-        myfile << "sumTimeMin," << sumTimeMin << ",min"  << endl;
-        myfile << "average Min," << sumTimeMin/SvehTraffic.size() << ",min" << endl;
+        myfile << endl << endl << endl;
+        myfile << "Total of vehicles_" << SvehTraffic.size() << endl;
+        myfile << "sumTimeSecond_" << sumTimeSecond << " s" << endl;
+        myfile << "average Second_" << sumTimeSecond/SvehTraffic.size() << " s" << endl;
+        myfile << "sumTimeMin_" << sumTimeMin << " min" << endl;
+        myfile << "average Min_" << sumTimeMin/SvehTraffic.size() << " min" << endl;
 
         myfile.close();
     }
