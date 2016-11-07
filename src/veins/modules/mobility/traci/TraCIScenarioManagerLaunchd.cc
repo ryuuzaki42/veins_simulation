@@ -91,6 +91,15 @@ void TraCIScenarioManagerLaunchd::initialize(int stage)
 	}
 	cXMLElementList seed_nodes = launchConfig->getElementsByTagName("seed");
 	if (seed_nodes.size() == 0) {
+
+        // If *.manager.seed is not set, will use the runNumber (CFGVAR_RUNNUMBER) instead
+        // repetition (CFGVAR_REPETITION), that need to be equal to  "seedset" (CFGVAR_SEEDSET)
+        // For this set in the "omnet".ini:
+        // repeat = 5                     # 5 ou how many ou need
+        // num-rngs = 1                   # Number of rngs generate
+        // seed-set = ${repetition}       # Set seed as a repetition number
+        // *.manager.seed = ${repetition} # make the seed in manager equal to repetiton
+
 		if (seed == -1) {
 			// default seed is current repetition
 			const char* seed_s = cSimulation::getActiveSimulation()->getEnvir()->getConfigEx()->getVariable(CFGVAR_RUNNUMBER);
