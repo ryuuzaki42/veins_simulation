@@ -20,21 +20,23 @@
 #
 # Livre(FSF) Inc., 51 Franklin St, Fifth Floor, Boston, MA 02110-1301 USA
 #
-# Script: inicia o SUMO (sumo ou sumo-gui) como requisitado pelo framework Veins
+# Script: Run SUMO (sumo ou sumo-gui) as the framework Veins need
 #
-# last update: 09/09/2016
+# last update: 08/11/2016
 #
-# Pasta do Veins (altere se a sua for diferente)
+
+# Veins folder (change if your is in another path)
 cd /media/sda4/prog/veins_simulation/
 
-echo -e "Deseja executar o SUMO com interface gráfica:\n(y)es - sumo-gui ou (n)o sumo"
+echo -e "\npython sumo-launchd.py -vv -c (\"sumo-gui\"|\"sumo\")"
+echo -e "\nWant run sumo-gui or sumo?"
+echo -en "(y)es to sumo-gui - (n)o to sumo: "
 read resposta
 
 if [ "$resposta" = "y" ]; then
     echo -e "\nRunning sumo-gui\n"
     python sumo-launchd.py -vv -c sumo-gui
-elif [ "$resposta" = "n" ]; then
+else
     echo -e "\nRunning sumo\n"
     python sumo-launchd.py -vv -c sumo
 fi
-echo -e "Fim do script\n"

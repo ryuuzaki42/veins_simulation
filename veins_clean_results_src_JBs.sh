@@ -22,15 +22,13 @@
 #
 # Script: limpa o histórico de resultados de execução do framework Veins
 #
-# Last update: 26/09/2016
+# Last update: 08/11/2016
 #
 # Pasta do Veins (altere se a sua for diferente)
 cd /media/sda4/prog/veins_simulation/
 
-inputPar=$1
-
-echo -e "\nEste script remove os results da pasta projects"
-echo -e "\nIrá apagar os arquivos:"
+echo -e "\nThis script remove/delete the results inside folder projects"
+echo -e "\nWill delete:"
 echo -e "\tprojects/*/results"
 echo -e "\tprojects/*/.tkenvrc"
 echo -e "\tprojects/*/run.r"
@@ -43,21 +41,21 @@ ls projects/*/.tkenvlog
 ls projects/*/run.r
 ls projects/*/runExperimentOuptut.r
 
-echo -en "\nDeseja continuar?\n(y)es - (n)o: "
-if [ "$inputPar" != "y" ]; then
+if [ "$1" == '' ]; then
+    echo -en "\nWant continue? (y)es - (n)o: "
     read resposta
 else
-    resposta=y
+    resposta=$1
 fi
 
-if [ "$resposta" = "y" ]; then # Altere projects para o nome da sua pasta de projetos
+if [ "$resposta" = "y" ]; then # Change "projects" for your project folder
     rm -r projects/*/results/
     rm projects/*/.tkenvrc
     rm projects/*/.tkenvlog
     rm projects/*/run.r
     rm projects/*/runExperimentOuptut.r
-    echo -e "\nOs arquivos foram apagados\n"
+    echo -e "\nThe files was deleted"
 else
-    echo -e "\nOs arquivos não foram apagados\n"
+    echo -e "\nThe files was not deleted"
 fi
-echo -e "Fim do script\n"
+echo -e "\nEnd script\n"
