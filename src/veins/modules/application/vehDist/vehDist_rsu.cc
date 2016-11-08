@@ -61,16 +61,13 @@ void vehDist_rsu::onBeaconMessage(WaveShortMessage* wsm) {
 
 void vehDist_rsu::handleSelfMsg(cMessage* msg) {
     switch (msg->getKind()) {
-        case SEND_BEACON_EVT: {
+        case SEND_BEACON_EVT_VehDist: { // Call prepareBeaconStatusWSM local to the rsu
             sendWSM(prepareBeaconStatusWSM("beaconStatus", beaconLengthBits, type_CCH, beaconPriority, -1));
             scheduleAt(simTime() + par("beaconInterval").doubleValue(), sendBeaconEvt);
             break;
         }
         default: {
-            if (msg) {
-                DBG << "APP: Error: Got Self Message of unknown kind! Name: " << msg->getName() << endl;
-                ASSERT2(0, "JBe - APP: Error: Got Self Message of unknown kind! -");
-            }
+            BaseWaveApplLayer::handleSelfMsg(msg);
             break;
         }
     }
