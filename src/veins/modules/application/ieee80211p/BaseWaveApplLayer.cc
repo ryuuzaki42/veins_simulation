@@ -12,7 +12,7 @@ const simsignalwrap_t BaseWaveApplLayer::mobilityStateChangedSignal = simsignalw
 void BaseWaveApplLayer::initialize_default_veins_TraCI(int stage) {
     BaseApplLayer::initialize(stage);
 
-    if (stage==0) {
+    if (stage == 0) {
         myMac = FindModule<WaveAppToMac1609_4Interface*>::findSubModule(getParentModule());
         assert(myMac);
 
@@ -29,7 +29,11 @@ void BaseWaveApplLayer::initialize_default_veins_TraCI(int stage) {
         dataOnSch = par("dataOnSch").boolValue();
         dataPriority = par("dataPriority").longValue();
 
-        sendBeaconEvt = new cMessage("beacon evt", SEND_BEACON_EVT);
+        if (par("vehDistTrueEpidemicFalse").boolValue()){
+            sendBeaconEvt = new cMessage("beacon evt", SEND_BEACON_EVT_VehDist);
+        } else {
+            sendBeaconEvt = new cMessage("beacon evt", SEND_BEACON_EVT);
+        }
 
         // Simulate asynchronous channel access
         double offSet = dblrand() * (par("beaconInterval").doubleValue()/2);
@@ -123,7 +127,7 @@ void BaseWaveApplLayer::vehInitializeValuesVehDist(string category, Coord positi
     cout << endl << source << " (MACint: " << MACToInteger() << ") category: " << vehCategory << " (initial: " << category;
     cout << ") entered in the scenario (position: " << curPosition << ") at: " << simTime() << " whit OffSet: " << vehOffSet << endl;
 
-    if (par("generateTraffic").boolValue()) {
+    if (par("getTraffic").boolValue()) {
         insertVehTraffic(); // Create or not the vehicle traffic in one .csv file
     }
 }
@@ -450,6 +454,17 @@ void BaseWaveApplLayer::restartFilesResultRSU(string folderResult) {
         } else {
             justAppend = true;
         }
+
+        if (par("getTraffic").boolValue()){
+            getTrafficEvtMethodCheck = new cMessage("get traffic evt", SendGetTrafficMethodCheck);
+
+            //map <string, cModule*> vehInsideSmap =  Veins::TraCIScenarioManagerLaunchdAccess().get()->getManagedHosts();
+
+            int countVehScenario = Veins::TraCIScenarioManagerLaunchdAccess().get()->getManagedHosts().size();
+            SvehGetTrafficMethodCheck.insert(make_pair(int(simTime().dbl()), countVehScenario));
+
+            scheduleAt(simTime() + par("trafficGranularitySum"), getTrafficEvtMethodCheck);
+        }
     } else { // repeatNumber != 0 just append
         justAppend = true;
     }
@@ -657,7 +672,7 @@ void BaseWaveApplLayer::toFinishVeh() {
         SvehCategoryCount[vehCategory]++;
     }
 
-    if (par("generateTraffic").boolValue()) {
+    if (par("getTraffic").boolValue()) {
         if (SvehTraffic.find(getStringId()) != SvehTraffic.end()) {
             SvehTraffic[getStringId()].exitTime = simTime();
         } else {
@@ -740,14 +755,15 @@ void BaseWaveApplLayer::printVehTraffic() {
         sumValuesEntry = sumValuesExit = 0;
 
         myfile << endl << endl << endl;
-        myfile << "Time (s)_Time (min)_Entry (s)_Exit (s)_Inside (int)" << endl;
+        myfile << "Time (s)_Time (min)_Inside Scenario (count veh)_Entry (count veh)_Exit (count veh)" << endl;
         myfile << "0_0_0_0_0" << endl;
 
         for (int i = 0; i < countValue; i++) {
             sumValuesEntry += valueEntry[i];
             sumValuesExit += valueExit[i];
 
-            myfile << j << "_" << (double)j/60 << "_" << sumValuesEntry << "_" << sumValuesExit << "_" << (sumValuesEntry - sumValuesExit) << endl;
+            myfile << j << "_" << double(j)/60 << "_" << (sumValuesEntry - sumValuesExit);
+            myfile << "_" << sumValuesEntry << "_" << sumValuesExit << endl;
 
             j += trafficGranularitySum;
         }
@@ -1008,6 +1024,28 @@ void BaseWaveApplLayer::toFinishRSU() {
         string comand = "sed -i 's/maxSpeed=.* color/maxSpeed=\"16.67\" color/g' " + pathFolder +"*.rou.xml";
         system(comand.c_str()); // Set the maxSpeed back to default: 16.67 m/s (60 km/h)
         cout << endl << "Setting speed back to default (16.67 m/s), command: " << comand << endl;
+
+        printVehTrafficMethodCheck();
+    }
+}
+
+void BaseWaveApplLayer::printVehTrafficMethodCheck() {
+    if (par("getTraffic").boolValue()){
+        int simulationLimit = atoi(ev.getConfig()->getConfigValue("sim-time-limit"));
+        int trafficGranularitySum = par("trafficGranularitySum");
+
+        string fileName="results/vehTraffic_simLimt" + to_string(simulationLimit) + "s_gran_"+ to_string(trafficGranularitySum) + "s_MethodCheck.csv";
+        myfile.open(fileName);
+        myfile << endl << "_This CVS file is separated by underscore\n\n\n";
+
+        myfile << "Time (s)_" << "Time (min)_" << "Inside Scenario (count veh)\n";
+
+        map <simtime_t, int>::iterator itSvehGetTraffic;
+        for (itSvehGetTraffic = SvehGetTrafficMethodCheck.begin(); itSvehGetTraffic != SvehGetTrafficMethodCheck.end(); itSvehGetTraffic++) {
+            myfile << itSvehGetTraffic->first << "_"<< itSvehGetTraffic->first/60 << "_" << itSvehGetTraffic->second << endl;
+        }
+
+        myfile.close();
     }
 }
 //######################################### vehDist - end #######################################################################
@@ -1709,10 +1747,18 @@ void BaseWaveApplLayer::handleSelfMsg(cMessage* msg) {
             if (!epidemicMessageSend.empty()) {
                 scheduleAt((simTime() + 0.1), sendEpidemicMessageRequestEvt);
             }
+            break;
+        }
+        case SendGetTrafficMethodCheck: {
+            SvehGetTrafficMethodCheck.insert(make_pair(simTime(), Veins::TraCIScenarioManagerLaunchdAccess().get()->getManagedHosts().size()));
+
+            scheduleAt(simTime() + par("trafficGranularitySum"), getTrafficEvtMethodCheck);
+            break;
         }
         default: {
             if (msg) {
                 DBG << "APP: Error: Got Self Message of unknown kind! Name: " << msg->getName() << endl;
+                ASSERT2(0, "JBe - APP: Error: Got Self Message of unknown kind! -");
             }
             break;
         }

@@ -39,10 +39,10 @@ class BaseWaveApplLayer : public BaseApplLayer {
 
         enum WaveApplMessageKinds {
             SERVICE_PROVIDER = LAST_BASE_APPL_MESSAGE_KIND,
-            SEND_BEACON_EVT, SEND_BEACON_EVT_minicurso,
+            SEND_BEACON_EVT,SEND_BEACON_EVT_VehDist , SEND_BEACON_EVT_minicurso,
             SERVICE_EXPIRED_EVT, SERVICE_QUERY_EVT, SERVICE_EVT, // Modificado OSDP, add SERVICE_EXPIRED_EVT, SERVICE_QUERY_EVT, SERVICE_EVT, antes era apenas SEND_BEACON_EVT
             SEND_BEACON_EVT_epidemic, Send_EpidemicMessageRequestEvt,
-            SendEvtGenerateBeaconMessage
+            SendEvtGenerateBeaconMessage, SendGetTrafficMethodCheck
         };
 
     protected:
@@ -88,8 +88,14 @@ class BaseWaveApplLayer : public BaseApplLayer {
 
         void vehInitializeValuesVehDist(string category, Coord position);
         void rsuInitializeValuesVehDist();
+
         int mt19937GetRandomValue(int upperLimmit);
+
         string getCFGVAR();
+
+        void insertVehTraffic();
+        void printVehTraffic();
+        void printVehTrafficMethodCheck();
 //######################################### vehDist #########################################
 
 //######################################### Epidemic #########################################
@@ -121,8 +127,6 @@ class BaseWaveApplLayer : public BaseApplLayer {
 
         void generateMessageEpidemic();
         string getStringId();
-        void printVehTraffic();
-        void insertVehTraffic();
 //######################################### Epidemic #########################################
 
         virtual void sendWSM(WaveShortMessage* wsm);
@@ -150,6 +154,7 @@ class BaseWaveApplLayer : public BaseApplLayer {
 
         //## Used to another projects
         cMessage* sendGenerateBeaconMessageEvt;
+        cMessage* getTrafficEvtMethodCheck;
 
         static mt19937 mtSelectVehicleGenarateMessage;
 
@@ -184,6 +189,7 @@ class BaseWaveApplLayer : public BaseApplLayer {
         };
         static map <string, struct traffic> SvehTraffic;
 
+        static map <simtime_t, int> SvehGetTrafficMethodCheck;
         static unordered_map <string, int> SvehCategoryCount;
         static unordered_map <string, WaveShortMessage> SvehScenario;
         static bool SvehDistTrueEpidemicFalse, SusePathHistory, SallowMessageCopy, SvehSendWhileParking;

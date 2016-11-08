@@ -94,6 +94,7 @@ class vehDist : public BaseWaveApplLayer {
 
 vector <string> BaseWaveApplLayer::SnumVehicles, BaseWaveApplLayer::SvehGenerateMessage;
 
+map <SimTime, int> BaseWaveApplLayer::SvehGetTrafficMethodCheck;
 unordered_map <string, int> BaseWaveApplLayer::SvehCategoryCount;
 unordered_map <string, WaveShortMessage> BaseWaveApplLayer::SvehScenario;
 map <string, struct BaseWaveApplLayer::traffic> BaseWaveApplLayer::SvehTraffic;
