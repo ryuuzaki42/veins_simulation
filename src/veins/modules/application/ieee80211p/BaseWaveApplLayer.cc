@@ -188,7 +188,7 @@ void BaseWaveApplLayer::printHeaderfileExecution() {
     myfile << "Exp: " << SexpNumber << " expSendbyDSCR: " << expSendbyDSCRText.c_str() << " ################";
     myfile << "##########################################################################" << endl;
     myfile << "Exp: " << SexpNumber << " expSendbyDSCR: " << expSendbyDSCRText.c_str() << " ### ExpNumber: " << SexpNumber << " RepeatNumber: " << SrepeatNumber;
-    myfile << " ttlBeaconMessage: " << SttlBeaconMessage << " countGenerateBeaconMessage: " << ScountGenerateBeaconMessage << endl << endl;
+    myfile << " ttlBeaconMessage: " << SttlBeaconMessage << " countGenerateBeaconMessage: " << ScountGenerateBeaconMessage << endl;
 }
 
 void BaseWaveApplLayer::generalInitializeVariables_executionByExpNumberVehDist() {
@@ -273,13 +273,10 @@ void BaseWaveApplLayer::generalInitializeVariables_executionByExpNumberVehDist()
         SprojectInfo += texTmp + "timeLimitGenerateMessage:_ " + to_string(StimeLimitGenerateBeaconMessage) + " s";
         SprojectInfo += texTmp + "beaconMessageHopLimit:_ " + to_string(SbeaconMessageHopLimit);
         SprojectInfo += texTmp + "expSendbyDSCR:_ " + to_string(SexpSendbyDSCR);
-        SprojectInfo += texTmp + "penetrationRateValue:_ " + to_string(Veins::TraCIScenarioManagerLaunchdAccess().get()->par("penetrationRate").doubleValue());
         SprojectInfo += texTmp;
         SprojectInfo += texTmp + "beaconLengthBits:_ " + to_string(beaconLengthBits);
         SprojectInfo += texTmp + "headerLength:_ " + to_string(headerLength);
         SprojectInfo += texTmp + "dataLengthBits:_ " + to_string(dataLengthBits);
-        SprojectInfo += texTmp + "iterationvars:_ " + cSimulation::getActiveSimulation()->getEnvir()->getConfigEx()->getVariable(CFGVAR_ITERATIONVARS2);
-        SprojectInfo += texTmp + "\n";
 
         SprojectInfo += texTmp;
         if (SvehDistTrueEpidemicFalse) {
@@ -302,30 +299,35 @@ void BaseWaveApplLayer::generalInitializeVariables_executionByExpNumberVehDist()
             SprojectInfo += texTmp + "maximumEpidemicBufferSize:_ " + to_string(maximumEpidemicBufferSize);
         }
 
-        SprojectInfo += "\n\n\n";
         SprojectInfo += getCFGVAR();
 
         cout << endl << SprojectInfo << endl;
     }
 }
 
-string BaseWaveApplLayer::getCFGVAR() { // Variables from: omnetpp-4.6/include/cconfiguration.h
+string BaseWaveApplLayer::getCFGVAR() { // Variables from omnetpp-4.6/include/cconfiguration.h
     int simulationLimit = atoi(ev.getConfig()->getConfigValue("sim-time-limit"));
     int trafficGranularitySum = par("trafficGranularitySum");
 
     string texTmp = "\nExp: " + to_string(SexpNumber) + "_ ";
 
-    string getAll = texTmp + "simulationLimit:_ " + to_string(simulationLimit) + string("s");
+    string getAll = texTmp;
+
+    getAll += texTmp + "simulationLimit:_ " + to_string(simulationLimit) + string("s");
     getAll += texTmp + "trafficGranularitySum:_ " + to_string(trafficGranularitySum) + string("s");
 
-    double penetrationRateValueScenario = Veins::TraCIScenarioManagerLaunchdAccess().get()->par("penetrationRate").doubleValue();
-    penetrationRateValueScenario *= 100;
-    getAll += texTmp + "penetrationRateValueScenario:_ " + to_string(penetrationRateValueScenario) + string("%");
+    Veins::TraCIScenarioManagerLaunchd* traciSMLget = Veins::TraCIScenarioManagerLaunchdAccess().get();
 
-    int seedScenarioManager = Veins::TraCIScenarioManagerLaunchdAccess().get()->par("seed");
+    double penetrationRateValueScenario = traciSMLget->par("penetrationRate").doubleValue();
+    penetrationRateValueScenario *= 100;
+    getAll += texTmp + "penetrationRateValueScenario:_ " + to_string(int(penetrationRateValueScenario)) + string("%");
+
+    int seedScenarioManager = traciSMLget->par("seed");
     getAll += texTmp + "seedScenario (*.manager.seed):_ " + to_string(seedScenarioManager) + string("_if -1 will use CFGVAR_RUNNUMBER");
 
-    string seedScenarioManager2 = cSimulation::getActiveSimulation()->getEnvir()->getConfigEx()->getVariable(CFGVAR_RUNNUMBER);
+    cConfigurationEx* configExGet = cSimulation::getActiveSimulation()->getEnvir()->getConfigEx();
+
+    string seedScenarioManager2 = configExGet->getVariable(CFGVAR_RUNNUMBER);
     getAll += texTmp + "seedScenarioManager2 (*.manager.seed):_ " + seedScenarioManager2 + string("_CFGVAR_RUNNUMBER value");
 
     string seedNumberSet = ev.getConfig()->getConfigValue("seed-set");
@@ -334,27 +336,27 @@ string BaseWaveApplLayer::getCFGVAR() { // Variables from: omnetpp-4.6/include/c
     string folderStartScenario = cSimulation::getActiveSimulation()->getEnvir()->getConfig()->getConfigEntry("network").getBaseDirectory();
     getAll += texTmp + "Folder scenario start:_ " + folderStartScenario;
 
-    cXMLElement* launchConfigScenario = Veins::TraCIScenarioManagerLaunchdAccess().get()->par("launchConfig").xmlValue();
+    cXMLElement* launchConfigScenario = traciSMLget->par("launchConfig").xmlValue();
     string folderScenarioLaunch = launchConfigScenario->getSourceLocation();
     getAll += texTmp + "folderScenarioLaunch:_ " + folderScenarioLaunch;
-    getAll += "\n\n\n";
 
-    getAll += texTmp + "runid:_ " + cSimulation::getActiveSimulation()->getEnvir()->getConfigEx()->getVariable(CFGVAR_RUNID);
-    getAll += texTmp + "inifile:_ " + cSimulation::getActiveSimulation()->getEnvir()->getConfigEx()->getVariable(CFGVAR_INIFILE);
-    getAll += texTmp + "configname:_ " + cSimulation::getActiveSimulation()->getEnvir()->getConfigEx()->getVariable(CFGVAR_CONFIGNAME);
-    getAll += texTmp + "runnumber:_ " + cSimulation::getActiveSimulation()->getEnvir()->getConfigEx()->getVariable(CFGVAR_RUNNUMBER);
-    getAll += texTmp + "network:_ " + cSimulation::getActiveSimulation()->getEnvir()->getConfigEx()->getVariable(CFGVAR_NETWORK);
-    getAll += texTmp + "experiment:_ " + cSimulation::getActiveSimulation()->getEnvir()->getConfigEx()->getVariable(CFGVAR_EXPERIMENT);
-    getAll += texTmp + "measurement:_ " + cSimulation::getActiveSimulation()->getEnvir()->getConfigEx()->getVariable(CFGVAR_MEASUREMENT);
-    getAll += texTmp + "replication:_ " + cSimulation::getActiveSimulation()->getEnvir()->getConfigEx()->getVariable(CFGVAR_REPLICATION);
-    getAll += texTmp + "processid:_ " + cSimulation::getActiveSimulation()->getEnvir()->getConfigEx()->getVariable(CFGVAR_PROCESSID);
-    getAll += texTmp + "datetime:_ " + cSimulation::getActiveSimulation()->getEnvir()->getConfigEx()->getVariable(CFGVAR_DATETIME);
-    getAll += texTmp + "resultdir:_ " + cSimulation::getActiveSimulation()->getEnvir()->getConfigEx()->getVariable(CFGVAR_RESULTDIR);
-    getAll += texTmp + "repetition:_ " + cSimulation::getActiveSimulation()->getEnvir()->getConfigEx()->getVariable(CFGVAR_REPETITION);
-    getAll += texTmp + "seedset:_ " + cSimulation::getActiveSimulation()->getEnvir()->getConfigEx()->getVariable(CFGVAR_SEEDSET);
-    getAll += texTmp + "iterationvars - without $repetition:_ " + cSimulation::getActiveSimulation()->getEnvir()->getConfigEx()->getVariable(CFGVAR_ITERATIONVARS);;
-    getAll += texTmp + "iterationvars2 - with $repetition:_ " + cSimulation::getActiveSimulation()->getEnvir()->getConfigEx()->getVariable(CFGVAR_ITERATIONVARS2);
-    getAll += "\n\n\n";
+    getAll += texTmp;
+    getAll += texTmp + "runid:_ " + configExGet->getVariable(CFGVAR_RUNID);
+    getAll += texTmp + "inifile:_ " + configExGet->getVariable(CFGVAR_INIFILE);
+    getAll += texTmp + "configname:_ " + configExGet->getVariable(CFGVAR_CONFIGNAME);
+    getAll += texTmp + "runnumber:_ " + configExGet->getVariable(CFGVAR_RUNNUMBER);
+    getAll += texTmp + "network:_ " + configExGet->getVariable(CFGVAR_NETWORK);
+    getAll += texTmp + "experiment:_ " + configExGet->getVariable(CFGVAR_EXPERIMENT);
+    getAll += texTmp + "measurement:_ " + configExGet->getVariable(CFGVAR_MEASUREMENT);
+    getAll += texTmp + "replication:_ " + configExGet->getVariable(CFGVAR_REPLICATION);
+    getAll += texTmp + "processid:_ " + configExGet->getVariable(CFGVAR_PROCESSID);
+    getAll += texTmp + "datetime:_ " + configExGet->getVariable(CFGVAR_DATETIME);
+    getAll += texTmp + "resultdir:_ " + configExGet->getVariable(CFGVAR_RESULTDIR);
+    getAll += texTmp + "repetition:_ " + configExGet->getVariable(CFGVAR_REPETITION);
+    getAll += texTmp + "seedset:_ " + configExGet->getVariable(CFGVAR_SEEDSET);
+    getAll += texTmp + "iterationvars - without $repetition:_ " + configExGet->getVariable(CFGVAR_ITERATIONVARS);;
+    getAll += texTmp + "iterationvars2 - with $repetition:_ " + configExGet->getVariable(CFGVAR_ITERATIONVARS2);
+    getAll += texTmp + "\n";
 
     return getAll;
 }
@@ -619,17 +621,19 @@ void BaseWaveApplLayer::printCountBeaconMessagesDropVeh() {
     SmsgBufferUseGeneral += msgBufferUse;
 
     if (SnumVehicles.size() == 1) {
-        myfile << endl << "Exp: " << SexpNumber << " ### Final count messages drop: " << ScountMesssageDrop << endl;
-        myfile << "Exp: " << SexpNumber << " ### Final count message dropped by buffer: " << SmsgDroppedbyBuffer << endl;
-        myfile << "Exp: " << SexpNumber << " ### Final count message dropped by copy (Only valid if copy of message are not allowed): " << SmsgDroppedbyCopy << endl;
-        myfile << "Exp: " << SexpNumber << " ### Final count message dropped by ttl: " << SmsgDroppedbyTTL << endl;
-        myfile << "Exp: " << SexpNumber << " ### Final average buffer use: " << double(SmsgBufferUseGeneral)/ScountVehicleAll << endl;
-        myfile << "Exp: " << SexpNumber << " ### Count of vehicle in the scenario: " << ScountVehicleAll << endl;
-        myfile << "Exp: " << SexpNumber << " ### Count meetings: " << (ScountTwoCategoryN + ScountMeetN) << endl;
-        myfile << "Exp: " << SexpNumber << " ### Count meetings two category: " << ScountTwoCategoryN << endl;
-        myfile << "Exp: " << SexpNumber << " ### Count meetings another: " << ScountMeetN << endl;
-        myfile << "Exp: " << SexpNumber << " ### Count meetings with real difference (Only valid with Category test): " << ScountMeetPshortestT << endl;
-        myfile << "Exp: " << SexpNumber << " ### Final count packets messages send: " << ScountMsgPacketSend << endl << endl;
+        string textTmp = "\nExp: " + to_string(SexpNumber) + " ###veh ";
+
+        myfile << textTmp + "Final count messages drop: " << ScountMesssageDrop;
+        myfile << textTmp + "Final count message dropped by buffer: " << SmsgDroppedbyBuffer;
+        myfile << textTmp + "Final count message dropped by copy (Only valid if copy of message are not allowed): " << SmsgDroppedbyCopy;
+        myfile << textTmp + "Final count message dropped by ttl: " << SmsgDroppedbyTTL;
+        myfile << textTmp + "Final average buffer use: " << double(SmsgBufferUseGeneral)/ScountVehicleAll;
+        myfile << textTmp + "Count of vehicle in the scenario: " << ScountVehicleAll;
+        myfile << textTmp + "Count meetings: " << (ScountTwoCategoryN + ScountMeetN);
+        myfile << textTmp + "Count meetings two category: " << ScountTwoCategoryN;
+        myfile << textTmp + "Count meetings another: " << ScountMeetN;
+        myfile << textTmp + "Count meetings with real difference (Only valid with Category test): " << ScountMeetPshortestT;
+        myfile << textTmp + "Final count packets messages send: " << ScountMsgPacketSend << endl;
     }
     myfile.close();
 }
@@ -918,21 +922,21 @@ void BaseWaveApplLayer::printCountMessagesReceivedRSU() {
         avgGeneralHopsMessage /= messagesReceivedRSU.size();
         avgGeneralTimeMessageReceived /= avgGeneralCopyMessageReceived;
 
-        string textTmp = "Exp: " + to_string(SexpNumber) + " ###";
+        string textTmp = "Exp: " + to_string(SexpNumber) + " ###rsu ";
         myfile << endl << endl << textTmp + " Messages received in the " << source << endl;
-        myfile << textTmp + " Count messages received: " << messagesReceivedRSU.size() << endl;
-        myfile << textTmp + " Count messages with hop count equal of zero received: " << messageCountHopZero << endl;
-        myfile << textTmp + " Count messages with hop count different of zero Received: " << (messagesReceivedRSU.size() - messageCountHopZero) << endl;
-        myfile << textTmp + " Average time to receive: " << avgGeneralTimeMessageReceived << endl;
-        myfile << textTmp + " Count copy message received: " << avgGeneralCopyMessageReceived << endl;
+        myfile << textTmp + "Count messages received: " << messagesReceivedRSU.size() << endl;
+        myfile << textTmp + "Count messages with hop count equal of zero received: " << messageCountHopZero << endl;
+        myfile << textTmp + "Count messages with hop count different of zero Received: " << (messagesReceivedRSU.size() - messageCountHopZero) << endl;
+        myfile << textTmp + "Average time to receive: " << avgGeneralTimeMessageReceived << endl;
+        myfile << textTmp + "Count copy message received: " << avgGeneralCopyMessageReceived << endl;
         avgGeneralCopyMessageReceived /= messagesReceivedRSU.size();
-        myfile << textTmp + " Average copy received: " << avgGeneralCopyMessageReceived << endl;
-        myfile << textTmp + " Average hops to received: " << avgGeneralHopsMessage << endl;
-        myfile << textTmp + " Hops by category T general: " << countT << endl;
-        myfile << textTmp + " Hops by category P general: " << countP << endl;
+        myfile << textTmp + "Average copy received: " << avgGeneralCopyMessageReceived << endl;
+        myfile << textTmp + "Average hops to received: " << avgGeneralHopsMessage << endl;
+        myfile << textTmp + "Hops by category T general: " << countT << endl;
+        myfile << textTmp + "Hops by category P general: " << countP << endl;
     } else {
         myfile << "messagesReceived from " << source << " is empty" << endl;
-        myfile << endl << "Exp: " << SexpNumber << " ### Count messages received: " << 0 << endl;
+        myfile << endl << "Exp: " << SexpNumber << " ###rsu Count messages received: " << 0 << endl;
     }
 
     if (SnumVehicles.size() == 0) {
