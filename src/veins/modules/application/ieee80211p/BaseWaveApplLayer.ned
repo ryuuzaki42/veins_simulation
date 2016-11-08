@@ -57,7 +57,7 @@ simple BaseWaveApplLayer like IBaseApplLayer {
         string folderPathSed = default("");
         bool disableCout = default(false);
 
-        bool generateTraffic = default(false); // Generate a csv file with the (in, out) of vehicles
+        bool getTraffic = default(false); // Generate a csv file with the (in, out) of vehicles
         int trafficGranularitySum @unit("s") = default(60s);
 
     gates:
