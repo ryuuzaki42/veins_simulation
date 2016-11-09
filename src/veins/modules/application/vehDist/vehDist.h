@@ -105,7 +105,7 @@ unsigned short int BaseWaveApplLayer::SmsgDroppedbyTTL, BaseWaveApplLayer::SmsgD
 unsigned short int BaseWaveApplLayer::ScountMsgPacketSend, BaseWaveApplLayer::SmsgBufferUseGeneral, BaseWaveApplLayer::SmessageHopLimit;
 unsigned short int BaseWaveApplLayer::ScountMesssageDrop, BaseWaveApplLayer::ScountMeetN, BaseWaveApplLayer::ScountTwoCategoryN;
 unsigned short int BaseWaveApplLayer::ScountMeetPshortestT, BaseWaveApplLayer::ScountVehicleAll;
-unsigned short int BaseWaveApplLayer::SbeaconMessageId;
+unsigned short int BaseWaveApplLayer::SbeaconMessageId, BaseWaveApplLayer::SbeaconTypeInitialize;
 
 unsigned short int BaseWaveApplLayer::SrepeatNumber, BaseWaveApplLayer::SexpNumber, BaseWaveApplLayer::SexpSendbyDSCR;
 unsigned short int BaseWaveApplLayer::ScountGenerateBeaconMessage, BaseWaveApplLayer::SttlBeaconMessage, BaseWaveApplLayer::SvehTimeLimitToAcceptGenerateMgs;
@@ -114,7 +114,7 @@ unsigned short int BaseWaveApplLayer::SbeaconStatusBufferSize, BaseWaveApplLayer
 unsigned short int BaseWaveApplLayer::StimeLimitGenerateBeaconMessage, BaseWaveApplLayer::StimeToUpdatePosition, BaseWaveApplLayer::SmessageBufferSize;
 
 string BaseWaveApplLayer::SprojectInfo;
-bool BaseWaveApplLayer::SvehDistTrueEpidemicFalse, BaseWaveApplLayer::SusePathHistory, BaseWaveApplLayer::SallowMessageCopy;
+bool BaseWaveApplLayer::SusePathHistory, BaseWaveApplLayer::SallowMessageCopy;
 bool BaseWaveApplLayer::SvehSendWhileParking, BaseWaveApplLayer::SselectFromAllVehicles, BaseWaveApplLayer::SuseMessagesSendLog;
 bool BaseWaveApplLayer::SvehDistCreateEventGenerateMessage, BaseWaveApplLayer::SuseRateTimeToSend;
 

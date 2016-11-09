@@ -173,7 +173,7 @@ class BaseWaveApplLayer : public BaseApplLayer {
         static unsigned short int ScountMsgPacketSend, SmsgBufferUseGeneral, ScountMesssageDrop, SmessageHopLimit;
         static unsigned short int ScountMeetN, ScountTwoCategoryN, ScountMeetPshortestT, ScountVehicleAll, SbeaconMessageId;
 
-        static unsigned short int SbeaconStatusBufferSize, SttlBeaconStatus, SpercentP;
+        static unsigned short int SbeaconStatusBufferSize, SttlBeaconStatus, SpercentP, SbeaconTypeInitialize;
         static unsigned short int StimeLimitGenerateBeaconMessage, StimeToUpdatePosition, SmessageBufferSize;
 
         static string SprojectInfo;
@@ -189,7 +189,7 @@ class BaseWaveApplLayer : public BaseApplLayer {
         static map <simtime_t, int> SvehGetTrafficMethodCheck;
         static unordered_map <string, int> SvehCategoryCount;
         static unordered_map <string, WaveShortMessage> SvehScenario;
-        static bool SvehDistTrueEpidemicFalse, SusePathHistory, SallowMessageCopy, SvehSendWhileParking;
+        static bool SusePathHistory, SallowMessageCopy, SvehSendWhileParking;
         static bool SselectFromAllVehicles, SuseMessagesSendLog, SvehDistCreateEventGenerateMessage, SuseRateTimeToSend;
 
         struct messages {
