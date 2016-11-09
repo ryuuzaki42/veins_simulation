@@ -29,16 +29,19 @@ void BaseWaveApplLayer::initialize_veins_TraCI(int stage) {
         dataOnSch = par("dataOnSch").boolValue();
         dataPriority = par("dataPriority").longValue();
 
-        int beaconTypeInitialize = par("beaconTypeInitialize");
+        SbeaconTypeInitialize = par("beaconTypeInitialize");
 
-        if (beaconTypeInitialize == 1) { // 1 vehDist
+        if (SbeaconTypeInitialize == 1) { // 1 vehDist
             sendBeaconEvt = new cMessage("beacon evt", SEND_BEACON_EVT_vehDist);
-        } else if (beaconTypeInitialize == 2) { // 2 epidemic
+        } else if (SbeaconTypeInitialize == 2) { // 2 epidemic
             sendBeaconEvt = new cMessage("beacon evt", SEND_BEACON_EVT_epidemic);
-        } else if (beaconTypeInitialize == 3) { // 3 minicurso_UFPI_TraCI
+        } else if (SbeaconTypeInitialize == 3) { // 3 minicurso_UFPI_TraCI
             sendBeaconEvt = new cMessage("beacon evt", SEND_BEACON_EVT_minicurso);
-        } else if (beaconTypeInitialize == 0) { // 0 default
+        } else if (SbeaconTypeInitialize == 0) { // 0 default
             sendBeaconEvt = new cMessage("beacon evt", SEND_BEACON_EVT);
+        } else {
+            cout << "JBe- beaconTypeInitialize is unknown -" << SbeaconTypeInitialize << endl;
+            ASSERT2(0, "JBe- beaconTypeInitialize is unknown -");
         }
 
         // Simulate asynchronous channel access
@@ -123,10 +126,13 @@ void BaseWaveApplLayer::vehInitializeValuesVehDist(string category, Coord positi
     if (SvehDistCreateEventGenerateMessage) { // Create Event to generate messages
         vehGenerateBeaconMessageBeginVeh(vehOffSet);
     } else { // All vehicle that enter will generate one message
-        if (SvehDistTrueEpidemicFalse) {
+        if (SbeaconTypeInitialize == 1) {
             generateBeaconMessageVehDist();
-        } else {
+        } else if (SbeaconTypeInitialize == 2) {
             generateMessageEpidemic();
+        } else {
+            cout << "JBe- beaconTypeInitialize is unknown -" << SbeaconTypeInitialize << endl;
+            ASSERT2(0, "JBe- beaconTypeInitialize is unknown -");
         }
     }
 
@@ -205,9 +211,8 @@ void BaseWaveApplLayer::generalInitializeVariables_executionByExpNumberVehDist()
     source = findHost()->getFullName();
     msgBufferUse = 0;
 
-    if (!SvehDistTrueEpidemicFalse) {
-        lastTimeSendLocalSummaryVector = nodesRecentlySendLocalSummaryVector = 0;
-    }
+    // Epidemic variables
+    lastTimeSendLocalSummaryVector = nodesRecentlySendLocalSummaryVector = 0;
 
     if (source.compare("rsu[0]") == 0) { // Static values inside of the if, that are the same for vehicle(s) and RSU(s)
         if (par("disableCout").boolValue()) {
@@ -217,8 +222,7 @@ void BaseWaveApplLayer::generalInitializeVariables_executionByExpNumberVehDist()
 
         SmessageBufferSize = par("messageBufferSize"); // Define the maximum buffer size (in number of messages) that a node is willing to allocate
         SmessageHopLimit = par("messageHopLimit").longValue();
-        string seedNumber = ev.getConfig()->getConfigValue("seed-set");
-        SrepeatNumber = atoi(seedNumber.c_str()); // Number of execution (${repetition})
+        SrepeatNumber = atoi(ev.getConfig()->getConfigValue("seed-set")); // Number of execution (${repetition})
         SexpSendbyDSCR = par("expSendbyDSCR").longValue();
         SsendSummaryVectorInterval = par("sendSummaryVectorInterval").longValue(); // For Epidemic, Define the minimum slide window length among contacts to send new version of summary vector
 
@@ -227,7 +231,6 @@ void BaseWaveApplLayer::generalInitializeVariables_executionByExpNumberVehDist()
         SselectFromAllVehicles = par("selectFromAllVehicles").boolValue();
         SusePathHistory = par("usePathHistory").boolValue(); // User or not path history when will send a message
         SuseMessagesSendLog = par("useMessagesSendLog").boolValue();
-        SvehDistTrueEpidemicFalse = par("vehDistTrueEpidemicFalse").boolValue();
         SvehDistCreateEventGenerateMessage = par("vehDistCreateEventGenerateMessage").boolValue();
         SuseRateTimeToSend = par("useRateTimeToSend").boolValue();
 
@@ -252,7 +255,7 @@ void BaseWaveApplLayer::generalInitializeVariables_executionByExpNumberVehDist()
             SttlBeaconMessage = par("ttlBeaconMessage_two").longValue();
             ScountGenerateBeaconMessage = par("countGenerateBeaconMessage_two").longValue();
         } else {
-            cout << "Error: Number of experiment not configured, class BaseWaveApplLayer.cc" << endl;
+            cout << "Error: Number of experiment not configured - SexpNumber" << SexpNumber << " class BaseWaveApplLayer.cc" << endl;
             ASSERT2(0, "JBe - Error: Number of experiment not configured -");
         }
 
@@ -272,7 +275,7 @@ void BaseWaveApplLayer::generalInitializeVariables_executionByExpNumberVehDist()
         string texTmp = "\nExp: " + to_string(SexpNumber) + "_ ";
         SprojectInfo = texTmp;
         SprojectInfo += texTmp + "Project information";
-        SprojectInfo += texTmp + "vehDistTrueEpidemicFalse:_ " + boolToString(SvehDistTrueEpidemicFalse);
+        SprojectInfo += texTmp + "beaconTypeInitialize:_ " + boolToString(SbeaconTypeInitialize);
         SprojectInfo += texTmp + "vehDistCreateEventGenerateMessage:_ " + boolToString(SvehDistCreateEventGenerateMessage);
         SprojectInfo += texTmp + "Experiment:_ " + to_string(SexpNumber);
         SprojectInfo += texTmp + "repeatNumber:_ " + to_string(SrepeatNumber);
@@ -291,7 +294,7 @@ void BaseWaveApplLayer::generalInitializeVariables_executionByExpNumberVehDist()
         SprojectInfo += texTmp + "dataLengthBits:_ " + to_string(dataLengthBits);
 
         SprojectInfo += texTmp;
-        if (SvehDistTrueEpidemicFalse) {
+        if (SbeaconTypeInitialize == 1) {
             SprojectInfo += texTmp + "useRateTimeToSend:_ " + boolToString(SuseRateTimeToSend);
             if (!SuseRateTimeToSend) {
                 stringstream ss;
@@ -305,8 +308,11 @@ void BaseWaveApplLayer::generalInitializeVariables_executionByExpNumberVehDist()
             SprojectInfo += texTmp + "usePathHistory:_ " + boolToString(SusePathHistory);
             SprojectInfo += texTmp + "useMessagesSendLog:_ " + boolToString(SuseMessagesSendLog);
             SprojectInfo += texTmp + "timeToUpdatePosition:_ " + to_string(StimeToUpdatePosition) + " s";
-        } else {
+        } else if (SbeaconTypeInitialize == 2) {
             SprojectInfo += texTmp + "sendSummaryVectorInterval:_ " + to_string(SsendSummaryVectorInterval) + " s";
+        } else {
+            cout << "JBe- beaconTypeInitialize is unknown -" << SbeaconTypeInitialize << endl;
+            ASSERT2(0, "JBe- beaconTypeInitialize is unknown -");
         }
 
         SprojectInfo += getCFGVAR();
@@ -413,10 +419,13 @@ string BaseWaveApplLayer::getFolderResultVehDist(unsigned short int expSendbyDSC
     }
 
     string resultFolderPart = "results/";
-    if (SvehDistTrueEpidemicFalse) {
+    if (SbeaconTypeInitialize == 1) {
         resultFolderPart += "vehDist_resultsEnd_";
-    } else {
+    } else if (SbeaconTypeInitialize == 2) {
         resultFolderPart += "epidemic_resultsEnd_";
+    } else {
+        cout << "JBe- beaconTypeInitialize is unknown -" << SbeaconTypeInitialize << endl;
+        ASSERT2(0, "JBe- beaconTypeInitialize is unknown -");
     }
 
     unsigned short int expPartOneOrTwo = par("expPart_one_or_two");
@@ -541,10 +550,13 @@ void BaseWaveApplLayer::vehGenerateBeaconMessageAfterBeginVeh() {
 
     auto itVeh = find(SvehGenerateMessage.begin(), SvehGenerateMessage.end(), source);
     if (itVeh != SvehGenerateMessage.end()) { // If have "vehNumber" on buffer, will generate one message
-        if (SvehDistTrueEpidemicFalse) {
+        if (SbeaconTypeInitialize == 1) {
             generateBeaconMessageVehDist();;
-        } else {
+        } else if (SbeaconTypeInitialize == 2) {
             generateMessageEpidemic();
+        } else {
+            cout << "JBe- beaconTypeInitialize is unknown -" << SbeaconTypeInitialize << endl;
+            ASSERT2(0, "JBe- beaconTypeInitialize is unknown -");
         }
 
         SvehGenerateMessage.erase(itVeh);
@@ -1688,7 +1700,7 @@ void BaseWaveApplLayer::handleSelfMsg(cMessage* msg) {
         }
         default: {
             if (msg) {
-                DBG << "APP: Error: Got Self Message of unknown kind! Name: " << msg->getName() << endl;
+                cout << "APP: Error: Got Self Message of unknown kind! Name: " << msg->getName() << endl;
                 ASSERT2(0, "JBe - APP: Error: Got Self Message of unknown kind! -");
             }
             break;
