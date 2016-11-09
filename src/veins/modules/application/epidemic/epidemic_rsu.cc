@@ -7,7 +7,7 @@ using Veins::AnnotationManagerAccess;
 Define_Module(epidemic_rsu);
 
 void epidemic_rsu::initialize(int stage) {
-    BaseWaveApplLayer::initialize_epidemic(stage);
+    BaseWaveApplLayer::initialize_veins_TraCI(stage);
     if (stage == 0) {
         mobi = dynamic_cast<BaseMobility*> (getParentModule()->getSubmodule("mobility"));
         ASSERT(mobi);

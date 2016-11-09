@@ -8,7 +8,7 @@ using Veins::AnnotationManagerAccess;
 Define_Module(epidemic);
 
 void epidemic::initialize(int stage) {
-    BaseWaveApplLayer::initialize_epidemic(stage);
+    BaseWaveApplLayer::initialize_veins_TraCI(stage);
     if (stage == 0) {
         mobility = TraCIMobilityAccess().get(getParentModule());
         traci = mobility->getCommandInterface();
