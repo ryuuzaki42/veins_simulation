@@ -19,13 +19,13 @@ simple BaseWaveApplLayer like IBaseApplLayer {
         bool dataOnSch = default(true); //tells the applayer whether to use a service channel for datapackets or the control channel
         int dataPriority = default(3); //the access category for data packets
 
-        // Add for Epidemic
+        // Epidemic
         int sendSummaryVectorInterval @unit("s") = default(0s); //define the minimum slide window length among contacts to send new version of summary vector
-        int maximumEpidemicBufferSize = default(0); //define the maximum buffer size (in number of messages) that a node is willing to allocate for epidemic messages.
 
-        int beaconMessageBufferSize = default(0);
+        // VehDist
+        int messageBufferSize = default(0); //define the maximum buffer size (in number of messages) that a node is willing to allocate
         int beaconMessageInterval @unit("s") = default(0s); // Interval to try send message(s)
-        int beaconMessageHopLimit = default(0); // Limit of hops
+        int messageHopLimit = default(0); // Limit of hops
         int timeGenerateBeaconMessage @unit("s") = default(0s); // Time for generate messages
 
         int expNumber = default(1); // Experiment number by table 2^k, number to use _one or _two variables
@@ -48,7 +48,7 @@ simple BaseWaveApplLayer like IBaseApplLayer {
         bool selectFromAllVehicles = default(false); // Chose for all vehicle or for only new
         bool useMessagesSendLog = default(false); // Use or not message send log
         bool vehSendWhileParking = default(false); // Send or not while is parking
-        bool vehDistTrueEpidemicFalse = default(false); // Is vehDist (true), is Epidemic (false)
+        int beaconTypeInitialize; // 1 for vehDist, 2 for epidemic, 3 for minicurso_UFPI_TraCI, 0 for the default
         bool vehDistCreateEventGenerateMessage = default(false); // Use the event to generate message or not
         int vehTimeLimitToAcceptGenerateMgs @unit("s") = default(0s); // Time limit that one vehile enter in the scenario
 
