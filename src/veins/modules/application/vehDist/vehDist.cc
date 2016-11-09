@@ -7,7 +7,7 @@ using Veins::TraCIMobilityAccess;
 Define_Module(vehDist);
 
 void vehDist::initialize(int stage) {
-    BaseWaveApplLayer::initialize_default_veins_TraCI(stage);
+    BaseWaveApplLayer::initialize_veins_TraCI(stage);
     if (stage == 0) { // traci - mobility, traci->getComand - traci, new traciVehice
         mobility = TraCIMobilityAccess().get(getParentModule());
         traci = mobility->getCommandInterface();
@@ -68,7 +68,7 @@ void vehDist::onBeaconMessage(WaveShortMessage* wsm) {
                         wsmDataTmp += vehCategory;
                         wsm->setWsmData(wsmDataTmp.c_str());
 
-                        if (messagesBufferVehDist.size() > SbeaconMessageBufferSize) {
+                        if (messagesBufferVehDist.size() > SmessageBufferSize) {
                             removeOldestInputBeaconMessage();
                         }
 
@@ -126,7 +126,7 @@ void vehDist::removeOldestInputBeaconMessage() {
             cout << source << " remove one message (" << idMessage << ") by time, minTime: " << minTime << " at: " << simTime();
             cout << " ttlBeaconMessage: " << SttlBeaconMessage << endl;
             typeRemoved = 3; // by ttl (1 buffer, 2 copy, 3 time)
-        } else if (messagesBufferVehDist.size() > SbeaconMessageBufferSize) {
+        } else if (messagesBufferVehDist.size() > SmessageBufferSize) {
             //cout << source << " remove one message (" << idMessage << ") by space, MessageBuffer.size(): " << messagesBuffer.size();
             //cout << " at: " << simTime() << " vehDist::beaconMessageBufferSize: " << vehDist::beaconMessageBufferSize << endl;
             typeRemoved = 1; // by buffer (1 buffer, 2 copy, 3 time)
@@ -839,7 +839,7 @@ WaveShortMessage* vehDist::updateBeaconMessageWSM(WaveShortMessage* wsm, string 
 
 void vehDist::handleSelfMsg(cMessage* msg) {
     switch (msg->getKind()) {
-        case SEND_BEACON_EVT_VehDist: {  // Call prepareBeaconStatusWSM local to the veh
+        case SEND_BEACON_EVT_vehDist: {  // Call prepareBeaconStatusWSM local to the veh
             sendWSM(prepareBeaconStatusWSM("beaconStatus", beaconLengthBits, type_CCH, beaconPriority, -1));
             scheduleAt(simTime() + par("beaconInterval").doubleValue(), sendBeaconEvt);
             break;

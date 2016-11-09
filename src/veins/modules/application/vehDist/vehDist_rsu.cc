@@ -5,7 +5,7 @@
 Define_Module(vehDist_rsu);
 
 void vehDist_rsu::initialize(int stage) {
-    BaseWaveApplLayer::initialize_default_veins_TraCI(stage);
+    BaseWaveApplLayer::initialize_veins_TraCI(stage);
     if (stage == 0) {
         mobi = dynamic_cast<BaseMobility*> (getParentModule()->getSubmodule("mobility"));
         ASSERT(mobi);
@@ -61,7 +61,7 @@ void vehDist_rsu::onBeaconMessage(WaveShortMessage* wsm) {
 
 void vehDist_rsu::handleSelfMsg(cMessage* msg) {
     switch (msg->getKind()) {
-        case SEND_BEACON_EVT_VehDist: { // Call prepareBeaconStatusWSM local to the rsu
+        case SEND_BEACON_EVT_vehDist: { // Call prepareBeaconStatusWSM local to the rsu
             sendWSM(prepareBeaconStatusWSM("beaconStatus", beaconLengthBits, type_CCH, beaconPriority, -1));
             scheduleAt(simTime() + par("beaconInterval").doubleValue(), sendBeaconEvt);
             break;
