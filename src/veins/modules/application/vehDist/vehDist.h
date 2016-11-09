@@ -102,7 +102,7 @@ map <string, struct BaseWaveApplLayer::traffic> BaseWaveApplLayer::SvehTraffic;
 Coord BaseWaveApplLayer::rsu0Position;
 
 unsigned short int BaseWaveApplLayer::SmsgDroppedbyTTL, BaseWaveApplLayer::SmsgDroppedbyCopy, BaseWaveApplLayer::SmsgDroppedbyBuffer;
-unsigned short int BaseWaveApplLayer::ScountMsgPacketSend, BaseWaveApplLayer::SmsgBufferUseGeneral, BaseWaveApplLayer::SbeaconMessageHopLimit;
+unsigned short int BaseWaveApplLayer::ScountMsgPacketSend, BaseWaveApplLayer::SmsgBufferUseGeneral, BaseWaveApplLayer::SmessageHopLimit;
 unsigned short int BaseWaveApplLayer::ScountMesssageDrop, BaseWaveApplLayer::ScountMeetN, BaseWaveApplLayer::ScountTwoCategoryN;
 unsigned short int BaseWaveApplLayer::ScountMeetPshortestT, BaseWaveApplLayer::ScountVehicleAll;
 unsigned short int BaseWaveApplLayer::SbeaconMessageId;
@@ -111,7 +111,7 @@ unsigned short int BaseWaveApplLayer::SrepeatNumber, BaseWaveApplLayer::SexpNumb
 unsigned short int BaseWaveApplLayer::ScountGenerateBeaconMessage, BaseWaveApplLayer::SttlBeaconMessage, BaseWaveApplLayer::SvehTimeLimitToAcceptGenerateMgs;
 
 unsigned short int BaseWaveApplLayer::SbeaconStatusBufferSize, BaseWaveApplLayer::SttlBeaconStatus, BaseWaveApplLayer::SpercentP;
-unsigned short int BaseWaveApplLayer::StimeLimitGenerateBeaconMessage, BaseWaveApplLayer::StimeToUpdatePosition, BaseWaveApplLayer::SbeaconMessageBufferSize;
+unsigned short int BaseWaveApplLayer::StimeLimitGenerateBeaconMessage, BaseWaveApplLayer::StimeToUpdatePosition, BaseWaveApplLayer::SmessageBufferSize;
 
 string BaseWaveApplLayer::SprojectInfo;
 bool BaseWaveApplLayer::SvehDistTrueEpidemicFalse, BaseWaveApplLayer::SusePathHistory, BaseWaveApplLayer::SallowMessageCopy;
