@@ -31,4 +31,6 @@ class epidemic : public BaseWaveApplLayer {
         void vehInitializeVariablesEpidemicVeh();
 };
 
+unsigned short int BaseWaveApplLayer::SsendSummaryVectorInterval;
+
 #endif
