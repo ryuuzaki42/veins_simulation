@@ -30,19 +30,16 @@ using namespace std;
 class BaseWaveApplLayer : public BaseApplLayer {
     public:
         ~BaseWaveApplLayer();
-        virtual void initialize_default_veins_TraCI(int stage);
-        virtual void initialize_minicurso_UFPI_TraCI(int stage);
-        virtual void initialize_epidemic(int stage);
+        virtual void initialize_veins_TraCI(int stage);
         virtual void finish();
 
         virtual  void receiveSignal(cComponent* source, simsignal_t signalID, cObject* obj, cObject* details);
 
         enum WaveApplMessageKinds {
             SERVICE_PROVIDER = LAST_BASE_APPL_MESSAGE_KIND,
-            SEND_BEACON_EVT,SEND_BEACON_EVT_VehDist , SEND_BEACON_EVT_minicurso,
+            SEND_BEACON_EVT, SEND_BEACON_EVT_vehDist, SEND_BEACON_EVT_epidemic, SEND_BEACON_EVT_minicurso,
             SERVICE_EXPIRED_EVT, SERVICE_QUERY_EVT, SERVICE_EVT, // Modificado OSDP, add SERVICE_EXPIRED_EVT, SERVICE_QUERY_EVT, SERVICE_EVT, antes era apenas SEND_BEACON_EVT
-            SEND_BEACON_EVT_epidemic, Send_EpidemicMessageRequestEvt,
-            SendEvtGenerateBeaconMessage, SendGetTrafficMethodCheck
+            Send_EpidemicMessageRequestEvt, SendEvtGenerateBeaconMessage, SendGetTrafficMethodCheck
         };
 
     protected:
@@ -173,11 +170,11 @@ class BaseWaveApplLayer : public BaseApplLayer {
         static unsigned short int SrepeatNumber, SexpNumber, SexpSendbyDSCR, ScountGenerateBeaconMessage, SttlBeaconMessage;
 
         static unsigned short int SmsgDroppedbyTTL, SmsgDroppedbyCopy, SmsgDroppedbyBuffer, SvehTimeLimitToAcceptGenerateMgs;
-        static unsigned short int ScountMsgPacketSend, SmsgBufferUseGeneral, ScountMesssageDrop, SbeaconMessageHopLimit;
+        static unsigned short int ScountMsgPacketSend, SmsgBufferUseGeneral, ScountMesssageDrop, SmessageHopLimit;
         static unsigned short int ScountMeetN, ScountTwoCategoryN, ScountMeetPshortestT, ScountVehicleAll, SbeaconMessageId;
 
         static unsigned short int SbeaconStatusBufferSize, SttlBeaconStatus, SpercentP;
-        static unsigned short int StimeLimitGenerateBeaconMessage, StimeToUpdatePosition, SbeaconMessageBufferSize;
+        static unsigned short int StimeLimitGenerateBeaconMessage, StimeToUpdatePosition, SmessageBufferSize;
 
         static string SprojectInfo;
 
@@ -219,7 +216,8 @@ class BaseWaveApplLayer : public BaseApplLayer {
 
         unordered_map <unsigned int, simtime_t> nodesRecentlyFoundList, nodesIRecentlySentSummaryVector;
 
-        unsigned int sendSummaryVectorInterval, maximumEpidemicBufferSize, nodesRecentlySendLocalSummaryVector;
+        static unsigned short int  SsendSummaryVectorInterval;
+        unsigned int nodesRecentlySendLocalSummaryVector;
         simtime_t lastTimeSendLocalSummaryVector;
 //######################################### Epidemic #########################################
 };
