@@ -9,7 +9,7 @@ using Veins::TraCIMobilityAccess;
 
 const simsignalwrap_t BaseWaveApplLayer::mobilityStateChangedSignal = simsignalwrap_t(MIXIM_SIGNAL_MOBILITY_CHANGE_NAME);
 
-void BaseWaveApplLayer::initialize_default_veins_TraCI(int stage) {
+void BaseWaveApplLayer::initialize_veins_TraCI(int stage) {
     BaseApplLayer::initialize(stage);
 
     if (stage == 0) {
@@ -29,9 +29,15 @@ void BaseWaveApplLayer::initialize_default_veins_TraCI(int stage) {
         dataOnSch = par("dataOnSch").boolValue();
         dataPriority = par("dataPriority").longValue();
 
-        if (par("vehDistTrueEpidemicFalse").boolValue()){
-            sendBeaconEvt = new cMessage("beacon evt", SEND_BEACON_EVT_VehDist);
-        } else {
+        int beaconTypeInitialize = par("beaconTypeInitialize");
+
+        if (beaconTypeInitialize == 1) { // 1 vehDist
+            sendBeaconEvt = new cMessage("beacon evt", SEND_BEACON_EVT_vehDist);
+        } else if (beaconTypeInitialize == 2) { // 2 epidemic
+            sendBeaconEvt = new cMessage("beacon evt", SEND_BEACON_EVT_epidemic);
+        } else if (beaconTypeInitialize == 3) { // 3 minicurso_UFPI_TraCI
+            sendBeaconEvt = new cMessage("beacon evt", SEND_BEACON_EVT_minicurso);
+        } else if (beaconTypeInitialize == 0) { // 0 default
             sendBeaconEvt = new cMessage("beacon evt", SEND_BEACON_EVT);
         }
 
@@ -209,10 +215,12 @@ void BaseWaveApplLayer::generalInitializeVariables_executionByExpNumberVehDist()
             //cout.clear(); // "Enable" the cout
         }
 
-        SbeaconMessageHopLimit = par("beaconMessageHopLimit").longValue();
+        SmessageBufferSize = par("messageBufferSize"); // Define the maximum buffer size (in number of messages) that a node is willing to allocate
+        SmessageHopLimit = par("messageHopLimit").longValue();
         string seedNumber = ev.getConfig()->getConfigValue("seed-set");
         SrepeatNumber = atoi(seedNumber.c_str()); // Number of execution (${repetition})
         SexpSendbyDSCR = par("expSendbyDSCR").longValue();
+        SsendSummaryVectorInterval = par("sendSummaryVectorInterval").longValue(); // For Epidemic, Define the minimum slide window length among contacts to send new version of summary vector
 
         SallowMessageCopy = par("allowMessageCopy").boolValue();
         SvehSendWhileParking = par("vehSendWhileParking").boolValue();
@@ -224,7 +232,6 @@ void BaseWaveApplLayer::generalInitializeVariables_executionByExpNumberVehDist()
         SuseRateTimeToSend = par("useRateTimeToSend").boolValue();
 
         SttlBeaconStatus = par("ttlBeaconStatus");
-        SbeaconMessageBufferSize = par("beaconMessageBufferSize");
         SbeaconStatusBufferSize = par("beaconStatusBufferSize");
         StimeToUpdatePosition = par("vehTimeUpdatePosition");
         StimeLimitGenerateBeaconMessage = par("timeLimitGenerateBeaconMessage");
@@ -275,7 +282,8 @@ void BaseWaveApplLayer::generalInitializeVariables_executionByExpNumberVehDist()
         SprojectInfo += texTmp + "sendWhileParking:_ " + boolToString(SvehSendWhileParking);
         SprojectInfo += texTmp + "selectFromAllVehicles:_ " + boolToString(SselectFromAllVehicles);
         SprojectInfo += texTmp + "timeLimitGenerateMessage:_ " + to_string(StimeLimitGenerateBeaconMessage) + " s";
-        SprojectInfo += texTmp + "beaconMessageHopLimit:_ " + to_string(SbeaconMessageHopLimit);
+        SprojectInfo += texTmp + "messageHopLimit:_ " + to_string(SmessageHopLimit);
+        SprojectInfo += texTmp + "messageBufferSize:_ " + to_string(SmessageBufferSize);
         SprojectInfo += texTmp + "expSendbyDSCR:_ " + to_string(SexpSendbyDSCR);
         SprojectInfo += texTmp;
         SprojectInfo += texTmp + "beaconLengthBits:_ " + to_string(beaconLengthBits);
@@ -292,15 +300,13 @@ void BaseWaveApplLayer::generalInitializeVariables_executionByExpNumberVehDist()
             }
 
             SprojectInfo += texTmp + "ttlBeaconStatus:_ " + to_string(SttlBeaconStatus) + " s";
-            SprojectInfo += texTmp + "beaconMessageBufferSize:_ " + to_string(SbeaconMessageBufferSize);
             SprojectInfo += texTmp + "beaconStatusBufferSize:_ " + to_string(SbeaconStatusBufferSize);
             SprojectInfo += texTmp + "percentP:_ " + to_string(SpercentP) + " %";
             SprojectInfo += texTmp + "usePathHistory:_ " + boolToString(SusePathHistory);
             SprojectInfo += texTmp + "useMessagesSendLog:_ " + boolToString(SuseMessagesSendLog);
             SprojectInfo += texTmp + "timeToUpdatePosition:_ " + to_string(StimeToUpdatePosition) + " s";
         } else {
-            SprojectInfo += texTmp + "sendSummaryVectorInterval:_ " + to_string(sendSummaryVectorInterval) + " s";
-            SprojectInfo += texTmp + "maximumEpidemicBufferSize:_ " + to_string(maximumEpidemicBufferSize);
+            SprojectInfo += texTmp + "sendSummaryVectorInterval:_ " + to_string(SsendSummaryVectorInterval) + " s";
         }
 
         SprojectInfo += getCFGVAR();
@@ -579,7 +585,7 @@ void BaseWaveApplLayer::generateBeaconMessageVehDist() {
     wsm->setSenderAddressTemporary(source.c_str());
     wsm->setRecipientAddressTemporary("Initial"); // Defined in time before send
 
-    wsm->setHopCount(SbeaconMessageHopLimit + 1); // Is beaconMessageHopLimit+1 because hops count is equals to routes in the path, not hops.
+    wsm->setHopCount(SmessageHopLimit + 1); // Is beaconMessageHopLimit+1 because hops count is equals to routes in the path, not hops.
     string wsmDataTmp = "WSMData generated by " + source;
     wsm->setWsmData(wsmDataTmp.c_str());
 
@@ -971,7 +977,7 @@ void BaseWaveApplLayer::printCountMessagesReceivedRSU() {
 void BaseWaveApplLayer::messagesReceivedMeasuringRSU(WaveShortMessage* wsm) {
     string wsmData = wsm->getWsmData();
     simtime_t timeToArrived = (simTime() - wsm->getTimestamp());
-    unsigned short int countHops = (SbeaconMessageHopLimit - wsm->getHopCount());
+    unsigned short int countHops = (SmessageHopLimit - wsm->getHopCount());
     map <string, struct messages>::iterator itMessagesReceived = messagesReceivedRSU.find(wsm->getGlobalMessageIdentificaton());
 
     if (itMessagesReceived != messagesReceivedRSU.end()) {
@@ -1049,41 +1055,6 @@ void BaseWaveApplLayer::printVehTrafficMethodCheck() {
     }
 }
 //######################################### vehDist - end #######################################################################
-void BaseWaveApplLayer::initialize_minicurso_UFPI_TraCI(int stage) {
-    BaseApplLayer::initialize(stage);
-
-    if (stage==0) {
-        myMac = FindModule<WaveAppToMac1609_4Interface*>::findSubModule(getParentModule());
-        assert(myMac);
-
-        myId = getParentModule()->getIndex();
-
-        headerLength = par("headerLength").longValue();
-        double maxOffset = par("maxOffset").doubleValue();
-        sendBeacons = par("sendBeacons").boolValue();
-        beaconLengthBits = par("beaconLengthBits").longValue();
-        beaconPriority = par("beaconPriority").longValue();
-
-        sendData = par("sendData").boolValue();
-        dataLengthBits = par("dataLengthBits").longValue();
-        dataOnSch = par("dataOnSch").boolValue();
-        dataPriority = par("dataPriority").longValue();
-
-        //sendBeaconEvt = new cMessage("beacon evt", SEND_BEACON_EVT);
-        sendBeaconEvt = new cMessage("beacon evt", SEND_BEACON_EVT_minicurso);
-
-        // Simulate asynchronous channel access
-        double offSet = dblrand() * (par("beaconInterval").doubleValue()/2);
-        offSet = offSet + floor(offSet/0.050)*0.050;
-        individualOffset = dblrand() * maxOffset;
-
-        findHost()->subscribe(mobilityStateChangedSignal, this);
-
-        if (sendBeacons) {
-            scheduleAt(simTime() + offSet, sendBeaconEvt); // Parte modificada para o osdp e para o service_discovery
-        }
-    }
-}
 
 //WaveShortMessage*  BaseWaveApplLayer::prepareWSM(string name, int lengthBits, t_channel channel, int priority, int rcvId, int serial) {
 WaveShortMessage*  BaseWaveApplLayer::prepareWSM(string name, int lengthBits, t_channel channel, int priority, unsigned int rcvId, int serial) {
@@ -1121,46 +1092,6 @@ WaveShortMessage*  BaseWaveApplLayer::prepareWSM(string name, int lengthBits, t_
 }
 
 //############################################ Epidemic - begin ########################################################################
-void BaseWaveApplLayer::initialize_epidemic(int stage) {
-    BaseApplLayer::initialize(stage);
-
-    if (stage==0) {
-        myMac = FindModule<WaveAppToMac1609_4Interface*>::findSubModule(getParentModule());
-        assert(myMac);
-
-        myId = getParentModule()->getIndex();
-
-        headerLength = par("headerLength").longValue();
-        double maxOffset = par("maxOffset").doubleValue();
-        sendBeacons = par("sendBeacons").boolValue();
-        beaconLengthBits = par("beaconLengthBits").longValue();
-        beaconPriority = par("beaconPriority").longValue();
-
-        sendData = par("sendData").boolValue();
-        dataLengthBits = par("dataLengthBits").longValue();
-        dataOnSch = par("dataOnSch").boolValue();
-        dataPriority = par("dataPriority").longValue();
-
-        // Define the minimum slide window length among contacts to send new version of summary vector
-        sendSummaryVectorInterval = par("sendSummaryVectorInterval").longValue();
-        // Define the maximum buffer size (in number of messages) that a node is willing to allocate for epidemic messages.
-        maximumEpidemicBufferSize = par("maximumEpidemicBufferSize").longValue();
-
-        //sendBeaconEvt = new cMessage("beacon evt", SEND_BEACON_EVT);
-        sendBeaconEvt = new cMessage("beacon evt", SEND_BEACON_EVT_epidemic);
-
-        // Simulate asynchronous channel access
-        double offSet = dblrand() * (par("beaconInterval").doubleValue()/2);
-        offSet = offSet + floor(offSet/0.050)*0.050;
-        individualOffset = dblrand() * maxOffset;
-
-        findHost()->subscribe(mobilityStateChangedSignal, this);
-
-        if (sendBeacons) {
-            scheduleAt(simTime() + offSet, sendBeaconEvt);
-        }
-    }
-}
 
 WaveShortMessage* BaseWaveApplLayer::prepareWSM_epidemic(std::string name, int lengthBits, t_channel channel, int priority, unsigned int rcvId, int serial) {
     WaveShortMessage* wsm = new WaveShortMessage(name.c_str());
@@ -1232,7 +1163,7 @@ void BaseWaveApplLayer::generateMessageEpidemic() { //Generate a message in orde
 
     string data = "WSMData generated by " + source;
     wsm->setWsmData(data.c_str());
-    wsm->setHopCount(SbeaconMessageHopLimit + 1);
+    wsm->setHopCount(SmessageHopLimit + 1);
 
     myfile.open(fileMessagesGenerated, std::ios_base::app); // Save info (Id and vehicle generate) on fileMessagesGenerated
     myfile << "                                                                    ";
@@ -1549,7 +1480,7 @@ void BaseWaveApplLayer::receivedOnBeaconEpidemic(WaveShortMessage* wsm) {
 
             printNodesIRecentlySentSummaryVector();
         } else {
-           if ((simTime() - got->second) >= sendSummaryVectorInterval) { // Send a summary vector to this node if passed the "sendSummaryVectorInterval" interval
+           if ((simTime() - got->second) >= SsendSummaryVectorInterval) { // Send a summary vector to this node if passed the "sendSummaryVectorInterval" interval
                //cout << source << " updating the entry in the nodesIRecentlySentSummaryVector" << endl;
 
                got->second = simTime();
@@ -1617,7 +1548,7 @@ void BaseWaveApplLayer::receivedOnDataEpidemic(WaveShortMessage* wsm) {
                     unordered_map <string, WaveShortMessage>::iterator got = epidemicLocalMessageBuffer.find(wsm->getGlobalMessageIdentificaton());
 
                     if (got == epidemicLocalMessageBuffer.end()) { // True value means that there is no entry in the epidemicLocalMessageBuffer for the current message identification
-                        if (epidemicLocalMessageBuffer.size() > maximumEpidemicBufferSize) { // The maximum buffer size was reached, so remove the oldest item
+                        if (epidemicLocalMessageBuffer.size() > SmessageBufferSize) { // The maximum buffer size was reached, so remove the oldest item
                             string idMessage;
                             simtime_t minTime = DBL_MAX;
                             for (auto& x: epidemicLocalMessageBuffer) {
@@ -1652,7 +1583,7 @@ void BaseWaveApplLayer::receivedOnDataEpidemic(WaveShortMessage* wsm) {
                 if (wsm->getSenderAddress() < MACToInteger()) { // To check, send a by time
                     bool SendOrNotLocalSummaryVector = false;
                     if (wsm->getSenderAddress() == nodesRecentlySendLocalSummaryVector) {
-                        if ((simTime() - sendSummaryVectorInterval) >= lastTimeSendLocalSummaryVector) {
+                        if ((simTime() - SsendSummaryVectorInterval) >= lastTimeSendLocalSummaryVector) {
                             SendOrNotLocalSummaryVector = true;
                         }
                     } else {
@@ -1715,7 +1646,7 @@ void BaseWaveApplLayer::handleSelfMsg(cMessage* msg) {
             break;
         }
         case SEND_BEACON_EVT_epidemic: {
-            sendWSM(prepareWSM_epidemic("beacon", beaconLengthBits, type_CCH, beaconPriority, -1, -1));
+            sendWSM(prepareWSM_epidemic("beacon", beaconLengthBits, type_CCH, beaconPriority, 0, -1));
             scheduleAt(simTime() + par("beaconInterval").doubleValue(), sendBeaconEvt);
             break;
         }
