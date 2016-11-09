@@ -28,7 +28,7 @@ const simsignalwrap_t default_veins_TraCI::parkingStateChangedSignal = simsignal
 Define_Module(default_veins_TraCI);
 
 void default_veins_TraCI::initialize(int stage) {
-    BaseWaveApplLayer::initialize_default_veins_TraCI(stage);
+    BaseWaveApplLayer::initialize_veins_TraCI(stage);
     if (stage == 0) {
         mobility = TraCIMobilityAccess().get(getParentModule());
         traci = mobility->getCommandInterface();

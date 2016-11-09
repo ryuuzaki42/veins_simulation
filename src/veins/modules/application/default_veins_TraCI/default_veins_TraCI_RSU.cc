@@ -25,7 +25,7 @@ using Veins::AnnotationManagerAccess;
 Define_Module(default_veins_TraCI_RSU);
 
 void default_veins_TraCI_RSU::initialize(int stage) {
-    BaseWaveApplLayer::initialize_default_veins_TraCI(stage);
+    BaseWaveApplLayer::initialize_veins_TraCI(stage);
     if (stage == 0) {
         mobi = dynamic_cast<BaseMobility*> (getParentModule()->getSubmodule("mobility"));
         ASSERT(mobi);
