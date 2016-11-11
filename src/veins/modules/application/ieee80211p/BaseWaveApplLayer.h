@@ -39,7 +39,7 @@ class BaseWaveApplLayer : public BaseApplLayer {
             SERVICE_PROVIDER = LAST_BASE_APPL_MESSAGE_KIND,
             SEND_BEACON_EVT, SEND_BEACON_EVT_vehDist, SEND_BEACON_EVT_epidemic, SEND_BEACON_EVT_minicurso,
             SERVICE_EXPIRED_EVT, SERVICE_QUERY_EVT, SERVICE_EVT, // Modificado OSDP, add SERVICE_EXPIRED_EVT, SERVICE_QUERY_EVT, SERVICE_EVT, antes era apenas SEND_BEACON_EVT
-            Send_EpidemicMessageRequestEvt, SendEvtGenerateBeaconMessage, SendGetTrafficMethodCheck
+            Send_EpidemicMessageRequestEvt, SendEvtGenerateMessage, SendGetTrafficMethodCheck, SendEvtSelectVehGenerateMessage
         };
 
     protected:
@@ -62,7 +62,7 @@ class BaseWaveApplLayer : public BaseApplLayer {
         string boolToString(bool value);
         string constCharToString(const char *s);
 
-        void restartFilesResultRSU(string folderResult);
+        void restartFilesResultRSU(string resultFolder);
         void restartFilesResultVeh(string projectInfo, Coord initialPos);
         void saveVehStartPositionVeh(string fileNameLocation, Coord initialPos);
         void insertMessageDropVeh(string ID, unsigned short int type, simtime_t timeGenarted);
@@ -70,7 +70,8 @@ class BaseWaveApplLayer : public BaseApplLayer {
         void printCountMessagesReceivedRSU();
         void messagesReceivedMeasuringRSU(WaveShortMessage* wsm);
 
-        void vehGenerateBeaconMessageBeginVeh(double vehOffSet);
+        void vehGenerateMessageBeginVeh(double vehOffSet);
+        void rsuSelectVehGenerateMessageBegin();
         void vehGenerateBeaconMessageAfterBeginVeh();
         void selectVehGenerateMessage();
 
@@ -150,7 +151,8 @@ class BaseWaveApplLayer : public BaseApplLayer {
         unordered_map <string, WaveShortMessage> messagesBufferVehDist;
 
         //## Used to another projects
-        cMessage* sendGenerateBeaconMessageEvt;
+        cMessage* sendGenerateMessageEvt;
+        cMessage* sendSelectVehGenerateMessageEvt;
         cMessage* getTrafficEvtMethodCheck;
 
         static mt19937 mtSelectVehicleGenarateMessage;
@@ -171,7 +173,7 @@ class BaseWaveApplLayer : public BaseApplLayer {
 
         static unsigned short int SmsgDroppedbyTTL, SmsgDroppedbyCopy, SmsgDroppedbyBuffer, SvehTimeLimitToAcceptGenerateMgs;
         static unsigned short int ScountMsgPacketSend, SmsgBufferUseGeneral, ScountMesssageDrop, SmessageHopLimit;
-        static unsigned short int ScountMeetN, ScountTwoCategoryN, ScountMeetPshortestT, ScountVehicleAll, SbeaconMessageId;
+        static unsigned short int ScountMeetN, ScountTwoCategoryN, ScountMeetPshortestT, ScountVehicleAll, SmessageId;
 
         static unsigned short int SbeaconStatusBufferSize, SttlBeaconStatus, SpercentP, SbeaconTypeInitialize;
         static unsigned short int StimeLimitGenerateBeaconMessage, StimeToUpdatePosition, SmessageBufferSize;

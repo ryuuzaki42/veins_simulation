@@ -40,8 +40,8 @@ void BaseWaveApplLayer::initialize_veins_TraCI(int stage) {
         } else if (SbeaconTypeInitialize == 0) { // 0 default
             sendBeaconEvt = new cMessage("beacon evt", SEND_BEACON_EVT);
         } else {
-            cout << "JBe- beaconTypeInitialize is unknown -" << SbeaconTypeInitialize << endl;
-            ASSERT2(0, "JBe- beaconTypeInitialize is unknown -");
+            cout << "JBe - beaconTypeInitialize is unknown -" << SbeaconTypeInitialize << endl;
+            ASSERT2(0, "JBe - beaconTypeInitialize is unknown -");
         }
 
         // Simulate asynchronous channel access
@@ -123,18 +123,7 @@ void BaseWaveApplLayer::vehInitializeValuesVehDist(string category, Coord positi
 
     restartFilesResultVeh(SprojectInfo, position);
 
-    if (SvehDistCreateEventGenerateMessage) { // Create Event to generate messages
-        vehGenerateBeaconMessageBeginVeh(vehOffSet);
-    } else { // All vehicle that enter will generate one message
-        if (SbeaconTypeInitialize == 1) {
-            generateBeaconMessageVehDist();
-        } else if (SbeaconTypeInitialize == 2) {
-            generateMessageEpidemic();
-        } else {
-            cout << "JBe- beaconTypeInitialize is unknown -" << SbeaconTypeInitialize << endl;
-            ASSERT2(0, "JBe- beaconTypeInitialize is unknown -");
-        }
-    }
+    vehGenerateMessageBeginVeh(vehOffSet); // Create Event to generate messages by the vehicles
 
     cout << endl << source << " (MACint: " << MACToInteger() << ") category: " << vehCategory << " (initial: " << category;
     cout << ") entered in the scenario (position: " << curPosition << ") at: " << simTime() << " whit OffSet: " << vehOffSet << endl;
@@ -171,6 +160,8 @@ void BaseWaveApplLayer::rsuInitializeValuesVehDist() {
     generalInitializeVariables_executionByExpNumberVehDist();
 
     restartFilesResultRSU(getFolderResultVehDist(SexpSendbyDSCR));
+
+    rsuSelectVehGenerateMessageBegin();
 
    cout << endl << source << " (MACint: " << MACToInteger() << ") entered in the scenario at: " << simTime();
 }
@@ -262,7 +253,7 @@ void BaseWaveApplLayer::generalInitializeVariables_executionByExpNumberVehDist()
         ScountMesssageDrop = ScountMsgPacketSend = SmsgBufferUseGeneral = ScountVehicleAll = 0;
         SmsgDroppedbyTTL = SmsgDroppedbyCopy = SmsgDroppedbyBuffer = 0;
         ScountMeetPshortestT = ScountTwoCategoryN = ScountMeetN = 0;
-        SbeaconMessageId = 1;
+        SmessageId = 1;
 
         // Initialize random seed (Seed the RNG) # Inside of IF because must be executed one time (the seed is "static")
         mtSelectVehicleGenarateMessage.seed(SrepeatNumber); // Instead another value, for make the experiment more reproducible, so seed = reapeatNumber
@@ -311,8 +302,8 @@ void BaseWaveApplLayer::generalInitializeVariables_executionByExpNumberVehDist()
         } else if (SbeaconTypeInitialize == 2) {
             SprojectInfo += texTmp + "sendSummaryVectorInterval:_ " + to_string(SsendSummaryVectorInterval) + " s";
         } else {
-            cout << "JBe- beaconTypeInitialize is unknown -" << SbeaconTypeInitialize << endl;
-            ASSERT2(0, "JBe- beaconTypeInitialize is unknown -");
+            cout << "JBe - beaconTypeInitialize is unknown -" << SbeaconTypeInitialize << endl;
+            ASSERT2(0, "JBe - beaconTypeInitialize is unknown -");
         }
 
         SprojectInfo += getCFGVAR();
@@ -424,8 +415,8 @@ string BaseWaveApplLayer::getFolderResultVehDist(unsigned short int expSendbyDSC
     } else if (SbeaconTypeInitialize == 2) {
         resultFolderPart += "epidemic_resultsEnd_";
     } else {
-        cout << "JBe- beaconTypeInitialize is unknown -" << SbeaconTypeInitialize << endl;
-        ASSERT2(0, "JBe- beaconTypeInitialize is unknown -");
+        cout << "JBe - beaconTypeInitialize is unknown -" << SbeaconTypeInitialize << endl;
+        ASSERT2(0, "JBe - beaconTypeInitialize is unknown -");
     }
 
     unsigned short int expPartOneOrTwo = par("expPart_one_or_two");
@@ -437,14 +428,15 @@ string BaseWaveApplLayer::getFolderResultVehDist(unsigned short int expSendbyDSC
     return resultFolderPart;
 }
 
-void BaseWaveApplLayer::restartFilesResultRSU(string folderResult) {
-    fileMessagesBroadcast = fileMessagesUnicast = fileMessagesCount = folderResult + source + "_";
+void BaseWaveApplLayer::restartFilesResultRSU(string resultFolder) {
+    fileMessagesBroadcast = fileMessagesUnicast = fileMessagesCount = resultFolder + source + "_";
 
     fileMessagesUnicast += "Messages_Received.r";
     fileMessagesBroadcast += "Broadcast_Messages.r";
     fileMessagesCount += "Count_Messages_Received.r";
+    fileMessagesGenerated = resultFolder + "Veh_Messages_Generated.r";
 
-    //fileMessagesDrop and fileMessagesGenerated // Not used yet to RSU
+    //fileMessagesDrop // Not used yet to RSU
 
     bool justAppend;
     if (myId == 0) {
@@ -537,17 +529,34 @@ void BaseWaveApplLayer::saveVehStartPositionVeh(string fileNameLocation, Coord i
     myfile.close();
 }
 
-void BaseWaveApplLayer::vehGenerateBeaconMessageBeginVeh(double vehOffSet) {
-    if (sendData) {
-        sendGenerateBeaconMessageEvt = new cMessage("Event generate beacon message", SendEvtGenerateBeaconMessage);
-        //cout << source << " at: " << simTime() << " schedule created sendGenerateMessageEvt to: "<< (simTime() + vehOffSet) << endl;
-        scheduleAt((simTime() + vehOffSet), sendGenerateBeaconMessageEvt);
+void BaseWaveApplLayer::vehGenerateMessageBeginVeh(double vehOffSet) {
+    if (SvehDistCreateEventGenerateMessage) { // Create Event to generate messages by the vehicles
+        sendGenerateMessageEvt = new cMessage("Event generate beacon message", SendEvtGenerateMessage);
+        //cout << source << " at: " << simTime() << " schedule created SendEvtGenerateMessage to: "<< (simTime() + vehOffSet) << endl;
+        scheduleAt((simTime() + vehOffSet), sendGenerateMessageEvt);
+    } else { // All vehicle that enter will generate only one message
+        if (SbeaconTypeInitialize == 1) {
+            generateBeaconMessageVehDist();
+        } else if (SbeaconTypeInitialize == 2) {
+            generateMessageEpidemic();
+        } else {
+            cout << "JBe - beaconTypeInitialize is unknown -" << SbeaconTypeInitialize << endl;
+            ASSERT2(0, "JBe - beaconTypeInitialize is unknown -");
+        }
+    }
+}
+
+void BaseWaveApplLayer::rsuSelectVehGenerateMessageBegin() {
+    if (myId == 0) { // Only the rsu[0] select vehicles to generate messages
+        if (SvehDistCreateEventGenerateMessage) { // Create Event to select vehicles to generate messages
+            sendSelectVehGenerateMessageEvt = new cMessage("Event generate beacon message", SendEvtSelectVehGenerateMessage);
+            //cout << source << " at: " << simTime() << " schedule created SendEvtSelectVehGenerateMessage to: "<< simTime() << endl;
+            scheduleAt((simTime() + 1), sendSelectVehGenerateMessageEvt); // + 1, to wait insert in the scenario
+        }
     }
 }
 
 void BaseWaveApplLayer::vehGenerateBeaconMessageAfterBeginVeh() {
-    selectVehGenerateMessage();
-
     auto itVeh = find(SvehGenerateMessage.begin(), SvehGenerateMessage.end(), source);
     if (itVeh != SvehGenerateMessage.end()) { // If have "vehNumber" on buffer, will generate one message
         if (SbeaconTypeInitialize == 1) {
@@ -555,8 +564,8 @@ void BaseWaveApplLayer::vehGenerateBeaconMessageAfterBeginVeh() {
         } else if (SbeaconTypeInitialize == 2) {
             generateMessageEpidemic();
         } else {
-            cout << "JBe- beaconTypeInitialize is unknown -" << SbeaconTypeInitialize << endl;
-            ASSERT2(0, "JBe- beaconTypeInitialize is unknown -");
+            cout << "JBe - beaconTypeInitialize is unknown -" << SbeaconTypeInitialize << endl;
+            ASSERT2(0, "JBe - beaconTypeInitialize is unknown -");
         }
 
         SvehGenerateMessage.erase(itVeh);
@@ -603,14 +612,14 @@ void BaseWaveApplLayer::generateBeaconMessageVehDist() {
 
     myfile.open(fileMessagesGenerated, std::ios_base::app); // Save info (Id and vehicle generate) on fileMessagesGenerated
     myfile << "                                                                    ";
-    if (SbeaconMessageId < 10) {
-        string msgIdTmp = "00" + to_string(SbeaconMessageId);
+    if (SmessageId < 10) {
+        string msgIdTmp = "00" + to_string(SmessageId);
         wsm->setGlobalMessageIdentificaton(msgIdTmp.c_str()); // Id 01 to 09
-    } else if (SbeaconMessageId < 100) {
-        string msgIdTmp = "0" + to_string(SbeaconMessageId);
+    } else if (SmessageId < 100) {
+        string msgIdTmp = "0" + to_string(SmessageId);
         wsm->setGlobalMessageIdentificaton(msgIdTmp.c_str()); // Id 11 to 99
     } else {
-        wsm->setGlobalMessageIdentificaton(to_string(SbeaconMessageId).c_str()); // Id 100 and going on
+        wsm->setGlobalMessageIdentificaton(to_string(SmessageId).c_str()); // Id 100 and going on
     }
     myfile << "### " << source << " generated the message ID: " << wsm->getGlobalMessageIdentificaton() << " at: " << simTime() << endl;
     cout << "### " << source << " generated the message ID: " << wsm->getGlobalMessageIdentificaton() << " at: " << simTime() << endl;
@@ -625,7 +634,7 @@ void BaseWaveApplLayer::generateBeaconMessageVehDist() {
     }
 
     colorCarryMessageVehDist(messagesBufferVehDist); // Change the range-color in the vehicle (GUI)
-    SbeaconMessageId++;
+    SmessageId++;
 }
 
 void BaseWaveApplLayer::printCountBeaconMessagesDropVeh() {
@@ -815,18 +824,24 @@ void BaseWaveApplLayer::colorCarryMessageVehDist(unordered_map <string, WaveShor
 }
 
 int BaseWaveApplLayer::mt19937GetRandomValue(int upperLimmit) {
+    if (upperLimmit < 1){
+        cout << "JBe - error upperLimmit < 1" << endl;
+        ASSERT2(0, "JBe - error upperLimmit < 1");
+    }
+
     uniform_int_distribution <int> dist(0, (upperLimmit - 1)); // generate a value, e.g, dist(0, 10), will be 0, 1, ... 10
     return dist(mtSelectVehicleGenarateMessage);
 }
 
 void BaseWaveApplLayer::selectVehGenerateMessage() {
-    if (myId == 0) { // If true, some vehicle has (in past) selected the vehicle to generate messages
-        if (simTime() <= StimeLimitGenerateBeaconMessage) { // Modify the generate message and test vehDist::timeLimitGenerateBeaconMessage
-            cout << source << " at " << simTime() << "in selectVehGenerateMessage, timeLimitGenerateBeaconMessage: " << StimeLimitGenerateBeaconMessage << endl;
+    if (myId == 0) { // Only rsu[0] will/can select the vehicle to generate messages
+        myfile.open(fileMessagesGenerated, std::ios_base::app); // To save info (Id and vehicle generate) on fileMessagesGenerated
+        cout << source << " at " << simTime() << " in selectVehGenerateMessage, timeLimitGenerateBeaconMessage: " << StimeLimitGenerateBeaconMessage << endl;
 
-            unsigned short int vehSelected;
-            myfile.open(fileMessagesGenerated, std::ios_base::app); // To save info (Id and vehicle generate) on fileMessagesGenerated
-            unsigned short int trySelectVeh = 0;
+        if (simTime() <= StimeLimitGenerateBeaconMessage) { // Modify the generate message and test vehDist::timeLimitGenerateBeaconMessage
+            unsigned short int vehSelected, trySelectVeh;
+            trySelectVeh = 0;
+
             for (unsigned short int i = 0; i < ScountGenerateBeaconMessage;) { // select vehicle to generate messages
                 vehSelected = mt19937GetRandomValue(SnumVehicles.size()); // return a number from 0 to (SnumVehicles.size() - 1), the index vector
                 string vehSelectedId = SnumVehicles[vehSelected]; // Get the vehicle name
@@ -849,7 +864,7 @@ void BaseWaveApplLayer::selectVehGenerateMessage() {
                             i++;
                         }
                     } else {
-                        cout << source << " selected " << vehSelectedId << " to generate " << SbeaconMessageId;
+                        cout << endl << source << " selected " << vehSelectedId << " to generate " << SmessageId;
                         cout << " message, but has Timestamp: " << SvehScenario[vehSelectedId] <<" at " << simTime() << endl;
                         if (trySelectVeh > (SvehScenario.size() * 4)) {
                             cout << endl << "JBe - Error loop in select vehicle to generate message, class BaseWaveApplLayer.cc";
@@ -860,8 +875,11 @@ void BaseWaveApplLayer::selectVehGenerateMessage() {
                     }
                 }
             }
-            myfile.close();
+        } else {
+            cout << endl << source << " time is more than StimeLimitGenerateBeaconMessage: " << StimeLimitGenerateBeaconMessage << " to generate a message at: " << simTime() << endl;
         }
+
+        myfile.close();
     }
 }
 
@@ -957,8 +975,11 @@ void BaseWaveApplLayer::printCountMessagesReceivedRSU() {
         avgGeneralTimeMessageReceived /= avgGeneralCopyMessageReceived;
 
         string textTmp = "Exp: " + to_string(SexpNumber) + " ###rsu ";
+        int percentMsgReceived = (double(messagesReceivedRSU.size() * 100 )/(SmessageId - 1));
+
         myfile << endl << endl << textTmp + " Messages received in the " << source << endl;
-        myfile << textTmp + "Count messages received: " << messagesReceivedRSU.size() << endl;
+        myfile << textTmp + "Count messages received: " << messagesReceivedRSU.size();
+        myfile << " of " << (SmessageId - 1) << " or " << percentMsgReceived << " % received" << endl;
         myfile << textTmp + "Count messages with hop count equal of zero received: " << messageCountHopZero << endl;
         myfile << textTmp + "Count messages with hop count different of zero Received: " << (messagesReceivedRSU.size() - messageCountHopZero) << endl;
         myfile << textTmp + "Average time to receive: " << avgGeneralTimeMessageReceived << endl;
@@ -1142,7 +1163,7 @@ WaveShortMessage* BaseWaveApplLayer::prepareWSM_epidemic(std::string name, int l
 void BaseWaveApplLayer::generateMessageEpidemic() { //Generate a message in order to be sent to a target
     generateTarget();
 
-    cout << source << " generating one message Id: " << SbeaconMessageId << " (" << source << " -> " << target << ")"<< endl;
+    cout << source << " generating one message Id: " << SmessageId << " (" << source << " -> " << target << ")"<< endl;
     WaveShortMessage* wsm = new WaveShortMessage("beaconMessage");
     wsm->setName("data");
     t_channel channel = dataOnSch ? type_SCH : type_CCH;
@@ -1179,20 +1200,20 @@ void BaseWaveApplLayer::generateMessageEpidemic() { //Generate a message in orde
 
     myfile.open(fileMessagesGenerated, std::ios_base::app); // Save info (Id and vehicle generate) on fileMessagesGenerated
     myfile << "                                                                    ";
-    if (SbeaconMessageId < 10) {
-        string msgIdTmp = "00" + to_string(SbeaconMessageId);
+    if (SmessageId < 10) {
+        string msgIdTmp = "00" + to_string(SmessageId);
         wsm->setGlobalMessageIdentificaton(msgIdTmp.c_str()); // Id 001 to 009
-    } else if (SbeaconMessageId < 100) {
-        string msgIdTmp = "0" + to_string(SbeaconMessageId);
+    } else if (SmessageId < 100) {
+        string msgIdTmp = "0" + to_string(SmessageId);
         wsm->setGlobalMessageIdentificaton(msgIdTmp.c_str()); // Id 011 to 099
     } else {
-        wsm->setGlobalMessageIdentificaton(to_string(SbeaconMessageId).c_str()); // Id 100 and going on
+        wsm->setGlobalMessageIdentificaton(to_string(SmessageId).c_str()); // Id 100 and going on
     }
     myfile << "### " << source << " generated the message ID: " << wsm->getGlobalMessageIdentificaton() << " at: " << simTime() << endl;
     cout << "### " << source << " generated the message ID: " << wsm->getGlobalMessageIdentificaton() << " at: " << simTime() << endl;
     myfile.close();
 
-    SbeaconMessageId++;
+    SmessageId++;
 
     epidemicLocalMessageBuffer.insert(make_pair(wsm->getGlobalMessageIdentificaton(), *wsm));
     epidemicLocalSummaryVector.insert(make_pair(wsm->getGlobalMessageIdentificaton(), true));
@@ -1662,9 +1683,14 @@ void BaseWaveApplLayer::handleSelfMsg(cMessage* msg) {
             scheduleAt(simTime() + par("beaconInterval").doubleValue(), sendBeaconEvt);
             break;
         }
-        case SendEvtGenerateBeaconMessage: {
+        case SendEvtGenerateMessage: {
             vehGenerateBeaconMessageAfterBeginVeh();
-            scheduleAt(simTime() + par("timeGenerateBeaconMessage").doubleValue(), sendGenerateBeaconMessageEvt);
+            scheduleAt(simTime() + par("timeGenerateBeaconMessage").doubleValue(), sendGenerateMessageEvt);
+            break;
+        }
+        case SendEvtSelectVehGenerateMessage: {
+            selectVehGenerateMessage();
+            scheduleAt(simTime() + par("timeGenerateBeaconMessage").doubleValue(), sendSelectVehGenerateMessageEvt);
             break;
         }
         case Send_EpidemicMessageRequestEvt: {
