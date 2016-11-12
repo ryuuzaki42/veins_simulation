@@ -60,5 +60,5 @@ if [ $# -eq 6 ]; then
     fi
 else
     echo "Error parameters"
-    echo "To use: a.sh -n file.net.xml -x \"xPoint\" -y \"yPoint\""
+    echo "To use: $0.sh -n file.net.xml -x \"xPoint\" -y \"yPoint\""
 fi
