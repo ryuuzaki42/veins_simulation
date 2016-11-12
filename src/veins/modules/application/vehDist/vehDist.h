@@ -99,7 +99,7 @@ unordered_map <string, int> BaseWaveApplLayer::SvehCategoryCount;
 unordered_map <string, WaveShortMessage> BaseWaveApplLayer::SvehScenario;
 map <string, struct BaseWaveApplLayer::traffic> BaseWaveApplLayer::SvehTraffic;
 
-Coord BaseWaveApplLayer::rsu0Position;
+Coord BaseWaveApplLayer::rsu0Position, BaseWaveApplLayer::rsu1Position, BaseWaveApplLayer::rsu2Position;
 
 unsigned short int BaseWaveApplLayer::SmsgDroppedbyTTL, BaseWaveApplLayer::SmsgDroppedbyCopy, BaseWaveApplLayer::SmsgDroppedbyBuffer;
 unsigned short int BaseWaveApplLayer::ScountMsgPacketSend, BaseWaveApplLayer::SmsgBufferUseGeneral, BaseWaveApplLayer::SmessageHopLimit;
@@ -118,6 +118,6 @@ bool BaseWaveApplLayer::SusePathHistory, BaseWaveApplLayer::SallowMessageCopy;
 bool BaseWaveApplLayer::SvehSendWhileParking, BaseWaveApplLayer::SselectFromAllVehicles, BaseWaveApplLayer::SuseMessagesSendLog;
 bool BaseWaveApplLayer::SvehDistCreateEventGenerateMessage, BaseWaveApplLayer::SuseRateTimeToSend;
 
-mt19937 BaseWaveApplLayer::mtSelectVehicleGenarateMessage;
+mt19937 BaseWaveApplLayer::mtSelectVehicleGenarateMessage, BaseWaveApplLayer::mtTargetMessageSelect;
 
 #endif

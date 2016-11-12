@@ -155,7 +155,7 @@ class BaseWaveApplLayer : public BaseApplLayer {
         cMessage* sendSelectVehGenerateMessageEvt;
         cMessage* getTrafficEvtMethodCheck;
 
-        static mt19937 mtSelectVehicleGenarateMessage;
+        static mt19937 mtSelectVehicleGenarateMessage, mtTargetMessageSelect;
 
         double vehOffSet;
 
@@ -164,7 +164,7 @@ class BaseWaveApplLayer : public BaseApplLayer {
         ofstream myfile; // record in file
 
         unsigned short int target_x, target_y;
-        static Coord rsu0Position;
+        static Coord rsu0Position,rsu1Position, rsu2Position;
         unsigned int msgBufferUse;
 
         string fileMessagesUnicast, fileMessagesBroadcast, fileMessagesCount, fileMessagesDrop, fileMessagesGenerated;
