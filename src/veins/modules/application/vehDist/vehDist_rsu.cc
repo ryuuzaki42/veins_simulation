@@ -15,15 +15,7 @@ void vehDist_rsu::initialize(int stage) {
 }
 
 void vehDist_rsu::rsuInitializeVariables() {
-    rsuInitializeValuesVehDist();
-
-    if (source.compare("rsu[0]") == 0) {
-        rsu0Position = mobi->getInitialPositionFromIniFileRSU();
-        cout << " position: " << rsu0Position << endl;
-    } else {
-        cout << source << " JBe - configuration to another RSU not implemented - " << endl;
-        ASSERT2(0, "JBe - configuration to another RSU not implemented -");
-    }
+    rsuInitializeValuesVehDist(mobi->getInitialPositionFromIniFileRSU());
 }
 
 void vehDist_rsu::handleLowerMsg(cMessage* msg) {
