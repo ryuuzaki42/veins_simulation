@@ -76,7 +76,7 @@ class BaseWaveApplLayer : public BaseApplLayer {
         void selectVehGenerateMessage();
 
         void generateBeaconMessageVehDist();
-        void generateTarget();
+        void selectTarget();
         void colorCarryMessageVehDist(unordered_map <string, WaveShortMessage> bufferOfMessages);
         void printCountBeaconMessagesDropVeh();
 
@@ -164,7 +164,7 @@ class BaseWaveApplLayer : public BaseApplLayer {
         ofstream myfile; // record in file
 
         unsigned short int target_x, target_y;
-        static map <int, Coord> SrsuPosition;
+        static unordered_map <int, Coord> SrsuPosition;
         unsigned int msgBufferUse;
 
         string fileMessagesUnicast, fileMessagesBroadcast, fileMessagesCount, fileMessagesDrop, fileMessagesGenerated;
