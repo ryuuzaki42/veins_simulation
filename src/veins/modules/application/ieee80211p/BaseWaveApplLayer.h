@@ -9,6 +9,9 @@
 #include "veins/base/connectionManager/ChannelAccess.h"
 #include "veins/modules/mac/ieee80211p/WaveAppToMac1609_4Interface.h"
 
+// To use Veins::TraCIScenarioManagerLaunchdAccess()
+#include "veins/modules/mobility/traci/TraCIScenarioManagerLaunchd.h"
+
 #include <map>
 #include <iomanip> // std::setprecision
 #include <sstream>
@@ -17,9 +20,6 @@
 #include <string.h>
 #include <algorithm> // std::find
 #include <unordered_map>
-
-// To use Veins::TraCIScenarioManagerLaunchdAccess()
-#include "veins/modules/mobility/traci/TraCIScenarioManagerLaunchd.h"
 
 using namespace std;
 
@@ -85,7 +85,7 @@ class BaseWaveApplLayer : public BaseApplLayer {
         void openFileAndClose(string fileName, bool justForAppend);
 
         void vehInitializeValuesVehDist(string category, Coord position);
-        void rsuInitializeValuesVehDist();
+        void rsuInitializeValuesVehDist(Coord position);
 
         int mt19937GetRandomValue(int upperLimmit);
 
@@ -164,7 +164,7 @@ class BaseWaveApplLayer : public BaseApplLayer {
         ofstream myfile; // record in file
 
         unsigned short int target_x, target_y;
-        static Coord rsu0Position,rsu1Position, rsu2Position;
+        static map <int, Coord> SrsuPosition;
         unsigned int msgBufferUse;
 
         string fileMessagesUnicast, fileMessagesBroadcast, fileMessagesCount, fileMessagesDrop, fileMessagesGenerated;

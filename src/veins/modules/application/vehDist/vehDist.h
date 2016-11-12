@@ -99,7 +99,7 @@ unordered_map <string, int> BaseWaveApplLayer::SvehCategoryCount;
 unordered_map <string, WaveShortMessage> BaseWaveApplLayer::SvehScenario;
 map <string, struct BaseWaveApplLayer::traffic> BaseWaveApplLayer::SvehTraffic;
 
-Coord BaseWaveApplLayer::rsu0Position, BaseWaveApplLayer::rsu1Position, BaseWaveApplLayer::rsu2Position;
+map <int, Coord> BaseWaveApplLayer::SrsuPosition;
 
 unsigned short int BaseWaveApplLayer::SmsgDroppedbyTTL, BaseWaveApplLayer::SmsgDroppedbyCopy, BaseWaveApplLayer::SmsgDroppedbyBuffer;
 unsigned short int BaseWaveApplLayer::ScountMsgPacketSend, BaseWaveApplLayer::SmsgBufferUseGeneral, BaseWaveApplLayer::SmessageHopLimit;
