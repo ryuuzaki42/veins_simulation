@@ -1,20 +1,25 @@
-## Versões dos simuladores
-SUMO = 0.25
+## Simulators version
+SUMO = 0.25.0
 OMNeT = 4.6
 Veins = 4.4
 
-Setar no ~/.bashrc
+Set on ~/.bashrc
 
 ## veins .bashrc
 # Can be different in your PC
+export TCL_LIBRARY=/usr/lib64/tcl8.6
+
 export SUMO_HOME=/opt/sumo-0.25.0
 export PATH=$PATH:/opt/sumo-0.25.0/bin
+
 export PATH=$PATH:/opt/omnetpp-4.6/bin
+
+veinsJB_scripts="/media/sda4/prog/veins_simulation/JB_scripts"
+export PATH=$PATH:$veinsJB_scripts
 
 veinsFolder="/media/sda4/prog/veins_simulation/"
 export PATH=$PATH:$veinsFolder
 alias veins_folder_cd='cd $veinsFolder'
-export TCL_LIBRARY=/usr/lib64/tcl8.6
 
 # Not change
 veins_RunExperiment() {
