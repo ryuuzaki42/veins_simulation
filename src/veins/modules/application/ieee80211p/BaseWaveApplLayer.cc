@@ -156,14 +156,27 @@ string BaseWaveApplLayer::getStringId() {
     return stringId;
 }
 
-void BaseWaveApplLayer::rsuInitializeValuesVehDist() {
+void BaseWaveApplLayer::rsuInitializeValuesVehDist(Coord position) {
     generalInitializeVariables_executionByExpNumberVehDist();
 
     restartFilesResultRSU(getFolderResultVehDist(SexpSendbyDSCR));
 
     rsuSelectVehGenerateMessageBegin();
 
+    if (SrsuPosition.empty() || (SrsuPosition.find(myId) == SrsuPosition.end())) {
+        if ((myId < 3) && (myId >= 0)) {
+            SrsuPosition.insert(make_pair(myId, position));
+        } else {
+            cout << source << " JBe - configuration to another RSU not implemented - myId: " << myId << endl;
+            ASSERT2(0, "JBe - configuration to another RSU not implemented -");
+        }
+    } else {
+        cout << source << " JBe - rsu already inserted in the rsuPosition - myId: " << myId << endl;
+        ASSERT2(0, "JBe - rsu already inserted in the rsuPosition -");
+    }
+
    cout << endl << source << " (MACint: " << MACToInteger() << ") entered in the scenario at: " << simTime();
+   cout << " in the position: " << SrsuPosition[myId] << endl;
 }
 
 void BaseWaveApplLayer::openFileAndClose(string fileName, bool justForAppend) {
@@ -178,9 +191,7 @@ void BaseWaveApplLayer::openFileAndClose(string fileName, bool justForAppend) {
 }
 
 void BaseWaveApplLayer::printHeaderfileExecution() {
-    if (SrepeatNumber != 0) {
-        myfile << endl;
-    }
+    myfile << endl;
 
     string expSendbyDSCRText;
     if (SexpSendbyDSCR < 10) {
@@ -257,6 +268,7 @@ void BaseWaveApplLayer::generalInitializeVariables_executionByExpNumberVehDist()
 
         // Initialize random seed (Seed the RNG) # Inside of IF because must be executed one time (the seed is "static")
         mtSelectVehicleGenarateMessage.seed(SrepeatNumber); // Instead another value, for make the experiment more reproducible, so seed = reapeatNumber
+        mtTargetMessageSelect.seed(SrepeatNumber); // Used to select a  random target
         srand(SrepeatNumber + 1); // repeatNumber + 1, because srand(0) == srand(1)
 
         // To run with different routes files use only one seed
@@ -433,7 +445,8 @@ void BaseWaveApplLayer::restartFilesResultRSU(string resultFolder) {
 
     fileMessagesUnicast += "Messages_Received.r";
     fileMessagesBroadcast += "Broadcast_Messages.r";
-    fileMessagesCount += "Count_Messages_Received.r";
+
+    fileMessagesCount = resultFolder + "rsu_" + "Count_Messages_Received.r";
     fileMessagesGenerated = resultFolder + "Veh_Messages_Generated.r";
 
     //fileMessagesDrop // Not used yet to RSU
@@ -443,24 +456,25 @@ void BaseWaveApplLayer::restartFilesResultRSU(string resultFolder) {
         string pathFolder = par("folderPathSed");
         if (SexpNumber <= 4) { // Set the maxSpeed to 16.67 m/s (60 km/h) in the expNumber 1 to 4
             string comand = "sed -i 's/maxSpeed=.* color/maxSpeed=\"16.67\" color/g' " + pathFolder +"*.rou.xml";
-            system(comand.c_str());
-            cout << endl << "Change the speed to 16.67 m/s, command1: " << comand << endl;
+            int retunrSystemValue = system(comand.c_str());
+            if (retunrSystemValue == 0) {
+                cout << endl << "Change the speed to 16.67 m/s, command1: " << comand << endl;
+            }
         } else if (SexpNumber >= 5) { // Set the maxSpeed to 25 m/s  (90 km/h) in the expNumber 5 to 8
             string comand = "sed -i 's/maxSpeed=.* color/maxSpeed=\"25\" color/g' " + pathFolder +"*.rou.xml";
-            system(comand.c_str());
-            cout << endl << "Change the speed to 25 m/s, command1: " << comand << endl;
+            int retunrSystemValue = system(comand.c_str());
+            if (retunrSystemValue == 0) {
+                cout << endl << "Change the speed to 25 m/s, command1: " << comand << endl;
+            }
         }
 
-        string commandCreateFolder = "mkdir -p " + folderResult + " > /dev/null";
+        string commandCreateFolder = "mkdir -p " + resultFolder + " > /dev/null";
         cout << endl << "Created the folder, command: \"" << commandCreateFolder << "\"" << endl;
         cout << "repeatNumber: " << SrepeatNumber << endl;
         system(commandCreateFolder.c_str()); // Try create a folder to save the results
 
-        if (SrepeatNumber == 0) {
-            justAppend = false; // Open a new file (blank)
-        } else {
-            justAppend = true;
-        }
+        justAppend = false; // Open a new file (blank)
+        openFileAndClose(fileMessagesCount, justAppend);
 
         if (par("getTraffic").boolValue()){
             getTrafficEvtMethodCheck = new cMessage("get traffic evt", SendGetTrafficMethodCheck);
@@ -476,7 +490,6 @@ void BaseWaveApplLayer::restartFilesResultRSU(string resultFolder) {
         justAppend = true;
     }
 
-    openFileAndClose(fileMessagesCount, justAppend);
     openFileAndClose(fileMessagesUnicast, justAppend);
     openFileAndClose(fileMessagesBroadcast, justAppend);
 }
@@ -494,11 +507,7 @@ void BaseWaveApplLayer::restartFilesResultVeh(string projectInfo, Coord initialP
 
     bool justAppend;
     if (myId == 0) {
-        if (SrepeatNumber == 0) {
-            justAppend = false;
-        } else { // (repeatNumber != 0)) // open just for append
-            justAppend = true;
-        }
+        justAppend = false;
 
         openFileAndClose(fileMessagesUnicast, justAppend);
         openFileAndClose(fileMessagesDrop, justAppend);
@@ -513,11 +522,7 @@ void BaseWaveApplLayer::restartFilesResultVeh(string projectInfo, Coord initialP
 void BaseWaveApplLayer::saveVehStartPositionVeh(string fileNameLocation, Coord initialPos) {
     fileNameLocation += "Veh_Position_Initialize.r";
     if (myId == 0) {
-        if (SrepeatNumber == 0) {
-            myfile.open(fileNameLocation);
-        } else {
-            myfile.open(fileNameLocation, std::ios_base::app);
-        }
+        myfile.open(fileNameLocation);
 
         printHeaderfileExecution();
         myfile << "Start Position Vehicles" << endl;
@@ -572,10 +577,19 @@ void BaseWaveApplLayer::vehGenerateBeaconMessageAfterBeginVeh() {
     }
 }
 
-void BaseWaveApplLayer::generateTarget() { // Set the target node to who the message has to be delivered
-    target = "rsu[0]";
-    target_x = rsu0Position.x;
-    target_y = rsu0Position.y;
+void BaseWaveApplLayer::selectTarget() { // Set the target node to who the message has to be delivered
+    uniform_int_distribution <int> dist(0, (SrsuPosition.size() - 1)); // generate a value, e.g, dist(0, 10), will be 0, 1, ... 10
+    int targetRsuId = dist(mtTargetMessageSelect);
+
+    if (SrsuPosition.find(targetRsuId) != SrsuPosition.end()) {
+        target = "rsu[" + to_string(targetRsuId) + "]";
+
+        target_x = SrsuPosition[targetRsuId].x;
+        target_y = SrsuPosition[targetRsuId].x;
+    } else {
+        cout << source << " JBe - rsu is not inserted in the rsuPosition - myId: " << myId << " targetRsuId: "<< targetRsuId << endl;
+        ASSERT2(0, "JBe - rsu is not inserted in the rsuPosition -");
+    }
 }
 
 void BaseWaveApplLayer::generateBeaconMessageVehDist() {
@@ -600,7 +614,7 @@ void BaseWaveApplLayer::generateBeaconMessageVehDist() {
     wsm->setTimestamp(simTime());
 
     wsm->setSource(source.c_str());
-    generateTarget(); // target = rsu[0] and respective position
+    selectTarget(); // target = rsu[x] (x =1, 2, 3 etc) and respective position
     wsm->setTarget(target.c_str());
     wsm->setTargetPos(Coord(target_x, target_y, 3));
     wsm->setSenderAddressTemporary(source.c_str());
@@ -621,8 +635,8 @@ void BaseWaveApplLayer::generateBeaconMessageVehDist() {
     } else {
         wsm->setGlobalMessageIdentificaton(to_string(SmessageId).c_str()); // Id 100 and going on
     }
-    myfile << "### " << source << " generated the message ID: " << wsm->getGlobalMessageIdentificaton() << " at: " << simTime() << endl;
-    cout << "### " << source << " generated the message ID: " << wsm->getGlobalMessageIdentificaton() << " at: " << simTime() << endl;
+    myfile << "### " << source << " generated the message ID: " << wsm->getGlobalMessageIdentificaton() << " to " << target << " " << Coord(target_x, target_y, 3) << " at: " << simTime() << endl;
+    cout << "### " << source << " generated the message ID: " << wsm->getGlobalMessageIdentificaton() << " to " << target << " " << Coord(target_x, target_y, 3) << " at: " << simTime() << endl;
     myfile.close();
 
     //bool insert = sendOneNewMessageToOneNeighborTarget(*wsm);
@@ -853,6 +867,15 @@ void BaseWaveApplLayer::selectVehGenerateMessage() {
                         cout << endl << source << " selected the " << vehSelectedId << " to generate a message at: " << simTime() << endl;
                         myfile << source << " selected the " << vehSelectedId << " to generate a message at: " << simTime() << endl;
                         i++;
+                    } else {
+                        cout << endl << source << " selected " << vehSelectedId << " to generate " << SmessageId;
+                        cout << " message, but has Timestamp: " << SvehScenario[vehSelectedId] <<" at " << simTime() << endl;
+                        if (trySelectVeh > (SvehScenario.size() * 4)) {
+                            cout << endl << "JBe - Error loop in select vehicle to generate message, class BaseWaveApplLayer.cc";
+                            cout << endl << "trySelectVeh: " << trySelectVeh << " vehDist::vehScenario.size(): " << SvehScenario.size() << endl;
+                            ASSERT2(0, "JBe - Error loop in select vehicle to generate message -");
+                        }
+                        trySelectVeh++;
                     }
                 } else {
                     if ((SvehScenario[vehSelectedId].getTimestamp() + SvehTimeLimitToAcceptGenerateMgs) >= simTime()) { // Test if vehicle are less than 60 s in the scenario
@@ -913,10 +936,11 @@ void BaseWaveApplLayer::insertMessageDropVeh(string messageId, unsigned short in
 }
 
 void BaseWaveApplLayer::printCountMessagesReceivedRSU() {
-    myfile.open (fileMessagesCount, std::ios_base::app);
+    myfile.open(fileMessagesCount, std::ios_base::app);
 
+    string textTmp = "Exp: " + to_string(SexpNumber) + " expSendbyDSCR: " + to_string(SexpSendbyDSCR) + " ### " + source + " ";
     if (!messagesReceivedRSU.empty()) {
-        myfile << "messagesReceived from " << source << endl;
+        myfile << endl << endl << textTmp << "received messages" << endl;
 
         SimTime avgGeneralTimeMessageReceived;
         unsigned short int countP, countT;
@@ -974,36 +998,35 @@ void BaseWaveApplLayer::printCountMessagesReceivedRSU() {
         avgGeneralHopsMessage /= messagesReceivedRSU.size();
         avgGeneralTimeMessageReceived /= avgGeneralCopyMessageReceived;
 
-        string textTmp = "Exp: " + to_string(SexpNumber) + " ###rsu ";
         int percentMsgReceived = (double(messagesReceivedRSU.size() * 100 )/(SmessageId - 1));
 
-        myfile << endl << endl << textTmp + " Messages received in the " << source << endl;
-        myfile << textTmp + "Count messages received: " << messagesReceivedRSU.size();
+        myfile << endl << endl << textTmp << "Count messages received: " << messagesReceivedRSU.size();
         myfile << " of " << (SmessageId - 1) << " or " << percentMsgReceived << " % received" << endl;
-        myfile << textTmp + "Count messages with hop count equal of zero received: " << messageCountHopZero << endl;
-        myfile << textTmp + "Count messages with hop count different of zero Received: " << (messagesReceivedRSU.size() - messageCountHopZero) << endl;
-        myfile << textTmp + "Average time to receive: " << avgGeneralTimeMessageReceived << endl;
-        myfile << textTmp + "Count copy message received: " << avgGeneralCopyMessageReceived << endl;
+        myfile << textTmp << "Count messages with hop count equal of zero received: " << messageCountHopZero << endl;
+        myfile << textTmp << "Count messages with hop count different of zero Received: " << (messagesReceivedRSU.size() - messageCountHopZero) << endl;
+        myfile << textTmp << "Average time to receive: " << avgGeneralTimeMessageReceived << endl;
+        myfile << textTmp << "Count copy message received: " << avgGeneralCopyMessageReceived << endl;
         avgGeneralCopyMessageReceived /= messagesReceivedRSU.size();
-        myfile << textTmp + "Average copy received: " << avgGeneralCopyMessageReceived << endl;
-        myfile << textTmp + "Average hops to received: " << avgGeneralHopsMessage << endl;
-        myfile << textTmp + "Hops by category T general: " << countT << endl;
-        myfile << textTmp + "Hops by category P general: " << countP << endl;
+        myfile << textTmp << "Average copy received: " << avgGeneralCopyMessageReceived << endl;
+        myfile << textTmp << "Average hops to received: " << avgGeneralHopsMessage << endl;
+        myfile << textTmp << "Hops by category T general: " << countT << endl;
+        myfile << textTmp << "Hops by category P general: " << countP << endl;
     } else {
+        myfile << endl << endl << textTmp << "Count messages received: " << 0 << endl;
         myfile << "messagesReceived from " << source << " is empty" << endl;
-        myfile << endl << "Exp: " << SexpNumber << " ###rsu Count messages received: " << 0 << endl;
     }
 
-    if (SnumVehicles.size() == 0) {
-        myfile << endl << endl << "## Count of vehicle by category" << endl;
-        cout << endl << endl << "## Count of vehicle by category" << endl;
+    if (SrsuPosition.size() == 1) {
+        // SnumVehicles.size() == 0)
+        myfile << endl << "## Count of vehicle by category" << endl;
+        cout << endl << "## Count of vehicle by category" << endl;
         for (auto& x: SvehCategoryCount) {
             myfile << "    Category: " << x.first << " count: " << x.second << endl;
             cout << "    Category: " << x.first << " count: " << x.second << endl;
         }
+        myfile << endl << "This simulation run terminated correctly" << endl;
     }
 
-    myfile << endl << "This simulation run terminated correctly" << endl;
     myfile.close();
 }
 
@@ -1058,11 +1081,20 @@ void BaseWaveApplLayer::messagesReceivedMeasuringRSU(WaveShortMessage* wsm) {
 void BaseWaveApplLayer::toFinishRSU() {
     printCountMessagesReceivedRSU();
 
-    if (myId == 0) {
+    if (SrsuPosition.find(myId) != SrsuPosition.end()) {
+        SrsuPosition.erase(myId);
+    } else {
+        cout << "JBe - rsu not inserted in the rsuPosition - myId:" << myId << " source: " << source << endl;
+        ASSERT2(0, "JBe - rsu not inserted in the rsuPosition - ");
+    }
+
+    if (SrsuPosition.size() == 0) {
         string pathFolder = par("folderPathSed");
         string comand = "sed -i 's/maxSpeed=.* color/maxSpeed=\"16.67\" color/g' " + pathFolder +"*.rou.xml";
-        system(comand.c_str()); // Set the maxSpeed back to default: 16.67 m/s (60 km/h)
-        cout << endl << "Setting speed back to default (16.67 m/s), command: " << comand << endl;
+        int retunrSystemValue = system(comand.c_str()); // Set the maxSpeed back to default: 16.67 m/s (60 km/h)
+        if (retunrSystemValue == 0) {
+            cout << endl << "Setting speed back to default (16.67 m/s), command: " << comand << endl;
+        }
 
         printVehTrafficMethodCheck();
     }
@@ -1161,8 +1193,6 @@ WaveShortMessage* BaseWaveApplLayer::prepareWSM_epidemic(std::string name, int l
 }
 
 void BaseWaveApplLayer::generateMessageEpidemic() { //Generate a message in order to be sent to a target
-    generateTarget();
-
     cout << source << " generating one message Id: " << SmessageId << " (" << source << " -> " << target << ")"<< endl;
     WaveShortMessage* wsm = new WaveShortMessage("beaconMessage");
     wsm->setName("data");
@@ -1188,6 +1218,7 @@ void BaseWaveApplLayer::generateMessageEpidemic() { //Generate a message in orde
     // wsm.setRecipientAddress(); // Set when will send
 
     wsm->setSource(source.c_str());
+    selectTarget(); // target = rsu[x] (x =1, 2, 3 etc) and respective position
     wsm->setTarget(target.c_str());
     wsm->setSenderPos(curPosition);
 
@@ -1209,8 +1240,8 @@ void BaseWaveApplLayer::generateMessageEpidemic() { //Generate a message in orde
     } else {
         wsm->setGlobalMessageIdentificaton(to_string(SmessageId).c_str()); // Id 100 and going on
     }
-    myfile << "### " << source << " generated the message ID: " << wsm->getGlobalMessageIdentificaton() << " at: " << simTime() << endl;
-    cout << "### " << source << " generated the message ID: " << wsm->getGlobalMessageIdentificaton() << " at: " << simTime() << endl;
+    myfile << "### " << source << " generated the message ID: " << wsm->getGlobalMessageIdentificaton() << " to " << target << " " << Coord(target_x, target_y, 3) << " at: " << simTime() << endl;
+    cout << "### " << source << " generated the message ID: " << wsm->getGlobalMessageIdentificaton() << " to " << target << " " << Coord(target_x, target_y, 3) << " at: " << simTime() << endl;
     myfile.close();
 
     SmessageId++;
