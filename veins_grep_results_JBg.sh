@@ -61,7 +61,7 @@ if ls -l | grep -q "\.ini"; then
         echo -e "\n\tThe ($PWD) is OMNeT project is unknown for this script\nexiting"
         exit 1
     fi
-    rsu0File="rsu[0]_Count_Messages_Received.r"
+    rsu0File="rsu_Count_Messages_Received.r"
     vehiclesFile="Veh_Messages_Drop.r"
 
     echo -e "\nNumber of experiments: $numExpI_1to8 to $numExpF_1to8"
