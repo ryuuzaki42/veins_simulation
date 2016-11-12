@@ -22,7 +22,7 @@
 #
 # Script: Script to collect the simulation result in one place
 #
-# last update: 29/10/2016
+# last update: 12/11/2016
 #
 echo -e "\n## Script to collect the simulation results in one place ##"
 
@@ -61,7 +61,7 @@ if ls -l | grep -q "\.ini"; then
         echo -e "\n\tThe ($PWD) is OMNeT project is unknown for this script\nexiting"
         exit 1
     fi
-    rsu0File="rsu_Count_Messages_Received.r"
+    rsuFile="rsu_Count_Messages_Received.r"
     vehiclesFile="Veh_Messages_Drop.r"
 
     echo -e "\nNumber of experiments: $numExpI_1to8 to $numExpF_1to8"
@@ -69,14 +69,14 @@ if ls -l | grep -q "\.ini"; then
         for experiment in `tree -fdi --noreport $pathFolder | grep "E$i.*run"`; do
             echo -e "\n## Working in the folder: $experiment"
 
-            fileRSU=`ls $experiment/$rsu0File`
-            fileVeh=`ls $experiment/$vehiclesFile`
+            rsuFileLs=`ls $experiment/$rsuFile`
+            vehiclesFileLs=`ls $experiment/$vehiclesFile`
 
-            echo -e "\n\t\t\tFile: $fileRSU"
-            cat $fileRSU | grep -E "Exp:"
+            echo -e "\n\t\t\tFile: $rsuFileLs"
+            cat $rsuFileLs | grep -E "Exp:"
 
-            echo -e "\n\t\t\tFile: $fileVeh"
-            cat $fileVeh | grep -E "Exp:"
+            echo -e "\n\t\t\tFile: $vehiclesFileLs"
+            cat $vehiclesFileLs | grep -E "Exp:"
         done
     done
 

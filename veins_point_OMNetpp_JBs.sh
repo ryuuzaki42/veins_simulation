@@ -22,7 +22,7 @@
 #
 # Script: Script to convert SUMO point to OMNeT++ points
 #
-# last update: 20/10/2016
+# last update: 12/11/2016
 #
 echo "\n# Script to convert the SUMO point to OMNeT #\n"
 
