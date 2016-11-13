@@ -860,9 +860,10 @@ void BaseWaveApplLayer::selectVehGenerateMessage() {
                 vehSelected = mt19937GetRandomValue(SnumVehicles.size()); // return a number from 0 to (SnumVehicles.size() - 1), the index vector
                 string vehSelectedId = SnumVehicles[vehSelected]; // Get the vehicle name
 
-                if (SselectFromAllVehicles) {
-                    auto itVehSelected = find(SvehGenerateMessage.begin(), SvehGenerateMessage.end(), vehSelectedId);
-                    if (itVehSelected == SvehGenerateMessage.end()) {
+                auto itVehSelected = find(SvehGenerateMessage.begin(), SvehGenerateMessage.end(), vehSelectedId);
+                if (itVehSelected == SvehGenerateMessage.end()) {
+                    // If SselectFromAllVehicles false, will test if vehicle are less than 60 s in the scenario
+                    if ((SselectFromAllVehicles) || (SvehScenario[vehSelectedId].getTimestamp() + SvehTimeLimitToAcceptGenerateMgs) >= simTime()) {
                         SvehGenerateMessage.push_back(vehSelectedId);
                         cout << endl << source << " selected the " << vehSelectedId << " to generate a message at: " << simTime() << endl;
                         myfile << source << " selected the " << vehSelectedId << " to generate a message at: " << simTime() << endl;
@@ -870,32 +871,16 @@ void BaseWaveApplLayer::selectVehGenerateMessage() {
                     } else {
                         cout << endl << source << " selected " << vehSelectedId << " to generate " << SmessageId;
                         cout << " message, but has Timestamp: " << SvehScenario[vehSelectedId] <<" at " << simTime() << endl;
-                        if (trySelectVeh > (SvehScenario.size() * 4)) {
-                            cout << endl << "JBe - Error loop in select vehicle to generate message, class BaseWaveApplLayer.cc";
-                            cout << endl << "trySelectVeh: " << trySelectVeh << " vehDist::vehScenario.size(): " << SvehScenario.size() << endl;
-                            ASSERT2(0, "JBe - Error loop in select vehicle to generate message -");
-                        }
                         trySelectVeh++;
                     }
                 } else {
-                    if ((SvehScenario[vehSelectedId].getTimestamp() + SvehTimeLimitToAcceptGenerateMgs) >= simTime()) { // Test if vehicle are less than 60 s in the scenario
-                        auto itVehSelected = find(SvehGenerateMessage.begin(), SvehGenerateMessage.end(), vehSelectedId);
-                        if (itVehSelected == SvehGenerateMessage.end()) {
-                            SvehGenerateMessage.push_back(vehSelectedId);
-                            cout << endl << source << " selected the " << vehSelectedId << " to generate a message at: " << simTime() << endl;
-                            myfile << source << " selected the " << vehSelectedId << " to generate a message at: " << simTime() << endl;
-                            i++;
-                        }
-                    } else {
-                        cout << endl << source << " selected " << vehSelectedId << " to generate " << SmessageId;
-                        cout << " message, but has Timestamp: " << SvehScenario[vehSelectedId] <<" at " << simTime() << endl;
-                        if (trySelectVeh > (SvehScenario.size() * 4)) {
-                            cout << endl << "JBe - Error loop in select vehicle to generate message, class BaseWaveApplLayer.cc";
-                            cout << endl << "trySelectVeh: " << trySelectVeh << " vehDist::vehScenario.size(): " << SvehScenario.size() << endl;
-                            ASSERT2(0, "JBe - Error loop in select vehicle to generate message -");
-                        }
-                        trySelectVeh++;
-                    }
+                    trySelectVeh++;
+                }
+
+                if (trySelectVeh > (SvehScenario.size() * 4)) {
+                    cout << endl << "JBe - Error loop in select vehicle to generate message, class BaseWaveApplLayer.cc";
+                    cout << endl << "trySelectVeh: " << trySelectVeh << " vehDist::vehScenario.size(): " << SvehScenario.size() << endl;
+                    ASSERT2(0, "JBe - Error loop in select vehicle to generate message -");
                 }
             }
         } else {
