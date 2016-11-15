@@ -22,7 +22,7 @@
 #
 # Script: Create the run a easy line to run in the opp_runall
 #
-# last update: 20/10/2016
+# last update: 15/11/2016
 #
 if [ $# -lt 5 ]; then # Test at least tree parameters
     echo "Error in the parameters"
@@ -50,8 +50,12 @@ else
 
         opp_runall $coreNumber veins_opp_runall_JBr.sh -f $iniFile -r $runNumber
 
-        #opp_runall -j3 veins_opp_runall_JBr.sh -f omnet.ini -r 0..2
-        #opp_runall command, -j3 number cores, veins_opp_runall_JBr script to run opp_runall, -f omnet.ini file, -r 0..2 run to execute
+        # Example: opp_runall -j3 veins_opp_runall_JBr.sh -f omnet.ini -r 0..2
+        # opp_runall command from OMNeT
+        # -j3 j(number cores) to be used
+        # veins_opp_runall_JBr script to create a line run to opp_runall
+        # -f omnet.ini file
+        # -r 0..2 run to execute
 
         SimulationEnd=`date` # End simulation
         echo -e "Simulation ends at: $SimulationEnd" | tee -a $fileResultGeneral

@@ -23,39 +23,41 @@
 # Script: Cria uma pasta no Dropbox ($dropboxFolderDest) com as
 # configurações necessárias (*.ini, *.ned etc) e depois zip essa pasta (veins_v001.zip)
 #
-# Last update: 20/10/2016
+# Last update: 15/11/2016
 #
 initialFolder=$PWD # Get the initial folder
 
-dropboxFolderDest="/media/sda4/prog/Dropbox/z_tmp_cemeai/veins_v001" # Dropbox destination folder
+dropboxFolderDest="/media/sda4/prog/Dropbox/z_share_code_JB" # Dropbox destination folder
 veinsFolderOri="/media/sda4/prog/veins_simulation" # Veins origin folder
+
+veinsVersion="veins_v01-configs"
 
 echo -e "\nThis script copy the \"veins_simulation\" ($veinsFolderOri) to one folder"
 echo -e "in Dropbox ($dropboxFolderDest) and delete sensitive data\n"
 
-rm -r $dropboxFolderDest/ # Delete older veins_v001 folder
-rm $dropboxFolderDest.zip # Delete older veins_v001.zip
+cd $dropboxFolderDest
+folderCP=$dropboxFolderDest/$veinsVersion
 
-mkdir $dropboxFolderDest/ # Create a new veins_v001 folder
+rm -r $veinsVersion $veinsVersion.zip 2> /dev/null # Delete older veins_v001 folder and $veinsVersion.zip  if exists
 
-cp $veinsFolderOri/sumo-launchd.py $dropboxFolderDest/ # Copy sumo-launchd.py to veins_v001
+mkdir $veinsVersion/ # Create a new veins_v001 folder
 
-cp $veinsFolderOri/*JBs.sh $dropboxFolderDest/ # Copy all *JBs.sh to veins_v001
+cp $veinsFolderOri/sumo-launchd.py $folderCP/ # Copy sumo-launchd.py to veins_v001
+cp -r $veinsFolderOri/JB_scripts/ $folderCP/ # Copy JB_scripts to veins_v001
+cp -r $veinsFolderOri/out/ $folderCP/ # Copy the folder out to veins_v001
 
-cp -r $veinsFolderOri/out/ $dropboxFolderDest/ # Copy the folder out to veins_v001
+mkdir $folderCP/projects # Create a folder projects in the veins_v001
+cp -r $veinsFolderOri/projects/0scenarios/ $folderCP/projects/  # Copy 0sceenarios to veins_v001
+cp -r $veinsFolderOri/projects/1node/ $folderCP/projects/       # Copy 1node to veins_v001
+cp -r $veinsFolderOri/projects/epidemic/ $folderCP/projects/    # Copy epidemic to veins_v001
+cp -r $veinsFolderOri/projects/vehDist/ $folderCP/projects/     # Copy vehDist to veins_v001
 
-mkdir $dropboxFolderDest/projects # Create a folder projects in the veins_v001
+rm -r $folderCP/projects/vehDist/others/ # Delete the others from vehDist in the veins_v001
+rm -r $folderCP/projects/*/results/ # Delete results in the veins_v001
 
-cp -r $veinsFolderOri/projects/0scenarios/ $dropboxFolderDest/projects/  # Copy 0sceenarios to veins_v001
-cp -r $veinsFolderOri/projects/1node/ $dropboxFolderDest/projects/       # Copy 1node to veins_v001
-cp -r $veinsFolderOri/projects/epidemic/ $dropboxFolderDest/projects/    # Copy epidemic to veins_v001
-cp -r $veinsFolderOri/projects/vehDist/ $dropboxFolderDest/projects/     # Copy vehDist to veins_v001
+cp -r $veinsFolderOri/src/ $folderCP/ # Copy the src to veins_v001
 
-rm -r $dropboxFolderDest/projects/vehDist/others/ # Delete the others from vehDist in the veins_v001
-
-cp -r $veinsFolderOri/src/ $dropboxFolderDest/ # Copy the src to veins_v001
-
-cd $dropboxFolderDest/src/ # Move to src veins_v001 folder
+cd $folderCP/src/ # Move to src veins_v001 folder
 
 delCC=`find . | grep "\.cc"` # Get all .cc files
 rm $delCC # Delete the .cc files
@@ -68,7 +70,8 @@ rmdir $dirEmpty # Delete the empty directories
 
 cd ../../ # Move up to nivels
 
-echo "Zip the veins_v001 in veins_v001.zip"
-zip -r veins_v001.zip veins_v001/
+echo "Zip the $veinsVersion in $veinsVersion.zip"
+zip -r $veinsVersion.zip $veinsVersion/
+rm -r $veinsVersion
 
-cd - $initialFolder > /dev/null # Back to initial folder
+cd $initialFolder # Back to initial folder

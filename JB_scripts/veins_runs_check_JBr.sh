@@ -22,35 +22,38 @@
 #
 # Script: Check if the all simulation run(s) terminated correct
 #
-# Last update: 17/10/2016
+# Last update: 15/11/2016
 #
-fileRSUCheck=` find .| sort | grep "rsu\[0\]_Count_Messages_Received.r"` # Get the result path files to rsu[0]_Count_Messages_Received.r
+fileRsuName="rsu_Count_Messages_Received.r"
+fileRSUCheck=` find .| sort | grep $fileRsuName` # Get the result path files to rsu_Count_Messages_Received.r
 
-echo -e "\n# Print the simulation runs that terminated with error #\n"
-
-tmpFileRun=`mktemp` # Create tmp files
-tmpFilePath=`mktemp`
-
-for lineFile in $fileRSUCheck; do # Read the fileRSUCheck line by line and set in lineFile
-    if ! cat $lineFile | grep -q "This simulation run terminated correctly"; then # Test if terminated success
-        echo "$lineFile" >> $tmpFilePath # Print the link in the tmpFilePath
-        runNumber=`echo "$lineFile" | rev | cut -d'/' -f2-3 | rev` # Get the run number
-        echo -e "\t$runNumber" >> $tmpFileRun
-    fi
-done
-
-experimentName=`echo $lineFile | rev | cut -d'/' -f4 | rev` # Get experiment name
-
-sizeResultFile=`ls -l $tmpFilePath | awk '{print $5}'` # Get the size of result file
-if [ "$sizeResultFile" != '0' ]; then # If result file is not empty
-    echo -e "Path of run(s) terminated with error:\n"
-    cat $tmpFilePath
-    echo -e "\n\n$experimentName"
-    cat $tmpFileRun
+if [ "$fileRSUCheck" == '' ]; then
+    echo -e "\nError: Not found any file \"$fileRsuName\" in the sub directories\n"
 else
-    echo "All the simulation run(s) terminated correctly"
+    echo -e "\nPrint the simulation runs that terminated with error\n"
+
+    tmpFileRun=`mktemp` # Create tmp files
+    tmpFilePath=`mktemp`
+
+    for lineFile in $fileRSUCheck; do # Read the fileRSUCheck line by line and set in lineFile
+        if ! cat $lineFile | grep -q "This simulation run terminated correctly"; then # Test if terminated success
+            echo "$lineFile" >> $tmpFilePath # Print the link in the tmpFilePath
+            runNumber=`echo "$lineFile" | rev | cut -d'/' -f2-3 | rev` # Get the run number
+            echo -e "\t$runNumber" >> $tmpFileRun
+        fi
+    done
+
+    experimentName=`echo $lineFile | rev | cut -d'/' -f4 | rev` # Get experiment name
+
+    sizeResultFile=`ls -l $tmpFilePath | awk '{print $5}'` # Get the size of result file
+    if [ "$sizeResultFile" != '0' ]; then # If result file is not empty
+        echo -e "Path of run(s) terminated with error:\n"
+        cat $tmpFilePath
+        echo -e "\n\n$experimentName"
+        cat $tmpFileRun
+    else
+        echo -e "\tAll the simulation run(s) terminated correctly\n"
+    fi
+
+    rm $tmpFileRun $tmpFilePath # Delete tmp files
 fi
-
-rm $tmpFileRun $tmpFilePath # Delete tmp files
-
-echo -e "\nEnd script\n"
