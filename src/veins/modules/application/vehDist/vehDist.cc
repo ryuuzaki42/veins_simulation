@@ -230,9 +230,7 @@ void vehDist::trySendBeaconMessage() {
 
         if (!beaconStatusNeighbors.empty()) {
             //printBeaconStatusNeighbors();
-
-            // Test to send RSU
-            // Assumimos o mesmo Range (rsu e veh)
+            // The same range to the RSU and veh
 
             string idMessage, rcvId;
             idMessage = messagesOrderReceivedVehDist[messageToSend];
@@ -248,7 +246,7 @@ void vehDist::trySendBeaconMessage() {
                 itBeaconN = beaconStatusNeighbors.find(rcvId);
                 catVeh = itBeaconN->second.getCategory();
 
-                cout << source << " chose the vehicle " << rcvId << " in the exp " << SexpSendbyDSCR << " to be a next hop to the " << idMessage << " message" << endl;
+                cout << source << " chose the vehicle " << rcvId << " in the expSendbyDSCR " << SexpSendbyDSCR << " to be a next hop to the " << idMessage << " message" << endl;
                 cout << "    " << source << " send message to " << rcvId << " with category " << catVeh << " at: "<< simTime() << endl;
                 cout << "    MessageToSend: " << messageToSend << endl;
                 cout << "    MessageID: " << idMessage << endl;
@@ -281,7 +279,6 @@ void vehDist::trySendBeaconMessage() {
                         messagesSendLog[idMessage] += ", " + rcvId;
                     }
                 }
-
             } else {
                 cout << source << " not send any message" << endl << endl;
             }
@@ -370,13 +367,13 @@ string vehDist::neighborWithShortestDistanceToTarge(string idMessage) {
                     sD.rateTimeToSendVeh = itBeaconNeighbors->second.getRateTimeToSend();
 
                     if (sD.categoryVeh.compare("T") == 0) {
-                        sD.distanceToTargetCategory = sD.distanceToTargetNow + sD.distanceToTargetNow * 0.1;
+                        sD.distanceToTargetCategory = sD.distanceToTargetNow * 0.90;
                         MeetCatT = 1;
-                    } else if (sD.categoryVeh.compare("B") == 0) {
-                        sD.distanceToTargetCategory = sD.distanceToTargetNow + sD.distanceToTargetNow * 0.1;
-                        MeetCatT = 1;
+//                    } else if (sD.categoryVeh.compare("B") == 0) {
+//                        sD.distanceToTargetCategory = sD.distanceToTargetNow * 0.95;
+//                        MeetCatT = 1;
                     } else if (sD.categoryVeh.compare("P") == 0) {
-                        sD.distanceToTargetCategory = sD.distanceToTargetNow + sD.distanceToTargetNow * 0.3;
+                        sD.distanceToTargetCategory = sD.distanceToTargetNow; // equal to * 1
                         MeetCatP = 1;
                     } else {
                         cout << endl << "JBe - Error category unknown -" << source << " category: " << sD.categoryVeh << endl;
