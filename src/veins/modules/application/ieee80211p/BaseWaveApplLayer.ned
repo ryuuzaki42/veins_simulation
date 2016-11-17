@@ -24,7 +24,6 @@ simple BaseWaveApplLayer like IBaseApplLayer {
 
         // VehDist
         int messageBufferSize = default(0); //define the maximum buffer size (in number of messages) that a node is willing to allocate
-        int messageIntervalTrySend @unit("s") = default(0s); // Interval to try send message(s)
         int messageHopLimit = default(0); // Limit of hops
         int timeGenerateNewMessage @unit("s") = default(0s); // Time to generate new messages, each this time generate more X messsages
         int timeStartGenerateMessage @unit("s") = default(0s); // Time to generate the frist messages or start generate messsages
@@ -54,7 +53,7 @@ simple BaseWaveApplLayer like IBaseApplLayer {
         int vehTimeLimitToAcceptGenerateMgs @unit("s") = default(0s); // Time limit that one vehile enter in the scenario
 
         bool useRateTimeToSend = default(false); // Use or not the rateTimeToSend
-        double normalTimeSendMessage @unit("s") = default(0s); // Time will send a message whe useRateTimeToSend is false.
+        double normalTimeSendMessage @unit("s") = default(0s); // Time will send a message when useRateTimeToSend is false.
         string folderPathSed = default("");
         bool disableCout = default(false);
 
