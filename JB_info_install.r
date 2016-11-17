@@ -1,12 +1,11 @@
 ## Simulators version
-SUMO = 0.25.0
-OMNeT = 4.6
-Veins = 4.4
+    SUMO = 0.25.0
+    OMNeT = 4.6
+    Veins = 4.4
 
-Set on ~/.bashrc
+## Add/Set on ~/.bashrc
 
-## veins .bashrc
-# Can be different in your PC
+# veins .bashrc, Can be different in your PC
 export TCL_LIBRARY=/usr/lib64/tcl8.6
 
 export SUMO_HOME=/opt/sumo-0.25.0
