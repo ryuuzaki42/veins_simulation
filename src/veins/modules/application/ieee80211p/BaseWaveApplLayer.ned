@@ -24,18 +24,19 @@ simple BaseWaveApplLayer like IBaseApplLayer {
 
         // VehDist
         int messageBufferSize = default(0); //define the maximum buffer size (in number of messages) that a node is willing to allocate
-        int beaconMessageInterval @unit("s") = default(0s); // Interval to try send message(s)
+        int messageIntervalTrySend @unit("s") = default(0s); // Interval to try send message(s)
         int messageHopLimit = default(0); // Limit of hops
-        int timeGenerateBeaconMessage @unit("s") = default(0s); // Time for generate messages
+        int timeGenerateNewMessage @unit("s") = default(0s); // Time to generate new messages, each this time generate more X messsages
+        int timeStartGenerateMessage @unit("s") = default(0s); // Time to generate the frist messages or start generate messsages
 
         int expNumber = default(1); // Experiment number by table 2^k, number to use _one or _two variables
-        int expPart_one_or_two = default(1); // Experiment part, can be 1 or 2, to use 4 values of ttlBeaconMessage
-        int timeLimitGenerateBeaconMessage @unit("s") = default(0s); // ttl beacon message
+        int expPart_one_or_two = default(1); // Experiment part, can be 1 or 2, to use 4 values of ttlMessage
+        int timeLimitGenerateMessage @unit("s") = default(0s); // Value limit to generate messages (by default ttlMessage_two can be in max 120s)
 
-        int ttlBeaconMessage_one @unit("s") = default(0s); // ttl beacon message
-        int ttlBeaconMessage_two @unit("s") = default(0s);
-        int countGenerateBeaconMessage_one = default(0); // Count messages generate by time
-        int countGenerateBeaconMessage_two = default(0);
+        int ttlMessage_one @unit("s") = default(0s); // ttl beacon message
+        int ttlMessage_two @unit("s") = default(0s);
+        int countGenerateMessage_one = default(0); // Count messages generate by time
+        int countGenerateMessage_two = default(0);
 
         int ttlBeaconStatus @unit("s") = default(0s);
         int beaconStatusBufferSize = default(0);
