@@ -37,7 +37,7 @@ void vehDist::onBeaconStatus(WaveShortMessage* wsm) {
         beaconStatusNeighbors.insert(make_pair(wsm->getSource(), *wsm));
         sendMessageToOneNeighborTarget(wsm->getSource()); // Look in buffer it has messages for this new vehNeighbor
     }
-    //printBeaconNeighbors();
+    //printBeaconStatusNeighbors();
 }
 
 void vehDist::onBeaconMessage(WaveShortMessage* wsm) {
@@ -91,7 +91,7 @@ void vehDist::onBeaconMessage(WaveShortMessage* wsm) {
         }
     }/*else { // Message to another vehicle
         cout << "Saving broadcast message from: " << wsm->getSenderAddressTemporary() << " to " << source << endl;
-        saveMessagesOnFile(wsm, fileMessagesNameBroadcast);
+        saveMessagesOnFile(wsm, fileMessagesBroadcast);
     }*/
     //printMessagesBuffer();
 }
@@ -122,13 +122,13 @@ void vehDist::removeOldestInputBeaconMessage() {
             }
         }
 
-        if (simTime() > (minTime + SttlBeaconMessage)) {
+        if (simTime() > (minTime + SttlMessage)) {
             cout << source << " remove one message (" << idMessage << ") by time, minTime: " << minTime << " at: " << simTime();
-            cout << " ttlBeaconMessage: " << SttlBeaconMessage << endl;
+            cout << " ttlMessage: " << SttlMessage << endl;
             typeRemoved = 3; // by ttl (1 buffer, 2 copy, 3 time)
         } else if (messagesBufferVehDist.size() > SmessageBufferSize) {
-            //cout << source << " remove one message (" << idMessage << ") by space, MessageBuffer.size(): " << messagesBuffer.size();
-            //cout << " at: " << simTime() << " vehDist::beaconMessageBufferSize: " << vehDist::beaconMessageBufferSize << endl;
+            //cout << source << " remove one message (" << idMessage << ") by space, MessageBufferVehDist.size(): " << messagesBufferVehDist.size();
+            //cout << " at: " << simTime() << " SmessageBufferSize: " << SmessageBufferSize << endl;
             typeRemoved = 1; // by buffer (1 buffer, 2 copy, 3 time)
         }
 
@@ -165,12 +165,12 @@ void vehDist::removeOldestInputBeaconStatus() {
 
         if (simTime() > (minTime + SttlBeaconStatus)) {
             //cout << source << " remove one beaconStatus (" << idBeacon << ") by time, minTime: " << minTime << " at: " << simTime();
-            //cout << " ttlBeaconStatus: " << ttlBeaconStatus << endl;
+            //cout << " SttlBeaconStatus: " << SttlBeaconStatus << endl;
             beaconStatusNeighbors.erase(idBeacon);
             removeOldestInputBeaconStatus();
         } else if (beaconStatusNeighbors.size() > SbeaconStatusBufferSize) {
             //cout << source << " remove one beaconStatus (" << idBeacon << ") by space, beaconStatusNeighbors.size(): " << beaconStatusNeighbors.size();
-            //cout << " at: " << simTime() << " beaconMessageBufferSize: " << beaconMessageBufferSize << endl;
+            //cout << " at: " << simTime() << " SbeaconStatusBufferSize: " << SbeaconStatusBufferSize << endl;
             beaconStatusNeighbors.erase(idBeacon);
             removeOldestInputBeaconStatus();
         }
@@ -187,7 +187,7 @@ void vehDist::sendBeaconMessage() {
 
 //    unordered_map<string, WaveShortMessage>::iterator itbeaconStatus;
 //    for (itbeaconStatus = beaconStatusNeighbors.begin(); itbeaconStatus != beaconStatusNeighbors.end(); itbeaconStatus++){
-//        sendMessageNeighborsTarget(itbeaconStatus->second.getSource()); // Look in buffer it has messages for this new vehicle neighbor
+//        sendMessageToOneNeighborTarget(itbeaconStatus->second.getSource()); // Look in buffer it has messages for this vehicle neighbor
 //    }
 //############################################################# run many times
 
@@ -351,6 +351,7 @@ string vehDist::neighborWithShortestDistanceToTarge(string idMessage) {
                     insert = true;
                 }
 
+                // Removed to allow vehicle all neigbor vehicle
 //                if (!SallowMessageCopy || !SusePathHistory) {
 //                    double thisVehDistanceNow = traci->getDistance(curPosition, messagesBufferVehDist[idMessage].getTargetPos(), false);
 //                    if (neighborDistanceNow > thisVehDistanceNow) { // Test if is closing to target
@@ -711,7 +712,7 @@ void vehDist::sendMessageToOneNeighborTarget(string beaconSource) {
     }
 }
 
-bool vehDist::sendOneNewMessageToOneNeighborTarget(WaveShortMessage wsm) { // Will use or not?
+bool vehDist::sendOneNewMessageToOneNeighborTarget(WaveShortMessage wsm) {
     unordered_map <string, WaveShortMessage>::iterator itBeaconStatus = beaconStatusNeighbors.begin();
     string targetMessage = wsm.getTarget();
 
@@ -719,7 +720,6 @@ bool vehDist::sendOneNewMessageToOneNeighborTarget(WaveShortMessage wsm) { // Wi
         if (targetMessage.compare(itBeaconStatus->first) == 0) { // Test if this neighbor is the target of the last message received
             cout << source << " sending OneNewMessageToOneNeighborTarget: " << wsm.getGlobalMessageIdentificaton() << " to: " << itBeaconStatus->first << endl;
 
-            //exit(14);
             sendWSM(updateBeaconMessageWSM(wsm.dup(), itBeaconStatus->first));
             ScountMsgPacketSend++;
             messagesDelivered.push_back(wsm.getGlobalMessageIdentificaton());
@@ -749,10 +749,9 @@ void vehDist::handleLowerMsg(cMessage* msg) {
 }
 
 void vehDist::vehCreateUpdateRateTimeToSendEvent() {
-    rateTimeToSend = 2500; //100 // Send in: 100 ms
-    //rateTimeToSend = 100; //100 // Send in: 100 ms
+    rateTimeToSend = 2500; // Initial rateTimeToSend #2500 - Send in: 2500 ms
     rateTimeToSendDistanceControl = 10; // Equal to 10 m in 1 s
-    rateTimeToSendLimitTime = par("beaconMessageInterval").longValue(); // #5
+    rateTimeToSendLimitTime = 5; // #5
     rateTimeToSendLimitTime = rateTimeToSendLimitTime * 1000; // #5000 // Limit that rateTimeToSend can be (one message by 5000 ms), value must be (bufferMessage limit) * rateTimeToSend, in this case 50 * 100 = 5000
     rateTimeToSendUpdateTime = 1; // Will update every 1 s
 
@@ -763,10 +762,11 @@ void vehDist::vehCreateUpdateRateTimeToSendEvent() {
 }
 
 void vehDist::vehCreateEventTrySendBeaconMessage() {
-    if (sendData) {
+    if (SvehDistCreateEventGenerateMessage) {
         sendBeaconMessageEvt = new cMessage("Event send beacon message", SendEvtBeaconMessage);
         timeToFinishLastStartSend = simTime() + vehOffSet;
         messageToSend = 0; // messagesOrderReceived.front();
+
         //cout << source << " at: "<< simTime() << " schedule created SendBeaconMessage to: "<< timeToFinishLastStartSend << endl;
         scheduleAt(timeToFinishLastStartSend, sendBeaconMessageEvt);
         timeToFinishLastStartSend += double(rateTimeToSendLimitTime)/1000; // /1000 because works with s instead ms
@@ -824,10 +824,10 @@ WaveShortMessage* vehDist::updateBeaconMessageWSM(WaveShortMessage* wsm, string 
 //    wsm->setRoadId(mobility->getRoadId().c_str());
 //    wsm->setSenderSpeed(mobility->getSpeed());
 //    wsm->setSenderPos(curPosition);
-//    if (simTime() < vehDist::timeToUpdatePosition) {
+//    if (simTime() < StimeToUpdatePosition) {
 //        wsm->setSenderPosPrevious(mobility->getPositionAt(0.1));
 //    } else {
-//        wsm->setSenderPosPrevious(mobility->getPositionAt(simTime() - vehDist::timeToUpdatePosition));
+//        wsm->setSenderPosPrevious(mobility->getPositionAt(simTime() - StimeToUpdatePosition));
 //    }
 //    wsm->setHeading(getVehHeading4()); //wsm->setHeading(getVehHeading8());
 
