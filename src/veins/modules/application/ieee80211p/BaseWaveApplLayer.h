@@ -169,14 +169,14 @@ class BaseWaveApplLayer : public BaseApplLayer {
 
         string fileMessagesUnicast, fileMessagesBroadcast, fileMessagesCount, fileMessagesDrop, fileMessagesGenerated;
 
-        static unsigned short int SrepeatNumber, SexpNumber, SexpSendbyDSCR, ScountGenerateBeaconMessage, SttlBeaconMessage;
+        static unsigned short int SrepeatNumber, SexpNumber, SexpSendbyDSCR, ScountGenerateMessage, SttlMessage;
 
         static unsigned short int SmsgDroppedbyTTL, SmsgDroppedbyCopy, SmsgDroppedbyBuffer, SvehTimeLimitToAcceptGenerateMgs;
         static unsigned short int ScountMsgPacketSend, SmsgBufferUseGeneral, ScountMesssageDrop, SmessageHopLimit;
         static unsigned short int ScountMeetN, ScountTwoCategoryN, ScountMeetPshortestT, ScountVehicleAll, SmessageId;
 
         static unsigned short int SbeaconStatusBufferSize, SttlBeaconStatus, SpercentP, SbeaconTypeInitialize;
-        static unsigned short int StimeLimitGenerateBeaconMessage, StimeToUpdatePosition, SmessageBufferSize;
+        static unsigned short int StimeLimitGenerateMessage, StimeToUpdatePosition, SmessageBufferSize;
 
         static string SprojectInfo;
 
