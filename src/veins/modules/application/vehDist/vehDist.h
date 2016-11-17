@@ -108,10 +108,10 @@ unsigned short int BaseWaveApplLayer::ScountMeetPshortestT, BaseWaveApplLayer::S
 unsigned short int BaseWaveApplLayer::SmessageId, BaseWaveApplLayer::SbeaconTypeInitialize;
 
 unsigned short int BaseWaveApplLayer::SrepeatNumber, BaseWaveApplLayer::SexpNumber, BaseWaveApplLayer::SexpSendbyDSCR;
-unsigned short int BaseWaveApplLayer::ScountGenerateBeaconMessage, BaseWaveApplLayer::SttlBeaconMessage, BaseWaveApplLayer::SvehTimeLimitToAcceptGenerateMgs;
+unsigned short int BaseWaveApplLayer::ScountGenerateMessage, BaseWaveApplLayer::SttlMessage, BaseWaveApplLayer::SvehTimeLimitToAcceptGenerateMgs;
 
 unsigned short int BaseWaveApplLayer::SbeaconStatusBufferSize, BaseWaveApplLayer::SttlBeaconStatus, BaseWaveApplLayer::SpercentP;
-unsigned short int BaseWaveApplLayer::StimeLimitGenerateBeaconMessage, BaseWaveApplLayer::StimeToUpdatePosition, BaseWaveApplLayer::SmessageBufferSize;
+unsigned short int BaseWaveApplLayer::StimeLimitGenerateMessage, BaseWaveApplLayer::StimeToUpdatePosition, BaseWaveApplLayer::SmessageBufferSize;
 
 string BaseWaveApplLayer::SprojectInfo;
 bool BaseWaveApplLayer::SusePathHistory, BaseWaveApplLayer::SallowMessageCopy;
