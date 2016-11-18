@@ -22,7 +22,7 @@
 #
 # Script: Script to collect the simulation result in one place
 #
-# last update: 12/11/2016
+# last update: 18/11/2016
 #
 echo -e "\n## Script to collect the simulation results in one place ##"
 
@@ -72,16 +72,39 @@ if ls -l | grep -q "\.ini"; then
             rsuFileLs=`ls $experiment/$rsuFile`
             vehiclesFileLs=`ls $experiment/$vehiclesFile`
 
-            echo -e "\n\t\t\tFile: $rsuFileLs"
-            cat $rsuFileLs | grep -E "Exp:"
+            if [ "$rsuFileLs" != '' ]; then
+                filesFound+="\t$experiment/$rsuFile\\n"
 
-            echo -e "\n\t\t\tFile: $vehiclesFileLs"
-            cat $vehiclesFileLs | grep -E "Exp:"
+                echo -e "\n\t\t\tFile: $rsuFileLs"
+                cat $rsuFileLs | grep -E "Exp:"
+            else
+                echo "\nThe experiment: $experiment\n Don't have the file \"$rsuFileLs\""
+                filesNotFound+="\t$experiment/$rsuFile\\n"
+            fi
+
+            if [ "$vehiclesFileLs" != '' ]; then
+                filesFound+="\\t$experiment/$vehiclesFile\\n"
+
+                echo -e "\n\t\t\tFile: $vehiclesFileLs"
+                cat $vehiclesFileLs | grep -E "Exp:"
+            else
+                echo "\nThe experiment: $experiment\n Don't have the file \"$vehiclesFileLs\""
+                filesNotFound+="\\t$experiment/$vehiclesFile\\n"
+            fi
         done
     done
 
-    echo -e "\nResult form:"
-    tree -fdi --noreport $pathFolder | grep "E[$numExpI_1to8-$numExpF_1to8].*run"
+    if [ "$filesFound" != '' ]; then
+        echo -e "\n# Result - Files found:\n\n$filesFound"
+    else
+        echo -e "\n# None file was founded\n"
+    fi
+
+    if [ "$filesNotFound" != '' ]; then
+        echo -e "\n# Result - Files not found:\n\n$filesNotFound"
+    else
+        echo -e "\n# All file was founded\n"
+    fi
 else
     echo -e "\nError: ($PWD) it is not a OMNeT project folder\nPlease go to the folder with a ini file"
 fi

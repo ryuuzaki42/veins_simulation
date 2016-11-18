@@ -21,6 +21,8 @@
 # Livre(FSF) Inc., 51 Franklin St, Fifth Floor, Boston, MA 02110-1301 USA
 #
 # Script: Check if the all simulation run(s) terminated correct
+# Obs: Need print "This simulation run terminated correctly" at
+#  the end of our simulation to be checked
 #
 # Last update: 15/11/2016
 #
