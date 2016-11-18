@@ -73,20 +73,20 @@ if ls -l | grep -q "\.ini"; then
             vehiclesFileLs=`ls $experiment/$vehiclesFile`
 
             if [ "$rsuFileLs" != '' ]; then
-                filesFound+="\t$experiment/$rsuFile\\n"
-
                 echo -e "\n\t\t\tFile: $rsuFileLs"
                 cat $rsuFileLs | grep -E "Exp:"
+
+                filesFound+="\t$experiment/$rsuFile\\n"
             else
                 echo "\nThe experiment: $experiment\n Don't have the file \"$rsuFileLs\""
                 filesNotFound+="\t$experiment/$rsuFile\\n"
             fi
 
             if [ "$vehiclesFileLs" != '' ]; then
-                filesFound+="\\t$experiment/$vehiclesFile\\n"
-
                 echo -e "\n\t\t\tFile: $vehiclesFileLs"
                 cat $vehiclesFileLs | grep -E "Exp:"
+
+                filesFound+="\\t$experiment/$vehiclesFile\\n"
             else
                 echo "\nThe experiment: $experiment\n Don't have the file \"$vehiclesFileLs\""
                 filesNotFound+="\\t$experiment/$vehiclesFile\\n"
@@ -95,15 +95,15 @@ if ls -l | grep -q "\.ini"; then
     done
 
     if [ "$filesFound" != '' ]; then
-        echo -e "\n# Result - Files found:\n\n$filesFound"
+        echo -e "\n# Result - Files founded:\n\n$filesFound"
     else
-        echo -e "\n# None file was founded\n"
+        echo -e "\n# None file was founded"
     fi
 
     if [ "$filesNotFound" != '' ]; then
-        echo -e "\n# Result - Files not found:\n\n$filesNotFound"
+        echo -e "\n# Result - Files not founded:\n\n$filesNotFound"
     else
-        echo -e "\n# All file was founded\n"
+        echo -e "\n# All files was founded"
     fi
 else
     echo -e "\nError: ($PWD) it is not a OMNeT project folder\nPlease go to the folder with a ini file"
