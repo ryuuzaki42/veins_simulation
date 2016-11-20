@@ -1,11 +1,12 @@
 ## Simulators version
-    SUMO = 0.25.0
-    OMNeT = 4.6
-    Veins = 4.4
+#   SUMO = 0.25.0
+#   OMNeT = 4.6
+#   Veins = 4.4
 
-## Add/Set on ~/.bashrc
+## Veins add in ~/.bashrc - Path can be different in your PC
+#. /media/sda4/prog/git_clone/8_veins_simulation/JB_scripts/JB_infoInstall-loadBash.r # copy and uncomment (don't remove the . (dot))
 
-# veins ~/.bashrc - Can be different in your PC
+## Veins run by ~/.bashrc - Can be different in your PC
 export TCL_LIBRARY=/usr/lib64/tcl8.6
 
 export SUMO_HOME=/opt/sumo-0.25.0
@@ -31,11 +32,11 @@ veins_RunExperiment() {
 
     # cd veins folder, make and go back
     veins_folder_cd
-    echo -e "\nMake the files in the folder `pwd`\n"
+    echo -e "\nMake the files in the folder \"`pwd`/\"\n"
     make
     cd -
 
-    if [ "$runExperimentI" == "" ]; then # test the input, if is "" will run -r 0, if is valid, run -r I..F
+    if [ "$runExperimentI" == '' ]; then # test the input, if is '' will run -r 0, if is valid, run -r I..F
         runExperimentI=0
         runExperimentF=0
     fi
