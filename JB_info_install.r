@@ -13,8 +13,7 @@ export PATH=$PATH:/opt/sumo-0.25.0/bin
 
 export PATH=$PATH:/opt/omnetpp-4.6/bin
 
-veinsFolder="/media/sda4/prog/git_clone/veins_simulation"
-
+veinsFolder="/media/sda4/prog/git_clone/8_veins_simulation"
 export PATH=$PATH:$veinsFolder
 export PATH=$PATH:"$veinsFolder/JB_scripts"
 export veinsFolder
