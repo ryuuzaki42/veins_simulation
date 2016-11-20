@@ -22,16 +22,16 @@
 #
 # Script: Create the run line to run in the opp_runall
 #
-# last update: 20/10/2016
+# last update: 20/11/2016
 #
 if [ $# -lt 4 ]; then # Test at least tree parameters
-    echo "Error in the parameters"
+    echo -e "\nError in the parameters"
     echo "To run: opp_runall -j3 veins_opp_runall_JBr.sh -f omnet.ini -r 0..2"
     echo " opp_runall - opp_runall command"
     echo " -j\"count of cores\" - number of cores to run"
     echo " veins_opp_runall_JBr.sh - this script"
     echo " -f omnet.ini - ini file of configuration"
-    echo " -r 0..2 or -r runSart..runEnd, like -r 0..1 or -r 0..3,6..9"
+    echo -e " -r 0..2 or -r runSart..runEnd, like -r 0..1 or -r 0..3,6..9\n"
 else
     #$1 is -f
     iniFile=$2
@@ -39,7 +39,7 @@ else
     runNumber=$4
 
     if [ -e $iniFile ]; then
-        export TZ=America/Sao_Paulo
+        export TZ=America/Sao_Paulo # Set timezone to America/Sao_Paulo
 
         fileResult="results/run_"$runNumber".r"
         mkdir results 2> /dev/null # create the results folder if not exists
@@ -48,8 +48,8 @@ else
         dateStartSeconds=`date +%s`
         echo -e "\nExperiment run $runNumber staring at: $dateStart" | tee $fileResult
 
-        echo -e "\nRunning: opp_run -u Cmdenv -n ../../src/veins/ -l ../../src/libveins_simulation.so -f $iniFile -r $runNumber >> $fileResult\n" | tee -a $fileResult
-        opp_run -u Cmdenv -n ../../src/veins/ -l ../../src/libveins_simulation.so -f $iniFile -r $runNumber >> $fileResult # running experiment
+        echo -e "\nRunning: opp_run -u Cmdenv -n ../../src/veins/ -l ../../out/gcc-debug/src/libveins_simulation.so -f $iniFile -r $runNumber >> $fileResult\n" | tee -a $fileResult
+        opp_run -u Cmdenv -n ../../src/veins/ -l ../../out/gcc-debug/src/libveins_simulation.so -f $iniFile -r $runNumber >> $fileResult # running experiment
 
         dateEnd=`date` # End running experiment
         echo -e "\nExperiment run $runNumber starts at: $dateStart" | tee -a $fileResult

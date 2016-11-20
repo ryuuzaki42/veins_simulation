@@ -22,7 +22,7 @@
 #
 # Script: Script to convert SUMO point to OMNeT++ points
 #
-# last update: 12/11/2016
+# last update: 20/11/2016
 #
 echo "\n# Script to convert the SUMO point to OMNeT #\n"
 
@@ -59,6 +59,5 @@ if [ $# -eq 6 ]; then
         echo -e "\n\n\tError: Script not implemented with (x,y) : ($boundaryXLeft $boundaryYLeft) values\n"
     fi
 else
-    echo "Error parameters"
-    echo "To use: $0.sh -n file.net.xml -x \"xPoint\" -y \"yPoint\""
+    echo -e "Error parameters - Try use: $0 -n file.net.xml -x \"xPoint\" -y \"yPoint\"\n"
 fi

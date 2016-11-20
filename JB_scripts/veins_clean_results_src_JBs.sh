@@ -22,10 +22,9 @@
 #
 # Script: limpa o histórico de resultados de execução do framework Veins
 #
-# Last update: 08/11/2016
+# Last update: 20/11/2016
 #
-# Pasta do Veins (altere se a sua for diferente)
-cd /media/sda4/prog/veins_simulation/
+cd $veinsFolder # veinsFolder (change in your ~/.bashrc)
 
 echo -e "\nThis script remove/delete the results inside folder projects"
 echo -e "\nWill delete:"
@@ -48,7 +47,7 @@ else
     resposta=$1
 fi
 
-if [ "$resposta" = "y" ]; then # Change "projects" for your project folder
+if [ "$resposta" = 'y' ]; then # Change "projects" for your project folder
     rm -r projects/*/results/
     rm projects/*/.tkenvrc
     rm projects/*/.tkenvlog

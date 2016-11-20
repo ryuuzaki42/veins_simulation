@@ -21,36 +21,33 @@
 # Livre(FSF) Inc., 51 Franklin St, Fifth Floor, Boston, MA 02110-1301 USA
 #
 # Script: Cria um versão zipada do pasta veins_simulation em um pasta
-# no Dropbox (dropboxFolderD)
+# no Dropbox (dropboxFolderDest)
 #
-# Last update: 15/11/2016
+# Last update: 20/11/2016
 #
-echo -e "\nThis script create a \"veins_simulation\"(.zip) ($veinsFolderO) in one"
-echo -e "Dropbox folder ($dropboxFolderD) with out log files\n"
-
-initialFolder=$PWD # Get the initial folder
-dropboxFolderD="/media/sda4/prog/Dropbox/z_share_code_JB" # Dropbox destination folder
-veinsFolderO="/media/sda4/prog/veins_simulation" # Veins origin folder
-
+dropboxFolderDest="/media/sda4/prog/Dropbox/z_share_code_JB" # Dropbox destination folder
+veinsFolderOri=$veinsFolder # veinsFolder (change in your ~/.bashrc)
+veinsNameFolder=`echo $veinsFolder | rev | cut -d"/" -f1 | rev`
 veinsVersion="veins_v01-full"
 
-rm $dropboxFolderD/$veinsVersion.zip 2> /dev/null # Delete older $veinsVersion.zip if exists
+echo -e "\nThis script create a \"$veinsVersion.zip\" from ($veinsFolderOri/)"
+echo -e "in the Dropbox ($dropboxFolderDest/) with out log files\n"
 
-cd $veinsFolderO/../ # Go to one up to veinsFolderO
+rm $dropboxFolderDest/$veinsVersion.zip 2> /dev/null # Delete older $veinsVersion.zip if exists
 
-echo "Zip the veins_simulation in $veinsVersion.zip without \"projects/*/results\" \"*.zip\" and \".git\""
-zip -r $dropboxFolderD/$veinsVersion.zip veins_simulation/ -x *.zip\* *.tkenvrc\* veins_simulation/.git\* veins_simulation/projects/*/results\*
+cd $veinsFolderOri/../ # Go to one up to veinsFolderOri
 
-cd $dropboxFolderD
-rm -r veins_simulation $veinsVersion 2> /dev/null # Delete the older veins_simulation and $veinsVersion
+echo "Zip the veins_simulation in $veinsVersion.zip without \"projects/*/results\" \"*.tkenvrc\" \"*.zip\" and \".git\""
+zip -r $dropboxFolderDest/$veinsVersion.zip $veinsNameFolder/ -x *.zip\* *.tkenvrc\* $veinsNameFolder/.git\* $veinsNameFolder/projects/*/results\* $veinsNameFolder/src/*.so\*
+
+cd $dropboxFolderDest
+rm -r $veinsNameFolder $veinsVersion 2> /dev/null # Delete the older veins_simulation and $veinsVersion
 
 unzip $veinsVersion.zip # Unzip/Extract the $veinsVersion.zip in the Dropbox folder
 rm $veinsVersion.zip # Delete the last $veinsVersion.zip
 
-mv veins_simulation $veinsVersion # Rename the folder to veinsVersion
+mv $veinsNameFolder $veinsVersion # Rename the folder to veinsVersion
+
 zip -r $veinsVersion.zip $veinsVersion # Zip $veinsVersion in $veinsVersion.zip
+echo -e "\nThe \"$veinsVersion.zip\" was created in \"$veinsFolderOri\"\n"
 rm -r $veinsVersion # Delete de $veinsVersion folder
-
-cd $initialFolder # Back to initial folder
-
-echo -e "\n\n\tEnd script\n"

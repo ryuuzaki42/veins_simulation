@@ -23,22 +23,19 @@
 # Script: Cria uma pasta no Dropbox ($dropboxFolderDest) com as
 # configurações necessárias (*.ini, *.ned etc) e depois zip essa pasta (veins_v001.zip)
 #
-# Last update: 15/11/2016
+# Last update: 20/11/2016
 #
-initialFolder=$PWD # Get the initial folder
-
 dropboxFolderDest="/media/sda4/prog/Dropbox/z_share_code_JB" # Dropbox destination folder
-veinsFolderOri="/media/sda4/prog/veins_simulation" # Veins origin folder
-
+veinsFolderOri=$veinsFolder # veinsFolder (change in your ~/.bashrc)
 veinsVersion="veins_v01-configs"
 
-echo -e "\nThis script copy the \"veins_simulation\" ($veinsFolderOri) to one folder"
-echo -e "in Dropbox ($dropboxFolderDest) and delete sensitive data\n"
+echo -e "\nThis script create a \"$veinsVersion.zip\" from ($veinsFolderOri/)"
+echo -e "in a Dropbox ($dropboxFolderDest/) and delete sensitive data\n"
 
 cd $dropboxFolderDest
 folderCP=$dropboxFolderDest/$veinsVersion
 
-rm -r $veinsVersion $veinsVersion.zip 2> /dev/null # Delete older veins_v001 folder and $veinsVersion.zip  if exists
+rm -r $veinsVersion $veinsVersion.zip 2> /dev/null # Delete older veins_v001 folder and $veinsVersion.zip if exists
 
 mkdir $veinsVersion/ # Create a new veins_v001 folder
 
@@ -52,12 +49,13 @@ cp -r $veinsFolderOri/projects/1node/ $folderCP/projects/       # Copy 1node to 
 cp -r $veinsFolderOri/projects/epidemic/ $folderCP/projects/    # Copy epidemic to veins_v001
 cp -r $veinsFolderOri/projects/vehDist/ $folderCP/projects/     # Copy vehDist to veins_v001
 
-rm -r $folderCP/projects/vehDist/others/ # Delete the others from vehDist in the veins_v001
-rm -r $folderCP/projects/*/results/ # Delete results in the veins_v001
+rm -r $folderCP/projects/vehDist/others/ 2> /dev/null # Delete the others from vehDist in the veins_v001 if exists
+rm -r $folderCP/projects/*/results/ 2> /dev/null # Delete results in the veins_v001 if exists
 
 cp -r $veinsFolderOri/src/ $folderCP/ # Copy the src to veins_v001
 
 cd $folderCP/src/ # Move to src veins_v001 folder
+rm *.so
 
 delCC=`find . | grep "\.cc"` # Get all .cc files
 rm $delCC # Delete the .cc files
@@ -70,8 +68,6 @@ rmdir $dirEmpty # Delete the empty directories
 
 cd ../../ # Move up to nivels
 
-echo "Zip the $veinsVersion in $veinsVersion.zip"
 zip -r $veinsVersion.zip $veinsVersion/
+echo -e "\nThe \"$veinsVersion.zip\" was created in \"$veinsFolderOri\"/\n"
 rm -r $veinsVersion
-
-cd $initialFolder # Back to initial folder
