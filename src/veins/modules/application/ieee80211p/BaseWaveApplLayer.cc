@@ -135,8 +135,8 @@ void BaseWaveApplLayer::vehInitializeValuesVehDist(string category, Coord positi
 }
 void BaseWaveApplLayer::insertVehTraffic() {
     traffic traf;
-    traf.source= source;
-    traf.entryTime= simTime();
+    traf.source = source;
+    traf.entryTime = simTime();
 
     SvehTraffic.insert(make_pair(getStringId(), traf));
 }
@@ -164,7 +164,7 @@ void BaseWaveApplLayer::rsuInitializeValuesVehDist(Coord position) {
 
     rsuSelectVehGenerateMessageBegin();
 
-    if (SrsuPosition.empty() || (SrsuPosition.find(myId) == SrsuPosition.end())) {
+    if (SrsuPosition.find(myId) == SrsuPosition.end()) {
         if ((myId < 3) && (myId >= 0)) {
             SrsuPosition.insert(make_pair(myId, position));
         } else {
@@ -709,7 +709,7 @@ void BaseWaveApplLayer::toFinishVeh() {
         ASSERT2(0, "JBe - Error in vehDist::numVehicles, need to have the same entries as the number of vehicles -");
     }
 
-    if (SvehCategoryCount.empty() || (SvehCategoryCount.find(vehCategory) == SvehCategoryCount.end())) {
+    if (SvehCategoryCount.find(vehCategory) == SvehCategoryCount.end()) {
         SvehCategoryCount.insert(make_pair(vehCategory, 1));
     }else {
         SvehCategoryCount[vehCategory]++;
@@ -895,7 +895,7 @@ void BaseWaveApplLayer::selectVehGenerateMessage() {
 }
 
 void BaseWaveApplLayer::insertMessageDropVeh(string messageId, unsigned short int type, simtime_t timeGenarted) {
-    if (messagesDropVeh.empty() || (messagesDropVeh.find(messageId) == messagesDropVeh.end())) {
+    if (messagesDropVeh.find(messageId) == messagesDropVeh.end()) {
         struct messagesDropStruct mD_tmp;
         mD_tmp.byBuffer = mD_tmp.byTime = mD_tmp.byCopy = 0;
 
