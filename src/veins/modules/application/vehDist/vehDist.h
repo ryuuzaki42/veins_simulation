@@ -60,7 +60,9 @@ class vehDist : public BaseWaveApplLayer {
 
         void loadEdgePosition();
         void saveEdgePositionFile();
+        void busInsertPlanedEdges();
         void getEdgePositionByTime();
+        void edgePositionFunctionsRun();
         void createEdgePositionSaveEvent();
 
         void vehCreateEventTrySendBeaconMessage();

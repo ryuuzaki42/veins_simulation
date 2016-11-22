@@ -20,49 +20,26 @@ void vehDist::initialize(int stage) {
 void vehDist::vehInitializeVariablesVehDistVeh() {
     vehCreateUpdateRateTimeToSendEvent(); // Create Event to update the rateTimeToSend (Only VehDist)
 
-    // edget position
-    createEdgePositionSaveEvent();
-    loadEdgePosition();
-
-    //curPosition = mobility->getPositionAt(simTime() + 0.1);
-
-    if (false) {
-        cout << "\ntraciVehicle->getRoadId(): " << traciVehicle->getRoadId();
-        cout << "\ntraciVehicle->getRouteId(): " << traciVehicle->getRouteId();
-        cout << "\ntraciVehicle->getLanePosition(): " << traciVehicle->getLanePosition();
-
-       int a3 = traciVehicle->getLaneIndex();
-        cout <<  "\na3: " << a3;
-        double a4 = traciVehicle->getLanePosition();
-        cout <<  "\na4: " << a4;
-
-        cout <<  "\ntraciVehicle->getPlannedRoadIds(): ";
-        list <string> l2 = traciVehicle->getPlannedRoadIds();
-        list <string>::iterator i;
-        for( i = l2.begin(); i != l2.end(); ++i) {
-            cout << *i << " ";
-        }
-        cout << endl;
-
-        //        list <string> l3 = traci->getLaneIds();
-        //        list <string>::iterator i2;
-        //        for( i2 = l3.begin(); i2 != l3.end(); ++i2) {
-        //            cout << *i2 << " ";
-        //        }
-        //        cout << endl;
-
-        string category = traciVehicle->getTypeId();
-        if ((count(category.begin(), category.end(), 'b') > 0) || (count(category.begin(), category.end(), 'B') > 0)) {
-            //vehCategory = 'B'; // Set 'B' to "bus"
-
-            SbusEdges.insert(make_pair(findHost()->getFullName(), traciVehicle->getPlannedRoadIds()));
-        }
-        exit(2);
-    }
+    edgePositionFunctionsRun(); // edget position
 
     vehInitializeValuesVehDist(traciVehicle->getTypeId(), mobility->getPositionAt(simTime() + 0.1)); // The same for Epidemic and VehDist
 
     vehCreateEventTrySendBeaconMessage(); // Create one Event to try send messages in buffer (Only VehDist)
+}
+
+void vehDist::edgePositionFunctionsRun() {
+    createEdgePositionSaveEvent(); // Create event to generate a csv file with the position edge (if getEdgePosition => true)
+    loadEdgePosition(); // Load a csv file with the position edge (if useEdgePosition => true)
+    busInsertPlanedEdges(); // Insert the bus edge in the SbusEdges map
+}
+
+void vehDist::busInsertPlanedEdges() {
+    string categoryVeh = traciVehicle->getTypeId();
+
+    // Test if has 'B' or 'b', that make the vehicle a "bus"
+    if ((count(categoryVeh.begin(), categoryVeh.end(), 'b') > 0) || (count(categoryVeh.begin(), categoryVeh.end(), 'B') > 0)) {
+        SbusEdges.insert(make_pair(findHost()->getFullName(), traciVehicle->getPlannedRoadIds()));
+    }
 }
 
 void vehDist::createEdgePositionSaveEvent() {
