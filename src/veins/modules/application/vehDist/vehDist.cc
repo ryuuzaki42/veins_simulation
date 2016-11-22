@@ -462,8 +462,8 @@ string vehDist::neighborWithShortestDistanceToTarge(string idMessage) {
 
     cout << "Meet with neighbors " << beaconStatusNeighbors.size() << " options to a send" << idMessage << " message" << endl;
     for (itBeaconNeighbors = beaconStatusNeighbors.begin(); itBeaconNeighbors != beaconStatusNeighbors.end(); itBeaconNeighbors++) {
-        string neighborID = itBeaconNeighbors->first;
-        if (neighborID.compare("rsu") != 0) { // When use more than one rsu, will ignore the RSU in the neighborID
+        string neighborCategory = itBeaconNeighbors->second.getCategory();
+        if (neighborCategory.compare("rsu") != 0) { // When use more than one rsu, will ignore the RSU in the neighborID
             if (strcmp(itBeaconNeighbors->second.getSource(), messagesBufferVehDist[idMessage].getTarget()) == 0) {
                 cout << source << " found target, message " << idMessage << " target " << messagesBufferVehDist[idMessage].getTarget() << endl;
 
@@ -515,7 +515,7 @@ string vehDist::neighborWithShortestDistanceToTarge(string idMessage) {
                             sD.distanceToTargetCategory = sD.distanceToTargetNow; // equal to * 1
                             MeetCatP = 1;
                         } else {
-                            cout << endl << "JBe - Error category unknown -" << source << " category: " << sD.categoryVeh << endl;
+                            cout << endl << "JBe - Error category unknown - " << source << " category: " << sD.categoryVeh << endl;
                             ASSERT2(0, "JBe - Error category unknown -");
                         }
 
