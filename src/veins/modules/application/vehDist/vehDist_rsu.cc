@@ -90,6 +90,7 @@ WaveShortMessage* vehDist_rsu::prepareBeaconStatusWSM(string name, int lengthBit
     wsm->setSenderPos(Coord(30000, 30000, 3)); // Value set to be not select by small distance
     wsm->setSenderPosPrevious(Coord(30000, 30000, 3)); // RSU can't move
     wsm->setRateTimeToSend(10000); // Value set to be not select by small rateTimeToSend
+    wsm->setCategory("rsu");
 
     //beacon don't need
     //wsm->setRecipientAddressString(); => "BROADCAST"
