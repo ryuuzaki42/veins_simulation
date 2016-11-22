@@ -14,7 +14,7 @@ class vehDist : public BaseWaveApplLayer {
         virtual void initialize(int stage);
 
         enum WaveApplMessageKinds {
-            SendEvtBeaconMessage, SendEvtUpdateRateTimeToSendVeh
+            SendEvtBeaconMessage, SendEvtUpdateRateTimeToSendVeh, SendEvtSaveEdgePosition
         };
 
     protected:
@@ -24,6 +24,7 @@ class vehDist : public BaseWaveApplLayer {
 
         cMessage* sendBeaconMessageEvt;
         cMessage* sendUpdateRateTimeToSendVeh;
+        cMessage* sendSaveEdgePosition;
 
         vector <string> messagesDelivered;
 
@@ -56,6 +57,11 @@ class vehDist : public BaseWaveApplLayer {
         void printBeaconStatusNeighbors();
         void onBeaconStatus(WaveShortMessage* wsm);
         WaveShortMessage* prepareBeaconStatusWSM(string name, int lengthBits, t_channel channel, int priority, int serial);
+
+        void loadEdgePosition();
+        void saveEdgePositionFile();
+        void getEdgePositionByTime();
+        void createEdgePositionSaveEvent();
 
         void vehCreateEventTrySendBeaconMessage();
         void sendBeaconMessage();
@@ -112,6 +118,10 @@ unsigned short int BaseWaveApplLayer::ScountGenerateMessage, BaseWaveApplLayer::
 
 unsigned short int BaseWaveApplLayer::SbeaconStatusBufferSize, BaseWaveApplLayer::SttlBeaconStatus, BaseWaveApplLayer::SpercentP;
 unsigned short int BaseWaveApplLayer::StimeLimitGenerateMessage, BaseWaveApplLayer::StimeToUpdatePosition, BaseWaveApplLayer::SmessageBufferSize;
+
+map <string, struct BaseWaveApplLayer::edgePosition> BaseWaveApplLayer::SedgesPosition;
+map <string, list <string>> BaseWaveApplLayer::SbusEdges;
+map <string, Coord> BaseWaveApplLayer::SedgesPositionLoaded;
 
 string BaseWaveApplLayer::SprojectInfo;
 bool BaseWaveApplLayer::SusePathHistory, BaseWaveApplLayer::SallowMessageCopy;
