@@ -315,7 +315,7 @@ void vehDist::removeOldestInputBeaconStatus() {
 }
 
 void vehDist::sendBeaconMessage() {
-    cout << source << " try to send message at: " << simTime() << endl;
+    //cout << source << " try to send message at: " << simTime() << endl;
 //############################################################# run many times
     removeOldestInputBeaconStatus();
     removeOldestInputBeaconMessage();
@@ -326,7 +326,7 @@ void vehDist::sendBeaconMessage() {
 //    }
 //############################################################# run many times
 
-    if (messageToSend >= messagesOrderReceivedVehDist.size() || messagesOrderReceivedVehDist.empty()) {
+    if (messageToSend >= messagesOrderReceivedVehDist.size()) {
         messageToSend = 0;
     }
 
@@ -335,26 +335,26 @@ void vehDist::sendBeaconMessage() {
     //printMessagesBuffer();
     messageToSend++; // Move to next message
 
-    if (!SuseRateTimeToSend){
-        cout << source << " schedule useRateTimeToSend: false at: " << simTime() << " to: " << (simTime() + 1) << endl;
+    if (!SuseRateTimeToSend) {
+        //cout << source << " schedule useRateTimeToSend: false at: " << simTime() << " to: " << (simTime() + 1) << endl;
         scheduleAt((simTime() + par("normalTimeSendMessage").doubleValue()), sendBeaconMessageEvt);
     } else {
-        if (messageToSend >= messagesOrderReceivedVehDist.size() || messagesOrderReceivedVehDist.empty()) {
+        if (messageToSend >= messagesOrderReceivedVehDist.size()) {
             if (simTime() > timeToFinishLastStartSend) {
                 scheduleAt((simTime() + double(rateTimeToSend)/1000), sendBeaconMessageEvt);
-                cout << source << " 1_schedule at: " << simTime() << " to: " << (simTime() + double(rateTimeToSend)/1000);
+                //cout << source << " 1_schedule at: " << simTime() << " to: " << (simTime() + double(rateTimeToSend)/1000);
             } else {
                 scheduleAt(timeToFinishLastStartSend, sendBeaconMessageEvt);
-                cout << source << " 2_schedule at: " << simTime() << " to: " << timeToFinishLastStartSend;
+                //cout << source << " 2_schedule at: " << simTime() << " to: " << timeToFinishLastStartSend;
             }
 
             timeToFinishLastStartSend += double(rateTimeToSendLimitTime)/1000;
         } else {
             scheduleAt((simTime() + double(rateTimeToSend)/1000), sendBeaconMessageEvt);
-            cout << source << " 3_schedule at: " << simTime() << " to: " << (simTime() + double(rateTimeToSend)/1000) << " rateTimeToSend: " << rateTimeToSend;
+            //cout << source << " 3_schedule at: " << simTime() << " to: " << (simTime() + double(rateTimeToSend)/1000) << " rateTimeToSend: " << rateTimeToSend;
         }
-        cout << " timeToFinishLastStartSend: " << timeToFinishLastStartSend << endl;
-        cout << "                               " << source << " expSendbyDSCR: " << SexpSendbyDSCR << " at: " << simTime() << endl << endl;
+        //cout << " timeToFinishLastStartSend: " << timeToFinishLastStartSend << endl;
+        //cout << "                               " << source << " expSendbyDSCR: " << SexpSendbyDSCR << " at: " << simTime() << endl << endl;
     }
 }
 
