@@ -54,7 +54,7 @@ simple BaseWaveApplLayer like IBaseApplLayer {
 
         bool useRateTimeToSend = default(false); // Use or not the rateTimeToSend
         double normalTimeSendMessage @unit("s") = default(0s); // Time will send a message when useRateTimeToSend is false.
-        string folderPathSed = default("");
+        // string folderPathSed = default(""); // Path for run the system("sed ...") command
         bool disableCout = default(false);
 
         bool getTraffic = default(false); // Generate a csv file with the (in, out) of vehicles

@@ -454,6 +454,9 @@ void BaseWaveApplLayer::restartFilesResultRSU(string resultFolder) {
 
     bool justAppend;
     if (myId == 0) {
+
+        // Not work with runs in parallel
+        /*
         string pathFolder = par("folderPathSed");
         if (SexpNumber <= 4) { // Set the maxSpeed to 16.67 m/s (60 km/h) in the expNumber 1 to 4
             string comand = "sed -i 's/maxSpeed=.* color/maxSpeed=\"16.67\" color/g' " + pathFolder +"*.rou.xml";
@@ -468,6 +471,7 @@ void BaseWaveApplLayer::restartFilesResultRSU(string resultFolder) {
                 cout << endl << "Change the speed to 25 m/s, command1: " << comand << endl;
             }
         }
+        */
 
         string commandCreateFolder = "mkdir -p " + resultFolder + " > /dev/null";
         cout << endl << "Created the folder, command: \"" << commandCreateFolder << "\"" << endl;
@@ -1077,12 +1081,16 @@ void BaseWaveApplLayer::toFinishRSU() {
     }
 
     if (SrsuPosition.size() == 0) {
+
+        // Not work with runs in parallel
+        /*
         string pathFolder = par("folderPathSed");
         string comand = "sed -i 's/maxSpeed=.* color/maxSpeed=\"16.67\" color/g' " + pathFolder +"*.rou.xml";
         int retunrSystemValue = system(comand.c_str()); // Set the maxSpeed back to default: 16.67 m/s (60 km/h)
         if (retunrSystemValue == 0) {
             cout << endl << "Setting speed back to default (16.67 m/s), command: " << comand << endl;
         }
+        */
 
         printVehTrafficMethodCheck();
     }
