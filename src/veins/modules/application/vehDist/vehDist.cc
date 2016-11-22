@@ -20,10 +20,145 @@ void vehDist::initialize(int stage) {
 void vehDist::vehInitializeVariablesVehDistVeh() {
     vehCreateUpdateRateTimeToSendEvent(); // Create Event to update the rateTimeToSend (Only VehDist)
 
-    curPosition = mobility->getPositionAt(simTime() + 0.1);
-    vehInitializeValuesVehDist(traciVehicle->getTypeId(), curPosition); // The same for Epidemic and VehDist
+    // edget position
+    createEdgePositionSaveEvent();
+    loadEdgePosition();
+
+    //curPosition = mobility->getPositionAt(simTime() + 0.1);
+
+    if (false) {
+        cout << "\ntraciVehicle->getRoadId(): " << traciVehicle->getRoadId();
+        cout << "\ntraciVehicle->getRouteId(): " << traciVehicle->getRouteId();
+        cout << "\ntraciVehicle->getLanePosition(): " << traciVehicle->getLanePosition();
+
+       int a3 = traciVehicle->getLaneIndex();
+        cout <<  "\na3: " << a3;
+        double a4 = traciVehicle->getLanePosition();
+        cout <<  "\na4: " << a4;
+
+        cout <<  "\ntraciVehicle->getPlannedRoadIds(): ";
+        list <string> l2 = traciVehicle->getPlannedRoadIds();
+        list <string>::iterator i;
+        for( i = l2.begin(); i != l2.end(); ++i) {
+            cout << *i << " ";
+        }
+        cout << endl;
+
+        //        list <string> l3 = traci->getLaneIds();
+        //        list <string>::iterator i2;
+        //        for( i2 = l3.begin(); i2 != l3.end(); ++i2) {
+        //            cout << *i2 << " ";
+        //        }
+        //        cout << endl;
+
+        string category = traciVehicle->getTypeId();
+        if ((count(category.begin(), category.end(), 'b') > 0) || (count(category.begin(), category.end(), 'B') > 0)) {
+            //vehCategory = 'B'; // Set 'B' to "bus"
+
+            SbusEdges.insert(make_pair(findHost()->getFullName(), traciVehicle->getPlannedRoadIds()));
+        }
+        exit(2);
+    }
+
+    vehInitializeValuesVehDist(traciVehicle->getTypeId(), mobility->getPositionAt(simTime() + 0.1)); // The same for Epidemic and VehDist
 
     vehCreateEventTrySendBeaconMessage(); // Create one Event to try send messages in buffer (Only VehDist)
+}
+
+void vehDist::createEdgePositionSaveEvent() {
+    if (par("getEdgePosition").boolValue()) {
+        sendSaveEdgePosition = new cMessage("Event get edges position", SendEvtSaveEdgePosition);
+        //cout << source << " at: " << simTime() << " schedule created SendEvtSaveEdgePosition to: "<< simTime() << endl;
+        scheduleAt(simTime(), sendSaveEdgePosition);
+    }
+}
+
+void vehDist::saveEdgePositionFile() {
+    if (par("getEdgePosition").boolValue()) {
+        if (SnumVehicles.size() == 1) {
+            string fileName = "results/edgesPosition-checkMethod.csv";
+            myfile.open(fileName);
+            myfile << "Edge Coord Position-Lane Info";
+
+            ofstream myfile2;
+            string fileName2 = "results/edgesPosition.csv";
+            myfile2.open(fileName2);
+            myfile2 << "Edge Coord";
+
+            map <string, edgePosition>::iterator itEdgePos;
+            for (itEdgePos = SedgesPosition.begin(); itEdgePos != SedgesPosition.end(); itEdgePos++) {
+                myfile << "\n" << itEdgePos->first << " " << itEdgePos->second.position;
+                myfile << " " << itEdgePos->second.vehPosGetPos << " " << itEdgePos->second.info;
+
+                myfile2 << "\n" << itEdgePos->first << " " << itEdgePos->second.position;
+            }
+            myfile.close();
+            myfile2.close();
+        }
+    }
+}
+
+void vehDist::getEdgePositionByTime(){
+    if (par("getEdgePositionByTime").boolValue()) {
+        string roadId = traciVehicle->getRoadId();
+        double vehPosLane = traciVehicle->getLanePosition();
+
+        map <string, edgePosition>::iterator itEdgePos = SedgesPosition.find(roadId);
+        if (itEdgePos == SedgesPosition.end()) {
+            edgePosition edgePosTmp;
+            edgePosTmp.position = mobility->getPositionAt(simTime() + 0.1);
+            edgePosTmp.vehPosGetPos = vehPosLane;
+            edgePosTmp.info = string(findHost()->getFullName()) + "_at:" + simTime().str() + "_Dist:" + to_string(vehPosLane);
+
+            SedgesPosition.insert(make_pair(roadId, edgePosTmp));
+        } else {
+            if (itEdgePos->second.vehPosGetPos > vehPosLane) {
+                itEdgePos->second.vehPosGetPos = vehPosLane;
+                itEdgePos->second.info += " " + string(findHost()->getFullName()) + "_at:" + simTime().str() + "_Dist:" + to_string(vehPosLane);
+            }
+        }
+    }
+}
+
+void vehDist::loadEdgePosition() {
+    if (par("useEdgePosition").boolValue()) {
+        string fileInput, line;
+
+        fileInput = "../0scenarios/bologna_small/joined/edgesPosition.csv";
+        freopen(fileInput.c_str(), "r", stdin);
+
+        getline(cin, line, '\n'); // line 1
+        cout << "\nline: " << line << endl;
+
+        string edgeName, pS;
+        Coord positionStart;
+
+        while (getline(cin, line, '\n')) {
+            //cout << line << endl;
+
+            size_t pos = line.find(' '); //line => :a0_0 (1787.24,1127.6,1.895)
+            edgeName = line.substr(0, pos);
+            //cout << "\n\nedgeName: " << edgeName;
+
+            string lineTmp = line.substr(pos + 1, std::string::npos);
+            //cout << "\nEdgePosition: " << lineTmp; // (1787.24,1127.6,1.895)
+            pos = lineTmp.find(','); // (1787.24,
+            positionStart.x = atof(lineTmp.substr(1, pos - 1).c_str());
+            //cout << "\npositionStart.x: " << positionStart.x;
+
+            lineTmp = lineTmp.substr(pos +1, std::string::npos);
+            pos = lineTmp.find(','); // 1127.6,1.895)
+            positionStart.y = atof(lineTmp.substr(0, pos).c_str());
+            //cout << "\npositionStart.y: " << positionStart.y;
+
+            lineTmp = lineTmp.substr(pos + 1, std::string::npos);
+            pos = lineTmp.find(','); // 1.895)
+            positionStart.z = atof(lineTmp.substr(0, lineTmp.size() - 1).c_str());
+            //cout << "\npositionStart.z: " << positionStart.z;
+
+            SedgesPositionLoaded.insert(make_pair(edgeName, positionStart));
+        }
+    }
 }
 
 void vehDist::onBeaconStatus(WaveShortMessage* wsm) {
@@ -51,13 +186,13 @@ void vehDist::onBeaconMessage(WaveShortMessage* wsm) {
 
         // test if message has been delivered to the target before.
         // TODO Alguma diferença no resultado final de mensagens recebidas?
-        if (messagesDelivered.empty() || (find(messagesDelivered.begin(), messagesDelivered.end(), wsm->getGlobalMessageIdentificaton()) == messagesDelivered.end())) {
+        if (find(messagesDelivered.begin(), messagesDelivered.end(), wsm->getGlobalMessageIdentificaton()) == messagesDelivered.end()) {
 
           bool insert = sendOneNewMessageToOneNeighborTarget(*wsm); // Look in neigborStatus buffer if has the target of this message
             //bool insert = true;
             if (insert) {
                 if (wsm->getHopCount() >= 0) {
-                    if (messagesBufferVehDist.empty() || messagesBufferVehDist.find(wsm->getGlobalMessageIdentificaton()) == messagesBufferVehDist.end()) { //verify if the message isn't in the buffer
+                    if (messagesBufferVehDist.find(wsm->getGlobalMessageIdentificaton()) == messagesBufferVehDist.end()) { //verify if the message isn't in the buffer
                         cout << source << " saving message from " << wsm->getSenderAddressTemporary() << " with Id: " << wsm->getGlobalMessageIdentificaton() << " at: " << simTime() << endl;
                         string wsmDataTmp = wsm->getWsmData();
                         if (wsmDataTmp.size() < 42) { // WSMData generated by car[x] and carry by [ T, P
@@ -327,71 +462,75 @@ string vehDist::neighborWithShortestDistanceToTarge(string idMessage) {
 
     cout << "Meet with neighbors " << beaconStatusNeighbors.size() << " options to a send" << idMessage << " message" << endl;
     for (itBeaconNeighbors = beaconStatusNeighbors.begin(); itBeaconNeighbors != beaconStatusNeighbors.end(); itBeaconNeighbors++) {
-        if (strcmp(itBeaconNeighbors->second.getSource(), messagesBufferVehDist[idMessage].getTarget()) == 0) {
-             cout << source << " found target, message " << idMessage << " target " << messagesBufferVehDist[idMessage].getTarget() << endl;
+        string neighborID = itBeaconNeighbors->first;
+        if (neighborID.compare("rsu") != 0) { // When use more than one rsu, will ignore the RSU in the neighborID
+            if (strcmp(itBeaconNeighbors->second.getSource(), messagesBufferVehDist[idMessage].getTarget()) == 0) {
+                cout << source << " found target, message " << idMessage << " target " << messagesBufferVehDist[idMessage].getTarget() << endl;
 
-             return itBeaconNeighbors->second.getSource();
-        } else {
-            if (!messagesSendLog.empty() && (messagesSendLog[idMessage].find(itBeaconNeighbors->first) != std::string::npos)) {
-                cout << source << " has been send a message " << idMessage << " to " << itBeaconNeighbors->first << endl;
+                return itBeaconNeighbors->second.getSource();
             } else {
-                neighborDistanceBefore = traci->getDistance(itBeaconNeighbors->second.getSenderPosPrevious(), messagesBufferVehDist[idMessage].getTargetPos(), false);
-                neighborDistanceNow = traci->getDistance(itBeaconNeighbors->second.getSenderPos(), messagesBufferVehDist[idMessage].getTargetPos(), false);
-                cout << "    1337 " << itBeaconNeighbors->first << " DistB: " << neighborDistanceBefore << " DistN: " << neighborDistanceNow << endl;
+                if (!messagesSendLog.empty() && (messagesSendLog[idMessage].find(itBeaconNeighbors->first) != std::string::npos)) {
+                    cout << source << " has been send a message " << idMessage << " to " << itBeaconNeighbors->first << endl;
+                } else {
+                    neighborDistanceBefore = traci->getDistance(itBeaconNeighbors->second.getSenderPosPrevious(), messagesBufferVehDist[idMessage].getTargetPos(), false);
+                    neighborDistanceNow = traci->getDistance(itBeaconNeighbors->second.getSenderPos(), messagesBufferVehDist[idMessage].getTargetPos(), false);
+                    cout << "    1337 " << itBeaconNeighbors->first << " DistB: " << neighborDistanceBefore << " DistN: " << neighborDistanceNow << endl;
 
-                if (SusePathHistory) { // True will check if the vehicle is closing to target (message target destination)
-                    insert = false;
+                    if (SusePathHistory) { // True will check if the vehicle is closing to target (message target destination)
+                        insert = false;
 
-                    if (neighborDistanceBefore > neighborDistanceNow) { // Test if is closing to target
-                        insert = true;
-                    } /*else {
+                        if (neighborDistanceBefore > neighborDistanceNow) { // Test if is closing to target
+                            insert = true;
+                        } /*else {
                         cout << itBeaconNeighbors->first << " going to another direction" << endl;
                     }*/
-                } else {
-                    insert = true;
-                }
-
-                // Removed to allow vehicle all neigbor vehicle
-//                if (!SallowMessageCopy || !SusePathHistory) {
-//                    double thisVehDistanceNow = traci->getDistance(curPosition, messagesBufferVehDist[idMessage].getTargetPos(), false);
-//                    if (neighborDistanceNow > thisVehDistanceNow) { // Test if is closing to target
-//                        insert = false;
-//                    }
-//                }
-
-                if (insert) {
-                    sD.categoryVeh = itBeaconNeighbors->second.getCategory();
-                    sD.distanceToTargetNow = neighborDistanceNow;
-                    sD.distanceToTargetBefore = neighborDistanceBefore;
-                    sD.senderPos = Coord(itBeaconNeighbors->second.getSenderPos());
-                    sD.speedVeh = itBeaconNeighbors->second.getSenderSpeed();
-                    sD.rateTimeToSendVeh = itBeaconNeighbors->second.getRateTimeToSend();
-
-                    if (sD.categoryVeh.compare("T") == 0) {
-                        sD.distanceToTargetCategory = sD.distanceToTargetNow * 0.90;
-                        MeetCatT = 1;
-//                    } else if (sD.categoryVeh.compare("B") == 0) {
-//                        sD.distanceToTargetCategory = sD.distanceToTargetNow * 0.95;
-//                        MeetCatT = 1;
-                    } else if (sD.categoryVeh.compare("P") == 0) {
-                        sD.distanceToTargetCategory = sD.distanceToTargetNow; // equal to * 1
-                        MeetCatP = 1;
                     } else {
-                        cout << endl << "JBe - Error category unknown -" << source << " category: " << sD.categoryVeh << endl;
-                        ASSERT2(0, "JBe - Error category unknown -");
+                        insert = true;
                     }
 
-                    sD.decisionValueDistanceSpeed = sD.distanceToTargetNow - (sD.speedVeh);
-                    sD.decisionValueDistanceRateTimeToSend = sD.distanceToTargetNow + (double(sD.rateTimeToSendVeh)/100);
-                    sD.decisionValueDistanceSpeedRateTimeToSend = sD.distanceToTargetNow - (sD.speedVeh) + (double(sD.rateTimeToSendVeh)/100);
+                    // Removed to allow vehicle all neigbor vehicle
+                    /*
+                    if (!SallowMessageCopy || !SusePathHistory) {
+                        double thisVehDistanceNow = traci->getDistance(curPosition, messagesBufferVehDist[idMessage].getTargetPos(), false);
+                        if (neighborDistanceNow > thisVehDistanceNow) { // Test if is closing to target
+                            insert = false;
+                        }
+                    } */
 
-                    // Distance = [0 - 125] - 720 m
-                    // vehicle Speed = 0 - (16.67/25) - 84 m/s
-                    // rateTimeToSend = 100 to 5000 ms
-                    // DecisonValueDS = distance - speed
-                    // DecisonValueDSCR = distance - speed + rateTimeToSend/100 (0.1 * 10)
+                    if (insert) {
+                        sD.categoryVeh = itBeaconNeighbors->second.getCategory();
+                        sD.distanceToTargetNow = neighborDistanceNow;
+                        sD.distanceToTargetBefore = neighborDistanceBefore;
+                        sD.senderPos = Coord(itBeaconNeighbors->second.getSenderPos());
+                        sD.speedVeh = itBeaconNeighbors->second.getSenderSpeed();
+                        sD.rateTimeToSendVeh = itBeaconNeighbors->second.getRateTimeToSend();
 
-                    vehShortestDistanceToTarget.insert(make_pair(itBeaconNeighbors->first, sD));
+                        if (sD.categoryVeh.compare("T") == 0) {
+                            sD.distanceToTargetCategory = sD.distanceToTargetNow * 0.90;
+                            MeetCatT = 1;
+                            //                    } else if (sD.categoryVeh.compare("B") == 0) {
+                            //                        sD.distanceToTargetCategory = sD.distanceToTargetNow * 0.95;
+                            //                        MeetCatT = 1;
+                        } else if (sD.categoryVeh.compare("P") == 0) {
+                            sD.distanceToTargetCategory = sD.distanceToTargetNow; // equal to * 1
+                            MeetCatP = 1;
+                        } else {
+                            cout << endl << "JBe - Error category unknown -" << source << " category: " << sD.categoryVeh << endl;
+                            ASSERT2(0, "JBe - Error category unknown -");
+                        }
+
+                        sD.decisionValueDistanceSpeed = sD.distanceToTargetNow - (sD.speedVeh);
+                        sD.decisionValueDistanceRateTimeToSend = sD.distanceToTargetNow + (double(sD.rateTimeToSendVeh)/100);
+                        sD.decisionValueDistanceSpeedRateTimeToSend = sD.distanceToTargetNow - (sD.speedVeh) + (double(sD.rateTimeToSendVeh)/100);
+
+                        // Distance = [0 - 125] - 720 m
+                        // vehicle Speed = 0 - (16.67/25) - 84 m/s
+                        // rateTimeToSend = 100 to 5000 ms
+                        // DecisonValueDS = distance - speed
+                        // DecisonValueDSCR = distance - speed + rateTimeToSend/100 (0.1 * 10)
+
+                        vehShortestDistanceToTarget.insert(make_pair(itBeaconNeighbors->first, sD));
+                    }
                 }
             }
         }
@@ -673,6 +812,8 @@ string vehDist::chosenByDistance_Speed_Category_RateTimeToSend(unordered_map <st
 }
 
 void vehDist::finish() {
+    saveEdgePositionFile();
+
     toFinishVeh();
 }
 
@@ -835,8 +976,59 @@ WaveShortMessage* vehDist::updateBeaconMessageWSM(WaveShortMessage* wsm, string 
 }
 
 void vehDist::handleSelfMsg(cMessage* msg) {
+    if (false) {
+    //if (true) {
+        if (simTime() > 40) {
+            cout << "\n\n" << source << "\npos: " << mobility->getCurrentPosition() << "\nlane: " << traciVehicle->getRoadId();
+            cout << "\nlanePos: " << traciVehicle->getLanePosition();
+
+            double diffPos, edgeDist;
+            Coord vehPos = mobility->getCurrentPosition();
+
+            map <string, edgePosition>::iterator itEdgePos = SedgesPosition.begin();
+            string edgeNow = itEdgePos->first;
+            edgeDist = traci->getDistance(itEdgePos->second.position, vehPos, false);
+
+            if (!SedgesPosition.empty()) {
+                for (; itEdgePos != SedgesPosition.end(); itEdgePos++) {
+                    diffPos = traci->getDistance(itEdgePos->second.position, vehPos, false);
+
+                    cout << "\n\nedge: " << itEdgePos->first;
+                    cout <<  "\npos: " << itEdgePos->second.position;
+                    cout <<  "\ndiff1: " << diffPos;
+
+                    if (int(diffPos) < int(edgeDist)) {
+                        edgeNow = itEdgePos->first;
+                        edgeDist = diffPos;
+                    }
+                }
+                cout << "\n\nedgeNow: " << edgeNow << " edgeDist: " << edgeDist;
+            }
+
+            cout << "\n\n";
+            map <string, list<string>>::iterator itbusEdges;
+            for (itbusEdges = SbusEdges.begin(); itbusEdges != SbusEdges.end(); itbusEdges++) {
+                cout << "\nbus: " << itbusEdges->first << " ";
+
+                list <string> listTmp = itbusEdges->second;
+                list <string>::iterator itList;
+                for(itList = listTmp.begin(); itList != listTmp.end(); ++itList) {
+                    cout << *itList << " ";
+                }
+            }
+
+            cout << "\n\n";
+            for (itEdgePos = SedgesPosition.begin(); itEdgePos != SedgesPosition.end(); itEdgePos++) {
+                cout << "\nedge: " << itEdgePos->first;
+                cout <<  "pos: " << itEdgePos->second.position;
+            }
+
+            exit(2);
+        }
+    }
+
     switch (msg->getKind()) {
-        case SEND_BEACON_EVT_vehDist: {  // Call prepareBeaconStatusWSM local to the veh
+        case SEND_BEACON_EVT_vehDist: { // Call prepareBeaconStatusWSM local to the veh
             sendWSM(prepareBeaconStatusWSM("beaconStatus", beaconLengthBits, type_CCH, beaconPriority, -1));
             scheduleAt(simTime() + par("beaconInterval").doubleValue(), sendBeaconEvt);
             break;
@@ -848,6 +1040,11 @@ void vehDist::handleSelfMsg(cMessage* msg) {
         case SendEvtUpdateRateTimeToSendVeh: {
             vehUpdateRateTimeToSend();
             scheduleAt(simTime() + rateTimeToSendUpdateTime, sendUpdateRateTimeToSendVeh);
+            break;
+        }
+        case SendEvtSaveEdgePosition: {
+            getEdgePositionByTime();
+            scheduleAt(simTime() + 1, sendSaveEdgePosition);
             break;
         }
         default: {
