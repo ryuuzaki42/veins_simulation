@@ -206,6 +206,16 @@ class BaseWaveApplLayer : public BaseApplLayer {
             simtime_t timeGenerate, timeDroped, timeDifference;
         };
         map <string, struct messagesDropStruct> messagesDropVeh;
+
+        struct edgePosition {
+            //->frist edgeName
+            Coord position;
+            double vehPosGetPos;
+            string info;
+        };
+        static map <string, edgePosition> SedgesPosition;
+        static map <string, list <string>> SbusEdges;
+        static map <string, Coord> SedgesPositionLoaded;
 //######################################### vehDist #########################################
 
 //######################################### Epidemic #########################################
