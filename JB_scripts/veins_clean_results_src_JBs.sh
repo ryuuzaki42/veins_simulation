@@ -22,7 +22,7 @@
 #
 # Script: limpa o histórico de resultados de execução do framework Veins
 #
-# Last update: 20/11/2016
+# Last update: 24/11/2016
 #
 cd $veinsFolder # veinsFolder (change in your ~/.bashrc)
 
@@ -40,12 +40,8 @@ ls projects/*/.tkenvlog
 ls projects/*/run.r
 ls projects/*/runExperimentOuptut.r
 
-if [ "$1" == '' ]; then
-    echo -en "\nWant continue? (y)es - (n)o: "
-    read resposta
-else
-    resposta=$1
-fi
+echo -en "\nWant continue? (y)es - (n)o: "
+read resposta
 
 if [ "$resposta" = 'y' ]; then # Change "projects" for your project folder
     rm -r projects/*/results/
