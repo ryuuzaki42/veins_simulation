@@ -102,11 +102,11 @@ unsigned short int generate_routes (unsigned short int lineStart, unsigned short
     output <<"    File with " << countVehicleRoutes << " (" << countVehicleCagegoryT << " T, ";
     output << (countVehicleRoutes - countVehicleCagegoryT) << " P) routes" << endl;
     output << "    goAndBack: " << boolalpha << goAndBack << endl;
-    output << "    Routes T (" << count << " to " << countVehicleCagegoryT <<"): \"random\"" << endl;
-    output << "    Routes P (" << (countVehicleCagegoryT + 1) << " to " << countVehicleRoutes << "): ";
+    output << "    Routes taxi (" << count << " to " << countVehicleCagegoryT <<"): \"random\"" << endl;
+    output << "    Routes passenger (" << (countVehicleCagegoryT + 1) << " to " << countVehicleRoutes << "): ";
     output << ((double(pathComp) * 250)/1000) * 2 << " km (" << ((pathComp * 250) * 2) << " m)" << endl;
-    output << "    Begin insert " << countVehicleCagegoryT << " T and " << countPBegin << " P" << endl;
-    output << "        After this, insert " << insertByTime << " P by each " << timeToInsert << " seconds"<< endl;
+    output << "    Begin insert " << countVehicleCagegoryT << " taxi and " << countPBegin << " passenger" << endl;
+    output << "        After this, insert " << insertByTime << " passenger by each " << timeToInsert << " seconds"<< endl;
     output << "    fileOutput: " << fileOutput << endl;
     output << "    lineStart: " << lineCount << endl;
     output << "    -->" << endl << endl;
@@ -243,7 +243,7 @@ unsigned short int generate_routes (unsigned short int lineStart, unsigned short
     string vehDescripType = " accel=\"3\" decel=\"5\" sigma=\"" + ss.str();
     vehDescripType += "\" length=\"2.5\" minGap=\"2.5\" maxSpeed=\"16.67\" ";
 
-    output << endl << "    <!-- T => Taxi/Táxi -->" << endl;
+    output << endl << "    <!-- taxi -->" << endl;
     // Um com id=T e outro com id=P
     output << "    <vType id=\"T\"" << vehDescripType << "color=\"1,1,0\"/>" << endl << endl;
 
@@ -258,12 +258,12 @@ unsigned short int generate_routes (unsigned short int lineStart, unsigned short
         } else {
             output << "veh" << count <<"\" route=\"route" << count;
         }
-        output << "\" type=\"T\"/>" << endl;
+        output << "\" type=\"taxi\"/>" << endl;
 
         count++;
     }
 
-    output << endl << "    <!-- P => Private car/Carro de passeio -->" << endl;
+    output << endl << "    <!-- passenger => Private car/Carro de passeio -->" << endl;
     output << "    <vType id=\"P\"" << vehDescripType << "color=\"0,1,0\"/>" << endl << endl;
     output << "    <!-- http://sumo.dlr.de/wiki/Definition_of_Vehicles,_Vehicle_Types,_and_Routes -->" << endl;
 
@@ -285,7 +285,7 @@ unsigned short int generate_routes (unsigned short int lineStart, unsigned short
         } else {
             output << "veh" << count <<"\" route=\"route" << count;
         }
-        output <<  "\" type=\"P\"/>" << endl;
+        output <<  "\" type=\"passenger\"/>" << endl;
         count++;
 
         if (count >= countPBeginTmp) {
