@@ -14,7 +14,7 @@ class vehDist : public BaseWaveApplLayer {
         virtual void initialize(int stage);
 
         enum WaveApplMessageKinds {
-            SendEvtBeaconMessage, SendEvtUpdateRateTimeToSendVeh, SendEvtSaveEdgePosition
+            SendEvtBeaconMessage, SendEvtUpdateRateTimeToSendVeh, SendEvtSaveBusPosition
         };
 
     protected:
@@ -24,7 +24,7 @@ class vehDist : public BaseWaveApplLayer {
 
         cMessage* sendBeaconMessageEvt;
         cMessage* sendUpdateRateTimeToSendVeh;
-        cMessage* sendSaveEdgePosition;
+        cMessage* sendSaveBusPosition;
 
         vector <string> messagesDelivered;
 
@@ -58,12 +58,15 @@ class vehDist : public BaseWaveApplLayer {
         void onBeaconStatus(WaveShortMessage* wsm);
         WaveShortMessage* prepareBeaconStatusWSM(string name, int lengthBits, t_channel channel, int priority, int serial);
 
-        void loadEdgePosition();
-        void saveEdgePositionFile();
-        void busInsertPlanedEdges();
-        void getEdgePositionByTime();
-        void edgePositionFunctionsRun();
-        void createEdgePositionSaveEvent();
+        void busPositionFunctionsRun();
+        void busPosInsertByTimeMap();
+        void saveBusPositionFile();
+
+        void busPosLoadFromFile();
+
+        bool busRouteDiffTarget(string busID, Coord targetPos);
+        void sendMessageDeleveryBuffer(string beaconSource);
+        void createBusPositionSaveEvent();
 
         void vehCreateEventTrySendBeaconMessage();
         void sendBeaconMessage();
@@ -121,9 +124,11 @@ unsigned short int BaseWaveApplLayer::ScountGenerateMessage, BaseWaveApplLayer::
 unsigned short int BaseWaveApplLayer::SbeaconStatusBufferSize, BaseWaveApplLayer::SttlBeaconStatus, BaseWaveApplLayer::SpercentP;
 unsigned short int BaseWaveApplLayer::StimeLimitGenerateMessage, BaseWaveApplLayer::StimeToUpdatePosition, BaseWaveApplLayer::SmessageBufferSize;
 
-map <string, struct BaseWaveApplLayer::edgePosition> BaseWaveApplLayer::SedgesPosition;
-map <string, list <string>> BaseWaveApplLayer::SbusEdges;
-map <string, Coord> BaseWaveApplLayer::SedgesPositionLoaded;
+int BaseWaveApplLayer::SsimulationTimeLimit;
+unordered_map <string, struct BaseWaveApplLayer::busPosByTime> BaseWaveApplLayer::SposTimeBus;
+unordered_map <string, struct BaseWaveApplLayer::busPosByTime> BaseWaveApplLayer::SposTimeBusLoaded;
+unordered_map <string, string> BaseWaveApplLayer::SrouteIDVehID;
+int BaseWaveApplLayer::ScounttoDeliveryMsg;
 
 string BaseWaveApplLayer::SprojectInfo;
 bool BaseWaveApplLayer::SusePathHistory, BaseWaveApplLayer::SallowMessageCopy;
