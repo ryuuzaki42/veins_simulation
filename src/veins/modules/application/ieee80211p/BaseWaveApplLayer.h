@@ -139,6 +139,8 @@ class BaseWaveApplLayer : public BaseApplLayer {
         Coord curPosition;
 
         string source, target;
+        bool toDeliveryMsg;
+        static int ScounttoDeliveryMsg;
 
         cMessage* sendBeaconEvt;
 
@@ -149,6 +151,7 @@ class BaseWaveApplLayer : public BaseApplLayer {
         vector <string> messagesOrderReceivedVehDist;
 
         unordered_map <string, WaveShortMessage> messagesBufferVehDist;
+        unordered_map <string, WaveShortMessage> messagesBufferToDelivery;
 
         //## Used to another projects
         cMessage* sendGenerateMessageEvt;
@@ -160,6 +163,8 @@ class BaseWaveApplLayer : public BaseApplLayer {
         double vehOffSet;
 
         string vehCategory;
+        string routeId;
+        static int SsimulationTimeLimit;
 
         ofstream myfile; // record in file
 
@@ -216,6 +221,14 @@ class BaseWaveApplLayer : public BaseApplLayer {
         static map <string, edgePosition> SedgesPosition;
         static map <string, list <string>> SbusEdges;
         static map <string, Coord> SedgesPositionLoaded;
+
+        struct busPosByTime {
+            //->frist source
+            map <simtime_t, Coord> timePos;
+        };
+        static unordered_map <string, busPosByTime> SposTimeBus; // To save bus position in a .csv
+        static unordered_map <string, busPosByTime> SposTimeBusLoaded; // To load bus position to memory form a .csv
+        static unordered_map <string, string> SrouteIDVehID; // routeID - vehID
 //######################################### vehDist #########################################
 
 //######################################### Epidemic #########################################
