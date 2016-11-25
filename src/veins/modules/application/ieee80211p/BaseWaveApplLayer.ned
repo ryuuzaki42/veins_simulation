@@ -60,8 +60,8 @@ simple BaseWaveApplLayer like IBaseApplLayer {
         bool getTraffic = default(false); // Generate a csv file with the (in, out) of vehicles
         int trafficGranularitySum @unit("s") = default(60s);
 
-        bool getEdgePosition = default(false); // Generate a csv file with the edge position
-        bool useEdgePosition = default(false); // Use or not the edge position
+        bool getBusPosition = default(false); // Generate a csv file with the bus position
+        bool useBusPosition = default(false); // Use or not the bus position/route
 
     gates:
         input lowerLayerIn; // from mac layer
