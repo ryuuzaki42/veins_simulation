@@ -98,20 +98,20 @@ void BaseWaveApplLayer::saveMessagesOnFile(WaveShortMessage* wsm, string fileNam
 void BaseWaveApplLayer::vehInitializeValuesVehDist(string category, Coord position) {
     generalInitializeVariables_executionByExpNumberVehDist();
 
+    curPosition = position;
     vehOffSet = double(myId)/1000; // Simulate asynchronous channel access. Values between 0.001, 0.002
     SnumVehicles.push_back(source);
     cout << endl << "Count of vehicle in the scenario at: " << simTime() << " - " << SnumVehicles.size() << endl;
     ScountVehicleAll++;
 
-    if ((count(category.begin(), category.end(), 't') > 0) || (count(category.begin(), category.end(), 'T') > 0)) {
+    if (category.find("taxi") != std::string::npos) {
         vehCategory = 'T'; // Set 'T' to "taxi"
-    } else if ((count(category.begin(), category.end(), 'p') > 0) || (count(category.begin(), category.end(), 'P') > 0)) {
+    } else if (category.find("passenger") != std::string::npos) {
         vehCategory = 'P'; // Set 'P' to "passenger"
-    } else if ((count(category.begin(), category.end(), 'b') > 0) || (count(category.begin(), category.end(), 'B') > 0)) {
-        //vehCategory = 'B'; // Set 'B' to "bus"
-        vehCategory = 'T'; // Set 'T' to "bus" but work equal taxi this the code
-    } else if ((count(category.begin(), category.end(), 'i') > 0) || (count(category.begin(), category.end(), 'I') > 0)) {
+    } else if (category.find("ignoring") != std::string::npos) {
         vehCategory = 'P'; // Set 'P' to "ignoring"
+    } else if (category.find("bus") != std::string::npos) {
+        vehCategory = 'B'; // Set 'B' to "bus"
     } else {
         cout << "JBe - Initial category: " << category << endl;
         ASSERT2(0, "JBe - Initial category is unknown - ");
@@ -213,6 +213,7 @@ void BaseWaveApplLayer::printHeaderfileExecution() {
 void BaseWaveApplLayer::generalInitializeVariables_executionByExpNumberVehDist() {
     source = findHost()->getFullName();
     msgBufferUse = 0;
+    toDeliveryMsg = false;
 
     // Epidemic variables
     lastTimeSendLocalSummaryVector = nodesRecentlySendLocalSummaryVector = 0;
@@ -223,6 +224,8 @@ void BaseWaveApplLayer::generalInitializeVariables_executionByExpNumberVehDist()
             //cout.clear(); // "Enable" the cout
         }
 
+        ScounttoDeliveryMsg = 0;
+        SsimulationTimeLimit = atoi(ev.getConfig()->getConfigValue("sim-time-limit"));
         SmessageBufferSize = par("messageBufferSize"); // Define the maximum buffer size (in number of messages) that a node is willing to allocate
         SmessageHopLimit = par("messageHopLimit").longValue();
         SrepeatNumber = atoi(ev.getConfig()->getConfigValue("seed-set")); // Number of execution (${repetition})
@@ -326,14 +329,13 @@ void BaseWaveApplLayer::generalInitializeVariables_executionByExpNumberVehDist()
 }
 
 string BaseWaveApplLayer::getCFGVAR() { // Variables from omnetpp-4.6/include/cconfiguration.h
-    int simulationLimit = atoi(ev.getConfig()->getConfigValue("sim-time-limit"));
     int trafficGranularitySum = par("trafficGranularitySum");
 
     string texTmp = "\nExp: " + to_string(SexpNumber) + "_ ";
 
     string getAll = texTmp;
 
-    getAll += texTmp + "simulationLimit:_ " + to_string(simulationLimit) + string("s");
+    getAll += texTmp + "simulationLimit:_ " + to_string(SsimulationTimeLimit) + string("s");
     getAll += texTmp + "trafficGranularitySum:_ " + to_string(trafficGranularitySum) + string("s");
 
     Veins::TraCIScenarioManagerLaunchd* traciSMLget = Veins::TraCIScenarioManagerLaunchdAccess().get();
@@ -733,10 +735,9 @@ void BaseWaveApplLayer::toFinishVeh() {
 
 void BaseWaveApplLayer::printVehTraffic() {
     if (SnumVehicles.size() == 0) {
-        int simulationLimit = atoi(ev.getConfig()->getConfigValue("sim-time-limit"));
         int trafficGranularitySum = par("trafficGranularitySum");
 
-        int countValue = simulationLimit/trafficGranularitySum + 1; // e.g., 600/60 + 1 => 11, or 310/30 +1 = 11
+        int countValue = SsimulationTimeLimit/trafficGranularitySum + 1; // e.g., 600/60 + 1 => 11, or 310/30 +1 = 11
 
         int valueEntry[countValue], valueExit[countValue];
         for (int i = 0; i < countValue; i++) {
@@ -744,7 +745,7 @@ void BaseWaveApplLayer::printVehTraffic() {
             valueExit[i] = 0;
         }
 
-        string fileName="results/vehTraffic_simLimt" + to_string(simulationLimit) + "s_gran_"+ to_string(trafficGranularitySum) + "s_.csv";
+        string fileName="results/vehTraffic_simLimt" + to_string(SsimulationTimeLimit) + "s_gran_"+ to_string(trafficGranularitySum) + "s_.csv";
         myfile.open(fileName);
         myfile << endl << "_This CVS file is separated by underscore\n\n\n";
 
@@ -1003,13 +1004,13 @@ void BaseWaveApplLayer::printCountMessagesReceivedRSU() {
         myfile << textTmp << "Average hops to received: " << avgGeneralHopsMessage << endl;
         myfile << textTmp << "Hops by category T general: " << countT << endl;
         myfile << textTmp << "Hops by category P general: " << countP << endl;
+        myfile << textTmp << "counttoDeliveryMsg: " << ScounttoDeliveryMsg << endl;
     } else {
         myfile << endl << endl << textTmp << "Count messages received: " << 0 << endl;
         myfile << "messagesReceived from " << source << " is empty" << endl;
     }
 
-    if (SrsuPosition.size() == 1) {
-        // SnumVehicles.size() == 0)
+    if (SrsuPosition.size() == 1) { // SnumVehicles.size() == 0
         myfile << endl << "## Count of vehicle by category" << endl;
         cout << endl << "## Count of vehicle by category" << endl;
         for (auto& x: SvehCategoryCount) {
@@ -1097,11 +1098,10 @@ void BaseWaveApplLayer::toFinishRSU() {
 }
 
 void BaseWaveApplLayer::printVehTrafficMethodCheck() {
-    if (par("getTraffic").boolValue()){
-        int simulationLimit = atoi(ev.getConfig()->getConfigValue("sim-time-limit"));
+    if (par("getTraffic").boolValue()) {
         int trafficGranularitySum = par("trafficGranularitySum");
 
-        string fileName="results/vehTraffic_simLimt" + to_string(simulationLimit) + "s_gran_"+ to_string(trafficGranularitySum) + "s_MethodCheck.csv";
+        string fileName="results/vehTraffic_simLimt" + to_string(SsimulationTimeLimit) + "s_gran_"+ to_string(trafficGranularitySum) + "s_MethodCheck.csv";
         myfile.open(fileName);
         myfile << endl << "_This CVS file is separated by underscore\n\n\n";
 
