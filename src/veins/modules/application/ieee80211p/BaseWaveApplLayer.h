@@ -139,7 +139,7 @@ class BaseWaveApplLayer : public BaseApplLayer {
 
         string source, target;
         bool toDeliveryMsg;
-        static int ScounttoDeliveryMsg;
+        static int ScountToDeliveryMsg;
 
         cMessage* sendBeaconEvt;
 

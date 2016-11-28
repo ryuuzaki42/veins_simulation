@@ -127,7 +127,7 @@ int BaseWaveApplLayer::SsimulationTimeLimit;
 unordered_map <string, struct BaseWaveApplLayer::busPosByTime> BaseWaveApplLayer::SposTimeBus;
 unordered_map <string, struct BaseWaveApplLayer::busPosByTime> BaseWaveApplLayer::SposTimeBusLoaded;
 unordered_map <string, string> BaseWaveApplLayer::SrouteIDVehID;
-int BaseWaveApplLayer::ScounttoDeliveryMsg;
+int BaseWaveApplLayer::ScountToDeliveryMsg;
 
 string BaseWaveApplLayer::SprojectInfo;
 bool BaseWaveApplLayer::SusePathHistory, BaseWaveApplLayer::SallowMessageCopy;
