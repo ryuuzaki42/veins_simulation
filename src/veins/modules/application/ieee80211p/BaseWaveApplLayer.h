@@ -60,7 +60,6 @@ class BaseWaveApplLayer : public BaseApplLayer {
         void toFinishRSU();
         void toFinishVeh();
         string boolToString(bool value);
-        string constCharToString(const char *s);
 
         void restartFilesResultRSU(string resultFolder);
         void restartFilesResultVeh(string projectInfo, Coord initialPos);
@@ -124,7 +123,7 @@ class BaseWaveApplLayer : public BaseApplLayer {
         void createEpidemicRemoteSummaryVector(string s);
 
         void generateMessageEpidemic();
-        string getStringId();
+        string insertZeroIntRetunrString(int value);
 //######################################### Epidemic #########################################
 
         virtual void sendWSM(WaveShortMessage* wsm);
@@ -162,8 +161,8 @@ class BaseWaveApplLayer : public BaseApplLayer {
 
         double vehOffSet;
 
-        string vehCategory;
-        string routeId;
+        string vehCategory, routeId;
+        char firstCategory, secondCategory;
         static int SsimulationTimeLimit;
 
         ofstream myfile; // record in file
@@ -201,7 +200,7 @@ class BaseWaveApplLayer : public BaseApplLayer {
 
         struct messages {
           string firstSource, hops, wsmData, times;
-          unsigned short int minHop, maxHop, sumHops, countT, countP, copyMessage;
+          unsigned short int minHop, maxHop, sumHops, countFirstCategory, countSecondCategory, countCopyMessage;
           simtime_t sumTimeRecived, timeGenerate;
         };
         map <string, struct messages> messagesReceivedRSU;
@@ -211,16 +210,6 @@ class BaseWaveApplLayer : public BaseApplLayer {
             simtime_t timeGenerate, timeDroped, timeDifference;
         };
         map <string, struct messagesDropStruct> messagesDropVeh;
-
-        struct edgePosition {
-            //->frist edgeName
-            Coord position;
-            double vehPosGetPos;
-            string info;
-        };
-        static map <string, edgePosition> SedgesPosition;
-        static map <string, list <string>> SbusEdges;
-        static map <string, Coord> SedgesPositionLoaded;
 
         struct busPosByTime {
             //->frist source
