@@ -42,6 +42,9 @@ void vehDist_rsu::onBeaconMessage(WaveShortMessage* wsm) {
             findHost()->bubble("Received Message");
             saveMessagesOnFile(wsm, fileMessagesUnicast);
 
+            if (wsm->getToDelivery()) {
+                ScountToDeliveryMsg++;
+            }
             messagesReceivedMeasuringRSU(wsm);
         }/* else {
             real scenario save this message in the buffer
