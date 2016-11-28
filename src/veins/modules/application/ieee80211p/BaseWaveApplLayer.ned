@@ -47,14 +47,12 @@ simple BaseWaveApplLayer like IBaseApplLayer {
         bool allowMessageCopy = default(false); // Allow or not copy of messages
         bool selectFromAllVehicles = default(false); // Chose for all vehicle or for only new
         bool useMessagesSendLog = default(false); // Use or not message send log
-        bool vehSendWhileParking = default(false); // Send or not while is parking
         int beaconTypeInitialize; // 1 for vehDist, 2 for epidemic, 3 for minicurso_UFPI_TraCI, 0 for the default
         bool vehDistCreateEventGenerateMessage = default(false); // Use the event to generate message or not
         int vehTimeLimitToAcceptGenerateMgs @unit("s") = default(0s); // Time limit that one vehile enter in the scenario
 
         bool useRateTimeToSend = default(false); // Use or not the rateTimeToSend
         double normalTimeSendMessage @unit("s") = default(0s); // Time will send a message when useRateTimeToSend is false.
-        // string folderPathSed = default(""); // Path for run the system("sed ...") command
         bool disableCout = default(false);
 
         bool getTraffic = default(false); // Generate a csv file with the (in, out) of vehicles
@@ -62,6 +60,9 @@ simple BaseWaveApplLayer like IBaseApplLayer {
 
         bool getBusPosition = default(false); // Generate a csv file with the bus position
         bool useBusPosition = default(false); // Use or not the bus position/route
+
+        string firstCategory = default(""); // First category from the vehicle # Only one char valid
+        string secondCategory = default(""); // Second category from the vehicle # Only one char valid
 
     gates:
         input lowerLayerIn; // from mac layer
