@@ -52,7 +52,6 @@ class vehDist : public BaseWaveApplLayer {
         void finish();
         void handleSelfMsg(cMessage* msg);
         void handleLowerMsg(cMessage* msg);
-        void sendWSM(WaveShortMessage* wsm);
 
         void printBeaconStatusNeighbors();
         void onBeaconStatus(WaveShortMessage* wsm);
