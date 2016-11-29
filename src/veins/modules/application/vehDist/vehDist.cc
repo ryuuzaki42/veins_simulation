@@ -198,7 +198,7 @@ void vehDist::onBeaconStatus(WaveShortMessage* wsm) {
 
 void vehDist::onBeaconMessage(WaveShortMessage* wsm) {
     if (source.compare(wsm->getRecipientAddressTemporary()) == 0) { // Verify if this is the recipient of the message
-        saveMessagesOnFile(wsm, SfileMessagesUnicastVeh);
+        //saveMessagesOnFile(wsm, SfileMessagesUnicastVeh);
 
         // Real scenario
         //if (source.compare(wsm->getTarget()) == 0) { // Message to this vehicle
