@@ -172,8 +172,9 @@ class BaseWaveApplLayer : public BaseApplLayer {
         unsigned int msgBufferUse;
 
         static string SfileMessagesUnicastVeh, SfileMessagesDropVeh;
-        static string SfileMessagesUnicastRsu, SfileMessagesBroadcastRsu, SfileMessagesCountRsu;
-        static string SfileMessagesGeneratedVehRsu, SresultFolder;
+        static string SfileMessagesCountRsu, SfileMessagesGeneratedVehRsu, SresultFolder;
+
+        string fileMessagesBroadcastRsu, fileMessagesUnicastRsu;
 
         static unsigned short int SrepeatNumber, SexpNumber, SexpSendbyDSCR, ScountGenerateMessage, SttlMessage;
 

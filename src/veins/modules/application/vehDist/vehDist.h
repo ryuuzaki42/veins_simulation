@@ -130,8 +130,8 @@ unordered_map <string, string> BaseWaveApplLayer::SrouteIDVehID;
 int BaseWaveApplLayer::ScountToDeliveryMsg;
 
 string BaseWaveApplLayer::SfileMessagesUnicastVeh, BaseWaveApplLayer::SfileMessagesDropVeh;
-string BaseWaveApplLayer::SfileMessagesUnicastRsu, BaseWaveApplLayer::SfileMessagesBroadcastRsu, BaseWaveApplLayer::SfileMessagesCountRsu;
-string BaseWaveApplLayer::SfileMessagesGeneratedVehRsu, BaseWaveApplLayer::SresultFolder;
+string BaseWaveApplLayer::SfileMessagesCountRsu, BaseWaveApplLayer::SfileMessagesGeneratedVehRsu;
+string BaseWaveApplLayer::SresultFolder;
 
 string BaseWaveApplLayer::SfirstCategory, BaseWaveApplLayer::SsecondCategory;
 
