@@ -61,7 +61,7 @@ class BaseWaveApplLayer : public BaseApplLayer {
         void toFinishVeh();
         string boolToString(bool value);
 
-        void restartFilesResultRSU(string resultFolder);
+        void restartFilesResultRSU();
         void restartFilesResultVeh(string projectInfo, Coord initialPos);
         void saveVehStartPositionVeh(string fileNameLocation, Coord initialPos);
         void insertMessageDropVeh(string ID, unsigned short int type, simtime_t timeGenarted);
@@ -171,7 +171,9 @@ class BaseWaveApplLayer : public BaseApplLayer {
         static unordered_map <int, Coord> SrsuPositions;
         unsigned int msgBufferUse;
 
-        string fileMessagesUnicast, fileMessagesBroadcast, fileMessagesCount, fileMessagesDrop, fileMessagesGenerated;
+        static string SfileMessagesUnicastVeh, SfileMessagesDropVeh;
+        static string SfileMessagesUnicastRsu, SfileMessagesBroadcastRsu, SfileMessagesCountRsu;
+        static string SfileMessagesGeneratedVehRsu, SresultFolder;
 
         static unsigned short int SrepeatNumber, SexpNumber, SexpSendbyDSCR, ScountGenerateMessage, SttlMessage;
 

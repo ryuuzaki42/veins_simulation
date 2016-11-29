@@ -129,6 +129,10 @@ unordered_map <string, struct BaseWaveApplLayer::busPosByTime> BaseWaveApplLayer
 unordered_map <string, string> BaseWaveApplLayer::SrouteIDVehID;
 int BaseWaveApplLayer::ScountToDeliveryMsg;
 
+string BaseWaveApplLayer::SfileMessagesUnicastVeh, BaseWaveApplLayer::SfileMessagesDropVeh;
+string BaseWaveApplLayer::SfileMessagesUnicastRsu, BaseWaveApplLayer::SfileMessagesBroadcastRsu, BaseWaveApplLayer::SfileMessagesCountRsu;
+string BaseWaveApplLayer::SfileMessagesGeneratedVehRsu, BaseWaveApplLayer::SresultFolder;
+
 string BaseWaveApplLayer::SprojectInfo;
 bool BaseWaveApplLayer::SusePathHistory, BaseWaveApplLayer::SallowMessageCopy;
 bool BaseWaveApplLayer::SvehSendWhileParking, BaseWaveApplLayer::SselectFromAllVehicles, BaseWaveApplLayer::SuseMessagesSendLog;

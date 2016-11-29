@@ -40,7 +40,7 @@ void vehDist_rsu::onBeaconMessage(WaveShortMessage* wsm) {
     if (source.compare(wsm->getRecipientAddressTemporary()) == 0) {
         if (source.compare(wsm->getTarget()) == 0) {
             findHost()->bubble("Received Message");
-            saveMessagesOnFile(wsm, fileMessagesUnicast);
+            saveMessagesOnFile(wsm, SfileMessagesUnicastRsu);
 
             if (wsm->getToDelivery()) {
                 ScountToDeliveryMsg++;
@@ -50,7 +50,7 @@ void vehDist_rsu::onBeaconMessage(WaveShortMessage* wsm) {
             real scenario save this message in the buffer
         }*/
     } else {
-        saveMessagesOnFile(wsm, fileMessagesBroadcast);
+        saveMessagesOnFile(wsm, SfileMessagesBroadcastRsu);
     }
 }
 
