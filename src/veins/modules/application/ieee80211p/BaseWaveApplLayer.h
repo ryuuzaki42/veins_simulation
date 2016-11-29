@@ -162,7 +162,7 @@ class BaseWaveApplLayer : public BaseApplLayer {
         double vehOffSet;
 
         string vehCategory, routeId;
-        char firstCategory, secondCategory;
+        static string SfirstCategory, SsecondCategory;
         static int SsimulationTimeLimit;
 
         ofstream myfile; // record in file

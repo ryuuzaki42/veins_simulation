@@ -133,6 +133,8 @@ string BaseWaveApplLayer::SfileMessagesUnicastVeh, BaseWaveApplLayer::SfileMessa
 string BaseWaveApplLayer::SfileMessagesUnicastRsu, BaseWaveApplLayer::SfileMessagesBroadcastRsu, BaseWaveApplLayer::SfileMessagesCountRsu;
 string BaseWaveApplLayer::SfileMessagesGeneratedVehRsu, BaseWaveApplLayer::SresultFolder;
 
+string BaseWaveApplLayer::SfirstCategory, BaseWaveApplLayer::SsecondCategory;
+
 string BaseWaveApplLayer::SprojectInfo;
 bool BaseWaveApplLayer::SusePathHistory, BaseWaveApplLayer::SallowMessageCopy;
 bool BaseWaveApplLayer::SvehSendWhileParking, BaseWaveApplLayer::SselectFromAllVehicles, BaseWaveApplLayer::SuseMessagesSendLog;
