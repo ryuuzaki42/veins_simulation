@@ -198,7 +198,7 @@ void vehDist::onBeaconStatus(WaveShortMessage* wsm) {
 
 void vehDist::onBeaconMessage(WaveShortMessage* wsm) {
     if (source.compare(wsm->getRecipientAddressTemporary()) == 0) { // Verify if this is the recipient of the message
-        saveMessagesOnFile(wsm, fileMessagesUnicast);
+        saveMessagesOnFile(wsm, SfileMessagesUnicastVeh);
 
         // Real scenario
         //if (source.compare(wsm->getTarget()) == 0) { // Message to this vehicle
@@ -721,12 +721,12 @@ string vehDist::chosenByDistance_CategoryA(unordered_map <string, shortestDistan
     for (itShortestDistance = vehShortestDistanceToTarget.begin(); itShortestDistance != vehShortestDistanceToTarget.end(); itShortestDistance++) {
         category = itShortestDistance->second.categoryVeh;
         distanceToTarget = itShortestDistance->second.distanceToTargetNow;
-        if (category.compare("P") == 0) {
+        if (category.compare(to_string(firstCategory)) == 0) {
             if (shortestDistanceP > distanceToTarget) {
                 shortestDistanceP = distanceToTarget;
                 vehIdP = itShortestDistance->first;
             }
-        } else if (category.compare("T") == 0) {
+        } else if (category.compare(to_string(secondCategory)) == 0) {
             if (shortestDistanceT > distanceToTarget) {
                 shortestDistanceT = distanceToTarget;
                 vehIdT = itShortestDistance->first;
@@ -791,12 +791,12 @@ string vehDist::chosenByDistance_Speed_Category(unordered_map <string, shortestD
     for (itShortestDistance = vehShortestDistanceToTarget.begin(); itShortestDistance != vehShortestDistanceToTarget.end(); itShortestDistance++) {
         category = itShortestDistance->second.categoryVeh;
         distanceSpeedValue = itShortestDistance->second.decisionValueDistanceSpeed;
-        if (category.compare("P") == 0) {
+        if (category.compare(to_string(firstCategory)) == 0) {
             if (shortestDistanceP > distanceSpeedValue) {
                 shortestDistanceP = distanceSpeedValue;
                 vehIdP = itShortestDistance->first;
             }
-        } else if (category.compare("T") == 0) {
+        } else if (category.compare(to_string(secondCategory)) == 0) {
             if (shortestDistanceT > distanceSpeedValue) {
                 shortestDistanceT = distanceSpeedValue;
                 vehIdT = itShortestDistance->first;
@@ -828,12 +828,12 @@ string vehDist::chosenByDistance_Speed_Category_RateTimeToSend(unordered_map <st
     for (itShortestDistance = vehShortestDistanceToTarget.begin(); itShortestDistance != vehShortestDistanceToTarget.end(); itShortestDistance++) {
         category = itShortestDistance->second.categoryVeh;
         valueDSCR = itShortestDistance->second.decisionValueDistanceSpeedRateTimeToSend;
-        if (category.compare("P") == 0) {
+        if (category.compare(to_string(firstCategory)) == 0) {
             if (shortestDistanceP > valueDSCR) {
                 shortestDistanceP = valueDSCR;
                 vehIdP = itShortestDistance->first;
             }
-        } else if (category.compare("T") == 0) {
+        } else if (category.compare(to_string(secondCategory)) == 0) {
             if (shortestDistanceT > valueDSCR) {
                 shortestDistanceT = valueDSCR;
                 vehIdT = itShortestDistance->first;
@@ -1052,13 +1052,16 @@ bool vehDist::busRouteDiffTarget(string busID, Coord targetPos) {
     if (par("useBusPosition").boolValue()) {
         string routeIDTmp;
         if (SrouteIDVehID.find(busID) == SrouteIDVehID.end()) {
+            cout << "\nJBe - SrouteIDVehID.find(" << busID << ") == SrouteIDVehID.end()";
             ASSERT2(0, "JBe - SrouteIDVehID.find(busID) == SrouteIDVehID.end()");
         } else {
             routeIDTmp = SrouteIDVehID.find(busID)->second;
         }
+        cout << "\nrouteIDTmp: " << routeIDTmp;
 
         struct busPosByTime structBusPosByTime;
         if (SposTimeBusLoaded.find(routeIDTmp) == SposTimeBusLoaded.end()) {
+            cout << "\nSposTimeBusLoaded.find(" << routeIDTmp << ") == SposTimeBusLoaded.end()";
             ASSERT2(0, "SposTimeBusLoaded.find(routeIDTmp) == SposTimeBusLoaded.end()");
         } else {
             structBusPosByTime = SposTimeBusLoaded.find(routeIDTmp)->second;
@@ -1070,7 +1073,8 @@ bool vehDist::busRouteDiffTarget(string busID, Coord targetPos) {
 
         map <simtime_t, Coord>::iterator itTimePos;
         if (timePosTmp.find(timeNow) == timePosTmp.end()) {
-            ASSERT2(0, "JBe - SrouteIDVehID.find(busID) == SrouteIDVehID.end()");
+            cout << "\ntimePosTmp.find(" << timeNow << ") == timePosTmp.end()";
+            return false;
         } else {
             itTimePos = timePosTmp.find(timeNow);
         }
