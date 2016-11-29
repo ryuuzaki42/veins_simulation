@@ -207,7 +207,7 @@ void vehDist::onBeaconMessage(WaveShortMessage* wsm) {
 
         cout << "vehCategory: " << vehCategory << "\n";
         if (SexpSendbyDSCR == 13) {
-            if (vehCategory.compare("B") == 0) {
+            if (vehCategory.compare(SsecondCategory) == 0) {
                 if (wsm->getToDelivery()) {
                     messagesBufferToDelivery.insert(make_pair(wsm->getGlobalMessageIdentificaton(), *wsm));
                     cout << source << " with one message ToDelivery: " << wsm->getToDelivery() << " target: " << wsm->getTarget() << " at: " << simTime() << endl;
@@ -241,7 +241,7 @@ void vehDist::onBeaconMessage(WaveShortMessage* wsm) {
                         msgBufferUse++;
                         messagesOrderReceivedVehDist.push_back(wsm->getGlobalMessageIdentificaton());
 
-                        colorCarryMessageVehDist(messagesBufferVehDist);
+                        //colorCarryMessageVehDist(messagesBufferVehDist);
                         printMessagesBuffer();
                     } else {
                         cout << source << " message (" << wsm->getGlobalMessageIdentificaton() << ") is on the buffer at: " << simTime() << endl;
@@ -431,7 +431,7 @@ void vehDist::trySendBeaconMessage() {
 
                     auto it = find(messagesOrderReceivedVehDist.begin(), messagesOrderReceivedVehDist.end(), idMessage);
                     messagesOrderReceivedVehDist.erase(it);
-                    colorCarryMessageVehDist(messagesBufferVehDist);
+                    //colorCarryMessageVehDist(messagesBufferVehDist);
                 }
 
                 if (SuseMessagesSendLog) {
@@ -721,12 +721,12 @@ string vehDist::chosenByDistance_CategoryA(unordered_map <string, shortestDistan
     for (itShortestDistance = vehShortestDistanceToTarget.begin(); itShortestDistance != vehShortestDistanceToTarget.end(); itShortestDistance++) {
         category = itShortestDistance->second.categoryVeh;
         distanceToTarget = itShortestDistance->second.distanceToTargetNow;
-        if (category.compare(to_string(firstCategory)) == 0) {
+        if (category.compare(SfirstCategory) == 0) {
             if (shortestDistanceP > distanceToTarget) {
                 shortestDistanceP = distanceToTarget;
                 vehIdP = itShortestDistance->first;
             }
-        } else if (category.compare(to_string(secondCategory)) == 0) {
+        } else if (category.compare(SsecondCategory) == 0) {
             if (shortestDistanceT > distanceToTarget) {
                 shortestDistanceT = distanceToTarget;
                 vehIdT = itShortestDistance->first;
@@ -791,12 +791,12 @@ string vehDist::chosenByDistance_Speed_Category(unordered_map <string, shortestD
     for (itShortestDistance = vehShortestDistanceToTarget.begin(); itShortestDistance != vehShortestDistanceToTarget.end(); itShortestDistance++) {
         category = itShortestDistance->second.categoryVeh;
         distanceSpeedValue = itShortestDistance->second.decisionValueDistanceSpeed;
-        if (category.compare(to_string(firstCategory)) == 0) {
+        if (category.compare(SfirstCategory) == 0) {
             if (shortestDistanceP > distanceSpeedValue) {
                 shortestDistanceP = distanceSpeedValue;
                 vehIdP = itShortestDistance->first;
             }
-        } else if (category.compare(to_string(secondCategory)) == 0) {
+        } else if (category.compare(SsecondCategory) == 0) {
             if (shortestDistanceT > distanceSpeedValue) {
                 shortestDistanceT = distanceSpeedValue;
                 vehIdT = itShortestDistance->first;
@@ -828,12 +828,12 @@ string vehDist::chosenByDistance_Speed_Category_RateTimeToSend(unordered_map <st
     for (itShortestDistance = vehShortestDistanceToTarget.begin(); itShortestDistance != vehShortestDistanceToTarget.end(); itShortestDistance++) {
         category = itShortestDistance->second.categoryVeh;
         valueDSCR = itShortestDistance->second.decisionValueDistanceSpeedRateTimeToSend;
-        if (category.compare(to_string(firstCategory)) == 0) {
+        if (category.compare(SfirstCategory) == 0) {
             if (shortestDistanceP > valueDSCR) {
                 shortestDistanceP = valueDSCR;
                 vehIdP = itShortestDistance->first;
             }
-        } else if (category.compare(to_string(secondCategory)) == 0) {
+        } else if (category.compare(SsecondCategory) == 0) {
             if (shortestDistanceT > valueDSCR) {
                 shortestDistanceT = valueDSCR;
                 vehIdT = itShortestDistance->first;
@@ -889,7 +889,7 @@ void vehDist::sendMessageToOneNeighborTarget(string beaconSource) {
                 cout << endl << source << "JBe - Error in messagesOrderReceived, need to have the same entries as messagesBuffer -" << endl;
                 ASSERT2(0, "JBe - Error in messagesOrderReceived, need to have the same entries as messagesBuffer -");
             }
-            colorCarryMessageVehDist(messagesBufferVehDist);
+            //colorCarryMessageVehDist(messagesBufferVehDist);
         } else {
             countMessage--;
             itMessage++;
@@ -918,7 +918,7 @@ void vehDist::sendMessageDeleveryBuffer(string beaconSource) {
             }
 
             messagesBufferToDelivery.erase(idMessage);
-            colorCarryMessageVehDist(messagesBufferToDelivery);
+            //colorCarryMessageVehDist(messagesBufferToDelivery);
         } else {
             countMessage--;
             itMessage++;
