@@ -138,7 +138,6 @@ class BaseWaveApplLayer : public BaseApplLayer {
         Coord curPosition;
 
         string source, target;
-        bool toDeliveryMsg;
         static int ScountToDeliveryMsg;
 
         cMessage* sendBeaconEvt;
@@ -147,6 +146,8 @@ class BaseWaveApplLayer : public BaseApplLayer {
 
 //######################################### vehDist #########################################
 
+        bool toDeliveryMsg;
+        static int StotalCountMessageReceivedRsu;
         vector <string> messagesOrderReceivedVehDist;
 
         unordered_map <string, WaveShortMessage> messagesBufferVehDist;
