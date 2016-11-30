@@ -70,6 +70,7 @@ class vehDist : public BaseWaveApplLayer {
         void vehCreateEventTrySendBeaconMessage();
         void sendBeaconMessage();
         void printMessagesBuffer();
+        void printVehShortestDistanceToTarget(unordered_map <string, shortestDistance> vehShortestDistanceToTarget, string idMessage);
         WaveShortMessage* updateBeaconMessageWSM(WaveShortMessage* wsm, string rcvId);
 
         void trySendBeaconMessage();
@@ -134,6 +135,7 @@ string BaseWaveApplLayer::SfileMessagesCountRsu, BaseWaveApplLayer::SfileMessage
 string BaseWaveApplLayer::SresultFolder;
 
 string BaseWaveApplLayer::SfirstCategory, BaseWaveApplLayer::SsecondCategory;
+int BaseWaveApplLayer::StotalCountMessageReceivedRsu;
 
 string BaseWaveApplLayer::SprojectInfo;
 bool BaseWaveApplLayer::SusePathHistory, BaseWaveApplLayer::SallowMessageCopy;
