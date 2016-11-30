@@ -11,6 +11,7 @@ class vehDist_rsu : public BaseWaveApplLayer {
 
     protected:
         BaseMobility* mobi;
+        string vehToDelivery;
 
     protected:
         virtual void onBeacon(WaveShortMessage* wsm);
