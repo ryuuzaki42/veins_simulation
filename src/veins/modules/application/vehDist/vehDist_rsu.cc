@@ -16,6 +16,11 @@ void vehDist_rsu::initialize(int stage) {
 
 void vehDist_rsu::rsuInitializeVariables() {
     rsuInitializeValuesVehDist(mobi->getInitialPositionFromIniFileRSU());
+
+    if (source.compare("rsu[0]") == 0) {
+        StotalCountMessageReceivedRsu = 0;
+        vehToDelivery = "SenderAddress MsgID timeSim rsuID\n";
+    }
 }
 
 void vehDist_rsu::handleLowerMsg(cMessage* msg) {
@@ -39,11 +44,13 @@ void vehDist_rsu::onBeaconStatus(WaveShortMessage* wsm) {
 void vehDist_rsu::onBeaconMessage(WaveShortMessage* wsm) {
     if (source.compare(wsm->getRecipientAddressTemporary()) == 0) {
         if (source.compare(wsm->getTarget()) == 0) {
-            findHost()->bubble("Received Message");
+            //findHost()->bubble("Received Message");
             saveMessagesOnFile(wsm, fileMessagesUnicastRsu);
 
             if (wsm->getToDelivery()) {
                 ScountToDeliveryMsg++;
+                vehToDelivery += wsm->getSenderAddressTemporary() + string(" ") + wsm->getGlobalMessageIdentificaton();
+                vehToDelivery += string(" ") + to_string(simTime().dbl()) + string(" ") + source + string("\n");
             }
             messagesReceivedMeasuringRSU(wsm);
         }/* else {
@@ -106,6 +113,11 @@ WaveShortMessage* vehDist_rsu::prepareBeaconStatusWSM(string name, int lengthBit
 
 void vehDist_rsu::finish() {
     toFinishRSU();
+
+    myfile.open(SfileMessagesCountRsu, std::ios_base::app);
+    cout << "\nvehToDelivery\n" << vehToDelivery << "\n";
+    myfile << "\nvehToDelivery\n" << vehToDelivery << "\n";
+    myfile.close();
 }
 
 // #####################################################################################################
