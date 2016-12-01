@@ -22,7 +22,7 @@
 #
 # Script: Save configs from a omnet.ini file
 #
-# last update: 18/11/2016
+# last update: 01/12/2016
 #
 countIniFile=`ls *.ini | wc -l`
 
@@ -43,15 +43,28 @@ else # $countIniFile == 1
     iniFileSedEmptyLine=`echo "$iniFileGrepRm" | sed '/^$/N;/^\n$/D'`
     #echo -e "##\n$iniFileSedEmptyLine\n##"
 
-    echo -en "\nFile name to save the config: "
-    read fileNameSave
+    inputValue=$1
+    if [ "$inputValue" != "inTheTerminal" ]; then
+        echo -en "\nFile name to save the config: "
+        read fileNameSave
 
-    echo -e "\nType some information about this in this config: "
-    read newInformationAdd
+        echo -e "\nType some information about this in this config: "
+        read newInformationAdd
 
-    echo -e "\n# Config saved #" > $fileNameSave
-    echo -e "\nInformation about this config:\n$newInformationAdd" >> $fileNameSave
-    echo -e "\n## Config\n$iniFileSedEmptyLine" >> $fileNameSave
+        echo -e "\n\n\n\n\n###############################################################" > $fileNameSave
+        echo -e "\n# Config saved #" > $fileNameSave
+        echo -e "\nInformation about this config:\n$newInformationAdd" >> $fileNameSave
 
-    echo -e "\n\tConfig saved in the file $fileNameSave\n"
+        echo -e "\n## Config\n$iniFileSedEmptyLine" >> $fileNameSave
+        echo -e "\n\tConfig saved in the file $fileNameSave\n"
+    else
+        echo -e "\n\n\n\n\n###############################################################"
+        echo -e "\n# Config saved #"
+
+        echo -e "\n## Config\n$iniFileSedEmptyLine"
+    fi
+
+    echo -e "\n\n\n\n\n############################## .ini file ##############################\n"
+    cat *.ini
+    echo -e "\n############################## .ini file ##############################\n"
 fi
