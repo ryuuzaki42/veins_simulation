@@ -136,7 +136,7 @@ string BaseWaveApplLayer::SfileMessagesCountRsu, BaseWaveApplLayer::SfileMessage
 string BaseWaveApplLayer::SresultFolder;
 
 string BaseWaveApplLayer::SfirstCategory, BaseWaveApplLayer::SsecondCategory;
-int BaseWaveApplLayer::StotalCountMessageReceivedRsu;
+struct BaseWaveApplLayer::targetResultMsg BaseWaveApplLayer::SresultMsgReceived;
 
 string BaseWaveApplLayer::SprojectInfo;
 bool BaseWaveApplLayer::SusePathHistory, BaseWaveApplLayer::SallowMessageCopy;

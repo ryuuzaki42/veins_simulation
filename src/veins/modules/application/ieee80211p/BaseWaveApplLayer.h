@@ -147,7 +147,6 @@ class BaseWaveApplLayer : public BaseApplLayer {
 //######################################### vehDist #########################################
 
         bool toDeliveryMsg;
-        static int StotalCountMessageReceivedRsu;
         vector <string> messagesOrderReceivedVehDist;
 
         unordered_map <string, WaveShortMessage> messagesBufferVehDist;
@@ -227,6 +226,14 @@ class BaseWaveApplLayer : public BaseApplLayer {
         static unordered_map <string, busPosByTime> SposTimeBus; // To save bus position in a .csv
         static unordered_map <string, busPosByTime> SposTimeBusLoaded; // To load bus position to memory form a .csv
         static unordered_map <string, string> SrouteIDVehID; // routeID - vehID
+
+        struct targetResultMsg {
+            int totalMessageReceived, messageHopDiffZero, messageHopEqualZero;
+            double avgTimeMessageReceived, avgCopyMessageReceived, avgHopsMessage;
+            int totalCopyReceived, countFirstCategory, countSecondCategory;
+            int countRsuTarget;
+        };
+        static struct targetResultMsg SresultMsgReceived;
 //######################################### vehDist #########################################
 
 //######################################### Epidemic #########################################
