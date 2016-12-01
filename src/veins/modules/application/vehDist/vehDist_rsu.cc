@@ -18,7 +18,16 @@ void vehDist_rsu::rsuInitializeVariables() {
     rsuInitializeValuesVehDist(mobi->getInitialPositionFromIniFileRSU());
 
     if (source.compare("rsu[0]") == 0) {
-        StotalCountMessageReceivedRsu = 0;
+        SresultMsgReceived.avgCopyMessageReceived = 0;
+        SresultMsgReceived.avgHopsMessage = 0;
+        SresultMsgReceived.avgTimeMessageReceived = 0;
+        SresultMsgReceived.countFirstCategory = 0;
+        SresultMsgReceived.countSecondCategory = 0;
+        SresultMsgReceived.messageHopDiffZero = 0;
+        SresultMsgReceived.messageHopEqualZero = 0;
+        SresultMsgReceived.totalCopyReceived = 0;
+        SresultMsgReceived.totalMessageReceived = 0;
+
         vehToDelivery = "SenderAddress MsgID timeSim rsuID\n";
     }
 }
