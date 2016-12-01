@@ -22,12 +22,17 @@
 #
 # Script: Script to collect the simulation result in one place
 #
-# last update: 18/11/2016
+# last update: 01/12/2016
 #
 echo -e "\n## Script to collect the simulation results in one place ##"
 
 if ls -l | grep -q "\.ini"; then
     echo -e "\nGreat, looks like it ($PWD) is a OMNeT project folder (with a ini file)"
+
+    noConfig=$1
+    if [ $noConfig == "noConfig" ]; then
+        shift
+    fi
 
     part=$1
     if [ "$part" == '' ]; then # result_part
@@ -53,12 +58,12 @@ if ls -l | grep -q "\.ini"; then
 
     if echo $PWD | grep -q "vehDist"; then
         pathFolder="results/vehDist_resultsEnd_$part"
-        echo -e "\n\tIt is a vehDist experiment ($pathFolder)"
+        echo -e "\n    It is a vehDist experiment ($pathFolder)"
     elif echo $PWD | grep -q "epidemic"; then
         pathFolder="results/epidemic_resultsEnd_$part"
-        echo -e "\n\tIt is a epidemic experiment ($pathFolder)"
+        echo -e "\n    It is a epidemic experiment ($pathFolder)"
     else
-        echo -e "\n\tThe ($PWD) is OMNeT project is unknown for this script\nexiting"
+        echo -e "\n    The ($PWD) is OMNeT project is unknown for this script\nexiting"
         exit 1
     fi
     rsuFile="rsu_Count_Messages_Received.r"
@@ -73,23 +78,23 @@ if ls -l | grep -q "\.ini"; then
             vehiclesFileLs=`ls $experiment/$vehiclesFile`
 
             if [ "$rsuFileLs" != '' ]; then
-                echo -e "\n\t\t\tFile: $rsuFileLs"
+                echo -e "\n            File: $rsuFileLs"
                 cat $rsuFileLs | grep -E "Exp:"
 
-                filesFound+="\t$experiment/$rsuFile\\n"
+                filesFound+="    $experiment/$rsuFile\\n"
             else
                 echo "\nThe experiment: $experiment\n Don't have the file \"$rsuFileLs\""
-                filesNotFound+="\t$experiment/$rsuFile\\n"
+                filesNotFound+="    $experiment/$rsuFile\\n"
             fi
 
             if [ "$vehiclesFileLs" != '' ]; then
-                echo -e "\n\t\t\tFile: $vehiclesFileLs"
+                echo -e "\n            File: $vehiclesFileLs"
                 cat $vehiclesFileLs | grep -E "Exp:"
 
-                filesFound+="\\t$experiment/$vehiclesFile\\n"
+                filesFound+="    $experiment/$vehiclesFile\\n"
             else
                 echo "\nThe experiment: $experiment\n Don't have the file \"$vehiclesFileLs\""
-                filesNotFound+="\\t$experiment/$vehiclesFile\\n"
+                filesNotFound+="    $experiment/$vehiclesFile\\n"
             fi
         done
     done
@@ -108,4 +113,9 @@ if ls -l | grep -q "\.ini"; then
 else
     echo -e "\nError: ($PWD) it is not a OMNeT project folder\nPlease go to the folder with a ini file"
 fi
-echo -e "\n\t\t## End of script ##\n"
+
+if [ $noConfig != "noConfig" ]; then
+    veins_save_config_used_JBr.sh inTheTerminal
+fi
+
+echo -e "\n        ## End of script ##\n"
