@@ -1111,6 +1111,8 @@ WaveShortMessage*  BaseWaveApplLayer::prepareWSM(string name, int lengthBits, t_
     wsm->setSenderPos(curPosition);
     wsm->setSerial(serial);
 
+    wsm->setSource(findHost()->getFullName());
+
     if (name == "beacon_minicurso") { // Change Minicurso_UFPI
         wsm->setRoadId(TraCIMobilityAccess().get(getParentModule())->getRoadId().c_str());
         wsm->setSenderSpeed(TraCIMobilityAccess().get(getParentModule())->getSpeed());
