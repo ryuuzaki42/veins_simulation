@@ -1,5 +1,5 @@
 ## Good name for algoritm:
-	Message Forwarding by Categorization of Vehicles (MFCV)
+    Message Forwarding by Categorization of Vehicles (MFCV)
 
 ## Link do pdf do minicurso
 http://www.eripi.ufpi.br/images/Minicursos/minicurso02.pdf
@@ -22,7 +22,7 @@ https://en.wikipedia.org/wiki/Free-space_path_loss
 ## Calculate transmission power
 http://superuser.com/questions/906398/calculate-required-transmit-power-of-wi-fi-router
 
--69db=10*log10(P1/P2)
+-69db = 10 * log10(P1/P2)
 
 6.9 = log10(P1/P2)
 
