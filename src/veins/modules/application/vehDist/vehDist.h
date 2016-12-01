@@ -27,6 +27,7 @@ class vehDist : public BaseWaveApplLayer {
         cMessage* sendSaveBusPosition;
 
         vector <string> messagesDelivered;
+        string busMsgToDelivery;
 
         unordered_map <string, string> messagesSendLog;
 
