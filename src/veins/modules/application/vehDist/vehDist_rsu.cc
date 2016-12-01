@@ -49,8 +49,8 @@ void vehDist_rsu::onBeaconMessage(WaveShortMessage* wsm) {
 
             if (wsm->getToDelivery()) {
                 ScountToDeliveryMsg++;
-                vehToDelivery += wsm->getSenderAddressTemporary() + string(" ") + wsm->getGlobalMessageIdentificaton();
-                vehToDelivery += string(" ") + to_string(simTime().dbl()) + string(" ") + source + string("\n");
+                vehToDelivery += wsm->getSenderAddressTemporary() + string(" msg: ") + wsm->getGlobalMessageIdentificaton();
+                vehToDelivery += string(" at: ") + to_string(simTime().dbl()) + string(" to ") + source + string("\n");
             }
             messagesReceivedMeasuringRSU(wsm);
         }/* else {
@@ -115,8 +115,8 @@ void vehDist_rsu::finish() {
     toFinishRSU();
 
     myfile.open(SfileMessagesCountRsu, std::ios_base::app);
-    cout << "\nvehToDelivery\n" << vehToDelivery << "\n";
-    myfile << "\nvehToDelivery\n" << vehToDelivery << "\n";
+    cout << "\nvehToDelivery from " << source << "\n" << vehToDelivery << "\n";
+    myfile << "\nvehToDelivery from " << source << "\n" << vehToDelivery << "\n";
     myfile.close();
 }
 
