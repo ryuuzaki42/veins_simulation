@@ -46,6 +46,8 @@ class default_veins_TraCI : public BaseWaveApplLayer {
         bool isParking;
         bool sendWhileParking;
         static const simsignalwrap_t parkingStateChangedSignal;
+
+        string fileName;
     protected:
         virtual void onBeacon(WaveShortMessage* wsm);
         virtual void onData(WaveShortMessage* wsm);

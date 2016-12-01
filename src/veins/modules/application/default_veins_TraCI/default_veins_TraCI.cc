@@ -42,9 +42,18 @@ void default_veins_TraCI::initialize(int stage) {
         isParking = false;
         sendWhileParking = par("sendWhileParking").boolValue();
     }
+
+    SrepeatNumber = atoi(ev.getConfig()->getConfigValue("seed-set")); // Number of execution (${repetition})
+    fileName = "results/beacons-received-" + to_string(SrepeatNumber) + ".r" ;
+    myfile.open(fileName);
+    myfile.close();
 }
 
 void default_veins_TraCI::onBeacon(WaveShortMessage* wsm) {
+    myfile.open(fileName, std::ios_base::app);
+    cout << findHost()->getFullName() << " received one beacon from " << wsm->getSource() << " at: " << simTime() << "\n";
+    myfile << findHost()->getFullName() << " received one beacon from " << wsm->getSource() << " at: " << simTime() << "\n";
+    myfile.close();
 }
 
 void default_veins_TraCI::onData(WaveShortMessage* wsm) {
