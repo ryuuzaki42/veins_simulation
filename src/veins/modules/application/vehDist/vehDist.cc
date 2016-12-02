@@ -104,14 +104,19 @@ void vehDist::saveBusPositionFile() {
             for (itTimePos = mapTimePos.begin(); itTimePos != mapTimePos.end(); itTimePos++){
                 myfile << itTimePos->first << " " << itTimePos->second << "\n";
             }
+
+            if (SnumVehicles.size() == 0) {
+                myfile << "\n";
+            }
             myfile.close();
         }
     }
 }
 
 void vehDist::busPosLoadFromFile() {
-    if (source.compare("car[0]")) {
+    if (source.compare("car[0]") == 0) {
         if (par("useBusPosition").boolValue()) {
+            //cout << "\nLoading routes from of the bus";
             string fileInput, line;
 
             fileInput = "../0scenarios/bologna_small/joined/busPosition.csv";
@@ -125,7 +130,7 @@ void vehDist::busPosLoadFromFile() {
             map <simtime_t, Coord> timePosTmp;
 
             while (getline(cin, line, '\n')) {
-                //cout << "\nline: " << line << endl;
+                //cout << "\nline: " << line;
 
                 // (countPos == 0) // blank line
                 // (countPos == 1) // routeId position time
@@ -173,6 +178,7 @@ void vehDist::busPosLoadFromFile() {
 
                    SposTimeBusLoaded.insert(make_pair(routeIDTmp, structBusPosByTime));
                    countPos = 1;
+                   //cout << "\n" << routeIDTmp;
                }
 
             }
@@ -866,8 +872,6 @@ string vehDist::chosenByDistance_Speed_Category_RateTimeToSend(unordered_map <st
 }
 
 void vehDist::finish() {
-    saveBusPositionFile();
-
     toFinishVeh();
 
     if (vehCategory.compare("B") == 0) {
@@ -876,6 +880,8 @@ void vehDist::finish() {
         myfile << "\nbusMsgToDelivery from " << source << "\n" << busMsgToDelivery << "\n";
         myfile.close();
     }
+
+    saveBusPositionFile();
 }
 
 void vehDist::sendMessageToOneNeighborTarget(string beaconSource) {
