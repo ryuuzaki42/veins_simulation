@@ -22,7 +22,7 @@
 #
 # Script: Script to collect the simulation result in one place
 #
-# last update: 01/12/2016
+# last update: 04/12/2016
 #
 echo -e "\n## Script to collect the simulation results in one place ##"
 
@@ -111,10 +111,11 @@ if ls -l | grep -q "\.ini"; then
         echo -e "\n# All files was founded"
     fi
 else
-    echo -e "\nError: ($PWD) it is not a OMNeT project folder\nPlease go to the folder with a ini file"
+    echo -e "\nError: ($PWD) it is not a OMNeT project folder\nPlease go to the folder with a ini file\n"
+    exit 1
 fi
 
-if [ $noConfig != "noConfig" ]; then
+if [ "$noConfig" != "noConfig" ]; then
     veins_save_config_used_JBr.sh inTheTerminal
 fi
 
