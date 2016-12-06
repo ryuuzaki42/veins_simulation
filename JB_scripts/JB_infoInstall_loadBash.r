@@ -4,7 +4,7 @@
 #   Veins = 4.4
 
 ## Veins add in ~/.bashrc - Path can be different in your PC
-#. /media/sda4/prog/git_clone/8_veins_simulation/JB_scripts/JB_infoInstall-loadBash.r # copy and uncomment (don't remove the . (dot))
+#. /media/sda4/prog/git_clone/8_veins_simulation/JB_scripts/JB_infoInstall_loadBash.r # copy and uncomment (don't remove the . (dot))
 
 ## Veins run by ~/.bashrc - Can be different in your PC
 export TCL_LIBRARY=/usr/lib64/tcl8.6
