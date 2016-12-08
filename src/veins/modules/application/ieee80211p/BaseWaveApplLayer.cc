@@ -260,6 +260,7 @@ void BaseWaveApplLayer::generalInitializeVariables_executionByExpNumberVehDist()
 
         SttlBeaconStatus = par("ttlBeaconStatus");
         SbeaconStatusBufferSize = par("beaconStatusBufferSize");
+        SuseBeaconStatusBufferSize = par("useBeaconStatusBufferSize");
         StimeToUpdatePosition = par("vehTimeUpdatePosition");
         StimeLimitGenerateMessage = par("timeLimitGenerateMessage");
         SvehTimeLimitToAcceptGenerateMgs = par("vehTimeLimitToAcceptGenerateMgs");
@@ -331,6 +332,7 @@ void BaseWaveApplLayer::generalInitializeVariables_executionByExpNumberVehDist()
 
             SprojectInfo += texTmp + "ttlBeaconStatus:_ " + to_string(SttlBeaconStatus) + " s";
             SprojectInfo += texTmp + "beaconStatusBufferSize:_ " + to_string(SbeaconStatusBufferSize);
+            SprojectInfo += texTmp + "useBeaconStatusBufferSize:_ " + boolToString(SuseBeaconStatusBufferSize);
             SprojectInfo += texTmp + "percentP:_ " + to_string(SpercentP) + " %";
             SprojectInfo += texTmp + "usePathHistory:_ " + boolToString(SusePathHistory);
             SprojectInfo += texTmp + "useMessagesSendLog:_ " + boolToString(SuseMessagesSendLog);
