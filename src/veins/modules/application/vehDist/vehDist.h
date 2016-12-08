@@ -129,7 +129,7 @@ int BaseWaveApplLayer::SsimulationTimeLimit;
 unordered_map <string, struct BaseWaveApplLayer::busPosByTime> BaseWaveApplLayer::SposTimeBus;
 unordered_map <string, struct BaseWaveApplLayer::busPosByTime> BaseWaveApplLayer::SposTimeBusLoaded;
 unordered_map <string, string> BaseWaveApplLayer::SrouteIDVehID;
-int BaseWaveApplLayer::ScountToDeliveryMsg;
+unsigned short int BaseWaveApplLayer::ScountToDeliveryMsg;
 
 string BaseWaveApplLayer::SfileMessagesUnicastVeh, BaseWaveApplLayer::SfileMessagesDropVeh;
 string BaseWaveApplLayer::SfileMessagesCountRsu, BaseWaveApplLayer::SfileMessagesGeneratedVehRsu;
