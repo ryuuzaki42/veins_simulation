@@ -38,6 +38,7 @@ simple BaseWaveApplLayer like IBaseApplLayer {
         int countGenerateMessage_two = default(0);
 
         int ttlBeaconStatus @unit("s") = default(0s);
+        bool useBeaconStatusBufferSize = default(false);
         int beaconStatusBufferSize = default(0);
         int vehTimeUpdatePosition @unit("s") = default(0s); // Time for update vehicle position
         int expSendbyDSCR = default(0);
