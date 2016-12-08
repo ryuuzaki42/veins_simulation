@@ -229,10 +229,9 @@ class BaseWaveApplLayer : public BaseApplLayer {
         static unordered_map <string, string> SrouteIDVehID; // routeID - vehID
 
         struct targetResultMsg {
-            int totalMessageReceived, messageHopDiffZero, messageHopEqualZero;
+            unsigned short int totalMessageReceived, messageHopDiffZero, messageHopEqualZero;
             double avgTimeMessageReceived, avgCopyMessageReceived, avgHopsMessage, avgHopsFirstReceived;
-            int totalCopyReceived, countFirstCategory, countSecondCategory;
-            int countRsuTarget;
+            unsigned short int totalCopyReceived, countFirstCategory, countSecondCategory, countRsuTarget;
         };
         static struct targetResultMsg SresultMsgReceived;
 //######################################### vehDist #########################################
