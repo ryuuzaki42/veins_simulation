@@ -38,7 +38,7 @@ class BaseWaveApplLayer : public BaseApplLayer {
         enum WaveApplMessageKinds {
             SERVICE_PROVIDER = LAST_BASE_APPL_MESSAGE_KIND,
             SEND_BEACON_EVT, SEND_BEACON_EVT_vehDist, SEND_BEACON_EVT_epidemic, SEND_BEACON_EVT_minicurso,
-            SERVICE_EXPIRED_EVT, SERVICE_QUERY_EVT, SERVICE_EVT, // Modificado OSDP, add SERVICE_EXPIRED_EVT, SERVICE_QUERY_EVT, SERVICE_EVT, antes era apenas SEND_BEACON_EVT
+            SERVICE_EXPIRED_EVT, SERVICE_QUERY_EVT, SERVICE_EVT,
             Send_EpidemicMessageRequestEvt, SendEvtGenerateMessage, SendGetTrafficMethodCheck, SendEvtSelectVehGenerateMessage
         };
 
@@ -203,12 +203,13 @@ class BaseWaveApplLayer : public BaseApplLayer {
         static map <simtime_t, int> SvehGetTrafficMethodCheck;
         static unordered_map <string, int> SvehCategoryCount;
         static unordered_map <string, WaveShortMessage> SvehScenario;
-        static bool SusePathHistory, SallowMessageCopy, SvehSendWhileParking;
-        static bool SselectFromAllVehicles, SuseMessagesSendLog, SvehDistCreateEventGenerateMessage, SuseRateTimeToSend;
+        static bool SusePathHistory, SallowMessageCopy, SvehSendWhileParking, SuseRateTimeToSend;
+        static bool SselectFromAllVehicles, SuseMessagesSendLog, SvehDistCreateEventGenerateMessage;
 
         struct messages {
           string firstSource, hops, wsmData, times;
-          unsigned short int minHop, maxHop, sumHops, countFirstCategory, countSecondCategory, countCopyMessage;
+          unsigned short int minHop, maxHop, sumHops, firstHopReceived;
+          unsigned short int countFirstCategory, countSecondCategory, countCopyMessage;
           simtime_t sumTimeRecived, timeGenerate;
         };
         map <string, struct messages> messagesReceivedRSU;
@@ -229,7 +230,7 @@ class BaseWaveApplLayer : public BaseApplLayer {
 
         struct targetResultMsg {
             int totalMessageReceived, messageHopDiffZero, messageHopEqualZero;
-            double avgTimeMessageReceived, avgCopyMessageReceived, avgHopsMessage;
+            double avgTimeMessageReceived, avgCopyMessageReceived, avgHopsMessage, avgHopsFirstReceived;
             int totalCopyReceived, countFirstCategory, countSecondCategory;
             int countRsuTarget;
         };
