@@ -191,8 +191,10 @@ void vehDist::onBeaconStatus(WaveShortMessage* wsm) {
     if (itStatusNeighbors != beaconStatusNeighbors.end()) { // Update the beaconStatus
         itStatusNeighbors->second = *wsm;
     } else {
-        if (beaconStatusNeighbors.size() > SbeaconStatusBufferSize) {
-            removeOldestInputBeaconStatus();
+        if (SuseBeaconStatusBufferSize) {
+            if (beaconStatusNeighbors.size() > SbeaconStatusBufferSize) {
+                removeOldestInputBeaconStatus();
+            }
         }
         beaconStatusNeighbors.insert(make_pair(wsm->getSource(), *wsm));
         sendMessageToOneNeighborTarget(wsm->getSource()); // Look in buffer it has messages for this new vehNeighbor
@@ -348,11 +350,13 @@ void vehDist::removeOldestInputBeaconStatus() {
             //cout << " SttlBeaconStatus: " << SttlBeaconStatus << endl;
             beaconStatusNeighbors.erase(idBeacon);
             removeOldestInputBeaconStatus();
-        } else if (beaconStatusNeighbors.size() > SbeaconStatusBufferSize) {
-            //cout << source << " remove one beaconStatus (" << idBeacon << ") by space, beaconStatusNeighbors.size(): " << beaconStatusNeighbors.size();
-            //cout << " at: " << simTime() << " SbeaconStatusBufferSize: " << SbeaconStatusBufferSize << endl;
-            beaconStatusNeighbors.erase(idBeacon);
-            removeOldestInputBeaconStatus();
+        } else if (SuseBeaconStatusBufferSize) {
+            if (beaconStatusNeighbors.size() > SbeaconStatusBufferSize) {
+                //cout << source << " remove one beaconStatus (" << idBeacon << ") by space, beaconStatusNeighbors.size(): " << beaconStatusNeighbors.size();
+                //cout << " at: " << simTime() << " SbeaconStatusBufferSize: " << SbeaconStatusBufferSize << endl;
+                beaconStatusNeighbors.erase(idBeacon);
+                removeOldestInputBeaconStatus();
+            }
         }
     } /*else {
         cout << "beaconStatusNeighbors from " << source << " is empty now" << endl;
