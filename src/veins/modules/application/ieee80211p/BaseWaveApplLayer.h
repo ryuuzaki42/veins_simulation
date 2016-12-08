@@ -190,6 +190,7 @@ class BaseWaveApplLayer : public BaseApplLayer {
 
         static unsigned short int SbeaconStatusBufferSize, SttlBeaconStatus, SpercentP, SbeaconTypeInitialize;
         static unsigned short int StimeLimitGenerateMessage, StimeToUpdatePosition, SmessageBufferSize;
+        static bool SuseBeaconStatusBufferSize;
 
         static string SprojectInfo;
 

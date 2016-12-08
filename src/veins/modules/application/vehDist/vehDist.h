@@ -124,6 +124,7 @@ unsigned short int BaseWaveApplLayer::ScountGenerateMessage, BaseWaveApplLayer::
 
 unsigned short int BaseWaveApplLayer::SbeaconStatusBufferSize, BaseWaveApplLayer::SttlBeaconStatus, BaseWaveApplLayer::SpercentP;
 unsigned short int BaseWaveApplLayer::StimeLimitGenerateMessage, BaseWaveApplLayer::StimeToUpdatePosition, BaseWaveApplLayer::SmessageBufferSize;
+bool BaseWaveApplLayer::SuseBeaconStatusBufferSize;
 
 int BaseWaveApplLayer::SsimulationTimeLimit;
 unordered_map <string, struct BaseWaveApplLayer::busPosByTime> BaseWaveApplLayer::SposTimeBus;
