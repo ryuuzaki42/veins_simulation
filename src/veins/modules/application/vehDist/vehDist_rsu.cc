@@ -48,6 +48,7 @@ void vehDist_rsu::onBeaconMessage(WaveShortMessage* wsm) {
 
             if (wsm->getToDelivery()) {
                 ScountToDeliveryMsg++;
+                countToDeliveryMsgLocal++;
                 vehToDelivery += wsm->getSenderAddressTemporary() + string(" msg: ") + wsm->getGlobalMessageIdentificaton();
                 vehToDelivery += string(" at: ") + to_string(simTime().dbl()) + string(" to ") + source + string("\n");
             }
