@@ -37,15 +37,6 @@ void epidemic::onData(WaveShortMessage* wsm) {
     receivedOnDataEpidemic(wsm);
 }
 
-void epidemic::sendWSM(WaveShortMessage* wsm) {
-    bool isParking = mobility->getParkingState();
-    if (isParking && !SvehSendWhileParking) {
-        return;
-    }
-
-    sendDelayedDown(wsm, individualOffset);
-}
-
 void epidemic::finish() {
     toFinishVeh();
 }

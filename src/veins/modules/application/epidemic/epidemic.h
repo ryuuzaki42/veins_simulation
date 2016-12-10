@@ -26,8 +26,6 @@ class epidemic : public BaseWaveApplLayer {
 
         void finish();
 
-        void sendWSM(WaveShortMessage* wsm);
-
         void vehInitializeVariablesEpidemicVeh();
 };
 
