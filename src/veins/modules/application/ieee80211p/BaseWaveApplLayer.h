@@ -205,7 +205,7 @@ class BaseWaveApplLayer : public BaseApplLayer {
         static map <simtime_t, int> SvehGetTrafficMethodCheck;
         static unordered_map <string, int> SvehCategoryCount;
         static unordered_map <string, WaveShortMessage> SvehScenario;
-        static bool SusePathHistory, SallowMessageCopy, SvehSendWhileParking, SuseRateTimeToSend;
+        static bool SusePathHistory, SallowMessageCopy, SuseRateTimeToSend;
         static bool SselectFromAllVehicles, SuseMessagesSendLog, SvehDistCreateEventGenerateMessage;
 
         struct messages {
