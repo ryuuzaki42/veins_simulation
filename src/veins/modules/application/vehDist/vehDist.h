@@ -113,12 +113,13 @@ map <string, struct BaseWaveApplLayer::traffic> BaseWaveApplLayer::SvehTraffic;
 
 unordered_map <int, Coord> BaseWaveApplLayer::SrsuPositions;
 
-unsigned short int BaseWaveApplLayer::SmsgDroppedbyTTL, BaseWaveApplLayer::SmsgDroppedbyCopy, BaseWaveApplLayer::SmsgDroppedbyBuffer;
-unsigned short int BaseWaveApplLayer::ScountMsgPacketSend, BaseWaveApplLayer::SmsgBufferUseGeneral, BaseWaveApplLayer::SmessageHopLimit;
-unsigned short int BaseWaveApplLayer::ScountMesssageDrop, BaseWaveApplLayer::ScountMeetN, BaseWaveApplLayer::ScountTwoCategoryN;
-unsigned short int BaseWaveApplLayer::ScountMeetPshortestT, BaseWaveApplLayer::ScountVehicleAll;
-unsigned short int BaseWaveApplLayer::SmessageId, BaseWaveApplLayer::SbeaconTypeInitialize;
+int BaseWaveApplLayer::SmsgDroppedbyTTL, BaseWaveApplLayer::SmsgDroppedbyCopy, BaseWaveApplLayer::SmsgDroppedbyBuffer;
+int BaseWaveApplLayer::ScountMsgPacketSend, BaseWaveApplLayer::SmsgBufferUseGeneral, BaseWaveApplLayer::SmessageHopLimit;
+int BaseWaveApplLayer::ScountMesssageDrop, BaseWaveApplLayer::ScountMeetN, BaseWaveApplLayer::ScountTwoCategoryN;
+int BaseWaveApplLayer::ScountMeetPshortestT, BaseWaveApplLayer::ScountVehicleAll, BaseWaveApplLayer::SmessageId;
+int BaseWaveApplLayer::ScountBeaconSend, BaseWaveApplLayer::ScountSummaryVectorSend, BaseWaveApplLayer::ScountRequestMessageVectorSend;
 
+unsigned short int BaseWaveApplLayer::SbeaconTypeInitialize;
 unsigned short int BaseWaveApplLayer::SrepeatNumber, BaseWaveApplLayer::SexpNumber, BaseWaveApplLayer::SexpSendbyDSCR;
 unsigned short int BaseWaveApplLayer::ScountGenerateMessage, BaseWaveApplLayer::SttlMessage, BaseWaveApplLayer::SvehTimeLimitToAcceptGenerateMgs;
 
@@ -130,7 +131,7 @@ int BaseWaveApplLayer::SsimulationTimeLimit;
 unordered_map <string, struct BaseWaveApplLayer::busPosByTime> BaseWaveApplLayer::SposTimeBus;
 unordered_map <string, struct BaseWaveApplLayer::busPosByTime> BaseWaveApplLayer::SposTimeBusLoaded;
 unordered_map <string, string> BaseWaveApplLayer::SrouteIDVehID;
-unsigned short int BaseWaveApplLayer::ScountToDeliveryMsg;
+int BaseWaveApplLayer::ScountToDeliveryMsg;
 
 string BaseWaveApplLayer::SfileMessagesUnicastVeh, BaseWaveApplLayer::SfileMessagesDropVeh;
 string BaseWaveApplLayer::SfileMessagesCountRsu, BaseWaveApplLayer::SfileMessagesGeneratedVehRsu;

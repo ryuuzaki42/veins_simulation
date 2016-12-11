@@ -138,8 +138,8 @@ class BaseWaveApplLayer : public BaseApplLayer {
         Coord curPosition;
 
         string source, target;
-        static unsigned short int ScountToDeliveryMsg;
-        unsigned short int countToDeliveryMsgLocal; // Count of message toDelivery received by one rsu
+        static int ScountToDeliveryMsg;
+        int countToDeliveryMsgLocal; // Count of message toDelivery received by one rsu
 
         cMessage* sendBeaconEvt;
 
@@ -184,12 +184,13 @@ class BaseWaveApplLayer : public BaseApplLayer {
 
         static unsigned short int SrepeatNumber, SexpNumber, SexpSendbyDSCR, ScountGenerateMessage, SttlMessage;
 
-        static unsigned short int SmsgDroppedbyTTL, SmsgDroppedbyCopy, SmsgDroppedbyBuffer, SvehTimeLimitToAcceptGenerateMgs;
-        static unsigned short int ScountMsgPacketSend, SmsgBufferUseGeneral, ScountMesssageDrop, SmessageHopLimit;
-        static unsigned short int ScountMeetN, ScountTwoCategoryN, ScountMeetPshortestT, ScountVehicleAll, SmessageId;
+        static int SmsgDroppedbyTTL, SmsgDroppedbyCopy, SmsgDroppedbyBuffer;
+        static int ScountMsgPacketSend, SmsgBufferUseGeneral, SmessageHopLimit, ScountMesssageDrop;
+        static int ScountMeetN, ScountTwoCategoryN, ScountMeetPshortestT, ScountVehicleAll, SmessageId;
+        static int ScountBeaconSend, ScountSummaryVectorSend, ScountRequestMessageVectorSend;
 
         static unsigned short int SbeaconStatusBufferSize, SttlBeaconStatus, SpercentP, SbeaconTypeInitialize;
-        static unsigned short int StimeLimitGenerateMessage, StimeToUpdatePosition, SmessageBufferSize;
+        static unsigned short int StimeLimitGenerateMessage, StimeToUpdatePosition, SmessageBufferSize, SvehTimeLimitToAcceptGenerateMgs;
         static bool SuseBeaconStatusBufferSize;
 
         static string SprojectInfo;
