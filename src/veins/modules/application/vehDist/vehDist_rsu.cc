@@ -66,6 +66,7 @@ void vehDist_rsu::handleSelfMsg(cMessage* msg) {
         case SEND_BEACON_EVT_vehDist: { // Call prepareBeaconStatusWSM local to the rsu
             sendWSM(prepareBeaconStatusWSM("beaconStatus", beaconLengthBits, type_CCH, beaconPriority, -1));
             scheduleAt(simTime() + par("beaconInterval").doubleValue(), sendBeaconEvt);
+            ScountBeaconSend++;
             break;
         }
         default: {
