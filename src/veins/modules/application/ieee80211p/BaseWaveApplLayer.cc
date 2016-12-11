@@ -285,6 +285,7 @@ void BaseWaveApplLayer::generalInitializeVariables_executionByExpNumberVehDist()
         }
 
         ScountMesssageDrop = ScountMsgPacketSend = SmsgBufferUseGeneral = ScountVehicleAll = 0;
+        ScountBeaconSend = ScountSummaryVectorSend = ScountRequestMessageVectorSend = 0;
         SmsgDroppedbyTTL = SmsgDroppedbyCopy = SmsgDroppedbyBuffer = 0;
         ScountMeetPshortestT = ScountTwoCategoryN = ScountMeetN = 0;
         SmessageId = 1;
@@ -682,7 +683,11 @@ void BaseWaveApplLayer::printCountBeaconMessagesDropVeh() {
         myfile << textTmp + "Count meetings two category: " << ScountTwoCategoryN;
         myfile << textTmp + "Count meetings another: " << ScountMeetN;
         myfile << textTmp + "Count meetings with real difference (Only valid with Category test): " << ScountMeetPshortestT;
-        myfile << textTmp + "Final count packets messages send: " << ScountMsgPacketSend << endl;
+        myfile << textTmp;
+        myfile << textTmp + "Count beacon send: " << ScountBeaconSend;
+        myfile << textTmp + "Final count packets messages send: " << ScountMsgPacketSend;
+        myfile << textTmp + "        Epidemic count SummaryVectorSend: " << ScountSummaryVectorSend;
+        myfile << textTmp + "        Epidemic count RequestMessageVectorSend: " << ScountRequestMessageVectorSend << endl;
     }
     myfile.close();
 }
@@ -1337,7 +1342,9 @@ void BaseWaveApplLayer::sendLocalSummaryVector(unsigned int newRecipientAddress)
     wsm->setWsmData(getLocalSummaryVectorData().c_str()); // Put the summary vector here, on data wsm field
 
     sendWSM(wsm); // Sending the summary vector
-    ScountMsgPacketSend++;
+
+    //ScountMsgPacketSend++;
+    ScountSummaryVectorSend++;
 }
 
 // Method used to convert the unordered_map epidemicLocalSummaryVectorData in a string
@@ -1460,8 +1467,10 @@ void BaseWaveApplLayer::sendEpidemicRequestMessageVector(unsigned int newRecipie
     wsm->setWsmData(getEpidemicRequestMessageVectorData().c_str()); // Put the summary vector here
 
     //cout << "Sending a vector of request messages from " << source << "(" << MACToInteger() << ") to " << newRecipientAddress << endl;
-    sendWSM(wsm); // Sending the summary vector
-    ScountMsgPacketSend++;
+    sendWSM(wsm); // Sending the RequestMessageVector
+
+    //ScountMsgPacketSend++;
+    ScountRequestMessageVectorSend++;
 }
 
 void BaseWaveApplLayer::createEpidemicRequestMessageVector() {
@@ -1725,16 +1734,19 @@ void BaseWaveApplLayer::handleSelfMsg(cMessage* msg) {
         case SEND_BEACON_EVT: {
             sendWSM(prepareWSM("beacon", beaconLengthBits, type_CCH, beaconPriority, 0, -1));
             scheduleAt(simTime() + par("beaconInterval").doubleValue(), sendBeaconEvt);
+            ScountBeaconSend++;
             break;
         }
         case SEND_BEACON_EVT_minicurso: {
             sendWSM(prepareWSM("beacon_minicurso", beaconLengthBits, type_CCH, beaconPriority, 0, -1));
             scheduleAt(simTime() + par("beaconInterval").doubleValue(), sendBeaconEvt);
+            ScountBeaconSend++;
             break;
         }
         case SEND_BEACON_EVT_epidemic: {
             sendWSM(prepareWSM_epidemic("beacon", beaconLengthBits, type_CCH, beaconPriority, 0, -1));
             scheduleAt(simTime() + par("beaconInterval").doubleValue(), sendBeaconEvt);
+            ScountBeaconSend++;
             break;
         }
         case SendEvtGenerateMessage: {
