@@ -7,20 +7,22 @@
 #. /media/sda4/prog/git_clone/8_veins_simulation/JB_scripts/JB_infoInstall_loadBash.r # copy and uncomment (don't remove the . (dot))
 
 ## Veins run by ~/.bashrc - Can be different in your PC
-export TCL_LIBRARY=/usr/lib64/tcl8.6
-
-export SUMO_HOME=/opt/sumo-0.25.0
-export PATH=$PATH:/opt/sumo-0.25.0/bin
-
-export PATH=$PATH:/opt/omnetpp-4.6/bin
-
+TCL_LIBRARY="/usr/lib64/tcl8.6"
+SUMO_HOME="/opt/sumo-0.25.0"
+omnetFolder="/opt/omnetpp-4.6/bin"
 veinsFolder="/media/sda4/prog/git_clone/8_veins_simulation"
+
+## No need of change in your PC
+export PATH=$PATH:$TCL_LIBRARY
+export PATH=$PATH:$SUMO_HOME
+export PATH=$PATH:"$SUMO_HOME/bin"
+export PATH=$PATH:$omnetFolder
+
 export PATH=$PATH:$veinsFolder
 export PATH=$PATH:"$veinsFolder/JB_scripts"
 export veinsFolder
 alias veins_folder_cd='cd $veinsFolder'
 
-# Not change
 veins_RunExperiment() {
     dateStart=`date` # Start runing experiment
     echo -e "\nExperiments staring at: $dateStart"
