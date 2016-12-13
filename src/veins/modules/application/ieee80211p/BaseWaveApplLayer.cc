@@ -63,7 +63,7 @@ void BaseWaveApplLayer::saveMessagesOnFile(WaveShortMessage* wsm, string fileNam
     myfile.open(fileName, std::ios_base::app); // Open file for just append
 
     //Send "strings" to be saved on the file
-    myfile << "BeaconMessage from " << wsm->getSenderAddressTemporary() << " at " << simTime();
+    myfile << "BeaconMessage from " << wsm->getSenderAddressTemporary() << " at: " << simTime();
     myfile << " to " << wsm->getRecipientAddressTemporary() << endl;
     myfile << "wsm->getGlobalMessageIdentificaton(): " << wsm->getGlobalMessageIdentificaton() << endl;
     myfile << "wsm->getName(): " << wsm->getName() << endl;
@@ -848,7 +848,7 @@ int BaseWaveApplLayer::mt19937GetRandomValue(int upperLimmit) {
 void BaseWaveApplLayer::selectVehGenerateMessage() {
     if (myId == 0) { // Only rsu[0] will/can select the vehicle to generate messages
         myfile.open(SfileMessagesGeneratedVehRsu, std::ios_base::app); // To save info (Id and vehicle generate) on fileMessagesGenerated
-        cout << source << " at " << simTime() << " in selectVehGenerateMessage, timeLimitGenerateMessage: " << StimeLimitGenerateMessage << endl;
+        cout << source << " at: " << simTime() << " in selectVehGenerateMessage, timeLimitGenerateMessage: " << StimeLimitGenerateMessage << endl;
 
         if (simTime() <= StimeLimitGenerateMessage) { // Modify the generate message and test StimeLimitGenerateMessage
             unsigned short int vehSelected, trySelectVeh;
@@ -869,7 +869,7 @@ void BaseWaveApplLayer::selectVehGenerateMessage() {
                         i++;
                     } else {
                         cout << endl << source << " selected " << vehSelectedId << " to generate " << SmessageId;
-                        cout << " message, but has Timestamp: " << SvehScenario[vehSelectedId] <<" at " << simTime() << endl;
+                        cout << " message, but has Timestamp: " << SvehScenario[vehSelectedId] <<" at: " << simTime() << endl;
                         trySelectVeh++;
                     }
                 } else {
@@ -1176,11 +1176,11 @@ WaveShortMessage*  BaseWaveApplLayer::prepareWSM(string name, int lengthBits, t_
     if (name == "beacon_minicurso") { // Change Minicurso_UFPI
         wsm->setRoadId(TraCIMobilityAccess().get(getParentModule())->getRoadId().c_str());
         wsm->setSenderSpeed(TraCIMobilityAccess().get(getParentModule())->getSpeed());
-        DBG << "Creating Beacon with Priority " << priority << " at Applayer at " << wsm->getTimestamp() << endl;
+        DBG << "Creating Beacon with Priority " << priority << " at Applayer at: " << wsm->getTimestamp() << endl;
     } else if (name == "beacon") {
-        DBG << "Creating Beacon with Priority " << priority << " at Applayer at " << wsm->getTimestamp() << endl;
+        DBG << "Creating Beacon with Priority " << priority << " at Applayer at: " << wsm->getTimestamp() << endl;
     } else if (name == "data") {
-        DBG << "Creating Data with Priority " << priority << " at Applayer at " << wsm->getTimestamp() << endl;
+        DBG << "Creating Data with Priority " << priority << " at Applayer at: " << wsm->getTimestamp() << endl;
     }
     return wsm;
 }
@@ -1214,9 +1214,9 @@ WaveShortMessage* BaseWaveApplLayer::prepareWSM_epidemic(std::string name, int l
     wsm->setSerial(serial);
 
     if (name == "beacon") {
-        DBG << "Creating Beacon with Priority " << priority << " at Applayer at " << wsm->getTimestamp() << endl;
+        DBG << "Creating Beacon with Priority " << priority << " at Applayer at: " << wsm->getTimestamp() << endl;
     }else if (name == "data") {
-        DBG << "Creating Data with Priority " << priority << " at Applayer at " << wsm->getTimestamp() << endl;
+        DBG << "Creating Data with Priority " << priority << " at Applayer at: " << wsm->getTimestamp() << endl;
     }
     return wsm;
 }
@@ -1284,7 +1284,7 @@ unsigned int BaseWaveApplLayer::MACToInteger(){
 }
 
 void BaseWaveApplLayer::printWaveShortMessageEpidemic(WaveShortMessage* wsm) {
-    cout << endl << findHost()->getFullName() << " print of wsm message at "<< simTime() << endl;
+    cout << endl << findHost()->getFullName() << " print of wsm message at: "<< simTime() << endl;
     cout << "wsm->getName(): " << wsm->getName() << endl;
     cout << "wsm->getBitLength(): " << wsm->getBitLength() << endl;
     cout << "wsm->getChannelNumber(): " << wsm->getChannelNumber() << endl;
@@ -1588,7 +1588,7 @@ void BaseWaveApplLayer::receivedOnBeaconEpidemic(WaveShortMessage* wsm) {
 void BaseWaveApplLayer::receivedOnDataEpidemic(WaveShortMessage* wsm) {
     if (wsm->getRecipientAddress() == MACToInteger()) { // Checking if is the recipient of this message
         if (wsm->getSummaryVector()) {
-            //cout << source << "(" << MACToInteger() << ") received the summary vector |> " << wsm->getWsmData() << " <| from " << wsm->getSenderAddress() << " at " << simTime() << endl;
+            //cout << source << "(" << MACToInteger() << ") received the summary vector |> " << wsm->getWsmData() << " <| from " << wsm->getSenderAddress() << " at: " << simTime() << endl;
 
             createEpidemicRemoteSummaryVector(wsm->getWsmData()); // Creating the remote summary vector
 
@@ -1617,10 +1617,10 @@ void BaseWaveApplLayer::receivedOnDataEpidemic(WaveShortMessage* wsm) {
                 sendMessagesRequested(wsm->getWsmData(), wsm->getSenderAddress());
             } else { // It's data content
                 cout << source << " (" << MACToInteger() << ") received a message requested " << wsm->getGlobalMessageIdentificaton();
-                cout << " |> " << wsm->getWsmData() << " <| from " << wsm->getSenderAddress() << " at " << simTime() << endl;
+                cout << " |> " << wsm->getWsmData() << " <| from " << wsm->getSenderAddress() << " at: " << simTime() << endl;
 
                 if (source.compare(wsm->getTarget()) == 0) { // Verifying if is the target of this message
-                    cout << source << " received a message for him at " << simTime() << endl;
+                    cout << source << " received a message for him at: " << simTime() << endl;
                     if (source.substr(0, 3).compare("rsu") == 0) {
                         findHost()->bubble("Received Message");
                         saveMessagesOnFile(wsm, fileMessagesUnicastRsu);

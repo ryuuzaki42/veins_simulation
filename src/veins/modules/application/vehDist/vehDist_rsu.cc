@@ -108,7 +108,7 @@ WaveShortMessage* vehDist_rsu::prepareBeaconStatusWSM(string name, int lengthBit
     //wsm->setSenderAddressTemporary();
     //wsm->setTarget(); => "BROADCAST"
 
-    DBG << "Creating BeaconStatus with Priority " << priority << " at Applayer at " << wsm->getTimestamp() << std::endl;
+    DBG << "Creating BeaconStatus with Priority " << priority << " at Applayer at: " << wsm->getTimestamp() << std::endl;
     return wsm;
 }
 

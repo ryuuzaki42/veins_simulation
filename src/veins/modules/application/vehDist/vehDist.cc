@@ -476,7 +476,7 @@ void vehDist::trySendBeaconMessage() {
             cout << source << " beaconNeighbors on sendDataMessage is empty now" << endl << endl;
         }
     } /*else {
-        cout << source << " messagesBuffer is empty at " << simTime() << endl;
+        cout << source << " messagesBuffer is empty at: " << simTime() << endl;
     }*/
 }
 
@@ -1058,7 +1058,7 @@ WaveShortMessage* vehDist::prepareBeaconStatusWSM(string name, int lengthBits, t
 //    wsm->setHeading(getVehHeading4()); //wsm->setHeading(getVehHeading8()); // heading 1 to 4 or 1 to 8
 //    wsm->setRoadId(mobility->getRoadId().c_str());
 
-    DBG << "Creating BeaconStatus with Priority " << priority << " at Applayer at " << wsm->getTimestamp() << endl;
+    DBG << "Creating BeaconStatus with Priority " << priority << " at Applayer at: " << wsm->getTimestamp() << endl;
     return wsm;
 }
 
