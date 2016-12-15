@@ -52,10 +52,16 @@ class BaseWaveApplLayer : public BaseApplLayer {
         //virtual WaveShortMessage* prepareWSM(string name, int dataLengthBits, t_channel channel, int priority, int rcvId, int serial=0);
         virtual WaveShortMessage* prepareWSM(string name, int dataLengthBits, t_channel channel, int priority, unsigned int rcvId, int serial=0);
 
+        virtual void sendWSM(WaveShortMessage* wsm);
+        virtual void onBeacon(WaveShortMessage* wsm) = 0;
+        virtual void onData(WaveShortMessage* wsm) = 0;
+        virtual void handlePositionUpdate(cObject* obj);
+
 //######################################### vehDist #########################################
         //## Used to another projects
         void generalInitializeVariables_executionByExpNumberVehDist();
         string getFolderResultVehDist(unsigned short int experimentSendbyDSR);
+        void generateMessage_vehDist_and_Epidemic();
 
         void toFinishRSU();
         void toFinishVeh();
@@ -74,7 +80,6 @@ class BaseWaveApplLayer : public BaseApplLayer {
         void vehGenerateBeaconMessageAfterBeginVeh();
         void selectVehGenerateMessage();
 
-        void generateBeaconMessageVehDist();
         void selectTarget();
         void colorCarryMessageVehDist(unordered_map <string, WaveShortMessage> bufferOfMessages);
         void printCountBeaconMessagesDropVeh();
@@ -116,20 +121,14 @@ class BaseWaveApplLayer : public BaseApplLayer {
         void printEpidemicLocalSummaryVectorData();
         void printEpidemicRemoteSummaryVectorData();
 
-        void sendEpidemicRequestMessageVector(unsigned int newRecipientAddress);
-        void sendMessagesRequested(string s, unsigned int recipientAddress);
+        void sendEpidemicRequestMessageVector(unsigned int rcvId);
+        void sendMessagesRequested(string s, unsigned int rcvId);
 
         void createEpidemicRequestMessageVector();
         void createEpidemicRemoteSummaryVector(string s);
 
-        void generateMessageEpidemic();
         string insertZeroIntRetunrString(int value);
 //######################################### Epidemic #########################################
-
-        virtual void sendWSM(WaveShortMessage* wsm);
-        virtual void onBeacon(WaveShortMessage* wsm) = 0;
-        virtual void onData(WaveShortMessage* wsm) = 0;
-        virtual void handlePositionUpdate(cObject* obj);
 
     protected:
         int beaconLengthBits, beaconPriority, mySCH, myId, dataLengthBits, dataPriority;
