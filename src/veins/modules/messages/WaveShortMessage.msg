@@ -60,7 +60,6 @@ packet WaveShortMessage {
     //double radius_of_Gyration; // Radius of Gyration of the vehicle, calculated from time to time.
     unsigned short heading;
 
-    unsigned short type; // Type of message
     string category; // Category of vehicle, e.g., T for Taxi, P for Private car
     Coord TargetPos; // Target position for de message
     Coord senderPosPrevious; // Position previous of the veh
