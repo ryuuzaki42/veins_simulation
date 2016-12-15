@@ -186,7 +186,7 @@ void vehDist::busPosLoadFromFile() {
     }
 }
 
-void vehDist::onBeaconStatus(WaveShortMessage* wsm) {
+void vehDist::onBeacon(WaveShortMessage* wsm) {
     unordered_map <string, WaveShortMessage>::iterator itStatusNeighbors = beaconStatusNeighbors.find(wsm->getSource());
     if (itStatusNeighbors != beaconStatusNeighbors.end()) { // Update the beaconStatus
         itStatusNeighbors->second = *wsm;
@@ -204,14 +204,14 @@ void vehDist::onBeaconStatus(WaveShortMessage* wsm) {
     //printBeaconStatusNeighbors();
 }
 
-void vehDist::onBeaconMessage(WaveShortMessage* wsm) {
+void vehDist::onData(WaveShortMessage* wsm) {
     if (source.compare(wsm->getRecipientAddressTemporary()) == 0) { // Verify if this is the recipient of the message
         //saveMessagesOnFile(wsm, SfileMessagesUnicastVeh);
 
         // Real scenario
         //if (source.compare(wsm->getTarget()) == 0) { // Message to this vehicle
         //
-        //} else ....
+        //} else ...
 
         if (wsm->getToDelivery()) {
             cout << "vehCategory: " << vehCategory << "\n";
@@ -979,22 +979,6 @@ bool vehDist::sendOneNewMessageToOneNeighborTarget(WaveShortMessage wsm) {
     return true;
 }
 
-void vehDist::handleLowerMsg(cMessage* msg) {
-    WaveShortMessage* wsm = dynamic_cast<WaveShortMessage*>(msg);
-    ASSERT(wsm);
-
-    if (wsm->getType() == 1) {
-        onBeaconStatus(wsm);
-    } else if (wsm->getType() == 2) {
-        onBeaconMessage(wsm);
-    } else {
-        cout << endl << "JBe - Error unknown message (" << wsm->getName() << ") received - " << endl;
-        ASSERT2(0, "JBe - Error unknown message received -");
-    }
-
-    delete(msg);
-}
-
 void vehDist::vehCreateUpdateRateTimeToSendEvent() {
     rateTimeToSend = 2500; // Initial rateTimeToSend #2500 - Send in: 2500 ms
     rateTimeToSendDistanceControl = 10; // Equal to 10 m in 1 s
@@ -1105,7 +1089,7 @@ bool vehDist::busRouteDiffTarget(string busID, Coord targetPos) {
 
         map <simtime_t, Coord>::iterator itTimePos;
         if (timePosTmp.find(timeNow) == timePosTmp.end()) {
-            cout << "\ntimePosTmp.find(" << timeNow << ") == timePosTmp.end()";
+            cout << "\ntimePosTmp.find(" << timeNow << ") == timePosTmp.end() - return false";
             return false;
         } else {
             itTimePos = timePosTmp.find(timeNow);
@@ -1116,11 +1100,11 @@ bool vehDist::busRouteDiffTarget(string busID, Coord targetPos) {
         int timeSmallDist = int(itTimePos->first.dbl());
         itTimePos++;
 
-        cout <<"\nsimTime: " << simTime() << "\n";
+        //cout <<"\nsimTime: " << simTime() << "\n";
         for(; itTimePos != timePosTmp.end(); itTimePos++) {
             distNow = traci->getDistance(itTimePos->second, targetPos, false);
 
-            cout << "time: " << itTimePos->first << " distNow: " << distNow << " smallDist: " << smallDist << " \n";
+            //cout << "time: " << itTimePos->first << " distNow: " << distNow << " smallDist: " << smallDist << " \n";
 
             if (distNow < smallDist) {
                 //cout << "\ntraci->getDistance" << itTimePos->second << ", "<<  targetPos << ", false)";
@@ -1225,13 +1209,6 @@ void vehDist::printBeaconStatusNeighbors() {
     } else {
         cout << endl << "beaconStatusNeighbors from " << source << " is empty now: " << simTime() << " position: " << curPosition << endl;
     }
-}
-
-//##############################################################################################################
-void vehDist::onData(WaveShortMessage* wsm) {
-}
-
-void vehDist::onBeacon(WaveShortMessage* wsm) {
 }
 
 // Not used ###############################################################

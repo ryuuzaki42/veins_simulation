@@ -22,25 +22,10 @@ void vehDist_rsu::rsuInitializeVariables() {
     }
 }
 
-void vehDist_rsu::handleLowerMsg(cMessage* msg) {
-    WaveShortMessage* wsm = dynamic_cast<WaveShortMessage*>(msg);
-    ASSERT(wsm);
-
-    if (wsm->getType() == 1) {
-        onBeaconStatus(wsm);
-    } else if (wsm->getType() == 2) {
-        onBeaconMessage(wsm);
-    } else {
-        cout << "unknown message (" << wsm->getName() << ")  received\n";
-        exit(1);
-    }
-    delete(msg);
+void vehDist_rsu::onBeacon(WaveShortMessage* wsm) {
 }
 
-void vehDist_rsu::onBeaconStatus(WaveShortMessage* wsm) {
-}
-
-void vehDist_rsu::onBeaconMessage(WaveShortMessage* wsm) {
+void vehDist_rsu::onData(WaveShortMessage* wsm) {
     if (source.compare(wsm->getRecipientAddressTemporary()) == 0) {
         if (source.compare(wsm->getTarget()) == 0) {
             //findHost()->bubble("Received Message");
@@ -119,11 +104,4 @@ void vehDist_rsu::finish() {
     cout << "\nvehToDelivery from " << source << "\n" << vehToDelivery << "\n";
     myfile << "\nvehToDelivery from " << source << "\n" << vehToDelivery << "\n";
     myfile.close();
-}
-
-// #####################################################################################################
-void vehDist_rsu::onBeacon(WaveShortMessage* wsm) {
-}
-
-void vehDist_rsu::onData(WaveShortMessage* wsm) {
 }

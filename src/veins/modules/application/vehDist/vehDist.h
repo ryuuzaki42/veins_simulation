@@ -47,15 +47,13 @@ class vehDist : public BaseWaveApplLayer {
         };
 
     protected:
-        virtual void onBeacon(WaveShortMessage* wsm);
-        virtual void onData(WaveShortMessage* wsm);
+        void onBeacon(WaveShortMessage* wsm);
+        void onData(WaveShortMessage* wsm);
 
         void finish();
         void handleSelfMsg(cMessage* msg);
-        void handleLowerMsg(cMessage* msg);
 
         void printBeaconStatusNeighbors();
-        void onBeaconStatus(WaveShortMessage* wsm);
         WaveShortMessage* prepareBeaconStatusWSM(string name, int lengthBits, t_channel channel, int priority, int serial);
 
         void busPositionFunctionsRun();
@@ -85,7 +83,6 @@ class vehDist : public BaseWaveApplLayer {
 
         void sendMessageToOneNeighborTarget(string beaconSource);
         bool sendOneNewMessageToOneNeighborTarget(WaveShortMessage wsm);
-        void onBeaconMessage(WaveShortMessage* wsm);
 
         void removeOldestInputBeaconMessage();
         void removeOldestInputBeaconStatus();

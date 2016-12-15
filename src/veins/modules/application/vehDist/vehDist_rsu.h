@@ -14,16 +14,13 @@ class vehDist_rsu : public BaseWaveApplLayer {
         string vehToDelivery;
 
     protected:
-        virtual void onBeacon(WaveShortMessage* wsm);
-        virtual void onData(WaveShortMessage* wsm);
+        void onBeacon(WaveShortMessage* wsm);
+        void onData(WaveShortMessage* wsm);
 
         void finish();
         void handleSelfMsg(cMessage* msg);
-        void handleLowerMsg(cMessage* msg);
         WaveShortMessage* prepareBeaconStatusWSM(string name, int lengthBits, t_channel channel, int priority, int serial);
 
         void rsuInitializeVariables();
-        void onBeaconStatus(WaveShortMessage* wsm);
-        void onBeaconMessage(WaveShortMessage* wsm);
 };
 #endif
