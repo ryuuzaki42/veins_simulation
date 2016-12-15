@@ -107,7 +107,7 @@ class BaseWaveApplLayer : public BaseApplLayer {
         void receivedOnBeaconEpidemic(WaveShortMessage* wsm);
         void receivedOnDataEpidemic(WaveShortMessage* wsm);
 
-        void printWaveShortMessageEpidemic(WaveShortMessage* wsm);
+        void printWaveShortMessage(WaveShortMessage* wsm);
 
         void sendLocalSummaryVector(unsigned int newRecipientAddress);
 
