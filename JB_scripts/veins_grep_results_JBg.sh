@@ -22,7 +22,7 @@
 #
 # Script: Script to collect the simulation result in one place
 #
-# last update: 04/12/2016
+# last update: 15/12/2016
 #
 echo -e "\n## Script to collect the simulation results in one place ##"
 
@@ -30,7 +30,7 @@ if ls -l | grep -q "\.ini"; then
     echo -e "\nGreat, looks like it ($PWD) is a OMNeT project folder (with a ini file)"
 
     noConfig=$1
-    if [ $noConfig == "noConfig" ]; then
+    if [ "$noConfig" == "noConfig" ]; then
         shift
     fi
 
@@ -118,5 +118,4 @@ fi
 if [ "$noConfig" != "noConfig" ]; then
     veins_save_config_used_JBr.sh inTheTerminal
 fi
-
 echo -e "\n        ## End of script ##\n"
