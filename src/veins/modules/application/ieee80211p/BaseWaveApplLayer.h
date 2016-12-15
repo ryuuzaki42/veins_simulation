@@ -37,7 +37,7 @@ class BaseWaveApplLayer : public BaseApplLayer {
 
         enum WaveApplMessageKinds {
             SERVICE_PROVIDER = LAST_BASE_APPL_MESSAGE_KIND,
-            SEND_BEACON_EVT, SEND_BEACON_EVT_vehDist, SEND_BEACON_EVT_epidemic, SEND_BEACON_EVT_minicurso,
+            SEND_BEACON_EVT, SEND_BEACON_EVT_vehDist, SEND_BEACON_EVT_epidemic,
             SERVICE_EXPIRED_EVT, SERVICE_QUERY_EVT, SERVICE_EVT,
             Send_EpidemicMessageRequestEvt, SendEvtGenerateMessage, SendGetTrafficMethodCheck, SendEvtSelectVehGenerateMessage
         };
