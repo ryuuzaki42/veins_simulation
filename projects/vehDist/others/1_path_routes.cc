@@ -244,8 +244,8 @@ unsigned short int generate_routes (unsigned short int lineStart, unsigned short
     vehDescripType += "\" length=\"2.5\" minGap=\"2.5\" maxSpeed=\"16.67\" ";
 
     output << endl << "    <!-- taxi -->" << endl;
-    // Um com id=T e outro com id=P
-    output << "    <vType id=\"T\"" << vehDescripType << "color=\"1,1,0\"/>" << endl << endl;
+    // Um com id=taxi e outro com id=passenger
+    output << "    <vType id=\"taxi\"" << vehDescripType << "color=\"1,1,0\"/>" << endl << endl;
 
     count = 1;
     while (count <= countVehicleCagegoryT) {
@@ -264,7 +264,7 @@ unsigned short int generate_routes (unsigned short int lineStart, unsigned short
     }
 
     output << endl << "    <!-- passenger => Private car/Carro de passeio -->" << endl;
-    output << "    <vType id=\"P\"" << vehDescripType << "color=\"0,1,0\"/>" << endl << endl;
+    output << "    <vType id=\"passenger\"" << vehDescripType << "color=\"0,1,0\"/>" << endl << endl;
     output << "    <!-- http://sumo.dlr.de/wiki/Definition_of_Vehicles,_Vehicle_Types,_and_Routes -->" << endl;
 
     unsigned short int countTmp, vehicleTimeDepart, countPBeginTmp;
