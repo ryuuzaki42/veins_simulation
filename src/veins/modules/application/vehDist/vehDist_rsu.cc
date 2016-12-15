@@ -49,7 +49,7 @@ void vehDist_rsu::onData(WaveShortMessage* wsm) {
 void vehDist_rsu::handleSelfMsg(cMessage* msg) {
     switch (msg->getKind()) {
         case SEND_BEACON_EVT_vehDist: { // Call prepareBeaconStatusWSM local to the rsu
-            sendWSM(prepareBeaconStatusWSM("beaconStatus", beaconLengthBits, type_CCH, beaconPriority, -1));
+            sendWSM(prepareBeaconStatusWSM("beacon", beaconLengthBits, type_CCH, beaconPriority, -1));
             scheduleAt(simTime() + par("beaconInterval").doubleValue(), sendBeaconEvt);
             ScountBeaconSend++;
             break;
@@ -63,7 +63,6 @@ void vehDist_rsu::handleSelfMsg(cMessage* msg) {
 
 WaveShortMessage* vehDist_rsu::prepareBeaconStatusWSM(string name, int lengthBits, t_channel channel, int priority, int serial) {
     WaveShortMessage* wsm = new WaveShortMessage(name.c_str());
-    wsm->setType(1); // Beacon of Status
     wsm->addBitLength(headerLength);
     wsm->addBitLength(lengthBits);
     switch (channel) {
