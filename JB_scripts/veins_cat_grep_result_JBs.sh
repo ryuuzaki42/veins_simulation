@@ -28,25 +28,43 @@ fileName=$1
 if [ "$fileName" == '' ]; then
     echo "Error - need pass the file name to grep"
 else
+    op1="Total of messages received:"
+    op2="Total count copy message received:"
+    op3="Total average time to receive:"
+    op4="Total average copy received:"
+    op5="Total average first hops to received:"
+    op6="Total average hops to received:"
+    op7="counttoDeliveryMsg:"
+
+    op8="Final count messages drop:"
+    op9="Final average buffer use:"
+
+    echo -e "\nRSU:"
+    echo "    1 - $op1"
+    echo "    2 - $op2"
+    echo "    3 - $op3"
+    echo "    4 - $op4"
+    echo "    5 - $op5"
+    echo "    6 - $op6"
+    echo "    7 - $op7"
+    echo "Veh:"
+    echo "    8 - $op8"
+    echo "    9 - $op9"
     echo "Wich value you want grep?"
-    echo -e "\n1 - Total message received"
     read optionInput
 
-    case $optionInput in
-        1 )
-            grepValue="Total of message"
-            ;;
-        * )
-            echo -e "\nError - option \"$optionInput\" is unknown\n"
-            exit 1
-        ;;
-    esac
+    opTmp="op$optionInput"
+    grepValue=`echo ${!opTmp}`
 
-    grepResult=`cat $fileName | grep "$grepValue"`
+    if [ "$grepValue" == '' ]; then
+        echo -e "\nError - option \"$optionInput\" is unknown"
+    else
+        grepResult=`cat $fileName | grep "$grepValue"`
 
-    echo -e "\n\n$grepResult"
+        echo -e "\n\n$grepResult"
 
-    echo -e "\n\n$grepResult" | cut -d ':' -f4- | cut -d ' ' -f2-
-
-    echo -e "\n\n$grepResult" | cut -d ':' -f4- | cut -d ' ' -f2- | cut -d ' ' -f1
+        echo -e "\n\nValues more clean:"
+        echo "$grepResult" | rev | cut -d ':' -f1 | rev | cut -d ' ' -f2-
+    fi
+    echo
 fi
