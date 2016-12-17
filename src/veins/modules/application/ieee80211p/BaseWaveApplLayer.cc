@@ -235,11 +235,8 @@ void BaseWaveApplLayer::generalInitializeVariables_executionByExpNumberVehDist()
             //cout.clear(); // "Enable" the cout
         }
 
-        SfirstCategory = par("firstCategory").str();
-        SfirstCategory = SfirstCategory[1];
-
-        SsecondCategory = par("secondCategory").str();
-        SsecondCategory = SsecondCategory[1];
+        SfirstCategory = par("firstCategory").stringValue();
+        SsecondCategory = par("secondCategory").stringValue();
 
         ScountToDeliveryMsg = 0;
         SsimulationTimeLimit = atoi(ev.getConfig()->getConfigValue("sim-time-limit"));
