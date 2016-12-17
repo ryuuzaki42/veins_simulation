@@ -119,7 +119,12 @@ void vehDist::busPosLoadFromFile() {
             //cout << "\nLoading routes from of the bus";
             string fileInput, line;
 
-            fileInput = "../0scenarios/bologna_small/joined/busPosition.csv";
+            fileInput = par("fileBusPositionPath").stringValue();
+            if (fileInput.compare("") == 0){
+                cout << "\nbusPosition fileInput is empty - need pass the path to \"busPosition.csv\"\n\n";
+                ASSERT2(0, "JBe - fileInput is empty - need pass the path to \"busPosition.csv\" -" );
+            }
+
             freopen(fileInput.c_str(), "r", stdin);
 
             int countPos = 0;
