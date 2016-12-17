@@ -24,6 +24,8 @@
 #
 # Last update: 17/12/2016
 #
+echo -e "\nThis script grep values froma result from a file\n"
+
 fileName=$1
 if [ "$fileName" == '' ]; then
     echo "Error - need pass the file name to grep"
@@ -39,19 +41,22 @@ else
     op8="Final count messages drop:"
     op9="Final average buffer use:"
 
-    echo -e "\nRSU:"
-    echo "    1 - $op1"
-    echo "    2 - $op2"
-    echo "    3 - $op3"
-    echo "    4 - $op4"
-    echo "    5 - $op5"
-    echo "    6 - $op6"
-    echo "    7 - $op7"
-    echo "Veh:"
-    echo "    8 - $op8"
-    echo "    9 - $op9"
-    echo "Wich value you want grep?"
-    read optionInput
+    optionInput=$2
+    if [ "$optionInput" == '' ]; then
+        echo "RSU"
+        echo "    1 - $op1"
+        echo "    2 - $op2"
+        echo "    3 - $op3"
+        echo "    4 - $op4"
+        echo "    5 - $op5"
+        echo "    6 - $op6"
+        echo "    7 - $op7"
+        echo "Veh"
+        echo "    8 - $op8"
+        echo "    9 - $op9"
+        echo -n "Wich value you want grep: "
+        read optionInput
+    fi
 
     opTmp="op$optionInput"
     grepValue=`echo ${!opTmp}`
@@ -59,9 +64,10 @@ else
     if [ "$grepValue" == '' ]; then
         echo -e "\nError - option \"$optionInput\" is unknown"
     else
+        echo -e "\n\nGrep the value: \"${!opTmp}\""
         grepResult=`cat $fileName | grep "$grepValue"`
 
-        echo -e "\n\n$grepResult"
+        echo "$grepResult"
 
         echo -e "\n\nValues more clean:"
         echo "$grepResult" | rev | cut -d ':' -f1 | rev | cut -d ' ' -f2-
