@@ -30,15 +30,23 @@ if [ "$fileName" == '' ]; then
 else
     echo "Wich value you want grep?"
     echo -e "\n1 - Total message received"
-    read grepNumber
+    read optionInput
 
-    if [ "$grepNumber" == 1 ]; then
-        grepValue="Total of message"
-    fi
+    case $optionInput in
+        1 )
+            grepValue="Total of message"
+            ;;
+        * )
+            echo -e "\nError - option \"$optionInput\" is unknown\n"
+            exit 1
+        ;;
+    esac
 
     grepResult=`cat $fileName | grep "$grepValue"`
 
     echo -e "\n\n$grepResult"
-    echo -e "\n\n"
-    echo "$grepResult" | cut -d ':' -f4-
+
+    echo -e "\n\n$grepResult" | cut -d ':' -f4- | cut -d ' ' -f2-
+
+    echo -e "\n\n$grepResult" | cut -d ':' -f4- | cut -d ' ' -f2- | cut -d ' ' -f1
 fi
