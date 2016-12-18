@@ -413,22 +413,22 @@ string BaseWaveApplLayer::getFolderResultVehDist(unsigned short int expSendbyDSC
     string expSendbyDSCRText;
     switch (expSendbyDSCR) {
         case 1:
-            expSendbyDSCRText = "0001_chosenByDistance";
+            expSendbyDSCRText = "0001_chooseByDistance";
             break;
         case 12:
-            expSendbyDSCRText = "0012_chosenByDistance_Speed";
+            expSendbyDSCRText = "0012_chooseByDistance_Speed";
             break;
         case 13:
-            expSendbyDSCRText = "0013_chosenByDistance_Category";
+            expSendbyDSCRText = "0013_chooseByDistance_Category";
             break;
         case 14:
-            expSendbyDSCRText = "0014_chosenByDistance_RateTimeToSend";
+            expSendbyDSCRText = "0014_chooseByDistance_RateTimeToSend";
             break;
         case 123:
-            expSendbyDSCRText = "0123_chosenByDistance_Speed_Category";
+            expSendbyDSCRText = "0123_chooseByDistance_Speed_Category";
             break;
         case 1234:
-            expSendbyDSCRText = "1234_chosenByDistance_Speed_Category_RateTimeToSend";
+            expSendbyDSCRText = "1234_chooseByDistance_Speed_Category_RateTimeToSend";
             break;
         case 99:
             expSendbyDSCRText = "0099_epidemic";
