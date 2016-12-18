@@ -75,30 +75,9 @@
     calculeDistance()
 
 ## See if the selected vehicle to generate messages are the same
-sublime_text E1*/Veh_Messages_Generated.r E3*/Veh_Messages_Generated.r E5*/Veh_Messages_Generated.r E7*/Veh_Messages_Generated.r
+    kate results/*/*/*/*/VehRsu_Messages_Generated.r
 
-sublime_text E2*/Veh_Messages_Generated.r E4*/Veh_Messages_Generated.r E6*/Veh_Messages_Generated.r E8*/Veh_Messages_Generated.r
-
-sublime_text E*/Veh_Position_Initialize.r
-
-## Split results in experiments numbers
-v=v001; mkdir $v; i=1; while [ $i -lt 9 ]; do echo Experiment $i $v; cat output_vehDist_$v\_results.r | grep -E "Exp: $i|experiment" > $v/exp$i.r; ((i+=1)); done
-
-## Get the count message received by the "split" experiment
-i=1; cat exp$i.r | grep -E "Count|experiment" | sed 's/Exp: '$i' ### Count messages received://g'
-
-## Get the count message received by the full experiment file
-i=1; cat file.r | grep -E "Exp: $i|Values" |  grep -E "Count messages received|Values" | sed 's/Exp: '$i' ### Count messages received://g'
-    #or
-i=1; f=1; part=1; ./grep_results_*.sh $part $i $f | grep -E "Exp: $i|Values" |  grep -E "Count messages received|Values" | sed 's/Exp: '$i' ### Count messages received://g'
-
-## Get the count message dropped by the full experiment file
-i=1; cat file.r | grep -E "Exp: $i|Values" |  grep -E "drop:|Values" | sed 's/Exp: '$i' ### Final count messages drop://g'
-
-## Get the count message packets send by the full experiment file
-i=1; cat file.r | grep -E "Exp: $i|Values" | grep -E "send|Values" | sed 's/Exp: '$i' ### Final count packets messages send://g'
-
-# Error ASSERT: condition count == drivingVehicleCount false in function processVehicleSubscription, veins/modules/mobility/traci/TraCIScenarioManager.cc line 759
+## Error ASSERT: condition count == drivingVehicleCount false in function processVehicleSubscription, veins/modules/mobility/traci/TraCIScenarioManager.cc line 759
     Commenting out the ASSERT is totally fine.
     In SUMO any vehicle can have one of five states (according to statesvehicleStates_sm.uxf):
     first, it is loaded, transitions to running when it starts driving, then transitions to arrived when it arrived at its destination.
