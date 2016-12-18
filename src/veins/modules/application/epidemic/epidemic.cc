@@ -14,11 +14,11 @@ void epidemic::initialize(int stage) {
         traci = mobility->getCommandInterface();
         traciVehicle = mobility->getVehicleCommandInterface();
 
-        vehInitializeVariablesEpidemicVeh();
+        epidemicInitializeVariablesVeh();
     }
 }
 
-void epidemic::vehInitializeVariablesEpidemicVeh() {
+void epidemic::epidemicInitializeVariablesVeh() {
     vehInitializeValuesVehDist(traciVehicle->getTypeId(), mobility->getPositionAt(simTime() + 0.1)); // The same for Epidemic and VehDist
 }
 
