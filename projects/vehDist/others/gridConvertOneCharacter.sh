@@ -78,5 +78,4 @@ while [ $countGridTmp -lt $countGrid ]; do
     ((countGridTmp++))
     echo -e "\tTurning \"$inValue\" in \"$outValue\""
 done
-
 echo -e "\nConverting finished\n"
