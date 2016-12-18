@@ -21,6 +21,6 @@ class vehDist_rsu : public BaseWaveApplLayer {
         void handleSelfMsg(cMessage* msg);
         WaveShortMessage* prepareBeaconStatusWSM(string name, int lengthBits, t_channel channel, int priority, int serial);
 
-        void rsuInitializeVariables();
+        void vehDistInitializeVariablesRsu();
 };
 #endif

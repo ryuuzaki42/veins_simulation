@@ -10,11 +10,11 @@ void vehDist_rsu::initialize(int stage) {
         mobi = dynamic_cast<BaseMobility*> (getParentModule()->getSubmodule("mobility"));
         ASSERT(mobi);
 
-        rsuInitializeVariables();
+        vehDistInitializeVariablesRsu();
     }
 }
 
-void vehDist_rsu::rsuInitializeVariables() {
+void vehDist_rsu::vehDistInitializeVariablesRsu() {
     rsuInitializeValuesVehDist(mobi->getInitialPositionFromIniFileRSU());
 
     if (source.compare("rsu[0]") == 0) {
