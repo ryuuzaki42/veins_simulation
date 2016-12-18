@@ -13,11 +13,11 @@ void vehDist::initialize(int stage) {
         traci = mobility->getCommandInterface();
         traciVehicle = mobility->getVehicleCommandInterface();
 
-        vehInitializeVariablesVehDistVeh();
+        vehDistInitializeVariablesVeh();
     }
 }
 
-void vehDist::vehInitializeVariablesVehDistVeh() {
+void vehDist::vehDistInitializeVariablesVeh() {
     vehCreateUpdateRateTimeToSendEvent(); // Create Event to update the rateTimeToSend (Only VehDist)
 
     vehInitializeValuesVehDist(traciVehicle->getTypeId(), mobility->getPositionAt(simTime() + 0.1)); // The same for Epidemic and VehDist
@@ -204,7 +204,7 @@ void vehDist::onBeacon(WaveShortMessage* wsm) {
         beaconStatusNeighbors.insert(make_pair(wsm->getSource(), *wsm));
         sendMessageToOneNeighborTarget(wsm->getSource()); // Look in buffer it has messages for this new vehNeighbor
 
-        sendMessageDeleveryBuffer(wsm->getSource());
+        sendMessageDeliveryBuffer(wsm->getSource());
     }
     //printBeaconStatusNeighbors();
 }
@@ -485,7 +485,7 @@ void vehDist::trySendBeaconMessage() {
     }*/
 }
 
-string vehDist::choseCategory_RandomNumber1to100(unsigned short int percentP, string vehIdP, string vehIdT) {
+string vehDist::chooseCategory_RandomNumber1to100(unsigned short int percentP, string vehIdP, string vehIdT) {
     unsigned short int valRand = rand() % 100 + 1;
     //cout << "valRand " << valRand;
     if (valRand <= percentP) {
@@ -635,34 +635,34 @@ string vehDist::neighborWithShortestDistanceToTarge(string idMessage) {
     if (!vehShortestDistanceToTarget.empty()) {
         switch (SexpSendbyDSCR) {
             case 1:
-                neighborId = chosenByDistance(vehShortestDistanceToTarget);
+                neighborId = chooseByDistance(vehShortestDistanceToTarget);
                 break;
             case 12:
-                neighborId = chosenByDistance_Speed(vehShortestDistanceToTarget);
+                neighborId = chooseByDistance_Speed(vehShortestDistanceToTarget);
                 break;
             case 13:
-                //neighborId = chosenByDistance_CategoryA(vehShortestDistanceToTarget, SpercentP);
+                //neighborId = chooseByDistance_CategoryA(vehShortestDistanceToTarget, SpercentP);
 
-                //neighborId = chosenByDistance_CategoryB(vehShortestDistanceToTarget, SpercentP);
+                //neighborId = chooseByDistance_CategoryB(vehShortestDistanceToTarget, SpercentP);
 
-                neighborId = chosenByDistance(vehShortestDistanceToTarget);
+                neighborId = chooseByDistance(vehShortestDistanceToTarget);
                 break;
             case 14:
-                neighborId = chosenByDistance_RateTimeToSend(vehShortestDistanceToTarget);
+                neighborId = chooseByDistance_RateTimeToSend(vehShortestDistanceToTarget);
                 break;
             case 123:
-                neighborId = chosenByDistance_Speed_Category(vehShortestDistanceToTarget, SpercentP);
+                neighborId = chooseByDistance_Speed_Category(vehShortestDistanceToTarget, SpercentP);
                 break;
 ////######################################################################################################
 //            case 124:
-//                neighborId = chosenByDistance_Speed_RateTimeToSend(vehShortestDistanceToTarget, SpercentP);
+//                neighborId = chooseByDistance_Speed_RateTimeToSend(vehShortestDistanceToTarget, SpercentP);
 //                break;
 //            case 134:
-//                neighborId = chosenByDistance_Category_RateTimeToSend(vehShortestDistanceToTarget, SpercentP);
+//                neighborId = chooseByDistance_Category_RateTimeToSend(vehShortestDistanceToTarget, SpercentP);
 //                break;
 ////######################################################################################################
             case 1234:
-                neighborId = chosenByDistance_Speed_Category_RateTimeToSend(vehShortestDistanceToTarget, SpercentP);
+                neighborId = chooseByDistance_Speed_Category_RateTimeToSend(vehShortestDistanceToTarget, SpercentP);
                 break;
             default:
                 cout << "JBe - Error! expSendbyDSCR: " << SexpSendbyDSCR << "not defined, class in vehDist.cc -";
@@ -705,7 +705,7 @@ void vehDist::printVehShortestDistanceToTarget(unordered_map <string, shortestDi
     }
 }
 
-string vehDist::chosenByDistance(unordered_map <string, shortestDistance> vehShortestDistanceToTarget) {
+string vehDist::chooseByDistance(unordered_map <string, shortestDistance> vehShortestDistanceToTarget) {
     unordered_map <string, shortestDistance>::iterator itShortestDistance;
     double distanceToTarget, shortestDistanceToTarget;
 
@@ -721,7 +721,7 @@ string vehDist::chosenByDistance(unordered_map <string, shortestDistance> vehSho
     return vehId;
 }
 
-string vehDist::chosenByDistance_Speed(unordered_map <string, shortestDistance> vehShortestDistanceToTarget) {
+string vehDist::chooseByDistance_Speed(unordered_map <string, shortestDistance> vehShortestDistanceToTarget) {
     unordered_map <string, shortestDistance>::iterator itShortestDistance;
     double distanceSpeedValue, shortestDistanceSpeedValue;
 
@@ -737,7 +737,7 @@ string vehDist::chosenByDistance_Speed(unordered_map <string, shortestDistance> 
     return vehId;
 }
 
-string vehDist::chosenByDistance_CategoryA(unordered_map <string, shortestDistance> vehShortestDistanceToTarget, int percentP) {
+string vehDist::chooseByDistance_CategoryA(unordered_map <string, shortestDistance> vehShortestDistanceToTarget, int percentP) {
     unordered_map <string, shortestDistance>::iterator itShortestDistance;
     double distanceToTarget, shortestDistanceT, shortestDistanceP;
     string category, vehIdP, vehIdT;
@@ -768,13 +768,13 @@ string vehDist::chosenByDistance_CategoryA(unordered_map <string, shortestDistan
 
     if (int(shortestDistanceT) > int(shortestDistanceP)) {
         ScountMeetPshortestT++;
-        return choseCategory_RandomNumber1to100(percentP, vehIdP, vehIdT);
+        return chooseCategory_RandomNumber1to100(percentP, vehIdP, vehIdT);
     } else {
         return vehIdT;
     }
 }
 
-string vehDist::chosenByDistance_CategoryB(unordered_map <string, shortestDistance> vehShortestDistanceToTarget, int percentP) {
+string vehDist::chooseByDistance_CategoryB(unordered_map <string, shortestDistance> vehShortestDistanceToTarget, int percentP) {
     string vehId = source;
     double distanceToTargetCategory, shortestDistanceCategory;
     shortestDistanceCategory = DBL_MAX;
@@ -791,7 +791,7 @@ string vehDist::chosenByDistance_CategoryB(unordered_map <string, shortestDistan
     return vehId;
 }
 
-string vehDist::chosenByDistance_RateTimeToSend(unordered_map <string, shortestDistance> vehShortestDistanceToTarget) {
+string vehDist::chooseByDistance_RateTimeToSend(unordered_map <string, shortestDistance> vehShortestDistanceToTarget) {
     unordered_map <string, shortestDistance>::iterator itShortestDistance;
     double distanceRateTimeToSendValue, shortestDistanceRateTimeToSendValue;
     string vehId = source;
@@ -807,7 +807,7 @@ string vehDist::chosenByDistance_RateTimeToSend(unordered_map <string, shortestD
     return vehId;
 }
 
-string vehDist::chosenByDistance_Speed_Category(unordered_map <string, shortestDistance> vehShortestDistanceToTarget, int percentP) {
+string vehDist::chooseByDistance_Speed_Category(unordered_map <string, shortestDistance> vehShortestDistanceToTarget, int percentP) {
     unordered_map <string, shortestDistance>::iterator itShortestDistance;
     double distanceSpeedValue, shortestDistanceT, shortestDistanceP;
     string category, vehIdP, vehIdT;
@@ -838,13 +838,13 @@ string vehDist::chosenByDistance_Speed_Category(unordered_map <string, shortestD
 
     if (int(shortestDistanceT) > int(shortestDistanceP)) {
         ScountMeetPshortestT++;
-        return choseCategory_RandomNumber1to100(percentP, vehIdP, vehIdT);
+        return chooseCategory_RandomNumber1to100(percentP, vehIdP, vehIdT);
     } else {
         return vehIdT;
     }
 }
 
-string vehDist::chosenByDistance_Speed_Category_RateTimeToSend(unordered_map <string, shortestDistance> vehShortestDistanceToTarget, int percentP) {
+string vehDist::chooseByDistance_Speed_Category_RateTimeToSend(unordered_map <string, shortestDistance> vehShortestDistanceToTarget, int percentP) {
     unordered_map <string, shortestDistance>::iterator itShortestDistance;
     double valueDSCR, shortestDistanceT, shortestDistanceP;
     string category, vehIdP, vehIdT;
@@ -875,7 +875,7 @@ string vehDist::chosenByDistance_Speed_Category_RateTimeToSend(unordered_map <st
 
     if (int(shortestDistanceT) > int(shortestDistanceP)) {
         ScountMeetPshortestT++;
-        return choseCategory_RandomNumber1to100(percentP, vehIdP, vehIdT);
+        return chooseCategory_RandomNumber1to100(percentP, vehIdP, vehIdT);
     } else {
         return vehIdT;
     }
@@ -930,7 +930,7 @@ void vehDist::sendMessageToOneNeighborTarget(string beaconSource) {
     }
 }
 
-void vehDist::sendMessageDeleveryBuffer(string beaconSource) {
+void vehDist::sendMessageDeliveryBuffer(string beaconSource) {
     if (messagesBufferToDelivery.find(beaconSource) != messagesBufferToDelivery.end()) {
         messagesToDelivery msgToDeliveryTmp = messagesBufferToDelivery.find(beaconSource)->second;
         map <string, WaveShortMessage> messagesTmp = msgToDeliveryTmp.messages;

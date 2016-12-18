@@ -63,7 +63,7 @@ class vehDist : public BaseWaveApplLayer {
         void busPosLoadFromFile();
 
         bool busRouteDiffTarget(string busID, Coord targetPos);
-        void sendMessageDeleveryBuffer(string beaconSource);
+        void sendMessageDeliveryBuffer(string beaconSource);
         void createBusPositionSaveEvent();
 
         void vehCreateEventTrySendBeaconMessage();
@@ -79,7 +79,7 @@ class vehDist : public BaseWaveApplLayer {
         void vehUpdateRateTimeToSend();
         void vehCreateUpdateRateTimeToSendEvent();
 
-        void vehInitializeVariablesVehDistVeh();
+        void vehDistInitializeVariablesVeh();
 
         void sendMessageToOneNeighborTarget(string beaconSource);
         bool sendOneNewMessageToOneNeighborTarget(WaveShortMessage wsm);
@@ -87,15 +87,15 @@ class vehDist : public BaseWaveApplLayer {
         void removeOldestInputBeaconMessage();
         void removeOldestInputBeaconStatus();
 
-        string choseCategory_RandomNumber1to100(unsigned short int percentP, string vehIdP, string vehIdT);
-        string chosenByDistance(unordered_map <string, shortestDistance> vehShortestDistanceToTarget); // 0001
-        string chosenByDistance_Speed(unordered_map <string, shortestDistance> vehShortestDistanceToTarget); // 0012
-        string chosenByDistance_CategoryA(unordered_map <string, shortestDistance> vehShortestDistanceToTarget, int percentP); // 0013
-        string chosenByDistance_RateTimeToSend(unordered_map <string, shortestDistance> vehShortestDistanceToTarget); // 0014
-        string chosenByDistance_Speed_Category(unordered_map <string, shortestDistance> vehShortestDistanceToTarget, int percentP); // 0123
-        string chosenByDistance_Speed_Category_RateTimeToSend(unordered_map <string, shortestDistance> vehShortestDistanceToTarget, int percentP); // 1234
+        string chooseCategory_RandomNumber1to100(unsigned short int percentP, string vehIdP, string vehIdT);
+        string chooseByDistance(unordered_map <string, shortestDistance> vehShortestDistanceToTarget); // 0001
+        string chooseByDistance_Speed(unordered_map <string, shortestDistance> vehShortestDistanceToTarget); // 0012
+        string chooseByDistance_CategoryA(unordered_map <string, shortestDistance> vehShortestDistanceToTarget, int percentP); // 0013
+        string chooseByDistance_RateTimeToSend(unordered_map <string, shortestDistance> vehShortestDistanceToTarget); // 0014
+        string chooseByDistance_Speed_Category(unordered_map <string, shortestDistance> vehShortestDistanceToTarget, int percentP); // 0123
+        string chooseByDistance_Speed_Category_RateTimeToSend(unordered_map <string, shortestDistance> vehShortestDistanceToTarget, int percentP); // 1234
 
-        string chosenByDistance_CategoryB(unordered_map <string, shortestDistance> vehShortestDistanceToTarget, int percentP); // 0013 with uncomment
+        string chooseByDistance_CategoryB(unordered_map <string, shortestDistance> vehShortestDistanceToTarget, int percentP); // 0013 with uncomment
 
         unsigned short int getVehHeading8();
         unsigned short int getVehHeading4();
