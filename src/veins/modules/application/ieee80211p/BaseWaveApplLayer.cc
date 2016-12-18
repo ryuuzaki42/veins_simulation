@@ -1692,7 +1692,7 @@ void BaseWaveApplLayer::handleSelfMsg(cMessage* msg) {
         }
         case SendEvtGenerateMessage: {
             vehGenerateBeaconMessageAfterBeginVeh();
-            scheduleAt(simTime() + par("timeGenerateNewMessage").doubleValue(), sendGenerateMessageEvt);
+            scheduleAt(simTime() + 1, sendGenerateMessageEvt);
             break;
         }
         case SendEvtSelectVehGenerateMessage: {
