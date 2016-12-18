@@ -12,11 +12,11 @@ void epidemic_rsu::initialize(int stage) {
         mobi = dynamic_cast<BaseMobility*> (getParentModule()->getSubmodule("mobility"));
         ASSERT(mobi);
 
-        epidemicInitializeVariables();
+        epidemicInitializeVariablesRsu();
     }
 }
 
-void epidemic_rsu::epidemicInitializeVariables() {
+void epidemic_rsu::epidemicInitializeVariablesRsu() {
     rsuInitializeValuesVehDist(mobi->getInitialPositionFromIniFileRSU());
 }
 

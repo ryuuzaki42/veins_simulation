@@ -21,7 +21,7 @@ class epidemic_rsu : public BaseWaveApplLayer {
 
         void finish();
 
-        void epidemicInitializeVariables();
+        void epidemicInitializeVariablesRsu();
 };
 
 #endif
