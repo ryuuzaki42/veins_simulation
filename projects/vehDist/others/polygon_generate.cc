@@ -11,9 +11,9 @@ using namespace std;
 int printObstaclesAxis(int idPolygon, int ya, int xa, int xb, int countKm) {
     int xc, xd, yb, yc, yd;
     ofstream myfile2;
-    myfile2.open ("vehDist.poly.xml", std::ios_base::app);
+    myfile2.open("vehDist.poly.xml", std::ios_base::app);
 
-    for(int i = 0; i < 5; i++) {
+    for (int i = 0; i < 5; i++) {
         xd = xc = xb+38;
         yc = yb = ya+38;
         yd = ya;
@@ -33,7 +33,7 @@ int printObstaclesAxis(int idPolygon, int ya, int xa, int xb, int countKm) {
 int corraParaAsColinas(int idPolygon, int ya, int xa, int xb, int countKm) {
     int tmpInt, forEnd;
     forEnd = 4 * countKm;
-    for(int i = 0; i < forEnd; i++) {
+    for (int i = 0; i < forEnd; i++) {
         tmpInt = printObstaclesAxis(idPolygon, ya, xa, xb, countKm);
 
         idPolygon += countKm * 5;
@@ -51,7 +51,7 @@ int main() {
 
     countKm = 3; // 1 to 1 km of grid
 
-    myfile.open (fileOutput);
+    myfile.open(fileOutput);
     myfile << "<shapes>" << endl << endl;
     myfile << "    <!-- File with " << countKm << " km^2 of grid polygons -->" << endl << endl;
     myfile.close();
