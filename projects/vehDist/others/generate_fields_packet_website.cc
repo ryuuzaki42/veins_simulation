@@ -12,40 +12,40 @@
 using namespace std;
 
 int main() {
-   int size, countFields, countLimit, fieldsValue;
-   string nome;
+    int size, countFields, countLimit, fieldsValue;
+    string nome;
 
-   cout << "Digite a quantidade de campos: ";
-   cin >> countLimit;
-   countFields = 1;
-   fieldsValue = 0;
+    cout << "Digite a quantidade de campos: ";
+    cin >> countLimit;
+    countFields = 1;
+    fieldsValue = 0;
 
-   std::ofstream myfile;
-   myfile.open("diagram.txt");
-   myfile << "packetdiag {" << endl;
-   myfile << "    #colwidth = 16" << endl;
-   myfile << "    #node_height = 80" << endl;
-   myfile << "    #node_width = 20" << endl << endl;
+    std::ofstream myfile;
+    myfile.open("diagram.txt");
+    myfile << "packetdiag {" << endl;
+    myfile << "    #colwidth = 16" << endl;
+    myfile << "    #node_height = 80" << endl;
+    myfile << "    #node_width = 20" << endl << endl;
 
-   while (countFields <= countLimit) {
-      while (cin.get() != '\n') {
-         continue;
-      }
+    while (countFields <= countLimit) {
+        while (cin.get() != '\n') {
+            continue;
+        }
 
-      cout << endl << "Nome_" << countFields << ": ";
-      getline(cin, nome);
-      cout << "Tamanho: ";
-      cin >> size;
+        cout << endl << "Nome_" << countFields << ": ";
+        getline(cin, nome);
+        cout << "Tamanho: ";
+        cin >> size;
 
-      myfile << "    " << fieldsValue << "-" << (fieldsValue + size - 1) << ": " << nome << endl;
-      fieldsValue += size;
+        myfile << "    " << fieldsValue << "-" << (fieldsValue + size - 1) << ": " << nome << endl;
+        fieldsValue += size;
 
-      countFields++;
-   }
+        countFields++;
+    }
 
-   myfile << "}";
-   cout << endl << "\tDiagram saved in the file diagram.txt" << endl << endl;
-   myfile.close();
+    myfile << "}";
+    cout << endl << "\tDiagram saved in the file diagram.txt" << endl << endl;
+    myfile.close();
 
-   return 0;
+    return 0;
 }
