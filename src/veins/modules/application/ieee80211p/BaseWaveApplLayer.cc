@@ -140,10 +140,10 @@ void BaseWaveApplLayer::insertVehTraffic() {
     traf.source = source;
     traf.entryTime = simTime();
 
-    SvehTraffic.insert(make_pair(insertZeroIntRetunrString(myId), traf));
+    SvehTraffic.insert(make_pair(insertZeroIntReturnString(myId), traf));
 }
 
-string BaseWaveApplLayer::insertZeroIntRetunrString(int value) {
+string BaseWaveApplLayer::insertZeroIntReturnString(int value) {
     string stringValue;
 
     if (value < 10){
@@ -212,7 +212,7 @@ void BaseWaveApplLayer::openFileAndClose(string fileName, bool justForAppend) {
 
 void BaseWaveApplLayer::printHeaderfileExecution() {
     myfile << endl;
-    string expSendbyDSCRText = insertZeroIntRetunrString(SexpSendbyDSCR);;
+    string expSendbyDSCRText = insertZeroIntReturnString(SexpSendbyDSCR);;
 
     myfile << "Exp: " << SexpNumber << " expSendbyDSCR: " << expSendbyDSCRText.c_str() << " ################";
     myfile << "##########################################################################" << endl;
@@ -511,7 +511,7 @@ void BaseWaveApplLayer::restartFilesResultVeh(string projectInfo, Coord initialP
         myfile.close();
     }
 
-    saveVehStartPositionVeh(SresultFolder, initialPos); // Save the start position of vehicle. Just for test of the seed
+    //saveVehStartPositionVeh(SresultFolder, initialPos); // Save the start position of vehicle. Just for test of the seed
 }
 
 void BaseWaveApplLayer::saveVehStartPositionVeh(string fileNameLocation, Coord initialPos) {
@@ -609,7 +609,7 @@ void BaseWaveApplLayer::generateMessage_vehDist_and_Epidemic() {
     myfile.open(SfileMessagesGeneratedVehRsu, std::ios_base::app); // Save info (Id and vehicle generate) on fileMessagesGenerated
     myfile << "                                                                    ";
 
-    wsm->setGlobalMessageIdentificaton(insertZeroIntRetunrString(SmessageId).c_str());
+    wsm->setGlobalMessageIdentificaton(insertZeroIntReturnString(SmessageId).c_str());
 
     myfile << "### " << source << " generated the message ID: " << wsm->getGlobalMessageIdentificaton() << " to " << target << " " << Coord(target_x, target_y, 3) << " at: " << simTime() << endl;
     cout << "### " << source << " generated the message ID: " << wsm->getGlobalMessageIdentificaton() << " to " << target << " " << Coord(target_x, target_y, 3) << " at: " << simTime() << endl;
@@ -711,7 +711,7 @@ void BaseWaveApplLayer::toFinishVeh() {
     }
 
     if (par("getTraffic").boolValue()) {
-        string myIdString = insertZeroIntRetunrString(myId);
+        string myIdString = insertZeroIntReturnString(myId);
         if (SvehTraffic.find(myIdString) != SvehTraffic.end()) {
             SvehTraffic[myIdString].exitTime = simTime();
         } else {

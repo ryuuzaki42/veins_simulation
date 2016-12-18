@@ -127,7 +127,7 @@ class BaseWaveApplLayer : public BaseApplLayer {
         void createEpidemicRequestMessageVector();
         void createEpidemicRemoteSummaryVector(string s);
 
-        string insertZeroIntRetunrString(int value);
+        string insertZeroIntReturnString(int value);
 //######################################### Epidemic #########################################
 
     protected:
