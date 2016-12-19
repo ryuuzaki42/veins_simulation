@@ -1,0 +1,13 @@
+<?xml version="1.0"?>
+<launch>
+    <copy file="joined_buslanes.net.xml" />
+    <copy file="joined.rou.xml" />
+    <copy file="joined_busses.rou_parsed3.xml" />
+    <copy file="joined_bus_stops.add.xml" />
+    <!-- <copy file="joined_detectors.add.xml" /> -->
+    <copy file="joined_vtypes.add.xml" />
+    <copy file="joined_tls.add.xml" />
+    <copy file="vehDist.poly_blank.xml" />
+    <copy file="gui-settings.cfg" />
+    <copy file="joined.sumo_parsed3.cfg" type="config" />
+</launch>
