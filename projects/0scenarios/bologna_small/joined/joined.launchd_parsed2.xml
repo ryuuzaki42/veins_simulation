@@ -9,5 +9,5 @@
     <copy file="joined_tls.add.xml" />
     <copy file="vehDist.poly_blank.xml" />
     <copy file="gui-settings.cfg" />
-    <copy file="joined.sumo_parsed.cfg" type="config" />
+    <copy file="joined.sumo_parsed2.cfg" type="config" />
 </launch>
