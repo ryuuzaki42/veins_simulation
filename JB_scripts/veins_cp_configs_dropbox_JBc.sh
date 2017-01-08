@@ -23,9 +23,9 @@
 # Script: Cria uma pasta no Dropbox ($dropboxFolderDest) com as
 # configurações necessárias (*.ini, *.ned etc) e depois zip essa pasta (veins_v001.zip)
 #
-# Last update: 20/11/2016
+# Last update: 08/01/2016
 #
-dropboxFolderDest="/media/sda4/prog/Dropbox/z_share_code_JB" # Dropbox destination folder
+dropboxFolderDest="/media/sda2/prog/Dropbox/z_share_code_JB" # Dropbox destination folder
 veinsFolderOri=$veinsFolder # veinsFolder (change in your ~/.bashrc)
 veinsVersion="veins_v01-configs"
 

@@ -1,16 +1,43 @@
+#!/bin/bash
+#
+# Autor= João Batista Ribeiro
+# Bugs, Agradecimentos, Críticas "construtivas"
+# Mande me um e-mail. Ficarei Grato!
+# e-mail: joao42lbatista@gmail.com
+#
+# Este programa é um software livre; você pode redistribui-lo e/ou
+# modifica-lo dentro dos termos da Licença Pública Geral GNU como
+# publicada pela Fundação do Software Livre (FSF); na versão 2 da
+# Licença, ou (na sua opinião) qualquer versão.
+#
+# Este programa é distribuído na esperança que possa ser útil,
+# mas SEM NENHUMA GARANTIA; sem uma garantia implícita de ADEQUAÇÃO a
+# qualquer MERCADO ou APLICAÇÃO EM PARTICULAR.
+#
+# Veja a Licença Pública Geral GNU para maiores detalhes.
+# Você deve ter recebido uma cópia da Licença Pública Geral GNU
+# junto com este programa, se não, escreva para a Fundação do Software
+#
+# Livre(FSF) Inc., 51 Franklin St, Fifth Floor, Boston, MA 02110-1301 USA
+#
+# Script: Script that load config Veins/OMNeT and SUMO needed
+#
+# Last update: 08/01/2016
+#
+
+## Veins add in ~/.bashrc - Path can be different in your PC
+#. /media/sda2/prog/git_clone/8_veins_simulation/JB_scripts/JB_infoInstall_loadBash.r # copy and uncomment (don't remove the . (dot))
+
 ## Simulators version
 #   SUMO = 0.25.0
 #   OMNeT = 4.6
 #   Veins = 4.4
 
-## Veins add in ~/.bashrc - Path can be different in your PC
-#. /media/sda4/prog/git_clone/8_veins_simulation/JB_scripts/JB_infoInstall_loadBash.r # copy and uncomment (don't remove the . (dot))
-
 ## Veins run by ~/.bashrc - Can be different in your PC
 TCL_LIBRARY="/usr/lib64/tcl8.6"
 SUMO_HOME="/opt/sumo-0.25.0"
 omnetFolder="/opt/omnetpp-4.6/bin"
-veinsFolder="/media/sda4/prog/git_clone/8_veins_simulation"
+veinsFolder="/media/sda2/prog/git_clone/8_veins_simulation"
 
 ## No need of change in your PC
 export PATH=$PATH:$TCL_LIBRARY
