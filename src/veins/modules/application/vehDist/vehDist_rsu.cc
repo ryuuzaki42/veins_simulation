@@ -31,7 +31,7 @@ void vehDist_rsu::onData(WaveShortMessage* wsm) {
             //findHost()->bubble("Received Message");
             saveMessagesOnFile(wsm, fileMessagesUnicastRsu);
 
-            if (wsm->getToDelivery()) {
+            if (wsm->getOnlyDelivery()) {
                 ScountToDeliveryMsg++;
                 countToDeliveryMsgLocal++;
                 vehToDelivery += wsm->getSenderAddressTemporary() + string(" msg: ") + wsm->getGlobalMessageIdentificaton();

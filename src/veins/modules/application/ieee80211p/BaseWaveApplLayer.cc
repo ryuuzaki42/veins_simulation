@@ -223,7 +223,7 @@ void BaseWaveApplLayer::printHeaderfileExecution() {
 void BaseWaveApplLayer::generalInitializeVariables_executionByExpNumberVehDist() {
     source = findHost()->getFullName();
     msgBufferUse = 0;
-    toDeliveryMsg = false;
+    msgOnlyDelivery = false;
 
     // Epidemic variables
     lastTimeSendLocalSummaryVector = nodesRecentlySendLocalSummaryVector = 0;

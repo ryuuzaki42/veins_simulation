@@ -51,7 +51,7 @@ packet WaveShortMessage {
     string globalMessageIdentificaton; // Unique global message identification
     unsigned short hopCount; // Hop Count works like TTL in the IP packets
 
-    bool toDelivery; // Message with this falg true is to be delivery by the bus with route near the target
+    bool onlyDelivery; // Message with this falg true is to be delivery by the bus with route near the target
     // Add Minicurso_UFPI - Send ID da pista e velocidade
     string roadId = ""; // Current ID of the road, e. g., 1ato2b
     double senderSpeed = 0; // Speed of vehicle in the moment
