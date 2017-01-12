@@ -146,7 +146,7 @@ class BaseWaveApplLayer : public BaseApplLayer {
 
 //######################################### vehDist #########################################
 
-        bool toDeliveryMsg;
+        bool msgOnlyDelivery;
         vector <string> messagesOrderReceivedVehDist;
 
         unordered_map <string, WaveShortMessage> messagesBufferVehDist;

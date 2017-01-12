@@ -218,9 +218,9 @@ void vehDist::onData(WaveShortMessage* wsm) {
         //
         //} else ...
 
-        if (wsm->getToDelivery()) {
+        if (wsm->getOnlyDelivery()) {
             cout << "vehCategory: " << vehCategory << "\n";
-            cout << source << " with one message ToDelivery: " << wsm->getToDelivery() << " target: " << wsm->getTarget() << " at: " << simTime() << endl;
+            cout << source << " with one message ToDelivery: " << wsm->getOnlyDelivery() << " target: " << wsm->getTarget() << " at: " << simTime() << endl;
 
             busMsgToDelivery += source + string(" msg: ") + wsm->getGlobalMessageIdentificaton() + string(" at: ") + to_string(simTime().dbl());
             busMsgToDelivery += string(" to ") + wsm->getTarget() + string("\n");
@@ -228,7 +228,7 @@ void vehDist::onData(WaveShortMessage* wsm) {
 
         bool insert = sendOneNewMessageToOneNeighborTarget(*wsm); // Look in neigborStatus buffer if has the target of this message
         if (insert) {
-            if (wsm->getToDelivery()) {
+            if (wsm->getOnlyDelivery()) {
                 map <string, WaveShortMessage> messagesTmp;
                 messagesToDelivery msgToDeliveryTmp;
 
@@ -421,7 +421,7 @@ void vehDist::trySendBeaconMessage() {
             //printBeaconStatusNeighbors();
             // The same range to the RSU and veh
 
-            toDeliveryMsg = false;
+            msgOnlyDelivery = false;
             string idMessage, rcvId = source;
             idMessage = messagesOrderReceivedVehDist[messageToSend];
             if (messagesBufferVehDist[idMessage].getHopCount() > 1) {
@@ -449,12 +449,12 @@ void vehDist::trySendBeaconMessage() {
 
                 WaveShortMessage wsmTmpSend = messagesBufferVehDist[idMessage];
                 // toDeliveryMsg is set when send to a bus (expSend13)
-                wsmTmpSend.setToDelivery(toDeliveryMsg);
+                wsmTmpSend.setOnlyDelivery(msgOnlyDelivery);
 
                 sendWSM(updateBeaconMessageWSM(wsmTmpSend.dup(), rcvId));
                 ScountMsgPacketSend++;
 
-                if ((!SallowMessageCopy) || (toDeliveryMsg)) {
+                if ((!SallowMessageCopy) || (msgOnlyDelivery)) {
                     cout << source << " send the message " << idMessage << " and removing (message copy not allow) at: "  << simTime() << endl;
 
                     insertMessageDropVeh(idMessage, 2, messagesBufferVehDist[idMessage].getTimestamp()); // Removed by the value of tyRemoved (1 buffer, 2 copy, 3 time)
@@ -535,8 +535,8 @@ string vehDist::neighborWithShortestDistanceToTarge(string idMessage) {
                     if (neighborCategory.compare("B") == 0) {
                         cout << "\n\n" << source << " whit neighbor: "<< neighborId << " category: " << neighborCategory;
                         cout << " msg to: " << messagesBufferVehDist[idMessage].getTarget() << " with pos: " << targetPos;
-                        toDeliveryMsg = busRouteDiffTarget(neighborId, targetPos);
-                        if (toDeliveryMsg) {
+                        msgOnlyDelivery = busRouteDiffTarget(neighborId, targetPos);
+                        if (msgOnlyDelivery) {
                             cout << "send by busTestEdgeRoute to "<< neighborId << "\n\n";
                             return neighborId;
                         }
