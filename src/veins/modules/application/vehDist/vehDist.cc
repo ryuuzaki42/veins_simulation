@@ -535,12 +535,16 @@ string vehDist::neighborWithShortestDistanceToTarge(string idMessage) {
                     if (neighborCategory.compare("B") == 0) {
                         cout << "\n\n" << source << " whit neighbor: "<< neighborId << " category: " << neighborCategory;
                         cout << " msg to: " << messagesBufferVehDist[idMessage].getTarget() << " with pos: " << targetPos;
-                        msgOnlyDelivery = busRouteDiffTarget(neighborId, targetPos);
-                        if (msgOnlyDelivery) {
-                            cout << "send by busTestEdgeRoute to "<< neighborId << "\n\n";
-                            return neighborId;
+                        if (itBeaconNeighbors->second.getBufferMessageOnlyDeliveryFull() == 0) {
+                            msgOnlyDelivery = busRouteDiffTarget(neighborId, targetPos);
+                            if (msgOnlyDelivery) {
+                                cout << "send by busTestEdgeRoute to "<< neighborId << "\n\n";
+                                return neighborId;
+                            }
+                            cout << "\n\n";
+                        } else {
+                            cout << "itBeaconNeighbors->second.getBufferMessageOnlyDeliveryFull() << Full Buffer" << endl;
                         }
-                        cout << "\n\n";
                     }
                 }
 
@@ -1046,6 +1050,19 @@ WaveShortMessage* vehDist::prepareBeaconStatusWSM(string name, int lengthBits, t
 
 //    wsm->setHeading(getVehHeading4()); //wsm->setHeading(getVehHeading8()); // heading 1 to 4 or 1 to 8
 //    wsm->setRoadId(mobility->getRoadId().c_str());
+
+    if (vehCategory.compare("B") == 0) { // It is a bus
+        if (messagesBufferToDelivery.size() >= SbufferMessageOnlyDeliveryLimit) {
+            wsm->setBufferMessageOnlyDeliveryFull(true);
+
+            cout << source << " SlimitbufferMsgOnlyDevivery: " << SbufferMessageOnlyDeliveryLimit << " - Full" << endl;
+            cout << "messagesBufferToDelivery.size(): " << messagesBufferToDelivery.size() << " at: " << simTime() << endl;
+        } else {
+            wsm->setBufferMessageOnlyDeliveryFull(false);
+        }
+    } else { // It is another category of vehicle
+        wsm->setBufferMessageOnlyDeliveryFull(false);
+    }
 
     DBG << "Creating BeaconStatus with Priority " << priority << " at Applayer at: " << wsm->getTimestamp() << endl;
     return wsm;
