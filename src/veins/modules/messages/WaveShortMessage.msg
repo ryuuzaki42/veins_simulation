@@ -52,6 +52,7 @@ packet WaveShortMessage {
     unsigned short hopCount; // Hop Count works like TTL in the IP packets
 
     bool onlyDelivery; // Message with this falg true is to be delivery by the bus with route near the target
+    bool bufferMessageOnlyDeliveryFull; // Buffer with message onlyDelivery is full or not
     // Add Minicurso_UFPI - Send ID da pista e velocidade
     string roadId = ""; // Current ID of the road, e. g., 1ato2b
     double senderSpeed = 0; // Speed of vehicle in the moment
