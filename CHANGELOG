@@ -20,10 +20,10 @@ v2.2
   Merge thermalNoise into attenuattion map for excluded AirFrame.
 + Ned INic definition was renamed to IWirelessNicUpperCtl (like INET IWirelessNic plus
   upper control gates)
-+ Add sendReply switch to BurstApplLayer, to disable send reply for 
++ Add sendReply switch to BurstApplLayer, to disable send reply for
   BROADCAST_MESSAGE's.
 + Renamed introduced timing info methods in Signal ( getSignalLength() ->
-  getDuration(); getSignalStart() -> getReceptionStart(); getSignalStart() + 
+  getDuration(); getSignalStart() -> getReceptionStart(); getSignalStart() +
   getSignalLength() -> getReceptionEnd() )
 + Signal now contains infos about the sending/receiption module/gate (getSendingModule;
   getReceiptionModule). The info will be extracted/saved from AirFrame in BasePhyLayer at
@@ -41,16 +41,16 @@ v2.1
 + added modules from MoBAN project from Majid Nabi, Marc Geilen and Twan Basten
 + added BMAC layer implementation written by Anna F�rster
 + new probabilistic broadcast routing modules
-+ new packet error rate analogue model (PERModel) 
++ new packet error rate analogue model (PERModel)
 + new BreakPointPathloss analogue model
 + added several more modules to choose from in "Basic MiXiM network" wizzard
-+ introduced "debugEV" which together with a modules "debug" parameter enables 
++ introduced "debugEV" which together with a modules "debug" parameter enables
   per module debugging for end user modules
 + added preconfigured hosts for 802.11 and 802.15.4 protocol respectively
 + added support for phy protocol ids to identify the protocol used for a
   transmission
 + added multi channel support to BasePhyLayer
-+ added Nic80211MultiChannel which extends the Nic80211 with multi channel 
++ added Nic80211MultiChannel which extends the Nic80211 with multi channel
   support
 + added parameter "scaleNodeByDepth" to BaseMobility to disable scaling of nodes
   when tkenv and 3d is used
@@ -84,13 +84,13 @@ v2.1
 * fixed a bug in csma's backoff algorithm
 
 v2.0
-+ introduced Mixnet - compatibility modules for using MiXiM NICs within INET 
++ introduced Mixnet - compatibility modules for using MiXiM NICs within INET
   networks
 + divided BaseArps addressing and ARP functionality into two separate interfaces
   to become more compatible with real ARPs which do not implement addressing
-* fixed use of wrong connection manager in MAC layer when using multiple 
+* fixed use of wrong connection manager in MAC layer when using multiple
   connection managers (thanks to "David" from the omnetpp list for reporting)
-* fixed a problem with ChannelInfo where it throw away channel information 
+* fixed a problem with ChannelInfo where it throw away channel information
   although it was still needed to answer a ChannelSenseRequest
 * fixed not canceled CCA timer on backoff (bug tracker id: 3083767)
 
@@ -112,7 +112,7 @@ v1.2
 + added a wizard to create a basic MiXiM-network as well as a wizard for
   creating your own AnalogueModel
 + added, updated or extended documentation for Radio, RSAM, ChannelInfo,
-  MiXiM-basics, mobility, border-handling and CSMA MAC-Layer 
+  MiXiM-basics, mobility, border-handling and CSMA MAC-Layer
 + changed scheduling priority of AirFrames to slightly higher than normal to
   ensure channel consistency
 + added utility-method 'addDiscontinuity' to MappingUtils which provides a
