@@ -138,6 +138,7 @@ class BaseWaveApplLayer : public BaseApplLayer {
 
         string source, target;
         static int ScountToDeliveryMsg;
+        static unsigned int SbufferMessageOnlyDeliveryLimit;
         int countToDeliveryMsgLocal; // Count of message toDelivery received by one rsu
 
         cMessage* sendBeaconEvt;

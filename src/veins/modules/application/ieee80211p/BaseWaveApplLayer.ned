@@ -65,6 +65,7 @@ simple BaseWaveApplLayer like IBaseApplLayer {
         string firstCategory = default(""); // First category from the vehicle # Only one char valid
         string secondCategory = default(""); // Second category from the vehicle # Only one char valid
         string fileBusPositionPath = default(""); // File (csv) of bus position to load
+        int bufferMessageOnlyDeliveryLimit = default(0); // Size limit of the buffer with message onlyDelivery
 
     gates:
         input lowerLayerIn; // from mac layer
