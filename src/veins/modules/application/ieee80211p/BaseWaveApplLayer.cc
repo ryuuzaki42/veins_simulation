@@ -88,6 +88,7 @@ void BaseWaveApplLayer::saveMessagesOnFile(WaveShortMessage* wsm, string fileNam
     myfile << "wsm->getSenderPos(): " << wsm->getSenderPos() << endl;
     myfile << "wsm->getWsmData(): " << wsm->getWsmData() << endl;
     myfile << "wsm->getTimestamp(): " << wsm->getTimestamp() << endl;
+    myfile << "wsm->getBufferMessageOnlyDeliveryFull(): " << wsm->getBufferMessageOnlyDeliveryFull() << endl;
     myfile << "Time to generate and received: " << (simTime() - wsm->getTimestamp()) << endl << endl;
 
     myfile.close();
@@ -238,6 +239,7 @@ void BaseWaveApplLayer::generalInitializeVariables_executionByExpNumberVehDist()
         SfirstCategory = par("firstCategory").stringValue();
         SsecondCategory = par("secondCategory").stringValue();
 
+        SbufferMessageOnlyDeliveryLimit = par("bufferMessageOnlyDeliveryLimit");
         ScountToDeliveryMsg = 0;
         SsimulationTimeLimit = atoi(ev.getConfig()->getConfigValue("sim-time-limit"));
         SmessageBufferSize = par("messageBufferSize"); // Define the maximum buffer size (in number of messages) that a node is willing to allocate
@@ -333,6 +335,7 @@ void BaseWaveApplLayer::generalInitializeVariables_executionByExpNumberVehDist()
             SprojectInfo += texTmp + "usePathHistory:_ " + boolToString(SusePathHistory);
             SprojectInfo += texTmp + "useMessagesSendLog:_ " + boolToString(SuseMessagesSendLog);
             SprojectInfo += texTmp + "timeToUpdatePosition:_ " + to_string(StimeToUpdatePosition) + " s";
+            SprojectInfo += texTmp + "bufferMessageOnlyDeliveryLimit:_ " + to_string(SbufferMessageOnlyDeliveryLimit);
         } else if (SbeaconTypeInitialize == 2) {
             SprojectInfo += texTmp + "sendSummaryVectorInterval:_ " + to_string(SsendSummaryVectorInterval) + " s";
         } else {
