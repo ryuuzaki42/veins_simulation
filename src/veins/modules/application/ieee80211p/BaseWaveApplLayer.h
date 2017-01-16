@@ -152,11 +152,11 @@ class BaseWaveApplLayer : public BaseApplLayer {
 
         unordered_map <string, WaveShortMessage> messagesBufferVehDist;
 
-        struct messagesToDelivery {
+        struct messagesOnlyDelivery {
                  //messageID
             map <string, WaveShortMessage> messages;
         };           //targetID
-        unordered_map <string, messagesToDelivery> messagesBufferToDelivery;
+        unordered_map <string, messagesOnlyDelivery> messagesBufferOnlyDelivery;
 
         //## Used to another projects
         cMessage* sendGenerateMessageEvt;
