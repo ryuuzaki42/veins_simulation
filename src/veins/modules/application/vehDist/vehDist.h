@@ -62,7 +62,7 @@ class vehDist : public BaseWaveApplLayer {
 
         void busPosLoadFromFile();
 
-        bool busRouteDiffTarget(string busID, Coord targetPos);
+        bool busRouteDiffTarget(string busID, Coord targetPos, double localVehDistanceNow);
         void sendMessageDeliveryBuffer(string beaconSource);
         void createBusPositionSaveEvent();
 
