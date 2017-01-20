@@ -6,6 +6,9 @@
     python /opt/sumo-0.25.0/tools/randomTrips.py --help
     http://sumo.dlr.de/wiki/FAQ#How_do_I_generate_random_routes.3F
 
+## Get name of the lane from a .net.xml file
+cat joined_buslanes.net.xml | grep "<edge id=" | grep -v "<edge id=\":" | sed 's/" from.*$//g' | sed 's/.*<edge id="//g' > joined_buslanes_listLanes.csv
+
 ## km^2, grid: (1, 5) (4, 9) (9, 13) (16, 17) (25, 21) (36, 25)
 
 ## Generate the grid 1 km^2
