@@ -147,16 +147,12 @@ class BaseWaveApplLayer : public BaseApplLayer {
 
 //######################################### vehDist #########################################
 
-        bool msgOnlyDelivery;
         vector <string> messagesOrderReceivedVehDist;
 
         unordered_map <string, WaveShortMessage> messagesBufferVehDist;
 
-        struct messagesOnlyDelivery {
-                 //messageID
-            map <string, WaveShortMessage> messages;
-        };           //targetID
-        unordered_map <string, messagesOnlyDelivery> messagesBufferOnlyDelivery;
+        static unsigned int SmsgUseOnlyDeliveryBufferGeneral;
+        unordered_map <string, WaveShortMessage> messagesBufferOnlyDelivery;
 
         //## Used to another projects
         cMessage* sendGenerateMessageEvt;
@@ -229,6 +225,7 @@ class BaseWaveApplLayer : public BaseApplLayer {
         };
         static unordered_map <string, busPosByTime> SposTimeBus; // To save bus position in a .csv
         static unordered_map <string, busPosByTime> SposTimeBusLoaded; // To load bus position to memory form a .csv
+        static vector <string > SlaneNameLoaded; // To load lane name to memory form a .csv
         static unordered_map <string, string> SrouteIDVehID; // routeID - vehID
 
         struct targetResultMsg {
