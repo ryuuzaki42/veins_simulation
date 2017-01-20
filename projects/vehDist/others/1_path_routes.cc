@@ -75,11 +75,28 @@ unsigned short int generate_routes (unsigned short int lineStart, unsigned short
         fileResultPartName = to_string(routeFileNumber);
     }
 
-    fileInput = "vehDist_tmp.rou.xml";
-    fileOutput = "vehDist.rou"+ fileResultPartName + ".xml";
+    string fileName;
+    cout << "\nEnter file name: ";
+    cin >> fileName;
+    cout << "File name: \"" <<  fileName << "\"\n";
+
+    if (fileName.size() < 10) {
+        cout << "Error: Need pass the file name\n\n";
+        exit(1);
+    }
+
+    fileInput = fileName;
+    fileOutput = fileName.substr(0, fileName.size() - 8) + "_" + fileResultPartName + "rou.xml";
     fileDist = "distributionCategory" + fileResultPartName + ".r";
 
-    freopen(fileInput.c_str(), "r", stdin); // Arquivo de entrada gerado com script randomTrips.py
+    FILE* fptr = freopen(fileInput.c_str(), "r", stdin); // Arquivo de entrada gerado com script randomTrips.py
+    if (fptr != NULL) {
+        fclose(fptr);
+        cout << "File exists\n\n";
+    } else {
+        cout << "File doesnt exist\n\n";
+        exit(1);
+    }
 
     lineCount = 0;
     while (getline(cin, line) && (lineCount < lineStart)) {
