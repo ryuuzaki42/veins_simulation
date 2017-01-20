@@ -101,6 +101,32 @@ TraCIBuffer TraCIConnection::query(uint8_t commandId, const TraCIBuffer& buf) {
 	return obuf;
 }
 
+TraCIBuffer TraCIConnection::query_JB(uint8_t commandId, const TraCIBuffer& buf) {
+    sendMessage(makeTraCICommand(commandId, buf));
+
+    TraCIBuffer obuf(receiveMessage());
+    uint8_t cmdLength; obuf >> cmdLength;
+    uint8_t commandResp; obuf >> commandResp;
+    ASSERT(commandResp == commandId);
+    uint8_t result; obuf >> result;
+    std::string description; obuf >> description;
+    if (result == RTYPE_NOTIMPLEMENTED) throw cRuntimeError("TraCI server reported command 0x%2x not implemented (\"%s\"). Might need newer version.", commandId, description.c_str());
+
+    if (result == RTYPE_ERR) {
+        int commandIdInt = unsigned(commandId);
+        //std::cout << "\ncommandId: " << unsigned(commandId) << "\ncommandIdInt: " << commandIdInt << "\n\n";
+        if (commandIdInt == 196) {
+            obuf.set("notChanged");
+            return obuf;
+        } else {
+            throw cRuntimeError("TraCI2 server reported error executing command 0x%2x (\"%s\").", commandId, description.c_str());
+        }
+    }
+
+    ASSERT(result == RTYPE_OK);
+    return obuf;
+}
+
 TraCIBuffer TraCIConnection::queryOptional(uint8_t commandId, const TraCIBuffer& buf, bool& success, std::string* errorMsg) {
 	sendMessage(makeTraCICommand(commandId, buf));
 

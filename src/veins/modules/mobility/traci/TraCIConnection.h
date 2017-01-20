@@ -20,6 +20,10 @@ class TraCIConnection
 		 */
 		TraCIBuffer query(uint8_t commandId, const TraCIBuffer& buf = TraCIBuffer());
 
+        // Equal to query, but not throw cRuntimeError(...) when ((result == RTYPE_ERR) && (commandIdInt == 196)),
+        // will return obuf. Where obuf.set("notChanged")
+        TraCIBuffer query_JB(uint8_t commandId, const TraCIBuffer& buf = TraCIBuffer());
+
 		/**
 		 * sends a single command via TraCI, expects no reply, returns true if successful
 		 */
