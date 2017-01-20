@@ -116,6 +116,12 @@ void BaseWaveApplLayer::vehInitializeValuesVehDist(string category, Coord positi
         ASSERT2(0, "JBe - Initial category is unknown - ");
     }
 
+    if (vehCategory.compare("B") == 0) {
+        ScountVehicleBus++;
+    } else if (vehCategory.compare("T") == 0) {
+        ScountVehicleTaxi++;
+    }
+
     WaveShortMessage wsmTmp;
     wsmTmp.setTimestamp(simTime());
     wsmTmp.setCategory(vehCategory.c_str());
@@ -239,7 +245,7 @@ void BaseWaveApplLayer::generalInitializeVariables_executionByExpNumberVehDist()
         SsecondCategory = par("secondCategory").stringValue();
 
         SbufferMessageOnlyDeliveryLimit = par("bufferMessageOnlyDeliveryLimit");
-        ScountToDeliveryMsg = 0;
+        ScountToDeliveryMsg = SmsgUseOnlyDeliveryBufferGeneral = 0;
         SsimulationTimeLimit = atoi(ev.getConfig()->getConfigValue("sim-time-limit"));
         SmessageBufferSize = par("messageBufferSize"); // Define the maximum buffer size (in number of messages) that a node is willing to allocate
         SmessageHopLimit = par("messageHopLimit").longValue();
@@ -280,8 +286,8 @@ void BaseWaveApplLayer::generalInitializeVariables_executionByExpNumberVehDist()
             ASSERT2(0, "JBe - Error: Number of experiment not configured -");
         }
 
-        ScountMesssageDrop = ScountMsgPacketSend = SmsgBufferUseGeneral = ScountVehicleAll = 0;
-        ScountBeaconSend = ScountSummaryVectorSend = ScountRequestMessageVectorSend = 0;
+        ScountMesssageDrop = ScountMsgPacketSend = SmsgBufferUseGeneral = ScountVehicleAll = ScountVehicleBus = 0;
+        ScountBeaconSend = ScountSummaryVectorSend = ScountRequestMessageVectorSend = ScountVehicleTaxi= 0;
         SmsgDroppedbyTTL = SmsgDroppedbyCopy = SmsgDroppedbyBuffer = 0;
         ScountMeetPshortestT = ScountTwoCategoryN = ScountMeetN = 0;
         SmessageId = 1;
@@ -679,7 +685,11 @@ void BaseWaveApplLayer::printCountBeaconMessagesDropVeh() {
         myfile << textTmp + "Final count message dropped by copy (Only valid if copy of message are not allowed): " << SmsgDroppedbyCopy;
         myfile << textTmp + "Final count message dropped by ttl: " << SmsgDroppedbyTTL;
         myfile << textTmp + "Final average buffer use: " << double(SmsgBufferUseGeneral)/ScountVehicleAll;
+        myfile << textTmp;
         myfile << textTmp + "Count of vehicle in the scenario (all time): " << ScountVehicleAll;
+        myfile << textTmp + "Count of vehicle Bus in the scenario (all time): " << ScountVehicleBus;
+        myfile << textTmp + "Count of vehicle Taxi in the scenario (all time): " << ScountVehicleTaxi;
+        myfile << textTmp;
         myfile << textTmp + "Count meetings: " << (ScountTwoCategoryN + ScountMeetN);
         myfile << textTmp + "Count meetings two category: " << ScountTwoCategoryN;
         myfile << textTmp + "Count meetings another: " << ScountMeetN;
@@ -1060,7 +1070,15 @@ void BaseWaveApplLayer::printCountMessagesReceivedRSU() {
 
         myfile << textTmp << endl;
         myfile << textTmp << "msgUseOnlyDeliveryBufferGeneral total: " << SmsgUseOnlyDeliveryBufferGeneral;
-        myfile << textTmp << "msgUseOnlyDeliveryBufferGeneral avg: " << double(SmsgUseOnlyDeliveryBufferGeneral)/ScountVehicleAll;
+
+        if (ScountVehicleBus == 0) {
+            ScountVehicleBus = 1;
+            if (SmsgUseOnlyDeliveryBufferGeneral != 0) {
+                cout << "JBe - (msgUseOnlyDeliveryBufferGeneral != 0) with (ScountVehicleBus == 0) at: " << simTime() << endl;
+                ASSERT2(0, "JBe - (msgUseOnlyDeliveryBufferGeneral != 0) with (ScountVehicleBus == 0) - ");
+            }
+        }
+        myfile << textTmp << "msgUseOnlyDeliveryBufferGeneral avg: " << double(SmsgUseOnlyDeliveryBufferGeneral)/ScountVehicleBus;
         myfile << textTmp << endl;
 
         myfile << textTmp << endl;

@@ -180,7 +180,7 @@ class BaseWaveApplLayer : public BaseApplLayer {
 
         static unsigned short int SrepeatNumber, SexpNumber, SexpSendbyDSCR, ScountGenerateMessage, SttlMessage;
 
-        static int SmsgDroppedbyTTL, SmsgDroppedbyCopy, SmsgDroppedbyBuffer;
+        static int SmsgDroppedbyTTL, SmsgDroppedbyCopy, SmsgDroppedbyBuffer, ScountVehicleBus, ScountVehicleTaxi;
         static int ScountMsgPacketSend, SmsgBufferUseGeneral, SmessageHopLimit, ScountMesssageDrop;
         static int ScountMeetN, ScountTwoCategoryN, ScountMeetPshortestT, ScountVehicleAll, SmessageId;
         static int ScountBeaconSend, ScountSummaryVectorSend, ScountRequestMessageVectorSend;
