@@ -42,6 +42,8 @@ class TraCICommandInterface
 				void setColor(const TraCIColor& color);
 				void slowDown(double speed, int time);
 				void newRoute(std::string roadId);
+                // Equal to newRoute, but has return (true - changed route, false for not)
+                bool newRoute_JB(std::string roadId);
 				void setParking();
 				std::string getRoadId();
 				std::string getCurrentRoadOnRoute();

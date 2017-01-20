@@ -75,6 +75,20 @@ void TraCICommandInterface::Vehicle::newRoute(std::string roadId) {
 	ASSERT(buf.eof());
 }
 
+bool TraCICommandInterface::Vehicle::newRoute_JB(std::string roadId) {
+    uint8_t variableId = LANE_EDGE_ID;
+    uint8_t variableType = TYPE_STRING;
+    TraCIBuffer buf = connection->query_JB(CMD_SET_VEHICLE_VARIABLE, TraCIBuffer() << variableId << nodeId << variableType << roadId);
+
+    std::string testChangeRoute = buf.str();
+    if (testChangeRoute.compare("notChanged") == 0) {
+        return false;
+    }
+
+    ASSERT(buf.eof());
+    return true;
+}
+
 void TraCICommandInterface::Vehicle::setParking() {
 	uint8_t variableId = REMOVE;
 	uint8_t variableType = TYPE_BYTE;
