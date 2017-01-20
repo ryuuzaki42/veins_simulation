@@ -224,7 +224,6 @@ void BaseWaveApplLayer::printHeaderfileExecution() {
 void BaseWaveApplLayer::generalInitializeVariables_executionByExpNumberVehDist() {
     source = findHost()->getFullName();
     msgBufferUse = 0;
-    msgOnlyDelivery = false;
 
     // Epidemic variables
     lastTimeSendLocalSummaryVector = nodesRecentlySendLocalSummaryVector = 0;
@@ -680,7 +679,7 @@ void BaseWaveApplLayer::printCountBeaconMessagesDropVeh() {
         myfile << textTmp + "Final count message dropped by copy (Only valid if copy of message are not allowed): " << SmsgDroppedbyCopy;
         myfile << textTmp + "Final count message dropped by ttl: " << SmsgDroppedbyTTL;
         myfile << textTmp + "Final average buffer use: " << double(SmsgBufferUseGeneral)/ScountVehicleAll;
-        myfile << textTmp + "Count of vehicle in the scenario: " << ScountVehicleAll;
+        myfile << textTmp + "Count of vehicle in the scenario (all time): " << ScountVehicleAll;
         myfile << textTmp + "Count meetings: " << (ScountTwoCategoryN + ScountMeetN);
         myfile << textTmp + "Count meetings two category: " << ScountTwoCategoryN;
         myfile << textTmp + "Count meetings another: " << ScountMeetN;
@@ -1058,6 +1057,12 @@ void BaseWaveApplLayer::printCountMessagesReceivedRSU() {
         for (auto& x: SvehCategoryCount) {
             myfile << textTmp << "    Category: " << x.first << " count: " << x.second << endl;
         }
+
+        myfile << textTmp << endl;
+        myfile << textTmp << "msgUseOnlyDeliveryBufferGeneral total: " << SmsgUseOnlyDeliveryBufferGeneral;
+        myfile << textTmp << "msgUseOnlyDeliveryBufferGeneral avg: " << double(SmsgUseOnlyDeliveryBufferGeneral)/ScountVehicleAll;
+        myfile << textTmp << endl;
+
         myfile << textTmp << endl;
         myfile << textTmp << "This simulation run terminated correctly" << endl;
         myfile << textTmp << endl;
