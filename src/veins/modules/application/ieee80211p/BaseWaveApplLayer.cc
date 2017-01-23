@@ -294,11 +294,14 @@ void BaseWaveApplLayer::generalInitializeVariables_executionByExpNumberVehDist()
 
         // Initialize random seed (Seed the RNG) # Inside of IF because must be executed one time (the seed is "static")
         mtSelectVehicleGenarateMessage.seed(SrepeatNumber); // Instead another value, for make the experiment more reproducible, so seed = reapeatNumber
-        mtTargetMessageSelect.seed(SrepeatNumber); // Used to select a  random target
+        mtTargetMessageSelect.seed(SrepeatNumber); // Used to select a random target
+        mtSelectLaneName.seed(SrepeatNumber); // Used to select lane name
         srand(SrepeatNumber + 1); // repeatNumber + 1, because srand(0) == srand(1)
 
         // To run with different routes files use only one seed
-        //mt_veh.seed(1);
+        //mtSelectVehicleGenarateMessage.seed(1);
+        //mtTargetMessageSelect.seed(1);
+        //mtSelectLaneName.seed(1);
         //srand(1);
 
         string texTmp = "\nExp: " + to_string(SexpNumber) + "_ ";

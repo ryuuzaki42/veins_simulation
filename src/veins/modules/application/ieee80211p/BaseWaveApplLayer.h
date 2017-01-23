@@ -159,7 +159,7 @@ class BaseWaveApplLayer : public BaseApplLayer {
         cMessage* sendSelectVehGenerateMessageEvt;
         cMessage* getTrafficEvtMethodCheck;
 
-        static mt19937 mtSelectVehicleGenarateMessage, mtTargetMessageSelect;
+        static mt19937 mtSelectVehicleGenarateMessage, mtTargetMessageSelect, mtSelectLaneName;
 
         double vehOffSet;
 
