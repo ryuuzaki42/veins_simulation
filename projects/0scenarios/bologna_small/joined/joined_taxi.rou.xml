@@ -1,0 +1,32 @@
+<routes>
+    <vehicle arrivalPos="-1" depart="0" departLane="best" departPos="0" id="Audinot_7_0_T1" type="taxi"><route edges="a131"/></vehicle>
+    <vehicle arrivalPos="-1" depart="0" departLane="best" departPos="0" id="Borgo_100_0_T2" type="taxi"><route edges="b6"/></vehicle>
+    <vehicle arrivalPos="-1" depart="0" departLane="best" departPos="0" id="Certosa_9_0_T3" type="taxi"><route edges="b22[0]"/></vehicle>
+    <vehicle arrivalPos="-1" depart="0" departLane="best" departPos="0" id="Costa_12_0_T4" type="taxi"><route edges="a78[0]"/></vehicle>
+    <vehicle arrivalPos="-1" depart="0" departLane="best" departPos="0" id="Gandhi_40_0_T5" type="taxi"><route edges="b1[0]"/></vehicle>
+    <vehicle arrivalPos="-1" depart="0" departLane="best" departPos="0" id="Malvasia_70_0_T6" type="taxi"><route edges="b52"/></vehicle>
+    <vehicle arrivalPos="-1" depart="0" departLane="best" departPos="0" id="Pepoli_3_0_T7" type="taxi"><route edges="a210"/></vehicle>
+    <vehicle arrivalPos="-1" depart="0" departLane="best" departPos="0" id="Pertini_20_0_T8" type="taxi"><route edges="b63[0]"/></vehicle>
+    <vehicle arrivalPos="-1" depart="0" departLane="best" departPos="0" id="Prati_Capraia_10_0_T9" type="taxi"><route edges="b3[0]"/></vehicle>
+    <vehicle arrivalPos="-1" depart="0" departLane="best" departPos="0" id="Silvani_11_0_T10" type="taxi"><route edges="a203[0]"/></vehicle>
+    <vehicle arrivalPos="-1" depart="0" departLane="best" departPos="0" id="Turati_10_0_T11" type="taxi"><route edges="a195"/></vehicle>
+    <vehicle arrivalPos="-1" depart="0" departLane="best" departPos="0" id="XXI_Aprile_7_0_T12" type="taxi"><route edges="a8"/></vehicle>
+    <vehicle arrivalPos="-1" depart="1" departLane="best" departPos="0" id="Gandhi_50_1_T13" type="taxi"><route edges="b1[0]"/></vehicle>
+    <vehicle arrivalPos="-1" depart="1" departLane="best" departPos="0" id="Pepoli_9_1_T14" type="taxi"><route edges="a210"/></vehicle>
+    <vehicle arrivalPos="-1" depart="2" departLane="best" departPos="0" id="Costa_12_1_T15" type="taxi"><route edges="a78[0]"/></vehicle>
+    <vehicle arrivalPos="-1" depart="2" departLane="best" departPos="0" id="Pertini_20_1_T16" type="taxi"><route edges="b63[0]"/></vehicle>
+    <vehicle arrivalPos="-1" depart="2" departLane="best" departPos="0" id="Silvani_11_1_T17" type="taxi"><route edges="a203[0]"/></vehicle>
+    <vehicle arrivalPos="-1" depart="3" departLane="best" departPos="0" id="Gandhi_60_2_T18" type="taxi"><route edges="b1[0]"/></vehicle>
+    <vehicle arrivalPos="-1" depart="3" departLane="best" departPos="0" id="Pepoli_3_2_T19" type="taxi"><route edges="a210"/></vehicle>
+    <vehicle arrivalPos="-1" depart="4" departLane="best" departPos="0" id="Gandhi_30_3_T20" type="taxi"><route edges="b1[0]"/></vehicle>
+    <vehicle arrivalPos="-1" depart="4" departLane="best" departPos="0" id="Malvasia_70_1_T21" type="taxi"><route edges="b52"/></vehicle>
+    <vehicle arrivalPos="-1" depart="4" departLane="best" departPos="0" id="Pertini_20_2_T22" type="taxi"><route edges="b63[0]"/></vehicle>
+    <vehicle arrivalPos="-1" depart="4" departLane="best" departPos="0" id="Prati_Capraia_10_1_T23" type="taxi"><route edges="b3[0]"/></vehicle>
+    <vehicle arrivalPos="-1" depart="4" departLane="best" departPos="0" id="Silvani_7_2_T24" type="taxi"><route edges="a203[0]"/></vehicle>
+    <vehicle arrivalPos="-1" depart="5" departLane="best" departPos="0" id="Costa_1_2_T25" type="taxi"><route edges="a78[0]"/></vehicle>
+    <vehicle arrivalPos="-1" depart="5" departLane="best" departPos="0" id="Pepoli_11_3_T26" type="taxi"><route edges="a210"/></vehicle>
+    <vehicle arrivalPos="-1" depart="6" departLane="best" departPos="0" id="Borgo_10_1_T27" type="taxi"><route edges="b6"/></vehicle>
+    <vehicle arrivalPos="-1" depart="6" departLane="best" departPos="0" id="Pepoli_10_4_T28" type="taxi"><route edges="a210"/></vehicle>
+    <vehicle arrivalPos="-1" depart="6" departLane="best" departPos="0" id="Pertini_22_3_T29" type="taxi"><route edges="b13[0]"/></vehicle>
+    <vehicle arrivalPos="-1" depart="7" departLane="best" departPos="0" id="Costa_12_3_T30" type="private"><route edges="a78[0]"/></vehicle>
+</routes>
