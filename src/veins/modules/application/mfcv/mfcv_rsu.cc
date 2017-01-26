@@ -15,7 +15,7 @@ void mfcv_rsu::initialize(int stage) {
 }
 
 void mfcv_rsu::mfcvInitializeVariablesRsu() {
-    rsuInitializeValuesmfcv(mobi->getInitialPositionFromIniFileRSU());
+    rsuInitializeValuesMfcv(mobi->getInitialPositionFromIniFileRSU());
 
     if (source.compare("rsu[0]") == 0) {
         vehToDelivery = "SenderAddress MsgID timeSim rsuID\n";
