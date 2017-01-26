@@ -2,11 +2,6 @@
 
 #include "veins/modules/application/ieee80211p/BaseWaveApplLayer.h"
 
-// Added by Minicurso_UFPI
-#include "veins/modules/mobility/traci/TraCIMobility.h"
-using Veins::TraCIMobilityAccess;
-//
-
 const simsignalwrap_t BaseWaveApplLayer::mobilityStateChangedSignal = simsignalwrap_t(MIXIM_SIGNAL_MOBILITY_CHANGE_NAME);
 
 void BaseWaveApplLayer::initialize_veins_TraCI(int stage) {
@@ -1205,9 +1200,6 @@ WaveShortMessage*  BaseWaveApplLayer::prepareWSM(string name, int lengthBits, t_
     wsm->setSerial(serial);
 
     wsm->setSource(findHost()->getFullName());
-
-    wsm->setRoadId(TraCIMobilityAccess().get(getParentModule())->getRoadId().c_str());
-    wsm->setSenderSpeed(TraCIMobilityAccess().get(getParentModule())->getSpeed());
 
     if (name == "beacon") {
         DBG << "Creating Beacon with Priority " << priority << " at Applayer at: " << wsm->getTimestamp() << endl;
