@@ -94,13 +94,6 @@ class vehDist : public BaseWaveApplLayer {
         void removeOldestInputBeaconMessage();
         void removeOldestInputBeaconStatus();
 
-        string chooseByDistance(unordered_map <string, shortestDistance> vehShortestDistanceToTarget); // 0001
-        string chooseByDistance_Speed(unordered_map <string, shortestDistance> vehShortestDistanceToTarget); // 0012
-        string chooseByDistance_RateTimeToSend(unordered_map <string, shortestDistance> vehShortestDistanceToTarget); // 0014
-        string chooseByDistance_Category_RateTimeToSend(unordered_map <string, shortestDistance> vehShortestDistanceToTarget); // 134
-
-        string chooseByDistance_Category(unordered_map <string, shortestDistance> vehShortestDistanceToTarget); // 0013 with uncomment
-
         string selectVehIdWithSmallValueBySexpSendbyDSCR(unordered_map <string, shortestDistance> vehShortestDistanceToTarget);
 
         unsigned short int getVehHeading8();
