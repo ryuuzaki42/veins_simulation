@@ -12,38 +12,38 @@ cat joined_buslanes.net.xml | grep "<edge id=" | grep -v "<edge id=\":" | sed 's
 ## km^2, grid: (1, 5) (4, 9) (9, 13) (16, 17) (25, 21) (36, 25)
 
 ## Generate the grid 1 km^2
-    netgenerate -g --grid.number=5 --grid.length=250 --default.lanenumber=1 --default.speed 85 -o vehDist.net.xml
+    netgenerate -g --grid.number=5 --grid.length=250 --default.lanenumber=1 --default.speed 85 -o mfcv.net.xml
     # or with no --no-turnarounds
-    netgenerate -g --grid.number=5 --grid.length=250 --default.lanenumber=1 --no-turnarounds --default.speed 85 -o vehDist.net.xml
+    netgenerate -g --grid.number=5 --grid.length=250 --default.lanenumber=1 --no-turnarounds --default.speed 85 -o mfcv.net.xml
         # Change --default.lanenumber to 1; added --no-turnarounds and the (max) speed to 85
 
 ## Generate the grid 9 km^2
-    netgenerate -g --grid.number=13 --grid.length=250 --default.lanenumber=1 --default.speed 85 -o vehDist.net.xml
+    netgenerate -g --grid.number=13 --grid.length=250 --default.lanenumber=1 --default.speed 85 -o mfcv.net.xml
     # or with no --no-turnarounds
-    netgenerate -g --grid.number=13 --grid.length=250 --default.lanenumber=1 --no-turnarounds --default.speed 85 -o vehDist.net.xml
+    netgenerate -g --grid.number=13 --grid.length=250 --default.lanenumber=1 --no-turnarounds --default.speed 85 -o mfcv.net.xml
     ## Afer this command run the script
     ./gridConvertOneCharacter.sh 13
 
 ## Generate the grid 36 km^2
-    netgenerate -g --grid.number=25 --grid.length=250 --default.lanenumber=1 --default.speed 85 -o vehDist.net.xml
+    netgenerate -g --grid.number=25 --grid.length=250 --default.lanenumber=1 --default.speed 85 -o mfcv.net.xml
     # or with no --no-turnarounds
-    netgenerate -g --grid.number=25 --grid.length=250 --default.lanenumber=1 --no-turnarounds --default.speed 85 -o vehDist.net.xml
+    netgenerate -g --grid.number=25 --grid.length=250 --default.lanenumber=1 --no-turnarounds --default.speed 85 -o mfcv.net.xml
     ## Afer this command run the script
     ./gridConvertOneCharacter.sh 25
 
 ## Generate the trips and the routes (with various distance)
     # Generate 3 M routes
-    python /opt/sumo-0.25.0/tools/randomTrips.py -n vehDist.net.xml --min-distance=100000 -b 0 -e 3000 -i 200 -s 1 -r vehDist_tmp.rou.xml
+    python /opt/sumo-0.25.0/tools/randomTrips.py -n mfcv.net.xml --min-distance=100000 -b 0 -e 3000 -i 200 -s 1 -r mfcv_tmp.rou.xml
     # Generate 30 M routes
-    python /opt/sumo-0.25.0/tools/randomTrips.py -n vehDist.net.xml --min-distance=100000 -b 0 -e 30000 -i 200 -s 1 -r vehDist_tmp.rou.xml
+    python /opt/sumo-0.25.0/tools/randomTrips.py -n mfcv.net.xml --min-distance=100000 -b 0 -e 30000 -i 200 -s 1 -r mfcv_tmp.rou.xml
         # The -s (seed) 1, for generate the same routes every time that run the command
 
 ## To test "is the same routes?"
-    cat vehDist.rou.xml | grep -v generated | md5sum
+    cat mfcv.rou.xml | grep -v generated | md5sum
 
 ## Wants TLS?
     # http://sumo.dlr.de/wiki/NETCONVERT
-    netgenerate -g --grid.number=5 --grid.length=250 --default.lanenumber=1 --default.speed 85 -o vehDist.net.xml --tls.set "0/0, 0/1, 0/2, 0/3, 0/4, 1/0, 1/1, 1/2, 1/3, 1/4, 2/0, 2/1, 2/2, 2/3, 2/4, 3/0, 3/1, 3/2, 3/3, 3/4, 4/0, 4/1, 4/2, 4/3, 4/4"
+    netgenerate -g --grid.number=5 --grid.length=250 --default.lanenumber=1 --default.speed 85 -o mfcv.net.xml --tls.set "0/0, 0/1, 0/2, 0/3, 0/4, 1/0, 1/1, 1/2, 1/3, 1/4, 2/0, 2/1, 2/2, 2/3, 2/4, 3/0, 3/1, 3/2, 3/3, 3/4, 4/0, 4/1, 4/2, 4/3, 4/4"
 
 ## Test same start position
     cat [folder]/vehicle_position_initialize.r | grep -v number  | md5sum
@@ -59,12 +59,12 @@ cat joined_buslanes.net.xml | grep "<edge id=" | grep -v "<edge id=\":" | sed 's
 ## OMNeT run project on terminal
     -u = mode (com GUI - Tkenv, sem GUI - Cmdenv) -f = arquivo ini -r = nº de execucão -l = libveins -n = arquivos ned
     # sem GUI e todas as execuções
-        opp_run -u Cmdenv -n ../../src/veins/ -l ../../src/libveins.so -f vehDist.ini > run.r
+        opp_run -u Cmdenv -n ../../src/veins/ -l ../../src/libveins.so -f mfcv.ini > run.r
     # com GUI e todas as execuções
-        opp_run -u Tkenv -n ../../src/veins/ -l ../../src/libveins.so -f vehDist.ini > run.r
+        opp_run -u Tkenv -n ../../src/veins/ -l ../../src/libveins.so -f mfcv.ini > run.r
     # Execuções de 0 até 3
-        opp_run -r 0..3 -u Tkenv -n ../../src/veins/ -l ../../src/libveins.so -f vehDist.ini > run.r
-        opp_run -r 0..3 -u Cmdenv -n ../../src/veins/ -l ../../src/libveins.so -f vehDist.ini > run.r
+        opp_run -r 0..3 -u Tkenv -n ../../src/veins/ -l ../../src/libveins.so -f mfcv.ini > run.r
+        opp_run -r 0..3 -u Cmdenv -n ../../src/veins/ -l ../../src/libveins.so -f mfcv.ini > run.r
 
 ## Script in R ##
 ## Execute R < script_r.r or source('script_r.r', echo=TRUE)

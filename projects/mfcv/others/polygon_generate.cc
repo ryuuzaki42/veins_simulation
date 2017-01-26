@@ -11,7 +11,7 @@ using namespace std;
 int printObstaclesAxis(int idPolygon, int ya, int xa, int xb, int countKm) {
     int xc, xd, yb, yc, yd;
     ofstream myfile2;
-    myfile2.open("vehDist.poly.xml", std::ios_base::app);
+    myfile2.open("mfcv.poly.xml", std::ios_base::app);
 
     for (int i = 0; i < 5; i++) {
         xd = xc = xb+38;
@@ -46,7 +46,7 @@ int main() {
     int xa, xb, ya, idPolygon, count;
     int countKm, countLimt;
     ofstream myfile;
-    string fileOutput = "vehDist.poly.xml";
+    string fileOutput = "mfcv.poly.xml";
     count = idPolygon = 1;
 
     countKm = 3; // 1 to 1 km of grid
@@ -77,7 +77,7 @@ int main() {
          count++;
     }
 
-    myfile.open ("vehDist.poly.xml", std::ios_base::app);
+    myfile.open ("mfcv.poly.xml", std::ios_base::app);
     myfile << endl << "</shapes>";
     myfile.close();
 

@@ -70,10 +70,10 @@ while [ $countGridTmp -lt $countGrid ]; do
         35) inValue=35; outValue="z" ;;
     esac
 
-    sed -i 's/to'$inValue'/to'$outValue'/g' vehDist.net.xml
-    sed -i 's/_'$inValue'/_'$outValue'/g' vehDist.net.xml
-    sed -i 's/\/'$inValue'/\/'$outValue'/g' vehDist.net.xml
-    sed -i 's/'$inValue'\//'$outValue'\//g' vehDist.net.xml
+    sed -i 's/to'$inValue'/to'$outValue'/g' mfcv.net.xml
+    sed -i 's/_'$inValue'/_'$outValue'/g' mfcv.net.xml
+    sed -i 's/\/'$inValue'/\/'$outValue'/g' mfcv.net.xml
+    sed -i 's/'$inValue'\//'$outValue'\//g' mfcv.net.xml
 
     ((countGridTmp++))
     echo -e "\tTurning \"$inValue\" in \"$outValue\""
