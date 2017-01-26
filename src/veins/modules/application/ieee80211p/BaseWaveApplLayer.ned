@@ -43,7 +43,6 @@ simple BaseWaveApplLayer like IBaseApplLayer {
         int vehTimeUpdatePosition @unit("s") = default(0s); // Time for update vehicle position
         int expSendbyDSCR = default(0);
 
-        int percentP = default(0); // Percentage that send to vehicle from category P
         bool usePathHistory = default(false); // User or not path history when send a message
         bool allowMessageCopy = default(false); // Allow or not copy of messages
         bool selectFromAllVehicles = default(false); // Chose for all vehicle or for only new
@@ -62,8 +61,6 @@ simple BaseWaveApplLayer like IBaseApplLayer {
         bool getBusPosition = default(false); // Generate a csv file with the bus position
         bool useBusPosition = default(false); // Use or not the bus position/route
 
-        string firstCategory = default(""); // First category from the vehicle # Only one char valid
-        string secondCategory = default(""); // Second category from the vehicle # Only one char valid
         string fileBusPositionPath = default(""); // File (csv) of bus position to load
         string fileLaneNamesPath = default(""); // File (csv) of lane names to load
         int bufferMessageOnlyDeliveryLimit = default(0); // Size limit of the buffer with message onlyDelivery
