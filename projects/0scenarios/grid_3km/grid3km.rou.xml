@@ -7,7 +7,7 @@
     Routes passenger (21 to 420): 2 km (2000 m)
     Begin insert 20 taxi and 80 passenger
         After this, insert 80 passenger by each 120 seconds
-    fileOutput: vehDist.rou00.xml
+    fileOutput: grid3km.rou00.xml
     lineStart: 0
     -->
 

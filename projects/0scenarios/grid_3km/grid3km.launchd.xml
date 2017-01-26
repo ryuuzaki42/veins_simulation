@@ -1,9 +1,9 @@
 <?xml version="1.0"?>
 <launch>
-    <copy file="vehDist.net.xml" />
-    <!-- <copy file="vehDist.poly.xml" /> -->
-    <copy file="vehDist.poly_blank.xml" />
-    <copy file="vehDist.rou.xml" />
+    <copy file="grid3km.net.xml" />
+    <!-- <copy file="grid3km.poly.xml" /> -->
+    <copy file="grid3km.poly_blank.xml" />
+    <copy file="grid3km.rou.xml" />
     <copy file="gui-settings.cfg" />
-    <copy file="vehDist.sumo.cfg" type="config" />
+    <copy file="grid3km.sumo.cfg" type="config" />
 </launch>
