@@ -285,7 +285,7 @@ void BaseWaveApplLayer::generalInitializeVariables_executionByExpNumberMfcv() {
         ScountMesssageDrop = ScountMsgPacketSend = SmsgBufferUseGeneral = ScountVehicleAll = ScountVehicleBus = 0;
         ScountBeaconSend = ScountSummaryVectorSend = ScountRequestMessageVectorSend = ScountVehicleTaxi= 0;
         SmsgDroppedbyTTL = SmsgDroppedbyCopy = SmsgDroppedbyBuffer = 0;
-        ScountMeetPshortestT = ScountTwoCategoryN = ScountMeetN = 0;
+        ScountMeetTotal = ScountMeetTwoCategory = ScountMeetJustOneCategory = ScountMessageOnlyDeliveryBus = 0;
         SmessageId = 1;
 
         // Initialize random seed (Seed the RNG) # Inside of IF because must be executed one time (the seed is "static")
@@ -424,14 +424,8 @@ string BaseWaveApplLayer::getFolderResultMfcv(unsigned short int expSendbyDSCR) 
         case 13:
             expSendbyDSCRText = "0013_chooseByDistance_Category";
             break;
-        case 14:
-            expSendbyDSCRText = "0014_chooseByDistance_RateTimeToSend";
-            break;
-        case 123:
-            expSendbyDSCRText = "0123_chooseByDistance_Speed_Category";
-            break;
-        case 1234:
-            expSendbyDSCRText = "1234_chooseByDistance_Speed_Category_RateTimeToSend";
+        case 134:
+            expSendbyDSCRText = "0134_chooseByDistance_Category_RateTimeToSend";
             break;
         case 99:
             expSendbyDSCRText = "0099_epidemic";
@@ -685,15 +679,20 @@ void BaseWaveApplLayer::printCountBeaconMessagesDropVeh() {
         myfile << textTmp + "Count of vehicle Bus in the scenario (all time): " << ScountVehicleBus;
         myfile << textTmp + "Count of vehicle Taxi in the scenario (all time): " << ScountVehicleTaxi;
         myfile << textTmp;
-        myfile << textTmp + "Count meetings: " << (ScountTwoCategoryN + ScountMeetN);
-        myfile << textTmp + "Count meetings two category: " << ScountTwoCategoryN;
-        myfile << textTmp + "Count meetings another: " << ScountMeetN;
-        myfile << textTmp + "Count meetings with real difference (Only valid with Category test): " << ScountMeetPshortestT;
+        myfile << textTmp + "MFCV";
+        myfile << textTmp + "        Count total of meetings: " << ScountMeetTotal;
+        myfile << textTmp + "        Count total of meetings: " << ScountMeetTotal;
+        myfile << textTmp + "        Count meetings with three category: " << (ScountMeetTotal - (ScountMeetTwoCategory + ScountMeetJustOneCategory));
+        myfile << textTmp + "        Count meetings with two category: " << ScountMeetTwoCategory;
+        myfile << textTmp + "        Count meetings with just one category: " << ScountMeetJustOneCategory;
+        myfile << textTmp;
+        myfile << textTmp + "        Count message OnlyDelivery sent to bus: " << ScountMessageOnlyDeliveryBus;
         myfile << textTmp;
         myfile << textTmp + "Count beacon send: " << ScountBeaconSend;
         myfile << textTmp + "Final count packets messages send: " << ScountMsgPacketSend;
         myfile << textTmp + "        Epidemic count SummaryVectorSend: " << ScountSummaryVectorSend;
         myfile << textTmp + "        Epidemic count RequestMessageVectorSend: " << ScountRequestMessageVectorSend << endl;
+        myfile << textTmp + "        Epidemic (full) is the sum of those 3: " << (ScountMsgPacketSend + ScountSummaryVectorSend + ScountRequestMessageVectorSend) << endl;
     }
     myfile.close();
 }
