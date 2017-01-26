@@ -109,10 +109,10 @@ map <string, struct BaseWaveApplLayer::traffic> BaseWaveApplLayer::SvehTraffic;
 
 unordered_map <int, Coord> BaseWaveApplLayer::SrsuPositions;
 
-int BaseWaveApplLayer::SmsgDroppedbyTTL, BaseWaveApplLayer::SmsgDroppedbyCopy, BaseWaveApplLayer::SmsgDroppedbyBuffer;
+int BaseWaveApplLayer::SmsgDroppedbyTTL, BaseWaveApplLayer::SmsgDroppedbyCopy, BaseWaveApplLayer::SmsgDroppedbyBuffer, BaseWaveApplLayer::ScountMessageOnlyDeliveryBus;
 int BaseWaveApplLayer::ScountMsgPacketSend, BaseWaveApplLayer::SmsgBufferUseGeneral, BaseWaveApplLayer::SmessageHopLimit;
-int BaseWaveApplLayer::ScountMesssageDrop, BaseWaveApplLayer::ScountMeetN, BaseWaveApplLayer::ScountTwoCategoryN, BaseWaveApplLayer::ScountVehicleBus;
-int BaseWaveApplLayer::ScountMeetPshortestT, BaseWaveApplLayer::ScountVehicleAll, BaseWaveApplLayer::SmessageId, BaseWaveApplLayer::ScountVehicleTaxi;
+int BaseWaveApplLayer::ScountMesssageDrop, BaseWaveApplLayer::ScountMeetJustOneCategory, BaseWaveApplLayer::ScountMeetTwoCategory, BaseWaveApplLayer::ScountVehicleBus;
+int BaseWaveApplLayer::ScountMeetTotal, BaseWaveApplLayer::ScountVehicleAll, BaseWaveApplLayer::SmessageId, BaseWaveApplLayer::ScountVehicleTaxi;
 int BaseWaveApplLayer::ScountBeaconSend, BaseWaveApplLayer::ScountSummaryVectorSend, BaseWaveApplLayer::ScountRequestMessageVectorSend;
 
 unsigned short int BaseWaveApplLayer::SbeaconTypeInitialize;
