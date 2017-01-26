@@ -1,11 +1,11 @@
 // Copyright (C) 2015-2016 João Batista <joao.b@usp.br>
 
-#ifndef vehDist_rsu_H
-#define vehDist_rsu_H
+#ifndef mfcv_rsu_H
+#define mfcv_rsu_H
 
 #include "veins/modules/application/ieee80211p/BaseWaveApplLayer.h"
 
-class vehDist_rsu : public BaseWaveApplLayer {
+class mfcv_rsu : public BaseWaveApplLayer {
     public:
         virtual void initialize(int stage);
 
@@ -21,6 +21,6 @@ class vehDist_rsu : public BaseWaveApplLayer {
         void handleSelfMsg(cMessage* msg);
         WaveShortMessage* prepareBeaconStatusWSM(string name, int lengthBits, t_channel channel, int priority, int serial);
 
-        void vehDistInitializeVariablesRsu();
+        void mfcvInitializeVariablesRsu();
 };
 #endif

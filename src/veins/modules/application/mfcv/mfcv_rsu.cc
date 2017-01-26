@@ -1,31 +1,31 @@
 // Copyright (C) 2015-2016 João Batista <joao.b@usp.br>
 
-#include "veins/modules/application/vehDist/vehDist_rsu.h"
+#include "veins/modules/application/mfcv/mfcv_rsu.h"
 
-Define_Module(vehDist_rsu);
+Define_Module(mfcv_rsu);
 
-void vehDist_rsu::initialize(int stage) {
+void mfcv_rsu::initialize(int stage) {
     BaseWaveApplLayer::initialize_veins_TraCI(stage);
     if (stage == 0) {
         mobi = dynamic_cast<BaseMobility*> (getParentModule()->getSubmodule("mobility"));
         ASSERT(mobi);
 
-        vehDistInitializeVariablesRsu();
+        mfcvInitializeVariablesRsu();
     }
 }
 
-void vehDist_rsu::vehDistInitializeVariablesRsu() {
-    rsuInitializeValuesVehDist(mobi->getInitialPositionFromIniFileRSU());
+void mfcv_rsu::mfcvInitializeVariablesRsu() {
+    rsuInitializeValuesmfcv(mobi->getInitialPositionFromIniFileRSU());
 
     if (source.compare("rsu[0]") == 0) {
         vehToDelivery = "SenderAddress MsgID timeSim rsuID\n";
     }
 }
 
-void vehDist_rsu::onBeacon(WaveShortMessage* wsm) {
+void mfcv_rsu::onBeacon(WaveShortMessage* wsm) {
 }
 
-void vehDist_rsu::onData(WaveShortMessage* wsm) {
+void mfcv_rsu::onData(WaveShortMessage* wsm) {
     if (source.compare(wsm->getRecipientAddressTemporary()) == 0) {
         if (source.compare(wsm->getTarget()) == 0) {
             //findHost()->bubble("Received Message");
@@ -46,9 +46,9 @@ void vehDist_rsu::onData(WaveShortMessage* wsm) {
     }
 }
 
-void vehDist_rsu::handleSelfMsg(cMessage* msg) {
+void mfcv_rsu::handleSelfMsg(cMessage* msg) {
     switch (msg->getKind()) {
-        case SEND_BEACON_EVT_vehDist: { // Call prepareBeaconStatusWSM local to the rsu
+        case SEND_BEACON_EVT_mfcv: { // Call prepareBeaconStatusWSM local to the rsu
             sendWSM(prepareBeaconStatusWSM("beacon", beaconLengthBits, type_CCH, beaconPriority, -1));
             scheduleAt(simTime() + par("beaconInterval").doubleValue(), sendBeaconEvt);
             ScountBeaconSend++;
@@ -61,7 +61,7 @@ void vehDist_rsu::handleSelfMsg(cMessage* msg) {
     }
 }
 
-WaveShortMessage* vehDist_rsu::prepareBeaconStatusWSM(string name, int lengthBits, t_channel channel, int priority, int serial) {
+WaveShortMessage* mfcv_rsu::prepareBeaconStatusWSM(string name, int lengthBits, t_channel channel, int priority, int serial) {
     WaveShortMessage* wsm = new WaveShortMessage(name.c_str());
     wsm->addBitLength(headerLength);
     wsm->addBitLength(lengthBits);
@@ -96,7 +96,7 @@ WaveShortMessage* vehDist_rsu::prepareBeaconStatusWSM(string name, int lengthBit
     return wsm;
 }
 
-void vehDist_rsu::finish() {
+void mfcv_rsu::finish() {
     toFinishRSU();
 
     myfile.open(SfileMessagesCountRsu, std::ios_base::app);
