@@ -1,4 +1,4 @@
-// Copyright (C) 2015-2016 João Batista <joao.b@usp.br>
+// Copyright (C) 2015-2017 João Batista <joao.b@usp.br>
 
 #ifndef mfcv_rsu_H
 #define mfcv_rsu_H

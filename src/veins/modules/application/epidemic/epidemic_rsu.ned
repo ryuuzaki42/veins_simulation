@@ -1,4 +1,4 @@
-// Copyright (C) 2015-2016 João Batista <joao.b@usp.br>
+// Copyright (C) 2015-2017 João Batista <joao.b@usp.br>
 
 package org.car2x.veins.modules.application.epidemic;
 import org.car2x.veins.modules.application.ieee80211p.BaseWaveApplLayer;
