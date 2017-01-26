@@ -16,7 +16,7 @@
 import org.car2x.veins.nodes.RSU;
 import org.car2x.veins.nodes.Scenario;
 
-network vehDist_rsu extends Scenario {
+network mfcv_rsu extends Scenario {
     submodules:
         rsu[1]: RSU {
             @display("i=device/rsu");
