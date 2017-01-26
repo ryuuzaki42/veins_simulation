@@ -56,9 +56,9 @@ if ls -l | grep -q "\.ini"; then
         numExpF_1to8=$numExpI_1to8
     fi
 
-    if echo $PWD | grep -q "vehDist"; then
-        pathFolder="results/vehDist_resultsEnd_$part"
-        echo -e "\n    It is a vehDist experiment ($pathFolder)"
+    if echo $PWD | grep -q "mfcv"; then
+        pathFolder="results/mfcv_resultsEnd_$part"
+        echo -e "\n    It is a mfcv experiment ($pathFolder)"
     elif echo $PWD | grep -q "epidemic"; then
         pathFolder="results/epidemic_resultsEnd_$part"
         echo -e "\n    It is a epidemic experiment ($pathFolder)"

@@ -47,9 +47,9 @@ mkdir $folderCP/projects # Create a folder projects in the veins_v001
 cp -r $veinsFolderOri/projects/0scenarios/ $folderCP/projects/  # Copy 0sceenarios to veins_v001
 cp -r $veinsFolderOri/projects/1node/ $folderCP/projects/       # Copy 1node to veins_v001
 cp -r $veinsFolderOri/projects/epidemic/ $folderCP/projects/    # Copy epidemic to veins_v001
-cp -r $veinsFolderOri/projects/vehDist/ $folderCP/projects/     # Copy vehDist to veins_v001
+cp -r $veinsFolderOri/projects/mfcv/ $folderCP/projects/     # Copy mfcv to veins_v001
 
-rm -r $folderCP/projects/vehDist/others/ 2> /dev/null # Delete the others from vehDist in the veins_v001 if exists
+rm -r $folderCP/projects/mfcv/others/ 2> /dev/null # Delete the others from mfcv in the veins_v001 if exists
 rm -r $folderCP/projects/*/results/ 2> /dev/null # Delete results in the veins_v001 if exists
 
 cp -r $veinsFolderOri/src/ $folderCP/ # Copy the src to veins_v001
