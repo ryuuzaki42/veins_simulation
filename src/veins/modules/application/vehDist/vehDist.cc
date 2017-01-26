@@ -554,18 +554,6 @@ void vehDist::trySendBeaconMessage() {
     }*/
 }
 
-string vehDist::chooseCategory_RandomNumber1to100(unsigned short int percentP, string vehIdP, string vehIdT) {
-    unsigned short int valRand = rand() % 100 + 1;
-    //cout << "valRand " << valRand;
-    if (valRand <= percentP) {
-        //cout << " return vehIdP" << endl;
-        return vehIdP;
-    } else { // valRand > percentP
-        //cout << " return vehIdT" << endl;
-        return vehIdT;
-    }
-}
-
 string vehDist::neighborWithShortestDistanceToTargeOnlyDelivery(string idMessage) {
     unordered_map <string, WaveShortMessage>::iterator itBeaconNeighbors;
 
@@ -643,32 +631,34 @@ string vehDist::neighborWithShortestDistanceToTarge(string idMessage) {
                     sD.rateTimeToSendVeh = itBeaconNeighbors->second.getRateTimeToSend();
 
                     if (sD.categoryVeh.compare("P") == 0) { // Private car
-                        sD.distanceToTargetCategory = sD.distanceToTargetNow; // equal to * 1
+                        sD.decisionValueDistanceCategory = sD.distanceToTargetNow; // equal to * 1
                         meetFirstCategory = 1;
                     } else if (sD.categoryVeh.compare("B") == 0) { // Bus
                         if (msgOnlyDeliveryFunctionResult == 2) {
-                            sD.distanceToTargetCategory = sD.distanceToTargetNow * 0.5;
+                            sD.decisionValueDistanceCategory = sD.distanceToTargetNow * 0.5;
                         } else {
-                            sD.distanceToTargetCategory = sD.distanceToTargetNow;
+                            sD.decisionValueDistanceCategory = sD.distanceToTargetNow;
                         }
                         meetSecondCategory = 1;
                     } else if (sD.categoryVeh.compare("T") == 0) { // Taxi
-                            sD.distanceToTargetCategory = sD.distanceToTargetNow * 0.7;
+                            sD.decisionValueDistanceCategory = sD.distanceToTargetNow * 0.7;
                     } else {
                         cout << endl << "JBe - Error category unknown - " << source << " category: " << sD.categoryVeh << endl;
-                        cout << "firstCategory: " << SfirstCategory << " secondCategory: " << SsecondCategory << endl;
+                        cout << "\nSfirstCategoryPrivateCar: " << SfirstCategoryPrivateCar;
+                        cout << "\nSsecondCategoryBus: " << SsecondCategoryBus;
+                        cout << "\nSthirdCategoryTaxi: " << SthirdCategoryTaxi << endl;
                         ASSERT2(0, "JBe - Error category unknown -");
                     }
 
                     sD.decisionValueDistanceSpeed = sD.distanceToTargetNow - (sD.speedVeh);
                     sD.decisionValueDistanceRateTimeToSend = sD.distanceToTargetNow + (double(sD.rateTimeToSendVeh)/100);
-                    sD.decisionValueDistanceSpeedRateTimeToSend = sD.distanceToTargetNow - (sD.speedVeh) + (double(sD.rateTimeToSendVeh)/100);
+                    sD.decisionValueDistanceCategoryRateTimeToSend = sD.decisionValueDistanceCategory + (double(sD.rateTimeToSendVeh)/100);
 
                     // Distance = [0 - 125] - 720 m
                     // vehicle Speed = 0 - (16.67/25) - 84 m/s
                     // rateTimeToSend = 100 to 5000 ms
                     // DecisonValueDS = distance - speed
-                    // DecisonValueDSCR = distance - speed + rateTimeToSend/100 (0.1 * 10)
+                    // DecisonValueDCR = distanceCategory + rateTimeToSend/100 (0.1 * 10)
 
                     vehShortestDistanceToTarget.insert(make_pair(neighborId, sD));
                 } else {
@@ -726,28 +716,19 @@ string vehDist::neighborWithShortestDistanceToTarge(string idMessage) {
                 neighborId = chooseByDistance_Speed(vehShortestDistanceToTarget);
                 break;
             case 13:
-                //neighborId = chooseByDistance_CategoryA(vehShortestDistanceToTarget, SpercentP);
-
-                //neighborId = chooseByDistance_CategoryB(vehShortestDistanceToTarget, SpercentP);
-
-                neighborId = chooseByDistance(vehShortestDistanceToTarget);
+                neighborId = chooseByDistance_Category(vehShortestDistanceToTarget);
+                //neighborId = chooseByDistance(vehShortestDistanceToTarget);
                 break;
             case 14:
                 neighborId = chooseByDistance_RateTimeToSend(vehShortestDistanceToTarget);
                 break;
-            case 123:
-                neighborId = chooseByDistance_Speed_Category(vehShortestDistanceToTarget, SpercentP);
-                break;
 ////######################################################################################################
-//            case 124:
-//                neighborId = chooseByDistance_Speed_RateTimeToSend(vehShortestDistanceToTarget, SpercentP);
-//                break;
-//            case 134:
-//                neighborId = chooseByDistance_Category_RateTimeToSend(vehShortestDistanceToTarget, SpercentP);
-//                break;
+//            case 123: chooseByDistance_Speed_Category
+//            case 124: chooseByDistance_Speed_RateTimeToSend
+//            case 1234: chooseByDistance_Speed_Category_RateTimeToSend
 ////######################################################################################################
-            case 1234:
-                neighborId = chooseByDistance_Speed_Category_RateTimeToSend(vehShortestDistanceToTarget, SpercentP);
+            case 134:
+                neighborId = chooseByDistance_Category_RateTimeToSend(vehShortestDistanceToTarget);
                 break;
             default:
                 cout << "JBe - Error! expSendbyDSCR: " << SexpSendbyDSCR << "not defined, class in vehDist.cc -";
@@ -780,14 +761,57 @@ void vehDist::printVehShortestDistanceToTarget(unordered_map <string, shortestDi
             cout << "    DistanceNow:    " << itShortestDistance->second.distanceToTargetNow << endl;
             cout << "    Speed: " << itShortestDistance->second.speedVeh << endl;
             cout << "    RateTimeToSend: " << itShortestDistance->second.rateTimeToSendVeh << endl;
-            cout << "    DistanceCategory: " << itShortestDistance->second.distanceToTargetCategory << endl;
+            cout << "    DistanceCategory: " << itShortestDistance->second.decisionValueDistanceCategory << endl;
             cout << "    DecisionValueDistanceSpeed: " << itShortestDistance->second.decisionValueDistanceSpeed << endl;
             cout << "    decisionValueDistanceRateTimeToSend: " << itShortestDistance->second.decisionValueDistanceRateTimeToSend << endl;
-            cout << "    DecisionValueDistanceSpeedRateTimeToSend: " << itShortestDistance->second.decisionValueDistanceSpeedRateTimeToSend << endl << endl;
+            cout << "    DecisionValueDistanceCategoryRateTimeToSend: " << itShortestDistance->second.decisionValueDistanceCategoryRateTimeToSend << endl << endl;
         }
     } else {
         cout << endl << "vehShortestDistanceToTarget to " << source << " at: " << simTime() << " vehShortestDistanceToTarget is empty" << endl << endl;
     }
+}
+
+string vehDist::selectVehIdWithSmallValueBySexpSendbyDSCR(unordered_map <string, shortestDistance> vehShortestDistanceToTarget) {
+    string vehId = source;
+    if (!vehShortestDistanceToTarget.empty()) {
+        unordered_map <string, shortestDistance>::iterator itShortestDistance;
+        double valueToTest, smallValueFound;
+
+        smallValueFound = DBL_MAX;
+        for (itShortestDistance = vehShortestDistanceToTarget.begin(); itShortestDistance != vehShortestDistanceToTarget.end(); itShortestDistance++) {
+
+            //1: Distance - 2: Speed - 3: Category - 4: RateTimeToSend
+            switch (SexpSendbyDSCR) {
+                case 1: // Distance
+                    valueToTest = itShortestDistance->second.distanceToTargetNow;
+                    break;
+                case 12: //DistanceSpeed
+                    valueToTest = itShortestDistance->second.decisionValueDistanceSpeed;
+                    break;
+                case 13: // DistanceCategory
+                    valueToTest = itShortestDistance->second.decisionValueDistanceCategory;
+                    break;
+////######################################################################################################
+//              case 14:   DistanceRateTimeToSend
+//              case 123:  DistanceSpeedCategory
+//              case 124:  DistanceSpeedRateTimeToSend
+//              case 1234: DistanceSpeedCategoryRateTimeToSend
+////######################################################################################################
+                case 134:
+                    valueToTest = itShortestDistance->second.decisionValueDistanceCategoryRateTimeToSend;
+                    break;
+                default:
+                    cout << "JBe - Error! expSendbyDSCR: " << SexpSendbyDSCR << "not defined, class in vehDist.cc -";
+                    ASSERT2(0, "JBe - Error expSendbyDSCR value not defined -");
+            }
+
+            if (smallValueFound > valueToTest) {
+                smallValueFound = valueToTest;
+                vehId = itShortestDistance->first;
+            }
+        }
+    }
+    return vehId;
 }
 
 string vehDist::chooseByDistance(unordered_map <string, shortestDistance> vehShortestDistanceToTarget) {
@@ -822,51 +846,14 @@ string vehDist::chooseByDistance_Speed(unordered_map <string, shortestDistance> 
     return vehId;
 }
 
-string vehDist::chooseByDistance_CategoryA(unordered_map <string, shortestDistance> vehShortestDistanceToTarget, int percentP) {
-    unordered_map <string, shortestDistance>::iterator itShortestDistance;
-    double distanceToTarget, shortestDistanceT, shortestDistanceP;
-    string category, vehIdP, vehIdT;
-
-    vehIdP = vehIdT = source;
-    shortestDistanceP = shortestDistanceT = DBL_MAX;
-    for (itShortestDistance = vehShortestDistanceToTarget.begin(); itShortestDistance != vehShortestDistanceToTarget.end(); itShortestDistance++) {
-        category = itShortestDistance->second.categoryVeh;
-        distanceToTarget = itShortestDistance->second.distanceToTargetNow;
-        if (category.compare(SfirstCategory) == 0) {
-            if (shortestDistanceP > distanceToTarget) {
-                shortestDistanceP = distanceToTarget;
-                vehIdP = itShortestDistance->first;
-            }
-        } else if (category.compare(SsecondCategory) == 0) {
-            if (shortestDistanceT > distanceToTarget) {
-                shortestDistanceT = distanceToTarget;
-                vehIdT = itShortestDistance->first;
-            }
-        }
-    }
-
-    if (shortestDistanceP == DBL_MAX) {
-        return vehIdT;
-    } else if (shortestDistanceT == DBL_MAX) {
-        return vehIdP;
-    }
-
-    if (int(shortestDistanceT) > int(shortestDistanceP)) {
-        ScountMeetPshortestT++;
-        return chooseCategory_RandomNumber1to100(percentP, vehIdP, vehIdT);
-    } else {
-        return vehIdT;
-    }
-}
-
-string vehDist::chooseByDistance_CategoryB(unordered_map <string, shortestDistance> vehShortestDistanceToTarget, int percentP) {
+string vehDist::chooseByDistance_Category(unordered_map <string, shortestDistance> vehShortestDistanceToTarget) {
     string vehId = source;
     double distanceToTargetCategory, shortestDistanceCategory;
     shortestDistanceCategory = DBL_MAX;
 
     unordered_map <string, shortestDistance>::iterator itShortestDistance = vehShortestDistanceToTarget.begin();
     for (; itShortestDistance != vehShortestDistanceToTarget.end(); itShortestDistance++) {
-        distanceToTargetCategory = itShortestDistance->second.distanceToTargetCategory;
+        distanceToTargetCategory = itShortestDistance->second.decisionValueDistanceCategory;
 
         if (shortestDistanceCategory > distanceToTargetCategory) {
             shortestDistanceCategory = distanceToTargetCategory;
@@ -892,78 +879,21 @@ string vehDist::chooseByDistance_RateTimeToSend(unordered_map <string, shortestD
     return vehId;
 }
 
-string vehDist::chooseByDistance_Speed_Category(unordered_map <string, shortestDistance> vehShortestDistanceToTarget, int percentP) {
+string vehDist::chooseByDistance_Category_RateTimeToSend(unordered_map <string, shortestDistance> vehShortestDistanceToTarget) {
     unordered_map <string, shortestDistance>::iterator itShortestDistance;
-    double distanceSpeedValue, shortestDistanceT, shortestDistanceP;
-    string category, vehIdP, vehIdT;
+    double valueDSCR, shortestDistance;
+    string vehId = source;
 
-    vehIdP = vehIdT = source;
-    shortestDistanceP = shortestDistanceT = DBL_MAX;
+    shortestDistance = DBL_MAX;
     for (itShortestDistance = vehShortestDistanceToTarget.begin(); itShortestDistance != vehShortestDistanceToTarget.end(); itShortestDistance++) {
-        category = itShortestDistance->second.categoryVeh;
-        distanceSpeedValue = itShortestDistance->second.decisionValueDistanceSpeed;
-        if (category.compare(SfirstCategory) == 0) {
-            if (shortestDistanceP > distanceSpeedValue) {
-                shortestDistanceP = distanceSpeedValue;
-                vehIdP = itShortestDistance->first;
-            }
-        } else if (category.compare(SsecondCategory) == 0) {
-            if (shortestDistanceT > distanceSpeedValue) {
-                shortestDistanceT = distanceSpeedValue;
-                vehIdT = itShortestDistance->first;
-            }
+        valueDSCR = itShortestDistance->second.decisionValueDistanceCategoryRateTimeToSend;
+        if (shortestDistance > valueDSCR) {
+            shortestDistance = valueDSCR;
+            vehId = itShortestDistance->first;
         }
     }
 
-    if (shortestDistanceP == DBL_MAX) {
-        return vehIdT;
-    } else if (shortestDistanceT == DBL_MAX) {
-        return vehIdP;
-    }
-
-    if (int(shortestDistanceT) > int(shortestDistanceP)) {
-        ScountMeetPshortestT++;
-        return chooseCategory_RandomNumber1to100(percentP, vehIdP, vehIdT);
-    } else {
-        return vehIdT;
-    }
-}
-
-string vehDist::chooseByDistance_Speed_Category_RateTimeToSend(unordered_map <string, shortestDistance> vehShortestDistanceToTarget, int percentP) {
-    unordered_map <string, shortestDistance>::iterator itShortestDistance;
-    double valueDSCR, shortestDistanceT, shortestDistanceP;
-    string category, vehIdP, vehIdT;
-
-    vehIdP = vehIdT = source;
-    shortestDistanceP = shortestDistanceT = DBL_MAX;
-    for (itShortestDistance = vehShortestDistanceToTarget.begin(); itShortestDistance != vehShortestDistanceToTarget.end(); itShortestDistance++) {
-        category = itShortestDistance->second.categoryVeh;
-        valueDSCR = itShortestDistance->second.decisionValueDistanceSpeedRateTimeToSend;
-        if (category.compare(SfirstCategory) == 0) {
-            if (shortestDistanceP > valueDSCR) {
-                shortestDistanceP = valueDSCR;
-                vehIdP = itShortestDistance->first;
-            }
-        } else if (category.compare(SsecondCategory) == 0) {
-            if (shortestDistanceT > valueDSCR) {
-                shortestDistanceT = valueDSCR;
-                vehIdT = itShortestDistance->first;
-            }
-        }
-    }
-
-    if (shortestDistanceP == DBL_MAX) {
-        return vehIdT;
-    } else if (shortestDistanceT == DBL_MAX) {
-        return vehIdP;
-    }
-
-    if (int(shortestDistanceT) > int(shortestDistanceP)) {
-        ScountMeetPshortestT++;
-        return chooseCategory_RandomNumber1to100(percentP, vehIdP, vehIdT);
-    } else {
-        return vehIdT;
-    }
+    return vehId;
 }
 
 void vehDist::finish() {

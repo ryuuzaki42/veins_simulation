@@ -43,8 +43,8 @@ class vehDist : public BaseWaveApplLayer {
         struct shortestDistance {
             Coord senderPos;
             string categoryVeh;
-            double distanceToTargetNow, distanceToTargetBefore, distanceToTargetCategory, decisionValueDistanceSpeed;
-            double decisionValueDistanceRateTimeToSend, decisionValueDistanceSpeedRateTimeToSend, speedVeh;
+            double distanceToTargetNow, distanceToTargetBefore, decisionValueDistanceCategory, decisionValueDistanceSpeed;
+            double decisionValueDistanceRateTimeToSend, decisionValueDistanceCategoryRateTimeToSend, speedVeh;
             unsigned short int rateTimeToSendVeh;
         };
 
@@ -94,15 +94,14 @@ class vehDist : public BaseWaveApplLayer {
         void removeOldestInputBeaconMessage();
         void removeOldestInputBeaconStatus();
 
-        string chooseCategory_RandomNumber1to100(unsigned short int percentP, string vehIdP, string vehIdT);
         string chooseByDistance(unordered_map <string, shortestDistance> vehShortestDistanceToTarget); // 0001
         string chooseByDistance_Speed(unordered_map <string, shortestDistance> vehShortestDistanceToTarget); // 0012
-        string chooseByDistance_CategoryA(unordered_map <string, shortestDistance> vehShortestDistanceToTarget, int percentP); // 0013
         string chooseByDistance_RateTimeToSend(unordered_map <string, shortestDistance> vehShortestDistanceToTarget); // 0014
-        string chooseByDistance_Speed_Category(unordered_map <string, shortestDistance> vehShortestDistanceToTarget, int percentP); // 0123
-        string chooseByDistance_Speed_Category_RateTimeToSend(unordered_map <string, shortestDistance> vehShortestDistanceToTarget, int percentP); // 1234
+        string chooseByDistance_Category_RateTimeToSend(unordered_map <string, shortestDistance> vehShortestDistanceToTarget); // 134
 
-        string chooseByDistance_CategoryB(unordered_map <string, shortestDistance> vehShortestDistanceToTarget, int percentP); // 0013 with uncomment
+        string chooseByDistance_Category(unordered_map <string, shortestDistance> vehShortestDistanceToTarget); // 0013 with uncomment
+
+        string selectVehIdWithSmallValueBySexpSendbyDSCR(unordered_map <string, shortestDistance> vehShortestDistanceToTarget);
 
         unsigned short int getVehHeading8();
         unsigned short int getVehHeading4();
@@ -127,7 +126,7 @@ unsigned short int BaseWaveApplLayer::SbeaconTypeInitialize;
 unsigned short int BaseWaveApplLayer::SrepeatNumber, BaseWaveApplLayer::SexpNumber, BaseWaveApplLayer::SexpSendbyDSCR;
 unsigned short int BaseWaveApplLayer::ScountGenerateMessage, BaseWaveApplLayer::SttlMessage, BaseWaveApplLayer::SvehTimeLimitToAcceptGenerateMgs;
 
-unsigned short int BaseWaveApplLayer::SbeaconStatusBufferSize, BaseWaveApplLayer::SttlBeaconStatus, BaseWaveApplLayer::SpercentP;
+unsigned short int BaseWaveApplLayer::SbeaconStatusBufferSize, BaseWaveApplLayer::SttlBeaconStatus;
 unsigned short int BaseWaveApplLayer::StimeLimitGenerateMessage, BaseWaveApplLayer::StimeToUpdatePosition, BaseWaveApplLayer::SmessageBufferSize;
 bool BaseWaveApplLayer::SuseBeaconStatusBufferSize;
 
@@ -143,7 +142,7 @@ string BaseWaveApplLayer::SfileMessagesUnicastVeh, BaseWaveApplLayer::SfileMessa
 string BaseWaveApplLayer::SfileMessagesCountRsu, BaseWaveApplLayer::SfileMessagesGeneratedVehRsu;
 string BaseWaveApplLayer::SresultFolder;
 
-string BaseWaveApplLayer::SfirstCategory, BaseWaveApplLayer::SsecondCategory;
+string BaseWaveApplLayer::SfirstCategoryPrivateCar, BaseWaveApplLayer::SsecondCategoryBus, BaseWaveApplLayer::SthirdCategoryTaxi;
 struct BaseWaveApplLayer::targetResultMsg BaseWaveApplLayer::SresultMsgReceived;
 
 string BaseWaveApplLayer::SprojectInfo;
