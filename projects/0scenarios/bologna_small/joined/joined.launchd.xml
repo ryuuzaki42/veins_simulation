@@ -7,7 +7,7 @@
     <!-- <copy file="joined_detectors.add.xml" /> -->
     <copy file="joined_vtypes.add.xml" />
     <copy file="joined_tls.add.xml" />
-    <copy file="vehDist.poly_blank.xml" />
+    <copy file="mfcv.poly_blank.xml" />
     <copy file="gui-settings.cfg" />
     <copy file="joined.sumo.cfg" type="config" />
 </launch>
