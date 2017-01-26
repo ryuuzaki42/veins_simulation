@@ -196,8 +196,9 @@ void BaseWaveApplLayer::rsuInitializeValuesVehDist(Coord position) {
        SresultMsgReceived.avgCopyMessageReceived = 0;
        SresultMsgReceived.avgHopsMessage = 0;
        SresultMsgReceived.avgTimeMessageReceived = 0;
-       SresultMsgReceived.countFirstCategory = 0;
-       SresultMsgReceived.countSecondCategory = 0;
+       SresultMsgReceived.countFirstCategoryPrivateCar = 0;
+       SresultMsgReceived.countSecondCategoryBus = 0;
+       SresultMsgReceived.countThirdCategoryTaxi = 0;
        SresultMsgReceived.messageHopDiffZero = 0;
        SresultMsgReceived.messageHopEqualZero = 0;
        SresultMsgReceived.totalCopyReceived = 0;
@@ -241,8 +242,9 @@ void BaseWaveApplLayer::generalInitializeVariables_executionByExpNumberVehDist()
             //cout.clear(); // "Enable" the cout
         }
 
-        SfirstCategory = par("firstCategory").stringValue();
-        SsecondCategory = par("secondCategory").stringValue();
+        SfirstCategoryPrivateCar = 'P';
+        SsecondCategoryBus = 'B';
+        SthirdCategoryTaxi = 'T';
 
         SbufferMessageOnlyDeliveryLimit = par("bufferMessageOnlyDeliveryLimit");
         ScountToDeliveryMsg = SmsgUseOnlyDeliveryBufferGeneral = 0;
@@ -266,7 +268,6 @@ void BaseWaveApplLayer::generalInitializeVariables_executionByExpNumberVehDist()
         StimeToUpdatePosition = par("vehTimeUpdatePosition");
         StimeLimitGenerateMessage = par("timeLimitGenerateMessage");
         SvehTimeLimitToAcceptGenerateMgs = par("vehTimeLimitToAcceptGenerateMgs");
-        SpercentP = par("percentP"); // 20 meaning 20% of message send to category P
 
         SexpNumber = par("expNumber").longValue();
         if ((SexpNumber == 1) || (SexpNumber == 5)) {
@@ -296,20 +297,17 @@ void BaseWaveApplLayer::generalInitializeVariables_executionByExpNumberVehDist()
         mtSelectVehicleGenarateMessage.seed(SrepeatNumber); // Instead another value, for make the experiment more reproducible, so seed = reapeatNumber
         mtTargetMessageSelect.seed(SrepeatNumber); // Used to select a random target
         mtSelectLaneName.seed(SrepeatNumber); // Used to select lane name
-        srand(SrepeatNumber + 1); // repeatNumber + 1, because srand(0) == srand(1)
 
-        // To run with different routes files use only one seed
-        //mtSelectVehicleGenarateMessage.seed(1);
-        //mtTargetMessageSelect.seed(1);
-        //mtSelectLaneName.seed(1);
-        //srand(1);
+        // To run with different routes files use only one seed set 1 to a the seed
+        // Not use rand anymore //srand(SrepeatNumber + 1); // repeatNumber + 1, because srand(0) == srand(1)
 
         string texTmp = "\nExp: " + to_string(SexpNumber) + "_ ";
         SprojectInfo = texTmp;
         SprojectInfo += texTmp + "Project information";
 
-        SprojectInfo += texTmp + "firstCategory:_ " + SfirstCategory;
-        SprojectInfo += texTmp + "secondCategory:_ " + SsecondCategory;
+        SprojectInfo += texTmp + "SfirstCategoryPrivateCar:_ \"" + SfirstCategoryPrivateCar + "\"";
+        SprojectInfo += texTmp + "SsecondCategoryBus:_ \"" + SsecondCategoryBus + "\"";
+        SprojectInfo += texTmp + "SThirdCategoryTaxi:_ \"" + SthirdCategoryTaxi + "\"";
         SprojectInfo += texTmp + "beaconTypeInitialize:_ " + boolToString(SbeaconTypeInitialize);
         SprojectInfo += texTmp + "vehDistCreateEventGenerateMessage:_ " + boolToString(SvehDistCreateEventGenerateMessage);
         SprojectInfo += texTmp + "Experiment:_ " + to_string(SexpNumber);
@@ -339,7 +337,6 @@ void BaseWaveApplLayer::generalInitializeVariables_executionByExpNumberVehDist()
             SprojectInfo += texTmp + "ttlBeaconStatus:_ " + to_string(SttlBeaconStatus) + " s";
             SprojectInfo += texTmp + "beaconStatusBufferSize:_ " + to_string(SbeaconStatusBufferSize);
             SprojectInfo += texTmp + "useBeaconStatusBufferSize:_ " + boolToString(SuseBeaconStatusBufferSize);
-            SprojectInfo += texTmp + "percentP:_ " + to_string(SpercentP) + " %";
             SprojectInfo += texTmp + "usePathHistory:_ " + boolToString(SusePathHistory);
             SprojectInfo += texTmp + "useMessagesSendLog:_ " + boolToString(SuseMessagesSendLog);
             SprojectInfo += texTmp + "timeToUpdatePosition:_ " + to_string(StimeToUpdatePosition) + " s";
@@ -849,13 +846,13 @@ void BaseWaveApplLayer::colorCarryMessageVehDist(unordered_map <string, WaveShor
     }
 }
 
-int BaseWaveApplLayer::mt19937GetRandomValue(int upperLimmit) {
-    if (upperLimmit < 1){
-        cout << "JBe - error upperLimmit < 1" << endl;
-        ASSERT2(0, "JBe - error upperLimmit < 1");
+int BaseWaveApplLayer::SelectRandomVehiclePositionId() {
+    if (SnumVehicles.size() < 1){
+        cout << "JBe - error SnumVehicles.size() < 1" << endl;
+        ASSERT2(0, "JBe - error SnumVehicles.size() < 1");
     }
 
-    uniform_int_distribution <int> dist(0, (upperLimmit - 1)); // generate a value, e.g, dist(0, 10), will be 0, 1, ... 10
+    uniform_int_distribution <int> dist(0, (SnumVehicles.size() - 1)); // generate a value, e.g, dist(0, 10), will be 0, 1, ... 10
     return dist(mtSelectVehicleGenarateMessage);
 }
 
@@ -869,7 +866,7 @@ void BaseWaveApplLayer::selectVehGenerateMessage() {
             trySelectVeh = 0;
 
             for (unsigned short int i = 0; i < ScountGenerateMessage;) { // select vehicle to generate messages
-                vehSelected = mt19937GetRandomValue(SnumVehicles.size()); // return a number from 0 to (SnumVehicles.size() - 1), the index vector
+                vehSelected = SelectRandomVehiclePositionId(); // return a number from 0 to (SnumVehicles.size() - 1), the index vector
                 string vehSelectedId = SnumVehicles[vehSelected]; // Get the vehicle name
 
                 // Vehicle can be choosen to generate more than one message?
@@ -939,11 +936,11 @@ void BaseWaveApplLayer::printCountMessagesReceivedRSU() {
     string textTmp = "Exp: " + to_string(SexpNumber) + " expSendbyDSCR: " + to_string(SexpSendbyDSCR) + " ### " + source + " ";
     if (!messagesReceivedRSU.empty()) {
         SimTime avgGeneralTimeMessageReceived;
-        unsigned short int countFirstCategory, countSecondCategory;
+        unsigned int countFirstCategoryPrivateCar, countSecondCategoryBus, countThirdCategoryTaxi;
         double avgGeneralHopsMessage, avgGeneralCopyMessageReceived, avgGeneralFirstHopsReceived;
 
         avgGeneralTimeMessageReceived = 0;
-        countFirstCategory = countSecondCategory = 0;
+        countFirstCategoryPrivateCar = countSecondCategoryBus = countThirdCategoryTaxi = 0;
 
         avgGeneralHopsMessage = avgGeneralCopyMessageReceived = 0;
         map <string, struct messages>::iterator itMessagesReceived;
@@ -971,10 +968,12 @@ void BaseWaveApplLayer::printCountMessagesReceivedRSU() {
             avgGeneralTimeMessageReceived += itMessagesReceived->second.sumTimeRecived;
             myfile << "Average time to received: " << (itMessagesReceived->second.sumTimeRecived/itMessagesReceived->second.countCopyMessage) << endl;
 
-            myfile << "Count first (" << SfirstCategory << ") category: " << itMessagesReceived->second.countFirstCategory << endl;
-            countFirstCategory += itMessagesReceived->second.countFirstCategory;
-            myfile << "Count second (" << SsecondCategory << ") category:: " << itMessagesReceived->second.countSecondCategory << endl;
-            countSecondCategory += itMessagesReceived->second.countSecondCategory;
+            myfile << "Count first (" << SfirstCategoryPrivateCar << ") category: " << itMessagesReceived->second.countFirstCategoryPrivateCar << endl;
+            countFirstCategoryPrivateCar += itMessagesReceived->second.countFirstCategoryPrivateCar;
+            myfile << "Count second (" << SsecondCategoryBus << ") category: " << itMessagesReceived->second.countSecondCategoryBus << endl;
+            countSecondCategoryBus += itMessagesReceived->second.countSecondCategoryBus;
+            myfile << "Count third (" << SthirdCategoryTaxi << ") category: " << itMessagesReceived->second.countThirdCategoryTaxi << endl;
+            countThirdCategoryTaxi += itMessagesReceived->second.countThirdCategoryTaxi;
         }
 
         unsigned short int messageCountHopZero = 0;
@@ -1034,11 +1033,14 @@ void BaseWaveApplLayer::printCountMessagesReceivedRSU() {
         myfile << textTmp << "counttoDeliveryMsgLocal: " << countToDeliveryMsgLocal << endl;
 
         myfile << textTmp << endl;
-        myfile << textTmp << "Count hops by category " << SfirstCategory << " general: " << countFirstCategory << endl;
-        SresultMsgReceived.countFirstCategory += countFirstCategory;
+        myfile << textTmp << "Count hops by category " << SfirstCategoryPrivateCar << " general: " << countFirstCategoryPrivateCar << endl;
+        SresultMsgReceived.countFirstCategoryPrivateCar += countFirstCategoryPrivateCar;
 
-        myfile << textTmp << "Count hops by category " << SsecondCategory << " general: " << countSecondCategory << endl;
-        SresultMsgReceived.countSecondCategory += countSecondCategory;
+        myfile << textTmp << "Count hops by category " << SsecondCategoryBus << " general: " << countSecondCategoryBus << endl;
+        SresultMsgReceived.countSecondCategoryBus += countSecondCategoryBus;
+
+        myfile << textTmp << "Count hops by category " << SthirdCategoryTaxi << " general: " << countThirdCategoryTaxi << endl;
+        SresultMsgReceived.countThirdCategoryTaxi += countThirdCategoryTaxi;
     } else {
         myfile << endl << endl << textTmp << endl;
         myfile << textTmp << "Count messages received: " << 0 << endl;
@@ -1061,8 +1063,9 @@ void BaseWaveApplLayer::printCountMessagesReceivedRSU() {
         myfile << textTmp << "Total average first hops to received: " << SresultMsgReceived.avgHopsFirstReceived/SresultMsgReceived.countRsuTarget << endl;
         myfile << textTmp << "Total average hops to received: " << SresultMsgReceived.avgHopsMessage/SresultMsgReceived.countRsuTarget << endl;
         myfile << textTmp << endl;
-        myfile << textTmp << "Total count hops by category " << SfirstCategory << " general: " << SresultMsgReceived.countFirstCategory << endl;
-        myfile << textTmp << "Total count hops by category " << SsecondCategory << " general: " << SresultMsgReceived.countSecondCategory << endl;
+        myfile << textTmp << "Total count hops by category " << SfirstCategoryPrivateCar << " general: " << SresultMsgReceived.countFirstCategoryPrivateCar << endl;
+        myfile << textTmp << "Total count hops by category " << SsecondCategoryBus << " general: " << SresultMsgReceived.countSecondCategoryBus << endl;
+        myfile << textTmp << "Total count hops by category " << SthirdCategoryTaxi << " general: " << SresultMsgReceived.countThirdCategoryTaxi << endl;
         myfile << textTmp << endl;
         myfile << textTmp << "counttoDeliveryMsg: " << ScountToDeliveryMsg << endl;
         myfile << textTmp << endl;
@@ -1118,8 +1121,9 @@ void BaseWaveApplLayer::messagesReceivedMeasuringRSU(WaveShortMessage* wsm) {
         }
 
         // Be aware, don't use the category identification as a value insert in the wsmData in the begin
-        itMessagesReceived->second.countFirstCategory += count(wsmData.begin(), wsmData.end(), SfirstCategory[0]);
-        itMessagesReceived->second.countSecondCategory += count(wsmData.begin(), wsmData.end(), SsecondCategory[0]);
+        itMessagesReceived->second.countFirstCategoryPrivateCar += count(wsmData.begin(), wsmData.end(), SfirstCategoryPrivateCar[0]);
+        itMessagesReceived->second.countSecondCategoryBus += count(wsmData.begin(), wsmData.end(), SsecondCategoryBus[0]);
+        itMessagesReceived->second.countThirdCategoryTaxi += count(wsmData.begin(), wsmData.end(), SthirdCategoryTaxi[0]);
     } else {
         struct messages msg;
         msg.firstSource = wsm->getSource();
@@ -1134,8 +1138,9 @@ void BaseWaveApplLayer::messagesReceivedMeasuringRSU(WaveShortMessage* wsm) {
         msg.times = timeToArrived.str();
 
         // Be aware, don't use the category identification as a value insert in the wsmData in the begin
-        msg.countFirstCategory = count(wsmData.begin(), wsmData.end(), SfirstCategory[0]);
-        msg.countSecondCategory = count(wsmData.begin(), wsmData.end(), SsecondCategory[0]);
+        msg.countFirstCategoryPrivateCar = count(wsmData.begin(), wsmData.end(), SfirstCategoryPrivateCar[0]);
+        msg.countSecondCategoryBus = count(wsmData.begin(), wsmData.end(), SsecondCategoryBus[0]);
+        msg.countThirdCategoryTaxi = count(wsmData.begin(), wsmData.end(), SthirdCategoryTaxi[0]);
 
         messagesReceivedRSU.insert(make_pair(wsm->getGlobalMessageIdentificaton(), msg));
     }

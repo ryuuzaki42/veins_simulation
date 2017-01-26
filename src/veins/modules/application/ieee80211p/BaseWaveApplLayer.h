@@ -91,7 +91,7 @@ class BaseWaveApplLayer : public BaseApplLayer {
         void vehInitializeValuesVehDist(string category, Coord position);
         void rsuInitializeValuesVehDist(Coord position);
 
-        int mt19937GetRandomValue(int upperLimmit);
+        int SelectRandomVehiclePositionId();
 
         string getCFGVAR();
 
@@ -146,7 +146,6 @@ class BaseWaveApplLayer : public BaseApplLayer {
         WaveAppToMac1609_4Interface* myMac;
 
 //######################################### vehDist #########################################
-
         vector <string> messagesOrderReceivedVehDist;
 
         unordered_map <string, WaveShortMessage> messagesBufferVehDist;
@@ -164,7 +163,7 @@ class BaseWaveApplLayer : public BaseApplLayer {
         double vehOffSet;
 
         string vehCategory, routeId;
-        static string SfirstCategory, SsecondCategory;
+        static string SfirstCategoryPrivateCar, SsecondCategoryBus, SthirdCategoryTaxi;
         static int SsimulationTimeLimit;
 
         ofstream myfile; // record in file
@@ -185,7 +184,7 @@ class BaseWaveApplLayer : public BaseApplLayer {
         static int ScountMeetN, ScountTwoCategoryN, ScountMeetPshortestT, ScountVehicleAll, SmessageId;
         static int ScountBeaconSend, ScountSummaryVectorSend, ScountRequestMessageVectorSend;
 
-        static unsigned short int SbeaconStatusBufferSize, SttlBeaconStatus, SpercentP, SbeaconTypeInitialize;
+        static unsigned short int SbeaconStatusBufferSize, SttlBeaconStatus, SbeaconTypeInitialize;
         static unsigned short int StimeLimitGenerateMessage, StimeToUpdatePosition, SmessageBufferSize, SvehTimeLimitToAcceptGenerateMgs;
         static bool SuseBeaconStatusBufferSize;
 
@@ -208,7 +207,7 @@ class BaseWaveApplLayer : public BaseApplLayer {
         struct messages {
           string firstSource, hops, wsmData, times;
           unsigned short int minHop, maxHop, sumHops, firstHopReceived;
-          unsigned short int countFirstCategory, countSecondCategory, countCopyMessage;
+          unsigned short int countFirstCategoryPrivateCar, countSecondCategoryBus, countThirdCategoryTaxi, countCopyMessage;
           simtime_t sumTimeRecived, timeGenerate;
         };
         map <string, struct messages> messagesReceivedRSU;
@@ -229,15 +228,14 @@ class BaseWaveApplLayer : public BaseApplLayer {
         static unordered_map <string, string> SrouteIDVehID; // routeID - vehID
 
         struct targetResultMsg {
-            unsigned short int totalMessageReceived, messageHopDiffZero, messageHopEqualZero;
+            unsigned int totalMessageReceived, messageHopDiffZero, messageHopEqualZero;
             double avgTimeMessageReceived, avgCopyMessageReceived, avgHopsMessage, avgHopsFirstReceived;
-            unsigned short int totalCopyReceived, countFirstCategory, countSecondCategory, countRsuTarget;
+            unsigned int totalCopyReceived, countFirstCategoryPrivateCar, countSecondCategoryBus, countThirdCategoryTaxi, countRsuTarget;
         };
         static struct targetResultMsg SresultMsgReceived;
 //######################################### vehDist #########################################
 
 //######################################### Epidemic #########################################
-
         cMessage* sendEpidemicMessageRequestEvt;
 
         unordered_map <string, WaveShortMessage> epidemicLocalMessageBuffer, epidemicMessageSend;
