@@ -1,37 +1,37 @@
 // Copyright (C) 2015-2016 João Batista <joao.b@usp.br>
 
-#include "veins/modules/application/vehDist/vehDist.h"
+#include "veins/modules/application/mfcv/mfcv.h"
 
 using Veins::TraCIMobilityAccess;
 
-Define_Module(vehDist);
+Define_Module(mfcv);
 
-void vehDist::initialize(int stage) {
+void mfcv::initialize(int stage) {
     BaseWaveApplLayer::initialize_veins_TraCI(stage);
     if (stage == 0) { // traci - mobility, traci->getComand - traci, new traciVehice
         mobility = TraCIMobilityAccess().get(getParentModule());
         traci = mobility->getCommandInterface();
         traciVehicle = mobility->getVehicleCommandInterface();
 
-        vehDistInitializeVariablesVeh();
+        mfcvInitializeVariablesVeh();
     }
 }
 
-void vehDist::vehDistInitializeVariablesVeh() {
-    vehCreateUpdateRateTimeToSendEvent(); // Create Event to update the rateTimeToSend (Only VehDist)
+void mfcv::mfcvInitializeVariablesVeh() {
+    vehCreateUpdateRateTimeToSendEvent(); // Create Event to update the rateTimeToSend (Only mfcv)
 
-    vehInitializeValuesVehDist(traciVehicle->getTypeId(), mobility->getPositionAt(simTime() + 0.1)); // The same for Epidemic and VehDist
+    vehInitializeValuesMfcv(traciVehicle->getTypeId(), mobility->getPositionAt(simTime() + 0.1)); // The same for Epidemic and mfcv
 
     busPositionFunctionsRun(); // bus position function
 
     loadLaneNames(); // load lane names
 
-    vehCreateEventTrySendBeaconMessage(); // Create one Event to try send messages in buffer (Only VehDist)
+    vehCreateEventTrySendBeaconMessage(); // Create one Event to try send messages in buffer (Only mfcv)
 
     createEvtTaxiChangeRoute();
 }
 
-void vehDist::createEvtTaxiChangeRoute() {
+void mfcv::createEvtTaxiChangeRoute() {
     if (vehCategory.compare("T") == 0 ) {
         taxiRoadIDNow = traciVehicle->getRoadId();
         sendTaxiChangeRoute = new cMessage("Event update rateTimeToSend vehicle", SendEvtTaxiChangeRoute);
@@ -41,12 +41,12 @@ void vehDist::createEvtTaxiChangeRoute() {
     }
 }
 
-int vehDist::selectLaneNamePositionID() {
+int mfcv::selectLaneNamePositionID() {
     uniform_int_distribution <int> dist(0, (SlaneNameLoaded.size() - 1)); // generate a value, e.g, dist(0, 10), will be 0, 1, ... 10
     return dist(mtSelectLaneName);
 }
 
-void vehDist::tryChangeRouteUntilSuccess() {
+void mfcv::tryChangeRouteUntilSuccess() {
     cout << "\nPlannedRoadIds before";
     printPlannedRoadIds(traciVehicle->getPlannedRoadIds());
 
@@ -73,7 +73,7 @@ void vehDist::tryChangeRouteUntilSuccess() {
     }
 }
 
-void vehDist::printPlannedRoadIds(list<string> plannedRoadIds) {
+void mfcv::printPlannedRoadIds(list<string> plannedRoadIds) {
     cout << "\n" << source << " printPlannedRoadIds" << " at: " << simTime();
     cout << " routeId: " << traciVehicle->getRouteId() << " roadId: " << mobility->getRoadId();
 
@@ -85,7 +85,7 @@ void vehDist::printPlannedRoadIds(list<string> plannedRoadIds) {
     cout << "\n";
 }
 
-void vehDist::busPositionFunctionsRun() {
+void mfcv::busPositionFunctionsRun() {
     routeId = traciVehicle->getRouteId();
     SrouteIDVehID.insert(make_pair(source, routeId));
     msgUseOnlyDeliveryBuffer = 0;
@@ -94,7 +94,7 @@ void vehDist::busPositionFunctionsRun() {
     busPosLoadFromFile(); // Load a csv file with bus position (if useBusPosition => true)
 }
 
-void vehDist::createBusPositionSaveEvent() {
+void mfcv::createBusPositionSaveEvent() {
     if (par("getBusPosition").boolValue()) {
         if (source.compare("car[0]") == 0) {
             string fileName = "results/busPosition.csv";
@@ -108,7 +108,7 @@ void vehDist::createBusPositionSaveEvent() {
     }
 }
 
-void vehDist::busPosInsertByTimeMap() {
+void mfcv::busPosInsertByTimeMap() {
     if (par("getBusPosition").boolValue()) {
         if (vehCategory.compare("B") == 0) {
             int timeNow = int(simTime().dbl());
@@ -144,7 +144,7 @@ void vehDist::busPosInsertByTimeMap() {
     }
 }
 
-void vehDist::saveBusPositionFile() {
+void mfcv::saveBusPositionFile() {
     if (par("getBusPosition").boolValue()) {
         if (vehCategory.compare("B") == 0) {
             struct busPosByTime structBusPosByTime;
@@ -172,7 +172,7 @@ void vehDist::saveBusPositionFile() {
     }
 }
 
-void vehDist::busPosLoadFromFile() {
+void mfcv::busPosLoadFromFile() {
     if (source.compare("car[0]") == 0) {
         if (par("useBusPosition").boolValue()) {
             cout << "\n\nLoading routes from of the bus";
@@ -251,7 +251,7 @@ void vehDist::busPosLoadFromFile() {
     }
 }
 
-void vehDist::loadLaneNames() {
+void mfcv::loadLaneNames() {
     if (source.compare("car[0]") == 0) {
         cout << "\n\nLoading lane name from of the taxi";
         string fileInput, line;
@@ -272,7 +272,7 @@ void vehDist::loadLaneNames() {
     }
 }
 
-void vehDist::onBeacon(WaveShortMessage* wsm) {
+void mfcv::onBeacon(WaveShortMessage* wsm) {
     unordered_map <string, WaveShortMessage>::iterator itStatusNeighbors = beaconStatusNeighbors.find(wsm->getSource());
     if (itStatusNeighbors != beaconStatusNeighbors.end()) { // Update the beaconStatus
         itStatusNeighbors->second = *wsm;
@@ -290,7 +290,7 @@ void vehDist::onBeacon(WaveShortMessage* wsm) {
     //printBeaconStatusNeighbors();
 }
 
-void vehDist::onData(WaveShortMessage* wsm) {
+void mfcv::onData(WaveShortMessage* wsm) {
     if (source.compare(wsm->getRecipientAddressTemporary()) == 0) { // Verify if this is the recipient of the message
         //saveMessagesOnFile(wsm, SfileMessagesUnicastVeh);
 
@@ -319,7 +319,7 @@ void vehDist::onData(WaveShortMessage* wsm) {
                 // test if message has been delivered to the target before.
                 if (find(messagesDelivered.begin(), messagesDelivered.end(), wsm->getGlobalMessageIdentificaton()) == messagesDelivered.end()) {
                     if (wsm->getHopCount() > 0) {
-                        if (messagesBufferVehDist.find(wsm->getGlobalMessageIdentificaton()) == messagesBufferVehDist.end()) { //verify if the message isn't in the buffer
+                        if (messagesBufferMfcv.find(wsm->getGlobalMessageIdentificaton()) == messagesBufferMfcv.end()) { //verify if the message isn't in the buffer
                             cout << source << " saving message from " << wsm->getSenderAddressTemporary() << " with Id: " << wsm->getGlobalMessageIdentificaton() << " at: " << simTime() << endl;
                             string wsmDataTmp = wsm->getWsmData();
                             if (wsmDataTmp.size() < 42) { // WSMData generated by car[x] and carry by [ T, P
@@ -330,15 +330,15 @@ void vehDist::onData(WaveShortMessage* wsm) {
                             wsmDataTmp += vehCategory;
                             wsm->setWsmData(wsmDataTmp.c_str());
 
-                            if (messagesBufferVehDist.size() > SmessageBufferSize) {
+                            if (messagesBufferMfcv.size() > SmessageBufferSize) {
                                 removeOldestInputBeaconMessage();
                             }
 
-                            messagesBufferVehDist.insert(make_pair(wsm->getGlobalMessageIdentificaton(), *wsm)); // Add the message in the vehicle buffer
+                            messagesBufferMfcv.insert(make_pair(wsm->getGlobalMessageIdentificaton(), *wsm)); // Add the message in the vehicle buffer
                             msgBufferUse++;
-                            messagesOrderReceivedVehDist.push_back(wsm->getGlobalMessageIdentificaton());
+                            messagesOrderReceivedMfcv.push_back(wsm->getGlobalMessageIdentificaton());
 
-                            //colorCarryMessageVehDist(messagesBufferVehDist);
+                            //colorCarryMessageMfcv(messagesBufferMfcv);
                             //printMessagesBuffer();
                         } else {
                             cout << source << " message (" << wsm->getGlobalMessageIdentificaton() << ") is on the buffer at: " << simTime() << endl;
@@ -359,17 +359,17 @@ void vehDist::onData(WaveShortMessage* wsm) {
     //printMessagesBuffer();
 }
 
-void vehDist::removeOldestInputBeaconMessage() {
+void mfcv::removeOldestInputBeaconMessage() {
     //printMessagesBuffer();
 
-    if (!messagesBufferVehDist.empty()) {
+    if (!messagesBufferMfcv.empty()) {
         unsigned short int typeRemoved = 0;
-        unordered_map <string, WaveShortMessage>::iterator itMessage = messagesBufferVehDist.begin();
+        unordered_map <string, WaveShortMessage>::iterator itMessage = messagesBufferMfcv.begin();
         simtime_t minTime = itMessage->second.getTimestamp();
         string idMessage = itMessage->first;
         itMessage++;
 
-        for (; itMessage != messagesBufferVehDist.end(); itMessage++) {
+        for (; itMessage != messagesBufferMfcv.end(); itMessage++) {
             if (minTime > itMessage->second.getTimestamp()) {
                 minTime = itMessage->second.getTimestamp();
                 idMessage = itMessage->first;
@@ -380,19 +380,19 @@ void vehDist::removeOldestInputBeaconMessage() {
             cout << source << " remove one message (" << idMessage << ") by time, minTime: " << minTime << " at: " << simTime();
             cout << " ttlMessage: " << SttlMessage << endl;
             typeRemoved = 3; // by ttl (1 buffer, 2 copy, 3 time)
-        } else if (messagesBufferVehDist.size() > SmessageBufferSize) {
-            //cout << source << " remove one message (" << idMessage << ") by space, MessageBufferVehDist.size(): " << messagesBufferVehDist.size();
+        } else if (messagesBufferMfcv.size() > SmessageBufferSize) {
+            //cout << source << " remove one message (" << idMessage << ") by space, MessageBuffermfcv.size(): " << messagesBufferMfcv.size();
             //cout << " at: " << simTime() << " SmessageBufferSize: " << SmessageBufferSize << endl;
             typeRemoved = 1; // by buffer (1 buffer, 2 copy, 3 time)
         }
 
         if (typeRemoved != 0) {
-            insertMessageDropVeh(idMessage, typeRemoved, messagesBufferVehDist[idMessage].getTimestamp()); // Removed by the value of tyRemoved (1 buffer, 2 copy, 3 time)
-            messagesBufferVehDist.erase(idMessage);
-            auto itMsg = find(messagesOrderReceivedVehDist.begin(), messagesOrderReceivedVehDist.end(), idMessage);
-            messagesOrderReceivedVehDist.erase(itMsg);
+            insertMessageDropVeh(idMessage, typeRemoved, messagesBufferMfcv[idMessage].getTimestamp()); // Removed by the value of tyRemoved (1 buffer, 2 copy, 3 time)
+            messagesBufferMfcv.erase(idMessage);
+            auto itMsg = find(messagesOrderReceivedMfcv.begin(), messagesOrderReceivedMfcv.end(), idMessage);
+            messagesOrderReceivedMfcv.erase(itMsg);
 
-            //colorCarryMessageVehDist(messagesBufferVehDist);
+            //colorCarryMessageMfcv(messagesBufferMfcv);
             removeOldestInputBeaconMessage();
         }
     } /*else {
@@ -400,7 +400,7 @@ void vehDist::removeOldestInputBeaconMessage() {
     }*/
 }
 
-void vehDist::removeOldestInputBeaconStatus() {
+void mfcv::removeOldestInputBeaconStatus() {
     //printBeaconStatusNeighbors();
 
     if (!beaconStatusNeighbors.empty()) {
@@ -435,7 +435,7 @@ void vehDist::removeOldestInputBeaconStatus() {
     }*/
 }
 
-void vehDist::sendBeaconMessage() {
+void mfcv::sendBeaconMessage() {
     //cout << source << " try to send message at: " << simTime() << endl;
 //############################################################# run many times
     removeOldestInputBeaconStatus();
@@ -447,7 +447,7 @@ void vehDist::sendBeaconMessage() {
 //    }
 //############################################################# run many times
 
-    if (messageToSend >= messagesOrderReceivedVehDist.size()) {
+    if (messageToSend >= messagesOrderReceivedMfcv.size()) {
         messageToSend = 0;
     }
 
@@ -460,7 +460,7 @@ void vehDist::sendBeaconMessage() {
         //cout << source << " schedule useRateTimeToSend: false the sendBeaconMessageEvt at: " << simTime() << " to: " << (simTime() + par("normalTimeSendMessage").doubleValue()) << endl;
         scheduleAt((simTime() + par("normalTimeSendMessage").doubleValue()), sendBeaconMessageEvt);
     } else {
-        if (messageToSend >= messagesOrderReceivedVehDist.size()) {
+        if (messageToSend >= messagesOrderReceivedMfcv.size()) {
             if (simTime() > timeToFinishLastStartSend) {
                 scheduleAt((simTime() + double(rateTimeToSend)/1000), sendBeaconMessageEvt);
                 //cout << source << " 1_schedule at: " << simTime() << " to: " << (simTime() + double(rateTimeToSend)/1000);
@@ -479,9 +479,9 @@ void vehDist::sendBeaconMessage() {
     }
 }
 
-void vehDist::trySendBeaconMessage() {
-    if (!messagesBufferVehDist.empty()) {
-        cout << source << " messagesBuffer with "<< messagesBufferVehDist.size() << " message(s) at: " << simTime() << endl;
+void mfcv::trySendBeaconMessage() {
+    if (!messagesBufferMfcv.empty()) {
+        cout << source << " messagesBuffer with "<< messagesBufferMfcv.size() << " message(s) at: " << simTime() << endl;
         // Test with hopCount 0, send only
 
         if (!beaconStatusNeighbors.empty()) {
@@ -490,8 +490,8 @@ void vehDist::trySendBeaconMessage() {
 
             msgOnlyDeliveryFunctionResult = 0;
             string idMessage, rcvId = source;
-            idMessage = messagesOrderReceivedVehDist[messageToSend];
-            if (messagesBufferVehDist[idMessage].getHopCount() > 1) {
+            idMessage = messagesOrderReceivedMfcv[messageToSend];
+            if (messagesBufferMfcv[idMessage].getHopCount() > 1) {
                 rcvId = neighborWithShortestDistanceToTarge(idMessage);
             } else {
                 rcvId = neighborWithShortestDistanceToTargeOnlyDelivery(idMessage);
@@ -507,14 +507,14 @@ void vehDist::trySendBeaconMessage() {
                 cout << "    " << source << " send message to " << rcvId << " with category " << catVeh << " at: "<< simTime() << endl;
                 cout << "    MessageToSend: " << messageToSend << endl;
                 cout << "    MessageID: " << idMessage << endl;
-                cout << "    Source: " << messagesBufferVehDist[idMessage].getSource() << endl;
-                cout << "    Message content: " << messagesBufferVehDist[idMessage].getWsmData() << endl;
-                cout << "    Target: " << messagesBufferVehDist[idMessage].getTarget() << endl;
-                cout << "    TargetPos: " << messagesBufferVehDist[idMessage].getTargetPos() << endl;
-                cout << "    Timestamp: " << messagesBufferVehDist[idMessage].getTimestamp() << endl;
-                cout << "    HopCount: " << messagesBufferVehDist[idMessage].getHopCount() << endl << endl;
+                cout << "    Source: " << messagesBufferMfcv[idMessage].getSource() << endl;
+                cout << "    Message content: " << messagesBufferMfcv[idMessage].getWsmData() << endl;
+                cout << "    Target: " << messagesBufferMfcv[idMessage].getTarget() << endl;
+                cout << "    TargetPos: " << messagesBufferMfcv[idMessage].getTargetPos() << endl;
+                cout << "    Timestamp: " << messagesBufferMfcv[idMessage].getTimestamp() << endl;
+                cout << "    HopCount: " << messagesBufferMfcv[idMessage].getHopCount() << endl << endl;
 
-                WaveShortMessage wsmTmpSend = messagesBufferVehDist[idMessage];
+                WaveShortMessage wsmTmpSend = messagesBufferMfcv[idMessage];
                 // toDeliveryMsg is set when send to a bus (expSend13)
                 if (msgOnlyDeliveryFunctionResult == 1) {
                     wsmTmpSend.setOnlyDelivery(true);
@@ -526,14 +526,14 @@ void vehDist::trySendBeaconMessage() {
                 if ((!SallowMessageCopy) || (msgOnlyDeliveryFunctionResult == 1)) {
                     cout << source << " send the message " << idMessage << " and removing (message copy not allow) at: "  << simTime() << endl;
 
-                    insertMessageDropVeh(idMessage, 2, messagesBufferVehDist[idMessage].getTimestamp()); // Removed by the value of tyRemoved (1 buffer, 2 copy, 3 time)
+                    insertMessageDropVeh(idMessage, 2, messagesBufferMfcv[idMessage].getTimestamp()); // Removed by the value of tyRemoved (1 buffer, 2 copy, 3 time)
 
-                    messagesBufferVehDist.erase(idMessage);
+                    messagesBufferMfcv.erase(idMessage);
                     messageToSend--;
 
-                    auto it = find(messagesOrderReceivedVehDist.begin(), messagesOrderReceivedVehDist.end(), idMessage);
-                    messagesOrderReceivedVehDist.erase(it);
-                    //colorCarryMessageVehDist(messagesBufferVehDist);
+                    auto it = find(messagesOrderReceivedMfcv.begin(), messagesOrderReceivedMfcv.end(), idMessage);
+                    messagesOrderReceivedMfcv.erase(it);
+                    //colorCarryMessageMfcv(messagesBufferMfcv);
                 }
 
                 if (SuseMessagesSendLog) {
@@ -554,18 +554,18 @@ void vehDist::trySendBeaconMessage() {
     }*/
 }
 
-string vehDist::neighborWithShortestDistanceToTargeOnlyDelivery(string idMessage) {
+string mfcv::neighborWithShortestDistanceToTargeOnlyDelivery(string idMessage) {
     unordered_map <string, WaveShortMessage>::iterator itBeaconNeighbors;
 
     for (itBeaconNeighbors = beaconStatusNeighbors.begin(); itBeaconNeighbors != beaconStatusNeighbors.end(); itBeaconNeighbors++) {
-        if (strcmp(itBeaconNeighbors->second.getSource(), messagesBufferVehDist[idMessage].getTarget()) == 0) {
-            cout << source << " found target, message " << idMessage << " target " << messagesBufferVehDist[idMessage].getTarget() << " at: " << simTime() << endl;
+        if (strcmp(itBeaconNeighbors->second.getSource(), messagesBufferMfcv[idMessage].getTarget()) == 0) {
+            cout << source << " found target, message " << idMessage << " target " << messagesBufferMfcv[idMessage].getTarget() << " at: " << simTime() << endl;
             return itBeaconNeighbors->second.getSource();
         }
     }
     return source;
 }
-string vehDist::neighborWithShortestDistanceToTarge(string idMessage) {
+string mfcv::neighborWithShortestDistanceToTarge(string idMessage) {
     string category, neighborCategory, neighborId;
     Coord targetPos, senderPosPrevious, senderPosNow;
     shortestDistance sD;
@@ -578,7 +578,7 @@ string vehDist::neighborWithShortestDistanceToTarge(string idMessage) {
     bool insert;
 
     double localVehDistanceNow = traci->getDistance(curPosition, targetPos, false);
-    targetPos = messagesBufferVehDist[idMessage].getTargetPos();
+    targetPos = messagesBufferMfcv[idMessage].getTargetPos();
 
     cout << source << " meet with " << beaconStatusNeighbors.size() << " neighbors options to the send the message " << idMessage << endl;
     for (itBeaconNeighbors = beaconStatusNeighbors.begin(); itBeaconNeighbors != beaconStatusNeighbors.end(); itBeaconNeighbors++) {
@@ -592,7 +592,7 @@ string vehDist::neighborWithShortestDistanceToTarge(string idMessage) {
                 if (SexpSendbyDSCR == 13) {
                     if (neighborCategory.compare("B") == 0) {
                         cout << "\n\n" << source << " whit neighbor: "<< neighborId << " category: " << neighborCategory;
-                        cout << " msg to: " << messagesBufferVehDist[idMessage].getTarget() << " with pos: " << targetPos;
+                        cout << " msg to: " << messagesBufferMfcv[idMessage].getTarget() << " with pos: " << targetPos;
                         if (itBeaconNeighbors->second.getBufferMessageOnlyDeliveryFull() == 0) {
                             msgOnlyDeliveryFunctionResult = busRouteDiffTarget(neighborId, targetPos, localVehDistanceNow);
                             if (msgOnlyDeliveryFunctionResult == 1) {
@@ -709,14 +709,14 @@ string vehDist::neighborWithShortestDistanceToTarge(string idMessage) {
     return selectVehIdWithSmallValueBySexpSendbyDSCR(vehShortestDistanceToTarget);
 }
 
-void vehDist::printVehShortestDistanceToTarget(unordered_map <string, shortestDistance> vehShortestDistanceToTarget, string idMessage) {
+void mfcv::printVehShortestDistanceToTarget(unordered_map <string, shortestDistance> vehShortestDistanceToTarget, string idMessage) {
     if (!vehShortestDistanceToTarget.empty()) {
         cout << "\nMeet with " << vehShortestDistanceToTarget.size() << " options to a send " << idMessage << " message" << endl;
         cout << "Source vehicle information" << endl;
         cout << "    Id(veh): " << source << endl;
-        cout << "    Message Id: " << messagesBufferVehDist[idMessage].getGlobalMessageIdentificaton() << endl;
+        cout << "    Message Id: " << messagesBufferMfcv[idMessage].getGlobalMessageIdentificaton() << endl;
         cout << "    Category: " << vehCategory << endl;
-        cout << "    Distance: " << traci->getDistance(curPosition, messagesBufferVehDist[idMessage].getTargetPos(), false) << endl;
+        cout << "    Distance: " << traci->getDistance(curPosition, messagesBufferMfcv[idMessage].getTargetPos(), false) << endl;
         cout << "    Speed: " << mobility->getSpeed() << endl;
         cout << "    Position: " << mobility->getCurrentPosition() << endl;
         cout << "    RateTimeToSend: " << rateTimeToSend << endl;
@@ -741,7 +741,7 @@ void vehDist::printVehShortestDistanceToTarget(unordered_map <string, shortestDi
     }
 }
 
-string vehDist::selectVehIdWithSmallValueBySexpSendbyDSCR(unordered_map <string, shortestDistance> vehShortestDistanceToTarget) {
+string mfcv::selectVehIdWithSmallValueBySexpSendbyDSCR(unordered_map <string, shortestDistance> vehShortestDistanceToTarget) {
     string vehId = source;
     if (!vehShortestDistanceToTarget.empty()) {
         unordered_map <string, shortestDistance>::iterator itShortestDistance;
@@ -771,7 +771,7 @@ string vehDist::selectVehIdWithSmallValueBySexpSendbyDSCR(unordered_map <string,
                     valueToTest = itShortestDistance->second.decisionValueDistanceCategoryRateTimeToSend;
                     break;
                 default:
-                    cout << "JBe - Error! expSendbyDSCR: " << SexpSendbyDSCR << " not defined, class in vehDist.cc -";
+                    cout << "JBe - Error! expSendbyDSCR: " << SexpSendbyDSCR << " not defined, class in mfcv.cc -";
                     ASSERT2(0, "JBe - Error expSendbyDSCR value not defined -");
             }
 
@@ -784,7 +784,7 @@ string vehDist::selectVehIdWithSmallValueBySexpSendbyDSCR(unordered_map <string,
     return vehId;
 }
 
-void vehDist::finish() {
+void mfcv::finish() {
     toFinishVeh();
 
     if (vehCategory.compare("B") == 0) {
@@ -799,9 +799,9 @@ void vehDist::finish() {
     saveBusPositionFile();
 }
 
-void vehDist::sendMessageToOneNeighborTarget(string beaconSource) {
-    unsigned short int countMessage = messagesBufferVehDist.size();
-    unordered_map <string, WaveShortMessage>::iterator itMessage = messagesBufferVehDist.begin();
+void mfcv::sendMessageToOneNeighborTarget(string beaconSource) {
+    unsigned short int countMessage = messagesBufferMfcv.size();
+    unordered_map <string, WaveShortMessage>::iterator itMessage = messagesBufferMfcv.begin();
     string idMessage;
     while (countMessage > 0) {
         if (beaconSource.compare(itMessage->second.getTarget()) == 0) {
@@ -819,15 +819,15 @@ void vehDist::sendMessageToOneNeighborTarget(string beaconSource) {
                 itMessage++;
             }
 
-            messagesBufferVehDist.erase(idMessage);
-            auto it = find(messagesOrderReceivedVehDist.begin(), messagesOrderReceivedVehDist.end(), idMessage);
-            if (it != messagesOrderReceivedVehDist.end()) {
-                messagesOrderReceivedVehDist.erase(it);
+            messagesBufferMfcv.erase(idMessage);
+            auto it = find(messagesOrderReceivedMfcv.begin(), messagesOrderReceivedMfcv.end(), idMessage);
+            if (it != messagesOrderReceivedMfcv.end()) {
+                messagesOrderReceivedMfcv.erase(it);
             } else {
                 cout << endl << source << "JBe - Error in messagesOrderReceived, need to have the same entries as messagesBuffer -" << endl;
                 ASSERT2(0, "JBe - Error in messagesOrderReceived, need to have the same entries as messagesBuffer -");
             }
-            //colorCarryMessageVehDist(messagesBufferVehDist);
+            //colorCarryMessageMfcv(messagesBufferMfcv);
         } else {
             countMessage--;
             itMessage++;
@@ -835,7 +835,7 @@ void vehDist::sendMessageToOneNeighborTarget(string beaconSource) {
     }
 }
 
-void vehDist::sendMessageDeliveryBuffer(string beaconSource) {
+void mfcv::sendMessageDeliveryBuffer(string beaconSource) {
     unordered_map <string, WaveShortMessage>::iterator itMessage = messagesBufferOnlyDelivery.begin();
     unsigned short int countMessage = messagesBufferOnlyDelivery.size();
     string idMessage;
@@ -856,7 +856,7 @@ void vehDist::sendMessageDeliveryBuffer(string beaconSource) {
             }
 
             messagesBufferOnlyDelivery.erase(idMessage);
-            //colorCarryMessageVehDist(messagesBufferToDelivery);
+            //colorCarryMessageMfcv(messagesBufferToDelivery);
         } else {
             countMessage--;
             itMessage++;
@@ -864,7 +864,7 @@ void vehDist::sendMessageDeliveryBuffer(string beaconSource) {
     }
 }
 
-bool vehDist::sendOneNewMessageToOneNeighborTarget(WaveShortMessage wsm) {
+bool mfcv::sendOneNewMessageToOneNeighborTarget(WaveShortMessage wsm) {
     unordered_map <string, WaveShortMessage>::iterator itBeaconStatus = beaconStatusNeighbors.begin();
     string targetMessage = wsm.getTarget();
 
@@ -882,7 +882,7 @@ bool vehDist::sendOneNewMessageToOneNeighborTarget(WaveShortMessage wsm) {
     return true;
 }
 
-void vehDist::vehCreateUpdateRateTimeToSendEvent() {
+void mfcv::vehCreateUpdateRateTimeToSendEvent() {
     rateTimeToSend = 2500; // Initial rateTimeToSend #2500 - Send in: 2500 ms
     rateTimeToSendDistanceControl = 10; // Equal to 10 m in 1 s
     rateTimeToSendLimitTime = 5; // #5
@@ -895,8 +895,8 @@ void vehDist::vehCreateUpdateRateTimeToSendEvent() {
     scheduleAt((simTime() + rateTimeToSendUpdateTime), sendUpdateRateTimeToSendVeh);
 }
 
-void vehDist::vehCreateEventTrySendBeaconMessage() {
-    if (SvehDistCreateEventGenerateMessage) {
+void mfcv::vehCreateEventTrySendBeaconMessage() {
+    if (SmfcvCreateEventGenerateMessage) {
         sendBeaconMessageEvt = new cMessage("Event send beacon message", SendEvtBeaconMessage);
         timeToFinishLastStartSend = simTime() + vehOffSet;
         messageToSend = 0; // messagesOrderReceived.front();
@@ -907,7 +907,7 @@ void vehDist::vehCreateEventTrySendBeaconMessage() {
     }
 }
 
-WaveShortMessage* vehDist::prepareBeaconStatusWSM(string name, int lengthBits, t_channel channel, int priority, int serial) {
+WaveShortMessage* mfcv::prepareBeaconStatusWSM(string name, int lengthBits, t_channel channel, int priority, int serial) {
     WaveShortMessage* wsm = new WaveShortMessage(name.c_str());
     wsm->addBitLength(headerLength);
     wsm->addBitLength(lengthBits);
@@ -961,7 +961,7 @@ WaveShortMessage* vehDist::prepareBeaconStatusWSM(string name, int lengthBits, t
     return wsm;
 }
 
-WaveShortMessage* vehDist::updateBeaconMessageWSM(WaveShortMessage* wsm, string rcvId) {
+WaveShortMessage* mfcv::updateBeaconMessageWSM(WaveShortMessage* wsm, string rcvId) {
     wsm->setSenderAddressTemporary(source.c_str());
     wsm->setRecipientAddressTemporary(rcvId.c_str());
     wsm->setCategory(vehCategory.c_str());
@@ -980,7 +980,7 @@ WaveShortMessage* vehDist::updateBeaconMessageWSM(WaveShortMessage* wsm, string 
     return wsm;
 }
 
-unsigned short int vehDist::busRouteDiffTarget(string busID, Coord targetPos, double localVehDistanceNow) {
+unsigned short int mfcv::busRouteDiffTarget(string busID, Coord targetPos, double localVehDistanceNow) {
     if (par("useBusPosition").boolValue()) {
         string routeIDTmp;
         if (SrouteIDVehID.find(busID) == SrouteIDVehID.end()) {
@@ -1047,9 +1047,9 @@ unsigned short int vehDist::busRouteDiffTarget(string busID, Coord targetPos, do
     return 0; // Equal a private car
 }
 
-void vehDist::handleSelfMsg(cMessage* msg) {
+void mfcv::handleSelfMsg(cMessage* msg) {
     switch (msg->getKind()) {
-        case SEND_BEACON_EVT_vehDist: { // Call prepareBeaconStatusWSM local to the veh
+        case SEND_BEACON_EVT_mfcv: { // Call prepareBeaconStatusWSM local to the veh
             sendWSM(prepareBeaconStatusWSM("beacon", beaconLengthBits, type_CCH, beaconPriority, -1));
             scheduleAt(simTime() + par("beaconInterval").doubleValue(), sendBeaconEvt);
             ScountBeaconSend++;
@@ -1106,7 +1106,7 @@ void vehDist::handleSelfMsg(cMessage* msg) {
     }
 }
 
-void vehDist::vehUpdateRateTimeToSend() {
+void mfcv::vehUpdateRateTimeToSend() {
     //cout << source << " rateTimeToSend: " << rateTimeToSend;
     unsigned short int distance = traci->getDistance(mobility->getPositionAt(simTime() - rateTimeToSendUpdateTime), curPosition, false);
 
@@ -1122,11 +1122,11 @@ void vehDist::vehUpdateRateTimeToSend() {
     //cout << " updated to: " << rateTimeToSend << " at: " << simTime() << " by: " <<  distance << " traveled [" << mobility->getPositionAt(simTime() - rateTimeToSendUpdateTime) << " " << curPosition << "]" << endl;
 }
 
-void vehDist::printMessagesBuffer() {
-    if (!messagesBufferVehDist.empty()) {
+void mfcv::printMessagesBuffer() {
+    if (!messagesBufferMfcv.empty()) {
         cout << endl << "messagesBuffer from " << source << " at: " << simTime() << " position: " << curPosition << endl;
         unordered_map <string, WaveShortMessage>::iterator itMessage;
-        for (itMessage = messagesBufferVehDist.begin(); itMessage != messagesBufferVehDist.end(); itMessage++) {
+        for (itMessage = messagesBufferMfcv.begin(); itMessage != messagesBufferMfcv.end(); itMessage++) {
             cout << "    Id(message): " << itMessage->second.getGlobalMessageIdentificaton() << endl;
             cout << "    WsmData: " << itMessage->second.getWsmData() << endl;
             cout << "    Source: " << itMessage->second.getSource() << endl;
@@ -1139,7 +1139,7 @@ void vehDist::printMessagesBuffer() {
     }
 }
 
-void vehDist::printBeaconStatusNeighbors() {
+void mfcv::printBeaconStatusNeighbors() {
     if (!beaconStatusNeighbors.empty()) {
         cout << endl << "beaconStatusNeighbors from " << source << " at: " << simTime() << " position: " << curPosition << endl;
         unordered_map <string, WaveShortMessage>::iterator itBeaconStatus;
@@ -1160,7 +1160,7 @@ void vehDist::printBeaconStatusNeighbors() {
 }
 
 // Not used ###############################################################
-unsigned short int vehDist::getVehHeading4() {
+unsigned short int mfcv::getVehHeading4() {
     // marcospaiva.com.br/images/rosa_dos_ventos%2002.GIF
     // marcospaiva.com.br/localizacao.htm
 
@@ -1184,7 +1184,7 @@ unsigned short int vehDist::getVehHeading4() {
     }
 }
 
-unsigned short int vehDist::getVehHeading8() {
+unsigned short int mfcv::getVehHeading8() {
     // marcospaiva.com.br/images/rosa_dos_ventos%2002.GIF
     // marcospaiva.com.br/localizacao.htm
 

@@ -56,7 +56,7 @@ void BaseWaveApplLayer::initialize_veins_TraCI(int stage) {
     }
 }
 
-//######################################### MFCV - begin #########################################################################
+//######################################### MFCV - begin #######################################################################
 void BaseWaveApplLayer::saveMessagesOnFile(WaveShortMessage* wsm, string fileName) {
     myfile.open(fileName, std::ios_base::app); // Open file for just append
 
@@ -1179,7 +1179,7 @@ void BaseWaveApplLayer::printVehTrafficMethodCheck() {
         myfile.close();
     }
 }
-//######################################### MFCV - end ###########################################################################
+//######################################### MFCV - end #########################################################################
 
 //WaveShortMessage*  BaseWaveApplLayer::prepareWSM(string name, int lengthBits, t_channel channel, int priority, int rcvId, int serial) {
 WaveShortMessage*  BaseWaveApplLayer::prepareWSM(string name, int lengthBits, t_channel channel, int priority, unsigned int rcvId, int serial) {
@@ -1217,7 +1217,7 @@ WaveShortMessage*  BaseWaveApplLayer::prepareWSM(string name, int lengthBits, t_
     return wsm;
 }
 
-//############################################ Epidemic - begin ########################################################################
+//############################################ Epidemic - begin ################################################################
 
 WaveShortMessage* BaseWaveApplLayer::prepareWSM_epidemic(string name, int lengthBits, t_channel channel, int priority, unsigned int rcvId, int serial) {
     WaveShortMessage* wsm = new WaveShortMessage(name.c_str());
@@ -1681,7 +1681,7 @@ void BaseWaveApplLayer::receivedOnDataEpidemic(WaveShortMessage* wsm) {
         }
     }
 }
-//############################################ Epidemic - end ########################################################################
+//############################################ Epidemic - end ##################################################################
 
 void BaseWaveApplLayer::receiveSignal(cComponent* source, simsignal_t signalID, cObject* obj, cObject* details) {
     Enter_Method_Silent();

@@ -1,7 +1,7 @@
 // Copyright (C) 2015-2016 João Batista <joao.b@usp.br>
 
-#ifndef vehDist_H
-#define vehDist_H
+#ifndef mfcv_H
+#define mfcv_H
 
 #include "veins/modules/mobility/traci/TraCIMobility.h"
 #include "veins/modules/application/ieee80211p/BaseWaveApplLayer.h"
@@ -9,7 +9,7 @@
 using Veins::TraCIMobility;
 using Veins::TraCICommandInterface;
 
-class vehDist : public BaseWaveApplLayer {
+class mfcv : public BaseWaveApplLayer {
     public:
         virtual void initialize(int stage);
 
@@ -86,7 +86,7 @@ class vehDist : public BaseWaveApplLayer {
         void vehUpdateRateTimeToSend();
         void vehCreateUpdateRateTimeToSendEvent();
 
-        void vehDistInitializeVariablesVeh();
+        void mfcvInitializeVariablesVeh();
 
         void sendMessageToOneNeighborTarget(string beaconSource);
         bool sendOneNewMessageToOneNeighborTarget(WaveShortMessage wsm);
@@ -141,7 +141,7 @@ struct BaseWaveApplLayer::targetResultMsg BaseWaveApplLayer::SresultMsgReceived;
 string BaseWaveApplLayer::SprojectInfo;
 bool BaseWaveApplLayer::SusePathHistory, BaseWaveApplLayer::SallowMessageCopy;
 bool BaseWaveApplLayer::SselectFromAllVehicles, BaseWaveApplLayer::SuseMessagesSendLog;
-bool BaseWaveApplLayer::SvehDistCreateEventGenerateMessage, BaseWaveApplLayer::SuseRateTimeToSend;
+bool BaseWaveApplLayer::SmfcvCreateEventGenerateMessage, BaseWaveApplLayer::SuseRateTimeToSend;
 
 mt19937 BaseWaveApplLayer::mtSelectVehicleGenarateMessage, BaseWaveApplLayer::mtTargetMessageSelect, BaseWaveApplLayer::mtSelectLaneName;
 
