@@ -17,7 +17,7 @@ void epidemic_rsu::initialize(int stage) {
 }
 
 void epidemic_rsu::epidemicInitializeVariablesRsu() {
-    rsuInitializeValuesVehDist(mobi->getInitialPositionFromIniFileRSU());
+    rsuInitializeValuesMfcv(mobi->getInitialPositionFromIniFileRSU());
 }
 
 void epidemic_rsu::onBeacon(WaveShortMessage* wsm) {

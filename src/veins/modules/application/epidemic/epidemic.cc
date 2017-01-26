@@ -19,7 +19,7 @@ void epidemic::initialize(int stage) {
 }
 
 void epidemic::epidemicInitializeVariablesVeh() {
-    vehInitializeValuesVehDist(traciVehicle->getTypeId(), mobility->getPositionAt(simTime() + 0.1)); // The same for Epidemic and VehDist
+    vehInitializeValuesMfcv(traciVehicle->getTypeId(), mobility->getPositionAt(simTime() + 0.1)); // The same for Epidemic and VehDist
 }
 
 void epidemic::onBeacon(WaveShortMessage* wsm) {
