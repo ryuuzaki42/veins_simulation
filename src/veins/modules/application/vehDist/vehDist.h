@@ -14,7 +14,7 @@ class vehDist : public BaseWaveApplLayer {
         virtual void initialize(int stage);
 
         enum WaveApplMessageKinds {
-            SendEvtBeaconMessage, SendEvtUpdateRateTimeToSendVeh, SendEvtSaveBusPosition
+            SendEvtBeaconMessage, SendEvtUpdateRateTimeToSendVeh, SendEvtSaveBusPosition, SendEvtTaxiChangeRoute
         };
 
     protected:
@@ -25,15 +25,17 @@ class vehDist : public BaseWaveApplLayer {
         cMessage* sendBeaconMessageEvt;
         cMessage* sendUpdateRateTimeToSendVeh;
         cMessage* sendSaveBusPosition;
+        cMessage* sendTaxiChangeRoute;
 
         vector <string> messagesDelivered;
         string busMsgToDelivery;
+        string taxiRoadIDNow;
 
         unordered_map <string, string> messagesSendLog;
 
         unordered_map <string, WaveShortMessage> beaconStatusNeighbors;
 
-        unsigned short int messageToSend, rateTimeToSend;
+        unsigned short int messageToSend, rateTimeToSend, msgOnlyDeliveryFunctionResult, msgUseOnlyDeliveryBuffer;
         unsigned short int rateTimeToSendLimitTime, rateTimeToSendUpdateTime, rateTimeToSendDistanceControl;
 
         simtime_t timeToFinishLastStartSend;
@@ -59,10 +61,15 @@ class vehDist : public BaseWaveApplLayer {
         void busPositionFunctionsRun();
         void busPosInsertByTimeMap();
         void saveBusPositionFile();
-
         void busPosLoadFromFile();
 
-        bool busRouteDiffTarget(string busID, Coord targetPos, double localVehDistanceNow);
+        void loadLaneNames();
+        void printPlannedRoadIds(list<string> plannedRoadIds);
+        void tryChangeRouteUntilSuccess();
+        int selectLaneNamePositionID();
+        void createEvtTaxiChangeRoute();
+
+        unsigned short int busRouteDiffTarget(string busID, Coord targetPos, double localVehDistanceNow);
         void sendMessageDeliveryBuffer(string beaconSource);
         void createBusPositionSaveEvent();
 
@@ -112,8 +119,8 @@ unordered_map <int, Coord> BaseWaveApplLayer::SrsuPositions;
 
 int BaseWaveApplLayer::SmsgDroppedbyTTL, BaseWaveApplLayer::SmsgDroppedbyCopy, BaseWaveApplLayer::SmsgDroppedbyBuffer;
 int BaseWaveApplLayer::ScountMsgPacketSend, BaseWaveApplLayer::SmsgBufferUseGeneral, BaseWaveApplLayer::SmessageHopLimit;
-int BaseWaveApplLayer::ScountMesssageDrop, BaseWaveApplLayer::ScountMeetN, BaseWaveApplLayer::ScountTwoCategoryN;
-int BaseWaveApplLayer::ScountMeetPshortestT, BaseWaveApplLayer::ScountVehicleAll, BaseWaveApplLayer::SmessageId;
+int BaseWaveApplLayer::ScountMesssageDrop, BaseWaveApplLayer::ScountMeetN, BaseWaveApplLayer::ScountTwoCategoryN, BaseWaveApplLayer::ScountVehicleBus;
+int BaseWaveApplLayer::ScountMeetPshortestT, BaseWaveApplLayer::ScountVehicleAll, BaseWaveApplLayer::SmessageId, BaseWaveApplLayer::ScountVehicleTaxi;
 int BaseWaveApplLayer::ScountBeaconSend, BaseWaveApplLayer::ScountSummaryVectorSend, BaseWaveApplLayer::ScountRequestMessageVectorSend;
 
 unsigned short int BaseWaveApplLayer::SbeaconTypeInitialize;
@@ -125,11 +132,12 @@ unsigned short int BaseWaveApplLayer::StimeLimitGenerateMessage, BaseWaveApplLay
 bool BaseWaveApplLayer::SuseBeaconStatusBufferSize;
 
 int BaseWaveApplLayer::SsimulationTimeLimit;
+vector <string> BaseWaveApplLayer::SlaneNameLoaded;
 unordered_map <string, struct BaseWaveApplLayer::busPosByTime> BaseWaveApplLayer::SposTimeBus;
 unordered_map <string, struct BaseWaveApplLayer::busPosByTime> BaseWaveApplLayer::SposTimeBusLoaded;
 unordered_map <string, string> BaseWaveApplLayer::SrouteIDVehID;
 int BaseWaveApplLayer::ScountToDeliveryMsg;
-unsigned int BaseWaveApplLayer::SbufferMessageOnlyDeliveryLimit;
+unsigned int BaseWaveApplLayer::SbufferMessageOnlyDeliveryLimit, BaseWaveApplLayer::SmsgUseOnlyDeliveryBufferGeneral;
 
 string BaseWaveApplLayer::SfileMessagesUnicastVeh, BaseWaveApplLayer::SfileMessagesDropVeh;
 string BaseWaveApplLayer::SfileMessagesCountRsu, BaseWaveApplLayer::SfileMessagesGeneratedVehRsu;
@@ -143,6 +151,6 @@ bool BaseWaveApplLayer::SusePathHistory, BaseWaveApplLayer::SallowMessageCopy;
 bool BaseWaveApplLayer::SselectFromAllVehicles, BaseWaveApplLayer::SuseMessagesSendLog;
 bool BaseWaveApplLayer::SvehDistCreateEventGenerateMessage, BaseWaveApplLayer::SuseRateTimeToSend;
 
-mt19937 BaseWaveApplLayer::mtSelectVehicleGenarateMessage, BaseWaveApplLayer::mtTargetMessageSelect;
+mt19937 BaseWaveApplLayer::mtSelectVehicleGenarateMessage, BaseWaveApplLayer::mtTargetMessageSelect, BaseWaveApplLayer::mtSelectLaneName;
 
 #endif
