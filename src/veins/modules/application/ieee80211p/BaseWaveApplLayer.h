@@ -37,7 +37,7 @@ class BaseWaveApplLayer : public BaseApplLayer {
 
         enum WaveApplMessageKinds {
             SERVICE_PROVIDER = LAST_BASE_APPL_MESSAGE_KIND,
-            SEND_BEACON_EVT, SEND_BEACON_EVT_vehDist, SEND_BEACON_EVT_epidemic,
+            SEND_BEACON_EVT, SEND_BEACON_EVT_mfcv, SEND_BEACON_EVT_epidemic,
             SERVICE_EXPIRED_EVT, SERVICE_QUERY_EVT, SERVICE_EVT,
             Send_EpidemicMessageRequestEvt, SendEvtGenerateMessage, SendGetTrafficMethodCheck, SendEvtSelectVehGenerateMessage
         };
@@ -57,11 +57,11 @@ class BaseWaveApplLayer : public BaseApplLayer {
         virtual void onData(WaveShortMessage* wsm) = 0;
         virtual void handlePositionUpdate(cObject* obj);
 
-//######################################### vehDist #########################################
+//######################################### MFCV #############################################
         //## Used to another projects
-        void generalInitializeVariables_executionByExpNumberVehDist();
-        string getFolderResultVehDist(unsigned short int experimentSendbyDSR);
-        void generateMessage_vehDist_and_Epidemic();
+        void generalInitializeVariables_executionByExpNumberMfcv();
+        string getFolderResultMfcv(unsigned short int experimentSendbyDSR);
+        void generateMessageMfcvAndEpidemic();
 
         void toFinishRSU();
         void toFinishVeh();
@@ -81,15 +81,15 @@ class BaseWaveApplLayer : public BaseApplLayer {
         void selectVehGenerateMessage();
 
         void selectTarget();
-        void colorCarryMessageVehDist(unordered_map <string, WaveShortMessage> bufferOfMessages);
+        void colorCarryMessageMfcv(unordered_map <string, WaveShortMessage> bufferOfMessages);
         void printCountBeaconMessagesDropVeh();
 
         void saveMessagesOnFile(WaveShortMessage* wsm, string fileName);
         void printHeaderfileExecution();
         void openFileAndClose(string fileName, bool justForAppend);
 
-        void vehInitializeValuesVehDist(string category, Coord position);
-        void rsuInitializeValuesVehDist(Coord position);
+        void vehInitializeValuesMfcv(string category, Coord position);
+        void rsuInitializeValuesMfcv(Coord position);
 
         int SelectRandomVehiclePositionId();
 
@@ -98,7 +98,7 @@ class BaseWaveApplLayer : public BaseApplLayer {
         void insertVehTraffic();
         void printVehTraffic();
         void printVehTrafficMethodCheck();
-//######################################### vehDist #########################################
+//######################################### MFCV #############################################
 
 //######################################### Epidemic #########################################
         virtual WaveShortMessage* prepareWSM_epidemic(string name, int dataLengthBits, t_channel channel, int priority, unsigned int rcvId, int serial=0);
@@ -145,10 +145,10 @@ class BaseWaveApplLayer : public BaseApplLayer {
 
         WaveAppToMac1609_4Interface* myMac;
 
-//######################################### vehDist #########################################
-        vector <string> messagesOrderReceivedVehDist;
+//######################################### MFCV #############################################
+        vector <string> messagesOrderReceivedMfcv;
 
-        unordered_map <string, WaveShortMessage> messagesBufferVehDist;
+        unordered_map <string, WaveShortMessage> messagesBufferMfcv;
 
         static unsigned int SmsgUseOnlyDeliveryBufferGeneral;
         unordered_map <string, WaveShortMessage> messagesBufferOnlyDelivery;
@@ -202,7 +202,7 @@ class BaseWaveApplLayer : public BaseApplLayer {
         static unordered_map <string, int> SvehCategoryCount;
         static unordered_map <string, WaveShortMessage> SvehScenario;
         static bool SusePathHistory, SallowMessageCopy, SuseRateTimeToSend;
-        static bool SselectFromAllVehicles, SuseMessagesSendLog, SvehDistCreateEventGenerateMessage;
+        static bool SselectFromAllVehicles, SuseMessagesSendLog, SmfcvCreateEventGenerateMessage;
 
         struct messages {
           string firstSource, hops, wsmData, times;
@@ -233,7 +233,7 @@ class BaseWaveApplLayer : public BaseApplLayer {
             unsigned int totalCopyReceived, countFirstCategoryPrivateCar, countSecondCategoryBus, countThirdCategoryTaxi, countRsuTarget;
         };
         static struct targetResultMsg SresultMsgReceived;
-//######################################### vehDist #########################################
+//######################################### MFCV #############################################
 
 //######################################### Epidemic #########################################
         cMessage* sendEpidemicMessageRequestEvt;

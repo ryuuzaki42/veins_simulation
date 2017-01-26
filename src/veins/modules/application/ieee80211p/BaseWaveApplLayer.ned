@@ -22,7 +22,7 @@ simple BaseWaveApplLayer like IBaseApplLayer {
         // Epidemic
         int sendSummaryVectorInterval @unit("s") = default(0s); //define the minimum slide window length among contacts to send new version of summary vector
 
-        // VehDist
+        // mfcv
         int messageBufferSize = default(0); //define the maximum buffer size (in number of messages) that a node is willing to allocate
         int messageHopLimit = default(0); // Limit of hops
         int timeGenerateNewMessage @unit("s") = default(0s); // Time to generate new messages, each this time generate more X messsages
@@ -47,8 +47,8 @@ simple BaseWaveApplLayer like IBaseApplLayer {
         bool allowMessageCopy = default(false); // Allow or not copy of messages
         bool selectFromAllVehicles = default(false); // Chose for all vehicle or for only new
         bool useMessagesSendLog = default(false); // Use or not message send log
-        int beaconTypeInitialize; // 1 for vehDist, 2 for epidemic, 3 for minicurso_UFPI_TraCI, 0 for the default
-        bool vehDistCreateEventGenerateMessage = default(false); // Use the event to generate message or not
+        int beaconTypeInitialize; // 1 for mfcv, 2 for epidemic, 3 for minicurso_UFPI_TraCI, 0 for the default
+        bool mfcvCreateEventGenerateMessage = default(false); // Use the event to generate message or not
         int vehTimeLimitToAcceptGenerateMgs @unit("s") = default(0s); // Time limit that one vehile enter in the scenario
 
         bool useRateTimeToSend = default(false); // Use or not the rateTimeToSend

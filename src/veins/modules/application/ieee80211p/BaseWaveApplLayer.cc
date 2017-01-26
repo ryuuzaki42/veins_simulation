@@ -31,8 +31,8 @@ void BaseWaveApplLayer::initialize_veins_TraCI(int stage) {
 
         SbeaconTypeInitialize = par("beaconTypeInitialize");
 
-        if (SbeaconTypeInitialize == 1) { // 1 vehDist
-            sendBeaconEvt = new cMessage("beacon evt", SEND_BEACON_EVT_vehDist);
+        if (SbeaconTypeInitialize == 1) { // 1 MFCV
+            sendBeaconEvt = new cMessage("beacon evt", SEND_BEACON_EVT_mfcv);
         } else if (SbeaconTypeInitialize == 2) { // 2 epidemic
             sendBeaconEvt = new cMessage("beacon evt", SEND_BEACON_EVT_epidemic);
         } else if (SbeaconTypeInitialize == 0) { // 0 default
@@ -56,7 +56,7 @@ void BaseWaveApplLayer::initialize_veins_TraCI(int stage) {
     }
 }
 
-//######################################### vehDist - begin #####################################################################
+//######################################### MFCV - begin #########################################################################
 void BaseWaveApplLayer::saveMessagesOnFile(WaveShortMessage* wsm, string fileName) {
     myfile.open(fileName, std::ios_base::app); // Open file for just append
 
@@ -94,8 +94,8 @@ void BaseWaveApplLayer::saveMessagesOnFile(WaveShortMessage* wsm, string fileNam
     myfile.close();
 }
 
-void BaseWaveApplLayer::vehInitializeValuesVehDist(string category, Coord position) {
-    generalInitializeVariables_executionByExpNumberVehDist();
+void BaseWaveApplLayer::vehInitializeValuesMfcv(string category, Coord position) {
+    generalInitializeVariables_executionByExpNumberMfcv();
 
     curPosition = position;
     vehOffSet = double(myId)/1000; // Simulate asynchronous channel access. Values between 0.001, 0.002
@@ -166,8 +166,8 @@ string BaseWaveApplLayer::insertZeroIntReturnString(int value) {
     return stringValue;
 }
 
-void BaseWaveApplLayer::rsuInitializeValuesVehDist(Coord position) {
-    generalInitializeVariables_executionByExpNumberVehDist();
+void BaseWaveApplLayer::rsuInitializeValuesMfcv(Coord position) {
+    generalInitializeVariables_executionByExpNumberMfcv();
 
     restartFilesResultRSU();
 
@@ -228,7 +228,7 @@ void BaseWaveApplLayer::printHeaderfileExecution() {
     myfile << " ttlMessage: " << SttlMessage << " countGenerateMessage: " << ScountGenerateMessage << endl;
 }
 
-void BaseWaveApplLayer::generalInitializeVariables_executionByExpNumberVehDist() {
+void BaseWaveApplLayer::generalInitializeVariables_executionByExpNumberMfcv() {
     source = findHost()->getFullName();
     msgBufferUse = 0;
 
@@ -259,7 +259,7 @@ void BaseWaveApplLayer::generalInitializeVariables_executionByExpNumberVehDist()
         SselectFromAllVehicles = par("selectFromAllVehicles").boolValue();
         SusePathHistory = par("usePathHistory").boolValue(); // User or not path history when will send a message
         SuseMessagesSendLog = par("useMessagesSendLog").boolValue();
-        SvehDistCreateEventGenerateMessage = par("vehDistCreateEventGenerateMessage").boolValue();
+        SmfcvCreateEventGenerateMessage = par("mfcvCreateEventGenerateMessage").boolValue();
         SuseRateTimeToSend = par("useRateTimeToSend").boolValue();
 
         SttlBeaconStatus = par("ttlBeaconStatus");
@@ -309,7 +309,7 @@ void BaseWaveApplLayer::generalInitializeVariables_executionByExpNumberVehDist()
         SprojectInfo += texTmp + "SsecondCategoryBus:_ \"" + SsecondCategoryBus + "\"";
         SprojectInfo += texTmp + "SThirdCategoryTaxi:_ \"" + SthirdCategoryTaxi + "\"";
         SprojectInfo += texTmp + "beaconTypeInitialize:_ " + boolToString(SbeaconTypeInitialize);
-        SprojectInfo += texTmp + "vehDistCreateEventGenerateMessage:_ " + boolToString(SvehDistCreateEventGenerateMessage);
+        SprojectInfo += texTmp + "mfcvCreateEventGenerateMessage:_ " + boolToString(SmfcvCreateEventGenerateMessage);
         SprojectInfo += texTmp + "Experiment:_ " + to_string(SexpNumber);
         SprojectInfo += texTmp + "repeatNumber:_ " + to_string(SrepeatNumber);
         SprojectInfo += texTmp + "ttlMessage:_ " + to_string(SttlMessage) + " s";
@@ -417,7 +417,7 @@ string BaseWaveApplLayer::boolToString(bool value) {
     }
 }
 
-string BaseWaveApplLayer::getFolderResultVehDist(unsigned short int expSendbyDSCR) {
+string BaseWaveApplLayer::getFolderResultMfcv(unsigned short int expSendbyDSCR) {
     string expSendbyDSCRText;
     switch (expSendbyDSCR) {
         case 1:
@@ -448,7 +448,7 @@ string BaseWaveApplLayer::getFolderResultVehDist(unsigned short int expSendbyDSC
 
     string resultFolderPart = "results/";
     if (SbeaconTypeInitialize == 1) {
-        resultFolderPart += "vehDist_resultsEnd_";
+        resultFolderPart += "mfcv_resultsEnd_";
     } else if (SbeaconTypeInitialize == 2) {
         resultFolderPart += "epidemic_resultsEnd_";
     } else {
@@ -468,7 +468,7 @@ string BaseWaveApplLayer::getFolderResultVehDist(unsigned short int expSendbyDSC
 void BaseWaveApplLayer::restartFilesResultRSU() {
     bool justAppend = false; // Open a new file (blank)
     if (myId == 0) {
-        SresultFolder = getFolderResultVehDist(SexpSendbyDSCR);
+        SresultFolder = getFolderResultMfcv(SexpSendbyDSCR);
 
         SfileMessagesCountRsu = SresultFolder + "rsu_" + "Count_Messages_Received.r";
         SfileMessagesGeneratedVehRsu = SresultFolder + "VehRsu_Messages_Generated.r";
@@ -538,18 +538,18 @@ void BaseWaveApplLayer::saveVehStartPositionVeh(string fileNameLocation, Coord i
 }
 
 void BaseWaveApplLayer::vehGenerateMessageBeginVeh(double vehOffSet) {
-    if (SvehDistCreateEventGenerateMessage) { // Create Event to generate messages by the vehicles
+    if (SmfcvCreateEventGenerateMessage) { // Create Event to generate messages by the vehicles
         sendGenerateMessageEvt = new cMessage("Event generate beacon message", SendEvtGenerateMessage);
         //cout << source << " at: " << simTime() << " schedule created SendEvtGenerateMessage to: "<< (simTime() + vehOffSet) << endl;
         scheduleAt((simTime() + vehOffSet), sendGenerateMessageEvt);
     } else { // All vehicle that enter will generate only one message
-        generateMessage_vehDist_and_Epidemic();
+        generateMessageMfcvAndEpidemic();
     }
 }
 
 void BaseWaveApplLayer::rsuSelectVehGenerateMessageBegin() {
     if (myId == 0) { // Only the rsu[0] select vehicles to generate messages
-        if (SvehDistCreateEventGenerateMessage) { // Create Event to select vehicles to generate messages
+        if (SmfcvCreateEventGenerateMessage) { // Create Event to select vehicles to generate messages
             sendSelectVehGenerateMessageEvt = new cMessage("Event generate beacon message", SendEvtSelectVehGenerateMessage);
             //cout << source << " at: " << simTime() << " schedule created SendEvtSelectVehGenerateMessage to: "<< simTime() << endl;
             scheduleAt((simTime() + par("timeStartGenerateMessage")), sendSelectVehGenerateMessageEvt); // + 30 of warm-up time
@@ -560,7 +560,7 @@ void BaseWaveApplLayer::rsuSelectVehGenerateMessageBegin() {
 void BaseWaveApplLayer::vehGenerateBeaconMessageAfterBeginVeh() {
     auto itVeh = find(SvehGenerateMessage.begin(), SvehGenerateMessage.end(), source);
     if (itVeh != SvehGenerateMessage.end()) { // If have "vehNumber" on buffer, will generate one message
-        generateMessage_vehDist_and_Epidemic();
+        generateMessageMfcvAndEpidemic();
 
         SvehGenerateMessage.erase(itVeh);
         vehGenerateBeaconMessageAfterBeginVeh(); // To try generate another message, if the vehicle was choosen one time
@@ -581,7 +581,7 @@ void BaseWaveApplLayer::selectTarget() { // Set the target node to who the messa
     }
 }
 
-void BaseWaveApplLayer::generateMessage_vehDist_and_Epidemic() {
+void BaseWaveApplLayer::generateMessageMfcvAndEpidemic() {
     WaveShortMessage* wsm = new WaveShortMessage("data");
     wsm->addBitLength(headerLength);
     wsm->addBitLength(dataLengthBits);
@@ -623,15 +623,15 @@ void BaseWaveApplLayer::generateMessage_vehDist_and_Epidemic() {
     cout << "### " << source << " generated the message ID: " << wsm->getGlobalMessageIdentificaton() << " to " << target << " " << Coord(target_x, target_y, 3) << " at: " << simTime() << endl;
     myfile.close();
 
-    if (SbeaconTypeInitialize == 1) { // vehDist
+    if (SbeaconTypeInitialize == 1) { // MFCV
         wsm->setTargetPos(Coord(target_x, target_y, 3));
         wsm->setSenderAddressTemporary(source.c_str());
         // wsm->setRecipientAddressTemporary("Initial"); // Set when will send
 
-        messagesBufferVehDist.insert(make_pair(wsm->getGlobalMessageIdentificaton(), *wsm)); // Adding the message on the buffer
-        messagesOrderReceivedVehDist.push_back(wsm->getGlobalMessageIdentificaton());
+        messagesBufferMfcv.insert(make_pair(wsm->getGlobalMessageIdentificaton(), *wsm)); // Adding the message on the buffer
+        messagesOrderReceivedMfcv.push_back(wsm->getGlobalMessageIdentificaton());
 
-        //colorCarryMessageVehDist(messagesBufferVehDist); // Change the range-color in the vehicle (GUI)
+        //colorCarryMessageMfcv(messagesBufferMfcv); // Change the range-color in the vehicle (GUI)
     } else if (SbeaconTypeInitialize == 2) { // Epidemic
         wsm->setSenderAddress(MACToInteger());
         // wsm.setRecipientAddress(); // Set when will send
@@ -642,7 +642,7 @@ void BaseWaveApplLayer::generateMessage_vehDist_and_Epidemic() {
         epidemicLocalMessageBuffer.insert(make_pair(wsm->getGlobalMessageIdentificaton(), *wsm));
         epidemicLocalSummaryVector.insert(make_pair(wsm->getGlobalMessageIdentificaton(), true));
 
-        //colorCarryMessageVehDist(epidemicLocalMessageBuffer);
+        //colorCarryMessageMfcv(epidemicLocalMessageBuffer);
     } else {
         cout << "JBe - beaconTypeInitialize is unknown -" << SbeaconTypeInitialize << endl;
         ASSERT2(0, "JBe - beaconTypeInitialize is unknown -");
@@ -712,8 +712,8 @@ void BaseWaveApplLayer::toFinishVeh() {
         cout << endl << "Count of vehicle in the scenario at: " << simTime() << " - " << SnumVehicles.size() << endl;
         SvehScenario.erase(source);
     } else {
-        cout << "JBe - Error in vehDist::numVehicles, need to have the same entries as the number of vehicles" << endl;
-        ASSERT2(0, "JBe - Error in vehDist::numVehicles, need to have the same entries as the number of vehicles -");
+        cout << "JBe - Error in mfcv::numVehicles, need to have the same entries as the number of vehicles" << endl;
+        ASSERT2(0, "JBe - Error in mfcv::numVehicles, need to have the same entries as the number of vehicles -");
     }
 
     if (SvehCategoryCount.find(vehCategory) == SvehCategoryCount.end()) {
@@ -727,8 +727,8 @@ void BaseWaveApplLayer::toFinishVeh() {
         if (SvehTraffic.find(myIdString) != SvehTraffic.end()) {
             SvehTraffic[myIdString].exitTime = simTime();
         } else {
-            cout << "JBe - Error in vehDist::numVehicles, need to have the same entries as the number of vehicles" << endl;
-            ASSERT2(0, "JBe - Error in vehDist::numVehicles, need to have the same entries as the number of vehicles -");
+            cout << "JBe - Error in mfcv::numVehicles, need to have the same entries as the number of vehicles" << endl;
+            ASSERT2(0, "JBe - Error in mfcv::numVehicles, need to have the same entries as the number of vehicles -");
         }
 
         printVehTraffic();
@@ -829,7 +829,7 @@ void BaseWaveApplLayer::printVehTraffic() {
     }
 }
 
-void BaseWaveApplLayer::colorCarryMessageVehDist(unordered_map <string, WaveShortMessage> bufferOfMessages) {
+void BaseWaveApplLayer::colorCarryMessageMfcv(unordered_map <string, WaveShortMessage> bufferOfMessages) {
     if (!bufferOfMessages.empty()) {
         unordered_map <string, WaveShortMessage>::iterator itMessage = bufferOfMessages.begin();
         for (unsigned int i = 0; i < bufferOfMessages.size(); i++) {
@@ -889,7 +889,7 @@ void BaseWaveApplLayer::selectVehGenerateMessage() {
 
                 if (trySelectVeh > (SvehScenario.size() * 4)) {
                     cout << endl << "JBe - Error loop in select vehicle to generate message, class BaseWaveApplLayer.cc";
-                    cout << endl << "trySelectVeh: " << trySelectVeh << " vehDist::vehScenario.size(): " << SvehScenario.size() << endl;
+                    cout << endl << "trySelectVeh: " << trySelectVeh << " mfcv::vehScenario.size(): " << SvehScenario.size() << endl;
                     ASSERT2(0, "JBe - Error loop in select vehicle to generate message -");
                 }
             }
@@ -1179,7 +1179,7 @@ void BaseWaveApplLayer::printVehTrafficMethodCheck() {
         myfile.close();
     }
 }
-//######################################### vehDist - end #######################################################################
+//######################################### MFCV - end ###########################################################################
 
 //WaveShortMessage*  BaseWaveApplLayer::prepareWSM(string name, int lengthBits, t_channel channel, int priority, int rcvId, int serial) {
 WaveShortMessage*  BaseWaveApplLayer::prepareWSM(string name, int lengthBits, t_channel channel, int priority, unsigned int rcvId, int serial) {
@@ -1311,7 +1311,7 @@ void BaseWaveApplLayer::sendLocalSummaryVector(unsigned int rcvId) {
 
             epidemicLocalMessageBuffer.erase(idMessage);
             epidemicLocalSummaryVector.erase(idMessage);
-            //colorCarryMessageVehDist(epidemicLocalMessageBuffer);
+            //colorCarryMessageMfcv(epidemicLocalMessageBuffer);
         } else {
             countMessage--;
             itMsg++;
@@ -1645,13 +1645,13 @@ void BaseWaveApplLayer::receivedOnDataEpidemic(WaveShortMessage* wsm) {
 
                             epidemicLocalMessageBuffer.erase(idMessage);
                             epidemicLocalSummaryVector.erase(idMessage);
-                            //colorCarryMessageVehDist(epidemicLocalMessageBuffer);
+                            //colorCarryMessageMfcv(epidemicLocalMessageBuffer);
                         }
 
                         epidemicLocalMessageBuffer.insert(make_pair(wsm->getGlobalMessageIdentificaton(), *wsm));
                         epidemicLocalSummaryVector.insert(make_pair(wsm->getGlobalMessageIdentificaton(), true));
                         msgBufferUse++;
-                        //colorCarryMessageVehDist(epidemicLocalMessageBuffer);
+                        //colorCarryMessageMfcv(epidemicLocalMessageBuffer);
                     }
 
                     //cout << "After message processing" << endl;
@@ -1749,7 +1749,7 @@ void BaseWaveApplLayer::handleSelfMsg(cMessage* msg) {
 
                 epidemicLocalMessageBuffer.erase(idMessage);
                 epidemicLocalSummaryVector.erase(idMessage);
-                //colorCarryMessageVehDist(epidemicLocalMessageBuffer);
+                //colorCarryMessageMfcv(epidemicLocalMessageBuffer);
             }
 
             epidemicMessageSend.erase(idMessage);
