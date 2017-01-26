@@ -569,12 +569,12 @@ string mfcv::neighborWithShortestDistanceToTarge(string idMessage) {
     string category, neighborCategory, neighborId;
     Coord targetPos, senderPosPrevious, senderPosNow;
     shortestDistance sD;
-    unsigned short int meetFirstCategory, meetSecondCategory;
+    unsigned short int meet1Cat, meet2Cat, meet3Cat;
     double neighborDistanceBefore, neighborDistanceNow;
     unordered_map <string, shortestDistance> vehShortestDistanceToTarget;
     unordered_map <string, WaveShortMessage>::iterator itBeaconNeighbors;
 
-    meetFirstCategory = meetSecondCategory = 0;
+    meet1Cat = meet2Cat = meet3Cat = 0;
     bool insert;
 
     double localVehDistanceNow = traci->getDistance(curPosition, targetPos, false);
@@ -593,10 +593,17 @@ string mfcv::neighborWithShortestDistanceToTarge(string idMessage) {
                     if (neighborCategory.compare("B") == 0) {
                         cout << "\n\n" << source << " whit neighbor: "<< neighborId << " category: " << neighborCategory;
                         cout << " msg to: " << messagesBufferMfcv[idMessage].getTarget() << " with pos: " << targetPos;
-                        if (itBeaconNeighbors->second.getBufferMessageOnlyDeliveryFull() == 0) {
+                        if (!itBeaconNeighbors->second.getBufferMessageOnlyDeliveryFull()) {
                             msgOnlyDeliveryFunctionResult = busRouteDiffTarget(neighborId, targetPos, localVehDistanceNow);
                             if (msgOnlyDeliveryFunctionResult == 1) {
                                 cout << "send by busTestEdgeRoute to "<< neighborId << "\n\n";
+                                ScountMessageOnlyDeliveryBus++;
+
+                                if ((meet1Cat + meet2Cat + meet3Cat) <= 1) {
+                                    ScountMeetJustOneCategory++;
+                                } else if ((meet1Cat + meet2Cat + meet3Cat) == 2) {
+                                    ScountMeetTwoCategory++;
+                                }
                                 return neighborId;
                             }
                             cout << "\n\n";
@@ -630,18 +637,19 @@ string mfcv::neighborWithShortestDistanceToTarge(string idMessage) {
                     sD.speedVeh = itBeaconNeighbors->second.getSenderSpeed();
                     sD.rateTimeToSendVeh = itBeaconNeighbors->second.getRateTimeToSend();
 
-                    if (sD.categoryVeh.compare("P") == 0) { // Private car
+                    if (sD.categoryVeh.compare(SfirstCategoryPrivateCar) == 0) { // Private car
                         sD.decisionValueDistanceCategory = sD.distanceToTargetNow; // equal to * 1
-                        meetFirstCategory = 1;
-                    } else if (sD.categoryVeh.compare("B") == 0) { // Bus
+                        meet1Cat = 1;
+                    } else if (sD.categoryVeh.compare(SsecondCategoryBus) == 0) { // Bus
                         if (msgOnlyDeliveryFunctionResult == 2) {
                             sD.decisionValueDistanceCategory = sD.distanceToTargetNow * 0.5;
                         } else {
                             sD.decisionValueDistanceCategory = sD.distanceToTargetNow;
                         }
-                        meetSecondCategory = 1;
-                    } else if (sD.categoryVeh.compare("T") == 0) { // Taxi
-                            sD.decisionValueDistanceCategory = sD.distanceToTargetNow * 0.7;
+                        meet2Cat = 1;
+                    } else if (sD.categoryVeh.compare(SthirdCategoryTaxi) == 0) { // Taxi
+                        sD.decisionValueDistanceCategory = sD.distanceToTargetNow * 0.7;
+                        meet3Cat = 1;
                     } else {
                         cout << endl << "JBe - Error category unknown - " << source << " category: " << sD.categoryVeh << endl;
                         cout << "\nSfirstCategoryPrivateCar: " << SfirstCategoryPrivateCar;
@@ -664,23 +672,17 @@ string mfcv::neighborWithShortestDistanceToTarge(string idMessage) {
                 } else {
                     cout << "\n\n    " << neighborId << " not insert in the vehShortestDistanceToTarget\n\n";
                 }
-
-                if ((meetFirstCategory == 1) && (meetSecondCategory == 1)) {
-                    ScountTwoCategoryN++;
-                    //cout << endl << "Meet of vehicles of two categories" << endl;
-                } else if ((meetFirstCategory == 1) || (meetSecondCategory == 1)) {
-                    ScountMeetN++;
-                }
             }
         }
     }
 
-    printVehShortestDistanceToTarget(vehShortestDistanceToTarget, idMessage);
-
-    if (msgOnlyDeliveryFunctionResult == 2) {
-        cout << "here123";
-        //exit(9);
+    if ((meet1Cat + meet2Cat + meet3Cat) == 1) {
+        ScountMeetJustOneCategory++;
+    } else if ((meet1Cat + meet2Cat + meet3Cat) == 2) {
+        ScountMeetTwoCategory++;
     }
+
+    printVehShortestDistanceToTarget(vehShortestDistanceToTarget, idMessage);
 
     if (SusePathHistory) {
         if (vehShortestDistanceToTarget.empty()) {
