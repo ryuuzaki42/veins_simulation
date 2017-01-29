@@ -24,23 +24,11 @@
 #
 # Last update: 29/01/2017
 #
-echo -e "\nThis script grep values froma result from a file\n"
+echo -e "\nThis script grep values from a result from a file"
 
-tmpFile=`mktemp` # Temp file if was used a pipe (|)
-cat > $tmpFile # Write the pipe content a tmp file
-
-exec </dev/tty >/dev/tty # Set input back to default (keyboard)
-
-sizeTmpFile=`ls -l $tmpFile | cut -d ' ' -f5` # tmpFile size
-
-if [ "$sizeTmpFile" -gt '0' ]; then
-    fileName=$tmpFile
-else
-    fileName=$1
-fi
-
+fileName=$1
 if [ "$fileName" == '' ]; then
-    echo "Error - need pass the file name to grep"
+    echo -e "\nError - need pass the file name to grep\n"
 else
     op1="Total of messages received:"
     op2="Total count copy message received:"
@@ -74,16 +62,15 @@ else
     grepValue=`echo ${!opTmp}`
 
     if [ "$grepValue" == '' ]; then
-        echo -e "\nError - option \"$optionInput\" is unknown"
+        echo -e "\nError - option \"$optionInput\" is unknown\n"
     else
-        echo -e "\n\nGrep the value: \"${!opTmp}\""
+        echo -e "\nGrep the value: \"${!opTmp}\""
         grepResult=`cat $fileName | grep "$grepValue"`
 
         echo "$grepResult"
 
-        echo -e "\n\nValues more clean:"
+        echo -e "\nValues more clean:"
         echo "$grepResult" | rev | cut -d ':' -f1 | rev | cut -d ' ' -f2-
     fi
     echo
 fi
-rm $tmpFile # Delete the tmpFile
