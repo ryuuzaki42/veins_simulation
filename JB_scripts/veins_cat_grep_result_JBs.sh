@@ -22,11 +22,23 @@
 #
 # Script: Grep result from a file
 #
-# Last update: 17/12/2016
+# Last update: 29/01/2017
 #
 echo -e "\nThis script grep values froma result from a file\n"
 
-fileName=$1
+tmpFile=`mktemp` # Temp file if was used a pipe (|)
+cat > $tmpFile # Write the pipe content a tmp file
+
+exec </dev/tty >/dev/tty # Set input back to default (keyboard)
+
+sizeTmpFile=`ls -l $tmpFile | cut -d ' ' -f5` # tmpFile size
+
+if [ "$sizeTmpFile" -gt '0' ]; then
+    fileName=$tmpFile
+else
+    fileName=$1
+fi
+
 if [ "$fileName" == '' ]; then
     echo "Error - need pass the file name to grep"
 else
@@ -43,7 +55,7 @@ else
 
     optionInput=$2
     if [ "$optionInput" == '' ]; then
-        echo "RSU"
+        echo -e "\nRSU"
         echo "    1 - $op1"
         echo "    2 - $op2"
         echo "    3 - $op3"
@@ -74,3 +86,4 @@ else
     fi
     echo
 fi
+rm $tmpFile # Delete the tmpFile
