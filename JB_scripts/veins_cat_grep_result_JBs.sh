@@ -37,9 +37,14 @@ else
     op5="Total average first hops to received:"
     op6="Total average hops to received:"
     op7="counttoDeliveryMsg:"
+    op8="counttoDeliveryMsgUnicID:"
+    op9="msgUseOnlyDeliveryBufferGeneral total:"
+    op10="msgUseOnlyDeliveryBufferGeneral avg:"
 
-    op8="Final count messages drop:"
-    op9="Final average buffer use:"
+    op11="Final count messages drop:"
+    op12="Final average buffer use:"
+    op13="Final buffer use total general:"
+
 
     optionInput=$2
     if [ "$optionInput" == '' ]; then
@@ -51,21 +56,32 @@ else
         echo "    5 - $op5"
         echo "    6 - $op6"
         echo "    7 - $op7"
-        echo "Veh"
         echo "    8 - $op8"
         echo "    9 - $op9"
+        echo "    10 - $op10"
+
+        echo "Veh"
+        echo "    11 - $op11"
+        echo "    12 - $op12"
+        echo "    13 - $op13"
+        echo "    99 - You insert the value"
         echo -n "Wich value you want grep: "
         read optionInput
     fi
 
-    opTmp="op$optionInput"
-    grepValue=`echo ${!opTmp}`
+    if [ "$optionInput" -ne "99" ]; then
+        opTmp="op$optionInput"
+        grepValue=`echo ${!opTmp}`
+    else
+        echo -en "\nInsert the value to be used in the grep: "
+        read grepValue
+    fi
 
     if [ "$grepValue" == '' ]; then
         echo -e "\nError - option \"$optionInput\" is unknown\n"
     else
         echo -e "\nGrep the value: \"${!opTmp}\""
-        grepResult=`cat $fileName | grep "$grepValue"`
+        grepResult=`cat $fileName | grep -E "$grepValue|## Working in the folder.*run_0" | sed 's/## Working in the folder.*run_0//g'`
 
         echo "$grepResult"
 
