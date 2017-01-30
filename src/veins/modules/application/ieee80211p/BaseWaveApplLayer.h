@@ -137,7 +137,7 @@ class BaseWaveApplLayer : public BaseApplLayer {
         Coord curPosition;
 
         string source, target;
-        static int ScountToDeliveryMsg;
+        static int ScountToDeliveryMsg, ScountToDeliveryMsgUnicID;
         static unsigned int SbufferMessageOnlyDeliveryLimit;
         int countToDeliveryMsgLocal; // Count of message toDelivery received by one rsu
 
@@ -209,6 +209,7 @@ class BaseWaveApplLayer : public BaseApplLayer {
           unsigned short int minHop, maxHop, sumHops, firstHopReceived;
           unsigned short int countFirstCategoryPrivateCar, countSecondCategoryBus, countThirdCategoryTaxi, countCopyMessage;
           simtime_t sumTimeRecived, timeGenerate;
+          bool receivedBusOnlyDelivery;
         };
         map <string, struct messages> messagesReceivedRSU;
 

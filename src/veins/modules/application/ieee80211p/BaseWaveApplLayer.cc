@@ -242,7 +242,7 @@ void BaseWaveApplLayer::generalInitializeVariables_executionByExpNumberMfcv() {
         SthirdCategoryTaxi = 'T';
 
         SbufferMessageOnlyDeliveryLimit = par("bufferMessageOnlyDeliveryLimit");
-        ScountToDeliveryMsg = SmsgUseOnlyDeliveryBufferGeneral = 0;
+        ScountToDeliveryMsg = ScountToDeliveryMsgUnicID = SmsgUseOnlyDeliveryBufferGeneral = 0;
         SsimulationTimeLimit = atoi(ev.getConfig()->getConfigValue("sim-time-limit"));
         SmessageBufferSize = par("messageBufferSize"); // Define the maximum buffer size (in number of messages) that a node is willing to allocate
         SmessageHopLimit = par("messageHopLimit").longValue();
@@ -673,6 +673,7 @@ void BaseWaveApplLayer::printCountBeaconMessagesDropVeh() {
         myfile << textTmp + "Final count message dropped by buffer: " << SmsgDroppedbyBuffer;
         myfile << textTmp + "Final count message dropped by copy (Only valid if copy of message are not allowed): " << SmsgDroppedbyCopy;
         myfile << textTmp + "Final count message dropped by ttl: " << SmsgDroppedbyTTL;
+        myfile << textTmp + "Final buffer use total general: " << SmsgBufferUseGeneral;
         myfile << textTmp + "Final average buffer use: " << double(SmsgBufferUseGeneral)/ScountVehicleAll;
         myfile << textTmp;
         myfile << textTmp + "Count of vehicle in the scenario (all time): " << ScountVehicleAll;
@@ -927,7 +928,7 @@ void BaseWaveApplLayer::insertMessageDropVeh(string messageId, unsigned short in
 void BaseWaveApplLayer::printCountMessagesReceivedRSU() {
     myfile.open(SfileMessagesCountRsu, std::ios_base::app);
 
-    string textTmp = "Exp: " + to_string(SexpNumber) + " expSendbyDSCR: " + to_string(SexpSendbyDSCR) + " ### " + source + " ";
+    string textTmp = "\nExp: " + to_string(SexpNumber) + " expSendbyDSCR: " + to_string(SexpSendbyDSCR) + " ### " + source + " ";
     if (!messagesReceivedRSU.empty()) {
         SimTime avgGeneralTimeMessageReceived;
         unsigned int countFirstCategoryPrivateCar, countSecondCategoryBus, countThirdCategoryTaxi;
@@ -968,6 +969,10 @@ void BaseWaveApplLayer::printCountMessagesReceivedRSU() {
             countSecondCategoryBus += itMessagesReceived->second.countSecondCategoryBus;
             myfile << "Count third (" << SthirdCategoryTaxi << ") category: " << itMessagesReceived->second.countThirdCategoryTaxi << endl;
             countThirdCategoryTaxi += itMessagesReceived->second.countThirdCategoryTaxi;
+
+            if (itMessagesReceived->second.receivedBusOnlyDelivery) {
+                ScountToDeliveryMsgUnicID++;
+            }
         }
 
         unsigned short int messageCountHopZero = 0;
@@ -994,95 +999,96 @@ void BaseWaveApplLayer::printCountMessagesReceivedRSU() {
 
         double percentMsgReceived = double(messagesReceivedRSU.size() * 100 )/(SmessageId - 1);
 
-        myfile << endl << endl << textTmp << endl;
+        myfile << endl << textTmp;
         myfile << textTmp << "Count messages received: " << messagesReceivedRSU.size();
-        myfile << " of " << (SmessageId - 1) << " or " << percentMsgReceived << " % received" << endl;
+        myfile << " of " << (SmessageId - 1) << " or " << percentMsgReceived << " % received";
         SresultMsgReceived.totalMessageReceived += messagesReceivedRSU.size();
 
-        myfile << textTmp << endl;
-        myfile << textTmp << "Count copy message received: " << avgGeneralCopyMessageReceived << endl;
+        myfile << textTmp;
+        myfile << textTmp << "Count copy message received: " << avgGeneralCopyMessageReceived;
         SresultMsgReceived.totalCopyReceived += avgGeneralCopyMessageReceived;
 
-        myfile << textTmp << "Count messages with hop count equal of zero received: " << messageCountHopZero << endl;
+        myfile << textTmp << "Count messages with hop count equal of zero received: " << messageCountHopZero;
         SresultMsgReceived.messageHopEqualZero += messageCountHopZero;
 
-        myfile << textTmp << "Count messages with hop count different of zero Received: " << (messagesReceivedRSU.size() - messageCountHopZero) << endl;
+        myfile << textTmp << "Count messages with hop count different of zero Received: " << (messagesReceivedRSU.size() - messageCountHopZero);
         SresultMsgReceived.messageHopDiffZero += (messagesReceivedRSU.size() - messageCountHopZero);
 
-        myfile << textTmp << endl;
-        myfile << textTmp << "Average time to receive: " << avgGeneralTimeMessageReceived << endl;
+        myfile << textTmp;
+        myfile << textTmp << "Average time to receive: " << avgGeneralTimeMessageReceived;
         SresultMsgReceived.avgTimeMessageReceived += avgGeneralTimeMessageReceived.dbl();
 
         avgGeneralCopyMessageReceived /= messagesReceivedRSU.size();
-        myfile << textTmp << "Average copy received: " << avgGeneralCopyMessageReceived << endl;
+        myfile << textTmp << "Average copy received: " << avgGeneralCopyMessageReceived;
         SresultMsgReceived.avgCopyMessageReceived += avgGeneralCopyMessageReceived;
 
-        myfile << textTmp << "Average first hops to received: " << avgGeneralFirstHopsReceived << endl;
+        myfile << textTmp << "Average first hops to received: " << avgGeneralFirstHopsReceived;
         SresultMsgReceived.avgHopsFirstReceived += avgGeneralFirstHopsReceived;
 
-        myfile << textTmp << "Average hops to received: " << avgGeneralHopsMessage << endl;
+        myfile << textTmp << "Average hops to received: " << avgGeneralHopsMessage;
         SresultMsgReceived.avgHopsMessage += avgGeneralHopsMessage;
 
-        myfile << textTmp << endl;
-        myfile << textTmp << "counttoDeliveryMsgLocal: " << countToDeliveryMsgLocal << endl;
+        myfile << textTmp;
+        myfile << textTmp << "counttoDeliveryMsgLocal: " << countToDeliveryMsgLocal;
 
-        myfile << textTmp << endl;
-        myfile << textTmp << "Count hops by category " << SfirstCategoryPrivateCar << " general: " << countFirstCategoryPrivateCar << endl;
+        myfile << textTmp;
+        myfile << textTmp << "Count hops by category " << SfirstCategoryPrivateCar << " general: " << countFirstCategoryPrivateCar;
         SresultMsgReceived.countFirstCategoryPrivateCar += countFirstCategoryPrivateCar;
 
-        myfile << textTmp << "Count hops by category " << SsecondCategoryBus << " general: " << countSecondCategoryBus << endl;
+        myfile << textTmp << "Count hops by category " << SsecondCategoryBus << " general: " << countSecondCategoryBus;
         SresultMsgReceived.countSecondCategoryBus += countSecondCategoryBus;
 
-        myfile << textTmp << "Count hops by category " << SthirdCategoryTaxi << " general: " << countThirdCategoryTaxi << endl;
+        myfile << textTmp << "Count hops by category " << SthirdCategoryTaxi << " general: " << countThirdCategoryTaxi;
         SresultMsgReceived.countThirdCategoryTaxi += countThirdCategoryTaxi;
     } else {
-        myfile << endl << endl << textTmp << endl;
-        myfile << textTmp << "Count messages received: " << 0 << endl;
-        myfile << textTmp << "messagesReceived from " << source << " is empty" << endl;
+        myfile << endl << textTmp;
+        myfile << textTmp << "Count messages received: " << 0;
+        myfile << textTmp << "messagesReceived from " << source << " is empty";
     }
 
     if (SrsuPositions.size() == 1) { // SnumVehicles.size() == 0
-        string textTmp = "Exp: " + to_string(SexpNumber) + " expSendbyDSCR: " + to_string(SexpSendbyDSCR) + " ### rsu[*] ";
-        myfile << endl << endl << textTmp << endl;
+        textTmp = "\nExp: " + to_string(SexpNumber) + " expSendbyDSCR: " + to_string(SexpSendbyDSCR) + " ### rsu[*] ";
+        myfile << endl << textTmp;
         myfile << textTmp << "Total of messages received: " << SresultMsgReceived.totalMessageReceived;
         double percentMsgReceived = double(SresultMsgReceived.totalMessageReceived * 100 )/(SmessageId - 1);
-        myfile << " of " << (SmessageId - 1) << " or " << percentMsgReceived << " % received" << endl;
+        myfile << " of " << (SmessageId - 1) << " or " << percentMsgReceived << " % received";
         myfile << textTmp << endl;
-        myfile << textTmp << "Total count copy message received: " << SresultMsgReceived.totalCopyReceived << endl;
-        myfile << textTmp << "Total count messages with hop count equal of zero received: " << SresultMsgReceived.messageHopEqualZero << endl;
-        myfile << textTmp << "Total count messages with hop count different of zero Received: " << SresultMsgReceived.messageHopDiffZero << endl;
-        myfile << textTmp << endl;
+        myfile << textTmp << "Total count copy message received: " << SresultMsgReceived.totalCopyReceived;
+        myfile << textTmp << "Total count messages with hop count equal of zero received: " << SresultMsgReceived.messageHopEqualZero;
+        myfile << textTmp << "Total count messages with hop count different of zero Received: " << SresultMsgReceived.messageHopDiffZero;
+        myfile << textTmp;
         myfile << textTmp << "Total average time to receive: " << SresultMsgReceived.avgTimeMessageReceived/SresultMsgReceived.countRsuTarget << endl;
         myfile << textTmp << "Total average copy received: " << SresultMsgReceived.avgCopyMessageReceived/SresultMsgReceived.countRsuTarget << endl;
         myfile << textTmp << "Total average first hops to received: " << SresultMsgReceived.avgHopsFirstReceived/SresultMsgReceived.countRsuTarget << endl;
         myfile << textTmp << "Total average hops to received: " << SresultMsgReceived.avgHopsMessage/SresultMsgReceived.countRsuTarget << endl;
-        myfile << textTmp << endl;
+        myfile << textTmp;
         myfile << textTmp << "Total count hops by category " << SfirstCategoryPrivateCar << " general: " << SresultMsgReceived.countFirstCategoryPrivateCar << endl;
         myfile << textTmp << "Total count hops by category " << SsecondCategoryBus << " general: " << SresultMsgReceived.countSecondCategoryBus << endl;
         myfile << textTmp << "Total count hops by category " << SthirdCategoryTaxi << " general: " << SresultMsgReceived.countThirdCategoryTaxi << endl;
-        myfile << textTmp << endl;
+        myfile << textTmp;
         myfile << textTmp << "counttoDeliveryMsg: " << ScountToDeliveryMsg << endl;
-        myfile << textTmp << endl;
+        myfile << textTmp << "- has at least one copy received by bus - counttoDeliveryMsgUnicID: " << ScountToDeliveryMsgUnicID;
+        myfile << textTmp;
         myfile << textTmp << "## Count of vehicle by category in the scenario\n";
         for (auto& x: SvehCategoryCount) {
-            myfile << textTmp << "    Category: " << x.first << " count: " << x.second << endl;
+            myfile << textTmp << "    Category: " << x.first << " count: " << x.second;
         }
 
-        myfile << textTmp << endl;
+        myfile << textTmp;
         myfile << textTmp << "msgUseOnlyDeliveryBufferGeneral total: " << SmsgUseOnlyDeliveryBufferGeneral;
 
         if (ScountVehicleBus == 0) {
             ScountVehicleBus = 1;
             if (SmsgUseOnlyDeliveryBufferGeneral != 0) {
-                cout << "JBe - (msgUseOnlyDeliveryBufferGeneral != 0) with (ScountVehicleBus == 0) at: " << simTime() << endl;
+                cout << "JBe - (msgUseOnlyDeliveryBufferGeneral != 0) with (ScountVehicleBus == 0) at: " << simTime();
                 ASSERT2(0, "JBe - (msgUseOnlyDeliveryBufferGeneral != 0) with (ScountVehicleBus == 0) - ");
             }
         }
         myfile << textTmp << "msgUseOnlyDeliveryBufferGeneral avg: " << double(SmsgUseOnlyDeliveryBufferGeneral)/ScountVehicleBus;
-        myfile << textTmp << endl;
+        myfile << textTmp;
 
-        myfile << textTmp << endl;
-        myfile << textTmp << "This simulation run terminated correctly" << endl;
+        myfile << textTmp;
+        myfile << textTmp << "This simulation run terminated correctly";
         myfile << textTmp << endl;
     }
 
@@ -1118,6 +1124,11 @@ void BaseWaveApplLayer::messagesReceivedMeasuringRSU(WaveShortMessage* wsm) {
         itMessagesReceived->second.countFirstCategoryPrivateCar += count(wsmData.begin(), wsmData.end(), SfirstCategoryPrivateCar[0]);
         itMessagesReceived->second.countSecondCategoryBus += count(wsmData.begin(), wsmData.end(), SsecondCategoryBus[0]);
         itMessagesReceived->second.countThirdCategoryTaxi += count(wsmData.begin(), wsmData.end(), SthirdCategoryTaxi[0]);
+
+        if (wsm->getOnlyDelivery()) {
+            itMessagesReceived->second.receivedBusOnlyDelivery = true;
+        }
+
     } else {
         struct messages msg;
         msg.firstSource = wsm->getSource();
@@ -1135,6 +1146,8 @@ void BaseWaveApplLayer::messagesReceivedMeasuringRSU(WaveShortMessage* wsm) {
         msg.countFirstCategoryPrivateCar = count(wsmData.begin(), wsmData.end(), SfirstCategoryPrivateCar[0]);
         msg.countSecondCategoryBus = count(wsmData.begin(), wsmData.end(), SsecondCategoryBus[0]);
         msg.countThirdCategoryTaxi = count(wsmData.begin(), wsmData.end(), SthirdCategoryTaxi[0]);
+
+        msg.receivedBusOnlyDelivery = wsm->getOnlyDelivery(); // True wsm->getOnlyDelivery() meaning that was OnlyDeliveryBus
 
         messagesReceivedRSU.insert(make_pair(wsm->getGlobalMessageIdentificaton(), msg));
     }
