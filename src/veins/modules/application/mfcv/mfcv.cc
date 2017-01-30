@@ -565,6 +565,22 @@ string mfcv::neighborWithShortestDistanceToTargeOnlyDelivery(string idMessage) {
     }
     return source;
 }
+
+bool mfcv::has3inSexpSendbyDSCR() { //true if has 3 (3 meaning category in the experiment)
+    switch (SexpSendbyDSCR) {
+        case 13: return true;
+        case 23: return true;
+        case 34: return true;
+
+        case 123: return true;
+        case 134: return true;
+        case 234: return true;
+
+        case 1234: return true;
+    }
+    return false;
+}
+
 string mfcv::neighborWithShortestDistanceToTarge(string idMessage) {
     string category, neighborCategory, neighborId;
     Coord targetPos, senderPosPrevious, senderPosNow;
@@ -589,7 +605,7 @@ string mfcv::neighborWithShortestDistanceToTarge(string idMessage) {
             if (!messagesSendLog.empty() && (messagesSendLog[idMessage].find(neighborId) != std::string::npos)) {
                 cout << source << " has been send a message " << idMessage << " to " << neighborId << endl;
             } else {
-                if (SexpSendbyDSCR == 13) {
+                if(has3inSexpSendbyDSCR()) {
                     if (neighborCategory.compare("B") == 0) {
                         cout << "\n\n" << source << " whit neighbor: "<< neighborId << " category: " << neighborCategory;
                         cout << " msg to: " << messagesBufferMfcv[idMessage].getTarget() << " with pos: " << targetPos;
@@ -642,13 +658,13 @@ string mfcv::neighborWithShortestDistanceToTarge(string idMessage) {
                         meet1Cat = 1;
                     } else if (sD.categoryVeh.compare(SsecondCategoryBus) == 0) { // Bus
                         if (msgOnlyDeliveryFunctionResult == 2) {
-                            sD.decisionValueDistanceCategory = sD.distanceToTargetNow * 0.5;
+                            sD.decisionValueDistanceCategory = sD.distanceToTargetNow * 0.9;
                         } else {
                             sD.decisionValueDistanceCategory = sD.distanceToTargetNow;
                         }
                         meet2Cat = 1;
                     } else if (sD.categoryVeh.compare(SthirdCategoryTaxi) == 0) { // Taxi
-                        sD.decisionValueDistanceCategory = sD.distanceToTargetNow * 0.7;
+                        sD.decisionValueDistanceCategory = sD.distanceToTargetNow * 0.95;
                         meet3Cat = 1;
                     } else {
                         cout << endl << "JBe - Error category unknown - " << source << " category: " << sD.categoryVeh << endl;
@@ -761,7 +777,7 @@ string mfcv::selectVehIdWithSmallValueBySexpSendbyDSCR(unordered_map <string, sh
                     break;
                 case 13: // DistanceCategory
                     valueToTest = itShortestDistance->second.decisionValueDistanceCategory;
-                    //valueToTest = itShortestDistance->second.distanceToTargetNow;
+                    //valueToTest = itShortestDistance->second.distanceToTargetNow; TODO test
                     break;
 ////######################################################################################################
 //              case 14:   DistanceRateTimeToSend
@@ -1040,10 +1056,8 @@ unsigned short int mfcv::busRouteDiffTarget(string busID, Coord targetPos, doubl
 
         if (smallDist <= 250) {
             return 1; // Send to bus as onlyDelivery
-        } else { // Small distance less than 50% of now to the target
-            if (smallDist <= (localVehDistanceNow/2)) {
-                return 2; // Use bus values as 0.5
-            }
+        } else if (smallDist <= (localVehDistanceNow * 0.8)) { // Small distance less than 80% of now to the target
+            return 2; // Use bus values as 0.9
         }
     }
     return 0; // Equal a private car

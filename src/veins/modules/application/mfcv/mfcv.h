@@ -62,6 +62,7 @@ class mfcv : public BaseWaveApplLayer {
         void busPosInsertByTimeMap();
         void saveBusPositionFile();
         void busPosLoadFromFile();
+        bool has3inSexpSendbyDSCR();
 
         void loadLaneNames();
         void printPlannedRoadIds(list<string> plannedRoadIds);
@@ -128,7 +129,7 @@ vector <string> BaseWaveApplLayer::SlaneNameLoaded;
 unordered_map <string, struct BaseWaveApplLayer::busPosByTime> BaseWaveApplLayer::SposTimeBus;
 unordered_map <string, struct BaseWaveApplLayer::busPosByTime> BaseWaveApplLayer::SposTimeBusLoaded;
 unordered_map <string, string> BaseWaveApplLayer::SrouteIDVehID;
-int BaseWaveApplLayer::ScountToDeliveryMsg;
+int BaseWaveApplLayer::ScountToDeliveryMsg, BaseWaveApplLayer::ScountToDeliveryMsgUnicID;
 unsigned int BaseWaveApplLayer::SbufferMessageOnlyDeliveryLimit, BaseWaveApplLayer::SmsgUseOnlyDeliveryBufferGeneral;
 
 string BaseWaveApplLayer::SfileMessagesUnicastVeh, BaseWaveApplLayer::SfileMessagesDropVeh;
