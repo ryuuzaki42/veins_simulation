@@ -116,6 +116,8 @@ int BaseWaveApplLayer::ScountMesssageDrop, BaseWaveApplLayer::ScountMeetJustOneC
 int BaseWaveApplLayer::ScountMeetTotal, BaseWaveApplLayer::ScountVehicleAll, BaseWaveApplLayer::SmessageId, BaseWaveApplLayer::ScountVehicleTaxi;
 int BaseWaveApplLayer::ScountBeaconSend, BaseWaveApplLayer::ScountSummaryVectorSend, BaseWaveApplLayer::ScountRequestMessageVectorSend;
 
+double BaseWaveApplLayer::SbusValueSend, BaseWaveApplLayer::StaxiValueSend;
+
 unsigned short int BaseWaveApplLayer::SbeaconTypeInitialize;
 unsigned short int BaseWaveApplLayer::SrepeatNumber, BaseWaveApplLayer::SexpNumber, BaseWaveApplLayer::SexpSendbyDSCR;
 unsigned short int BaseWaveApplLayer::ScountGenerateMessage, BaseWaveApplLayer::SttlMessage, BaseWaveApplLayer::SvehTimeLimitToAcceptGenerateMgs;
