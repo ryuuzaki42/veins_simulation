@@ -667,7 +667,7 @@ void BaseWaveApplLayer::printCountBeaconMessagesDropVeh() {
     SmsgBufferUseGeneral += msgBufferUse;
 
     if (SnumVehicles.size() == 1) {
-        string textTmp = "\nExp: " + to_string(SexpNumber) + " ###veh ";
+        string textTmp = "\nExp: " + to_string(SexpNumber) + " expSendbyDSCR: " + to_string(SexpSendbyDSCR) + " run " + to_string(SrepeatNumber) + " ###veh ";
 
         myfile << textTmp + "Final count messages drop: " << ScountMesssageDrop;
         myfile << textTmp + "Final count message dropped by buffer: " << SmsgDroppedbyBuffer;
@@ -677,6 +677,7 @@ void BaseWaveApplLayer::printCountBeaconMessagesDropVeh() {
         myfile << textTmp + "Final average buffer use: " << double(SmsgBufferUseGeneral)/ScountVehicleAll;
         myfile << textTmp;
         myfile << textTmp + "Count of vehicle in the scenario (all time): " << ScountVehicleAll;
+        myfile << textTmp + "Count of private car in the scenario (all time): " << (ScountVehicleAll - (ScountVehicleBus + ScountVehicleTaxi));
         myfile << textTmp + "Count of vehicle Bus in the scenario (all time): " << ScountVehicleBus;
         myfile << textTmp + "Count of vehicle Taxi in the scenario (all time): " << ScountVehicleTaxi;
         myfile << textTmp;
@@ -713,7 +714,7 @@ void BaseWaveApplLayer::toFinishVeh() {
 
     if (SvehCategoryCount.find(vehCategory) == SvehCategoryCount.end()) {
         SvehCategoryCount.insert(make_pair(vehCategory, 1));
-    }else {
+    } else {
         SvehCategoryCount[vehCategory]++;
     }
 
@@ -928,7 +929,7 @@ void BaseWaveApplLayer::insertMessageDropVeh(string messageId, unsigned short in
 void BaseWaveApplLayer::printCountMessagesReceivedRSU() {
     myfile.open(SfileMessagesCountRsu, std::ios_base::app);
 
-    string textTmp = "\nExp: " + to_string(SexpNumber) + " expSendbyDSCR: " + to_string(SexpSendbyDSCR) + " ### " + source + " ";
+    string textTmp = "\nExp: " + to_string(SexpNumber) + " expSendbyDSCR: " + to_string(SexpSendbyDSCR) + " run " + to_string(SrepeatNumber) + " ### " + source + " ";
     if (!messagesReceivedRSU.empty()) {
         SimTime avgGeneralTimeMessageReceived;
         unsigned int countFirstCategoryPrivateCar, countSecondCategoryBus, countThirdCategoryTaxi;
@@ -1046,8 +1047,8 @@ void BaseWaveApplLayer::printCountMessagesReceivedRSU() {
         myfile << textTmp << "messagesReceived from " << source << " is empty";
     }
 
-    if (SrsuPositions.size() == 1) { // SnumVehicles.size() == 0
-        textTmp = "\nExp: " + to_string(SexpNumber) + " expSendbyDSCR: " + to_string(SexpSendbyDSCR) + " ### rsu[*] ";
+    if (SrsuPositions.size() == 1) {
+        textTmp = "\nExp: " + to_string(SexpNumber) + " expSendbyDSCR: " + to_string(SexpSendbyDSCR) + " run " + to_string(SrepeatNumber) + " ### rsu[*] ";
         myfile << endl << textTmp;
         myfile << textTmp << "Total of messages received: " << SresultMsgReceived.totalMessageReceived;
         double percentMsgReceived = double(SresultMsgReceived.totalMessageReceived * 100 )/(SmessageId - 1);
@@ -1078,7 +1079,7 @@ void BaseWaveApplLayer::printCountMessagesReceivedRSU() {
         myfile << textTmp << "msgUseOnlyDeliveryBufferGeneral total: " << SmsgUseOnlyDeliveryBufferGeneral;
 
         if (ScountVehicleBus == 0) {
-            ScountVehicleBus = 1;
+            ScountVehicleBus = 1; // To not do division by zero
             if (SmsgUseOnlyDeliveryBufferGeneral != 0) {
                 cout << "JBe - (msgUseOnlyDeliveryBufferGeneral != 0) with (ScountVehicleBus == 0) at: " << simTime();
                 ASSERT2(0, "JBe - (msgUseOnlyDeliveryBufferGeneral != 0) with (ScountVehicleBus == 0) - ");
