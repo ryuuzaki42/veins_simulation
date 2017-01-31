@@ -23,10 +23,10 @@ simple BaseWaveApplLayer like IBaseApplLayer {
         int sendSummaryVectorInterval @unit("s") = default(0s); //define the minimum slide window length among contacts to send new version of summary vector
 
         // mfcv
-        int messageBufferSize = default(0); //define the maximum buffer size (in number of messages) that a node is willing to allocate
+        int messageBufferSize = default(0); // Define the maximum buffer size (in number of messages) that a node is willing to allocate
         int messageHopLimit = default(0); // Limit of hops
-        int timeGenerateNewMessage @unit("s") = default(0s); // Time to generate new messages, each this time generate more X messsages
-        int timeStartGenerateMessage @unit("s") = default(0s); // Time to generate the frist messages or start generate messsages
+        int timeGenerateNewMessage @unit("s") = default(0s); // Time to generate new messages, each this time generate more X messages
+        int timeStartGenerateMessage @unit("s") = default(0s); // Time to generate the first messages or start generate messages
 
         int expNumber = default(1); // Experiment number by table 2^k, number to use _one or _two variables
         int expPart_one_or_two = default(1); // Experiment part, can be 1 or 2, to use 4 values of ttlMessage
@@ -64,6 +64,9 @@ simple BaseWaveApplLayer like IBaseApplLayer {
         string fileBusPositionPath = default(""); // File (csv) of bus position to load
         string fileLaneNamesPath = default(""); // File (csv) of lane names to load
         int bufferMessageOnlyDeliveryLimit = default(0); // Size limit of the buffer with message onlyDelivery
+
+        double busValueSend = default(0); // Value (double) to use when use categories and has a bus in the neighbors
+        double taxiValueSend = default(0); // Value (double) to use when use categories and has a taxi in the neighbors
 
     gates:
         input lowerLayerIn; // from mac layer
