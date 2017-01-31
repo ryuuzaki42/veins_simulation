@@ -22,14 +22,19 @@
 #
 # Script: Grep result from a file
 #
-# Last update: 29/01/2017
+# Last update: 31/01/2017
 #
-echo -e "\nThis script grep values from a result from a file"
+if [ "$1" != "noHead" ]; then
+    echo -e "\nThis script grep values from a result from a file"
+else
+    shift
+fi
 
 fileName=$1
 if [ "$fileName" == '' ]; then
     echo -e "\nError - need pass the file name to grep\n"
 else
+    # Rsu
     op1="Total of messages received:"
     op2="Total count copy message received:"
     op3="Total average time to receive:"
@@ -38,55 +43,68 @@ else
     op6="Total average hops to received:"
     op7="counttoDeliveryMsg:"
     op8="counttoDeliveryMsgUnicID:"
+
+    # Veh
     op9="msgUseOnlyDeliveryBufferGeneral total:"
     op10="msgUseOnlyDeliveryBufferGeneral avg:"
-
     op11="Final count messages drop:"
     op12="Final average buffer use:"
     op13="Final buffer use total general:"
 
-
+    countOption=13
     optionInput=$2
     if [ "$optionInput" == '' ]; then
-        echo -e "\nRSU"
-        echo "    1 - $op1"
-        echo "    2 - $op2"
-        echo "    3 - $op3"
-        echo "    4 - $op4"
-        echo "    5 - $op5"
-        echo "    6 - $op6"
-        echo "    7 - $op7"
-        echo "    8 - $op8"
-        echo "    9 - $op9"
-        echo "    10 - $op10"
+        i=1
+        while [ "$i" -lt "$countOption" ]; do
+            if [ "$i" -eq '1' ]; then
+                echo -e "\n###   Rsu"
+            elif [ "$i" -eq '9' ]; then
+                echo -e "\n###   Veh"
+            fi
 
-        echo "Veh"
-        echo "    11 - $op11"
-        echo "    12 - $op12"
-        echo "    13 - $op13"
+            opTmp="op$i"
+            echo -e "    $i - ${!opTmp}"
+            ((i++))
+        done
+        echo -e "\n###   General"
+        echo "    88 - All above"
         echo "    99 - You insert the value"
-        echo -n "Wich value you want grep: "
+
+        echo -en "\nWich value you want grep: "
         read optionInput
     fi
 
-    if [ "$optionInput" -ne "99" ]; then
-        opTmp="op$optionInput"
-        grepValue=`echo ${!opTmp}`
-    else
+    if [ $optionInput -eq "88" ]; then
+        i=1
+        while [ "$i" -lt "$countOption" ]; do
+            $0 noHead $fileName $i
+            ((i++))
+        done
+
+        exit 0
+    elif [ "$optionInput" -eq "99" ]; then
         echo -en "\nInsert the value to be used in the grep: "
         read grepValue
+    else
+        opTmp="op$optionInput"
+        grepValue=`echo ${!opTmp}`
     fi
 
     if [ "$grepValue" == '' ]; then
         echo -e "\nError - option \"$optionInput\" is unknown\n"
     else
-        echo -e "\nGrep the value: \"${!opTmp}\""
+        echo -e "\nGrep the value: $optionInput - \"${!opTmp}\""
         grepResult=`cat $fileName | grep -E "$grepValue|## Working in the folder.*run_0" | sed 's/## Working in the folder.*run_0//g'`
 
         echo "$grepResult"
 
         echo -e "\nValues more clean:"
         echo "$grepResult" | rev | cut -d ':' -f1 | rev | cut -d ' ' -f2-
+
+        if [ $optionInput -eq "1" ]; then
+            echo -e "\nValues more clean2:"
+            echo "$grepResult" | rev | cut -d ':' -f1 | rev | cut -d ' ' -f6- | sed 's/ % received//g'
+        fi
     fi
     echo
 fi
