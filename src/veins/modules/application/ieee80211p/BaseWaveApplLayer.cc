@@ -241,6 +241,9 @@ void BaseWaveApplLayer::generalInitializeVariables_executionByExpNumberMfcv() {
         SsecondCategoryBus = 'B';
         SthirdCategoryTaxi = 'T';
 
+        SbusValueSend = par("busValueSend").doubleValue();
+        StaxiValueSend = par("taxiValueSend").doubleValue();
+
         SbufferMessageOnlyDeliveryLimit = par("bufferMessageOnlyDeliveryLimit");
         ScountToDeliveryMsg = ScountToDeliveryMsgUnicID = SmsgUseOnlyDeliveryBufferGeneral = 0;
         SsimulationTimeLimit = atoi(ev.getConfig()->getConfigValue("sim-time-limit"));
