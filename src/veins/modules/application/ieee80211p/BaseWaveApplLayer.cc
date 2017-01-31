@@ -241,8 +241,8 @@ void BaseWaveApplLayer::generalInitializeVariables_executionByExpNumberMfcv() {
         SsecondCategoryBus = 'B';
         SthirdCategoryTaxi = 'T';
 
-        SbusValueSend = par("busValueSend").doubleValue();
-        StaxiValueSend = par("taxiValueSend").doubleValue();
+        SbusValueCategoryGoingTarget = par("busValueCategoryGoingTarget").doubleValue();
+        StaxiValueCategory = par("taxiValueCategory").doubleValue();
 
         SbufferMessageOnlyDeliveryLimit = par("bufferMessageOnlyDeliveryLimit");
         ScountToDeliveryMsg = ScountToDeliveryMsgUnicID = SmsgUseOnlyDeliveryBufferGeneral = 0;

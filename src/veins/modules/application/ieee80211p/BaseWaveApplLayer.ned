@@ -65,8 +65,8 @@ simple BaseWaveApplLayer like IBaseApplLayer {
         string fileLaneNamesPath = default(""); // File (csv) of lane names to load
         int bufferMessageOnlyDeliveryLimit = default(0); // Size limit of the buffer with message onlyDelivery
 
-        double busValueSend = default(0); // Value (double) to use when use categories and has a bus in the neighbors
-        double taxiValueSend = default(0); // Value (double) to use when use categories and has a taxi in the neighbors
+        double busValueCategoryGoingTarget = default(0); // Value (double) to use when use categories and has a bus in the neighbors
+        double taxiValueCategory = default(0); // Value (double) to use when use categories and has a taxi in the neighbors
 
     gates:
         input lowerLayerIn; // from mac layer
