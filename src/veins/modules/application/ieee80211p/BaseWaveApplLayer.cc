@@ -245,9 +245,10 @@ void BaseWaveApplLayer::generalInitializeVariables_executionByExpNumberMfcv() {
         StaxiValueCategory = par("taxiValueCategory").doubleValue();
         SrateTimeToSendModDecision = par("rateTimeToSendModDecision").doubleValue();
         SspeedModDecision = par("speedModDecision").doubleValue();
+        SbusPercentageRouteGoTarget = par("busPercentageRouteGoTarget").doubleValue();
 
         SbufferMessageOnlyDeliveryLimit = par("bufferMessageOnlyDeliveryLimit");
-        ScountToDeliveryMsg = ScountToDeliveryMsgUnicID = SmsgUseOnlyDeliveryBufferGeneral = 0;
+        ScountToDeliveryMsg = ScountToDeliveryMsgUniqueId = SmsgUseOnlyDeliveryBufferGeneral = 0;
         SsimulationTimeLimit = atoi(ev.getConfig()->getConfigValue("sim-time-limit"));
         SmessageBufferSize = par("messageBufferSize"); // Define the maximum buffer size (in number of messages) that a node is willing to allocate
         SmessageHopLimit = par("messageHopLimit").longValue();
@@ -287,14 +288,14 @@ void BaseWaveApplLayer::generalInitializeVariables_executionByExpNumberMfcv() {
             ASSERT2(0, "JBe - Error: Number of experiment not configured -");
         }
 
-        ScountMesssageDrop = ScountMsgPacketSend = SmsgBufferUseGeneral = ScountVehicleAll = ScountVehicleBus = 0;
+        ScountMessageDrop = ScountMsgPacketSend = SmsgBufferUseGeneral = ScountVehicleAll = ScountVehicleBus = 0;
         ScountBeaconSend = ScountSummaryVectorSend = ScountRequestMessageVectorSend = ScountVehicleTaxi= 0;
         SmsgDroppedbyTTL = SmsgDroppedbyCopy = SmsgDroppedbyBuffer = 0;
         ScountMeetTotal = ScountMeetTwoCategory = ScountMeetJustOneCategory = ScountMessageOnlyDeliveryBus = 0;
         SmessageId = 1;
 
         // Initialize random seed (Seed the RNG) # Inside of IF because must be executed one time (the seed is "static")
-        mtSelectVehicleGenarateMessage.seed(SrepeatNumber); // Instead another value, for make the experiment more reproducible, so seed = reapeatNumber
+        mtSelectVehicleGenerateMessage.seed(SrepeatNumber); // Instead another value, for make the experiment more reproducible, so seed = reapeatNumber
         mtTargetMessageSelect.seed(SrepeatNumber); // Used to select a random target
         mtSelectLaneName.seed(SrepeatNumber); // Used to select lane name
 
@@ -346,6 +347,7 @@ void BaseWaveApplLayer::generalInitializeVariables_executionByExpNumberMfcv() {
             SprojectInfo += texTmp + "taxiValueCategory:_ " + to_string(StaxiValueCategory);
             SprojectInfo += texTmp + "rateTimeToSendModDecision:_ " + to_string(SrateTimeToSendModDecision);
             SprojectInfo += texTmp + "speedModDecision:_ " + to_string(SspeedModDecision);
+            SprojectInfo += texTmp + "busPercentageRouteGoTarget:_ " + to_string(SbusPercentageRouteGoTarget);
         } else if (SbeaconTypeInitialize == 2) {
             SprojectInfo += texTmp + "sendSummaryVectorInterval:_ " + to_string(SsendSummaryVectorInterval) + " s";
         } else {
@@ -422,9 +424,9 @@ string BaseWaveApplLayer::boolToString(bool value) {
     }
 }
 
-string BaseWaveApplLayer::getFolderResultMfcv(unsigned short int expSendbyDSCR) {
+string BaseWaveApplLayer::getFolderResultMfcv() {
     string expSendbyDSCRText;
-    switch (expSendbyDSCR) {
+    switch (SexpSendbyDSCR) {
         case 1:
             expSendbyDSCRText = "0001_chooseByDistance";
             break;
@@ -434,14 +436,25 @@ string BaseWaveApplLayer::getFolderResultMfcv(unsigned short int expSendbyDSCR) 
         case 13:
             expSendbyDSCRText = "0013_chooseByDistance_Category";
             break;
+        case 14:
+            expSendbyDSCRText = "0014_chooseByDistance_RateTimeToSend";
+            break;
+        case 123:
+            expSendbyDSCRText = "0123_chooseByDistance_Speed_Category";
+            break;
+        case 124:
+            expSendbyDSCRText = "0124_chooseByDistance_Speed_RateTimeToSend";
+            break;
         case 134:
             expSendbyDSCRText = "0134_chooseByDistance_Category_RateTimeToSend";
             break;
+        case 1234:
+            expSendbyDSCRText = "1234_chooseByDistance_Speed_Category_RateTimeToSend";
         case 99:
             expSendbyDSCRText = "0099_epidemic";
             break;
         default:
-            cout << "JBe - Error, expSendbyDSCR: " << expSendbyDSCR << " not defined, class in BaseWaveApplLayer.cc";
+            cout << "JBe - Error, expSendbyDSCR: " << SexpSendbyDSCR << " not defined, class in BaseWaveApplLayer.cc";
             ASSERT2(0, "JBe - Error expSendbyDSCR value not defined -");
     }
 
@@ -465,9 +478,8 @@ string BaseWaveApplLayer::getFolderResultMfcv(unsigned short int expSendbyDSCR) 
 }
 
 void BaseWaveApplLayer::restartFilesResultRSU() {
-    bool justAppend = false; // Open a new file (blank)
     if (myId == 0) {
-        SresultFolder = getFolderResultMfcv(SexpSendbyDSCR);
+        SresultFolder = getFolderResultMfcv();
 
         SfileMessagesCountRsu = SresultFolder + "rsu_" + "Count_Messages_Received.r";
         SfileMessagesGeneratedVehRsu = SresultFolder + "VehRsu_Messages_Generated.r";
@@ -477,30 +489,26 @@ void BaseWaveApplLayer::restartFilesResultRSU() {
         cout << "repeatNumber: " << SrepeatNumber << endl;
         system(commandCreateFolder.c_str()); // Try create a folder to save the results
 
-        openFileAndClose(SfileMessagesCountRsu, justAppend);
-        openFileAndClose(SfileMessagesGeneratedVehRsu, justAppend);
+        openFileAndClose(SfileMessagesCountRsu, false);
+        openFileAndClose(SfileMessagesGeneratedVehRsu, false);
 
         if (par("getTraffic").boolValue()) {
             getTrafficEvtMethodCheck = new cMessage("get traffic evt", SendGetTrafficMethodCheck);
-
-            //map <string, cModule*> vehInsideSmap =  Veins::TraCIScenarioManagerLaunchdAccess().get()->getManagedHosts();
 
             int countVehScenario = Veins::TraCIScenarioManagerLaunchdAccess().get()->getManagedHosts().size();
             SvehGetTrafficMethodCheck.insert(make_pair(int(simTime().dbl()), countVehScenario));
 
             scheduleAt(simTime() + par("trafficGranularitySum"), getTrafficEvtMethodCheck);
         }
-    } //else { // repeatNumber != 0 just append
-//        justAppend = true;
-//    }
+    }
 
     fileMessagesBroadcastRsu = fileMessagesUnicastRsu = SresultFolder + source + "_";
 
     fileMessagesUnicastRsu += "Messages_Received.r";
     fileMessagesBroadcastRsu += "Broadcast_Messages.r";
 
-    openFileAndClose(fileMessagesUnicastRsu, justAppend);
-    openFileAndClose(fileMessagesBroadcastRsu, justAppend);
+    openFileAndClose(fileMessagesUnicastRsu, false);
+    openFileAndClose(fileMessagesBroadcastRsu, false);
 }
 
 void BaseWaveApplLayer::restartFilesResultVeh(string projectInfo, Coord initialPos) {
@@ -509,15 +517,13 @@ void BaseWaveApplLayer::restartFilesResultVeh(string projectInfo, Coord initialP
         SfileMessagesUnicastVeh += "Veh_Unicast_Messages.r";
         SfileMessagesDropVeh += "Veh_Messages_Drop.r";
 
-        bool justAppend = false;
-        openFileAndClose(SfileMessagesUnicastVeh, justAppend);
-        openFileAndClose(SfileMessagesDropVeh, justAppend);
+        openFileAndClose(SfileMessagesUnicastVeh, false);
+        openFileAndClose(SfileMessagesDropVeh, false);
 
         myfile.open(SfileMessagesDropVeh, std::ios_base::app);
         myfile << projectInfo << endl;
         myfile.close();
     }
-
     //saveVehStartPositionVeh(SresultFolder, initialPos); // Save the start position of vehicle. Just for test of the seed
 }
 
@@ -618,8 +624,8 @@ void BaseWaveApplLayer::generateMessageMfcvAndEpidemic() {
 
     wsm->setGlobalMessageIdentificaton(insertZeroIntReturnString(SmessageId).c_str());
 
-    myfile << "### " << source << " generated the message ID: " << wsm->getGlobalMessageIdentificaton() << " to " << target << " " << Coord(target_x, target_y, 3) << " at: " << simTime() << endl;
-    cout << "### " << source << " generated the message ID: " << wsm->getGlobalMessageIdentificaton() << " to " << target << " " << Coord(target_x, target_y, 3) << " at: " << simTime() << endl;
+    myfile << "### " << source << " generated the message Id: " << wsm->getGlobalMessageIdentificaton() << " to " << target << " " << Coord(target_x, target_y, 3) << " at: " << simTime() << endl;
+    cout << "### " << source << " generated the message Id: " << wsm->getGlobalMessageIdentificaton() << " to " << target << " " << Coord(target_x, target_y, 3) << " at: " << simTime() << endl;
     myfile.close();
 
     if (SbeaconTypeInitialize == 1) { // MFCV
@@ -654,32 +660,32 @@ void BaseWaveApplLayer::generateMessageMfcvAndEpidemic() {
 void BaseWaveApplLayer::printCountBeaconMessagesDropVeh() {
     myfile.open (SfileMessagesDropVeh, std::ios_base::app);
 
-    myfile << endl << "messagesDrop from " << source << endl;
+    myfile << "\nmessagesDrop from " << source;
     unsigned short int messageDropbyOneVeh = 0;
     map <string, struct messagesDropStruct>::iterator itMessageDrop;
     for (itMessageDrop = messagesDropVeh.begin(); itMessageDrop != messagesDropVeh.end(); itMessageDrop++) {
-        myfile << "Message Id: " << itMessageDrop->first << endl;
-        myfile << "By Buffer: " << itMessageDrop->second.byBuffer << endl;
-        myfile << "By Time: " << itMessageDrop->second.byTime << endl;
-        myfile << "By Copy: " << itMessageDrop->second.byCopy << endl;
-        myfile << "TimeGenerate: " << itMessageDrop->second.timeGenerate << endl;
-        myfile << "TimeDroped: " << itMessageDrop->second.timeDroped << endl;
-        myfile << "TimeDifference: " << itMessageDrop->second.timeDifference << endl << endl;
+        myfile << "\nMessage Id: " << itMessageDrop->first;
+        myfile << "\nBy Buffer: " << itMessageDrop->second.byBuffer;
+        myfile << "\nBy Time: " << itMessageDrop->second.byTime;
+        myfile << "\nBy Copy: " << itMessageDrop->second.byCopy;
+        myfile << "\nTimeGenerate: " << itMessageDrop->second.timeGenerate;
+        myfile << "\nTimeDroped: " << itMessageDrop->second.timeDroped;
+        myfile << "\nTimeDifference: " << itMessageDrop->second.timeDifference << "\n\n";
         messageDropbyOneVeh += itMessageDrop->second.byBuffer + itMessageDrop->second.byTime;
         SmsgDroppedbyTTL += itMessageDrop->second.byTime;
         SmsgDroppedbyCopy += itMessageDrop->second.byCopy;
         SmsgDroppedbyBuffer += itMessageDrop->second.byBuffer;
     }
 
-    ScountMesssageDrop += messageDropbyOneVeh;
-    myfile << "### " << source << " dropped: " << messageDropbyOneVeh << endl;
-    myfile << "### " << source << " use message buffer: " << msgBufferUse << endl;
+    ScountMessageDrop += messageDropbyOneVeh;
+    myfile << "\n### " << source << " dropped: " << messageDropbyOneVeh;
+    myfile << "\n### " << source << " use message buffer: " << msgBufferUse << endl;
     SmsgBufferUseGeneral += msgBufferUse;
 
     if (SnumVehicles.size() == 1) {
         string textTmp = "\nExp: " + to_string(SexpNumber) + " expSendbyDSCR: " + to_string(SexpSendbyDSCR) + " run " + to_string(SrepeatNumber) + " ###veh ";
 
-        myfile << textTmp + "Final count messages drop: " << ScountMesssageDrop;
+        myfile << textTmp + "Final count messages drop: " << ScountMessageDrop;
         myfile << textTmp + "Final count message dropped by buffer: " << SmsgDroppedbyBuffer;
         myfile << textTmp + "Final count message dropped by copy (Only valid if copy of message are not allowed): " << SmsgDroppedbyCopy;
         myfile << textTmp + "Final count message dropped by ttl: " << SmsgDroppedbyTTL;
@@ -703,7 +709,7 @@ void BaseWaveApplLayer::printCountBeaconMessagesDropVeh() {
         myfile << textTmp + "Count beacon send: " << ScountBeaconSend;
         myfile << textTmp + "Final count packets messages send: " << ScountMsgPacketSend;
         myfile << textTmp + "        Epidemic count SummaryVectorSend: " << ScountSummaryVectorSend;
-        myfile << textTmp + "        Epidemic count RequestMessageVectorSend: " << ScountRequestMessageVectorSend << endl;
+        myfile << textTmp + "        Epidemic count RequestMessageVectorSend: " << ScountRequestMessageVectorSend;
         myfile << textTmp + "        Epidemic (full) is the sum of those 3: " << (ScountMsgPacketSend + ScountSummaryVectorSend + ScountRequestMessageVectorSend) << endl;
     }
     myfile.close();
@@ -859,7 +865,7 @@ int BaseWaveApplLayer::SelectRandomVehiclePositionId() {
     }
 
     uniform_int_distribution <int> dist(0, (SnumVehicles.size() - 1)); // generate a value, e.g, dist(0, 10), will be 0, 1, ... 10
-    return dist(mtSelectVehicleGenarateMessage);
+    return dist(mtSelectVehicleGenerateMessage);
 }
 
 void BaseWaveApplLayer::selectVehGenerateMessage() {
@@ -951,7 +957,7 @@ void BaseWaveApplLayer::printCountMessagesReceivedRSU() {
         avgGeneralHopsMessage = avgGeneralCopyMessageReceived = 0;
         map <string, struct messages>::iterator itMessagesReceived;
         for (itMessagesReceived = messagesReceivedRSU.begin(); itMessagesReceived != messagesReceivedRSU.end(); itMessagesReceived++) {
-            myfile << endl << "## Message ID: " << itMessagesReceived->first << endl;
+            myfile << endl << "## Message Id: " << itMessagesReceived->first << endl;
             myfile << "Count received: " << itMessagesReceived->second.countCopyMessage << endl;
             avgGeneralCopyMessageReceived += itMessagesReceived->second.countCopyMessage;
 
@@ -982,7 +988,7 @@ void BaseWaveApplLayer::printCountMessagesReceivedRSU() {
             countThirdCategoryTaxi += itMessagesReceived->second.countThirdCategoryTaxi;
 
             if (itMessagesReceived->second.receivedBusOnlyDelivery) {
-                ScountToDeliveryMsgUnicID++;
+                ScountToDeliveryMsgUniqueId++;
             }
         }
 
@@ -1078,7 +1084,7 @@ void BaseWaveApplLayer::printCountMessagesReceivedRSU() {
         myfile << textTmp << "Total count hops by category " << SthirdCategoryTaxi << " general: " << SresultMsgReceived.countThirdCategoryTaxi << endl;
         myfile << textTmp;
         myfile << textTmp << "counttoDeliveryMsg: " << ScountToDeliveryMsg << endl;
-        myfile << textTmp << "- has at least one copy received by bus - counttoDeliveryMsgUnicID: " << ScountToDeliveryMsgUnicID;
+        myfile << textTmp << "- has at least one copy received by bus - counttoDeliveryMsgUniqueId: " << ScountToDeliveryMsgUniqueId;
         myfile << textTmp;
         myfile << textTmp << "## Count of vehicle by category in the scenario\n";
         for (auto& x: SvehCategoryCount) {
@@ -1397,7 +1403,7 @@ void BaseWaveApplLayer::printEpidemicLocalMessageBuffer() {
         for (auto& x: epidemicLocalMessageBuffer) {
             WaveShortMessage wsmBuffered = x.second;
 
-            cout << " GlobalID " << ": " << wsmBuffered.getGlobalMessageIdentificaton() << endl;
+            cout << " GlobalId " << ": " << wsmBuffered.getGlobalMessageIdentificaton() << endl;
             cout << " Message Content: " << wsmBuffered.getWsmData() << endl;
             cout << " source: " << wsmBuffered.getSource() << endl;
             cout << " target: " << wsmBuffered.getTarget() << endl;
@@ -1581,7 +1587,7 @@ void BaseWaveApplLayer::receivedOnBeaconEpidemic(WaveShortMessage* wsm) {
            }
         }
     } /*else { // My address is bigger than the Beacon sender -> Do nothing
-        cout << source << "(" << MACToInteger() << ")" << " SenderAddress: " << wsm->getSenderAddress() << " My ID is bigger than the Beacon sender" << endl;
+        cout << source << "(" << MACToInteger() << ")" << " SenderAddress: " << wsm->getSenderAddress() << " My Id is bigger than the Beacon sender" << endl;
     }*/
 }
 
@@ -1698,9 +1704,9 @@ void BaseWaveApplLayer::receivedOnDataEpidemic(WaveShortMessage* wsm) {
 }
 //############################################ Epidemic - end ##################################################################
 
-void BaseWaveApplLayer::receiveSignal(cComponent* source, simsignal_t signalID, cObject* obj, cObject* details) {
+void BaseWaveApplLayer::receiveSignal(cComponent* source, simsignal_t signalId, cObject* obj, cObject* details) {
     Enter_Method_Silent();
-    if (signalID == mobilityStateChangedSignal) {
+    if (signalId == mobilityStateChangedSignal) {
         handlePositionUpdate(obj);
     }
 }
