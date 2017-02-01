@@ -47,14 +47,14 @@ class mfcv : public BaseWaveApplLayer {
             double speedVeh;
             double distanceToTargetBefore;
 
-            double distanceToTargetNow; // 1
-            double decisionValueDistanceSpeed; // 12
-            double decisionValueDistanceCategory; // 13
-            double decisionValueDistanceRateTimeToSend; // 14
-            double decisionValueDistanceSpeedCategory; // 123
-            double decisionValueDistanceSpeedRateTimeToSend; // 124
-            double decisionValueDistanceCategoryRateTimeToSend; // 134
-            double decisionValueDistanceSpeedCategoryRateTimeToSend; // 1234
+            double Distance; // 1
+            double DistanceSpeed; // 12
+            double DistanceCategory; // 13
+            double DistanceRateTimeToSend; // 14
+            double DistanceSpeedCategory; // 123
+            double DistanceSpeedRateTimeToSend; // 124
+            double DistanceCategoryRateTimeToSend; // 134
+            double DistanceSpeedCategoryRateTimeToSend; // 1234
         };
 
     protected:
