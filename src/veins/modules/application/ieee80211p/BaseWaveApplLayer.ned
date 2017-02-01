@@ -11,7 +11,7 @@ simple BaseWaveApplLayer like IBaseApplLayer {
         bool sendBeacons = default(false); //tell the applayer to periodically send beacons
         int beaconLengthBits = default(256bit) @unit(bit); //the length of a beacon packet
         int beaconPriority = default(3); //the access category of the beacon messages
-        volatile double beaconInterval = default(1s) @unit(s); //the intervall between 2 beacon messages
+        volatile double beaconInterval = default(1s) @unit(s); //the interval between 2 beacon messages
 
         double maxOffset = default(0s) @unit(s); //the maximum delay of messages sent down to avoid synchronous channel access
         bool sendData = default(false); //whether this applayer should send data
@@ -22,7 +22,7 @@ simple BaseWaveApplLayer like IBaseApplLayer {
         // Epidemic
         int sendSummaryVectorInterval @unit("s") = default(0s); //define the minimum slide window length among contacts to send new version of summary vector
 
-        // mfcv
+        // MFCV
         int messageBufferSize = default(0); // Define the maximum buffer size (in number of messages) that a node is willing to allocate
         int messageHopLimit = default(0); // Limit of hops
         int timeGenerateNewMessage @unit("s") = default(0s); // Time to generate new messages, each this time generate more X messages
@@ -47,7 +47,7 @@ simple BaseWaveApplLayer like IBaseApplLayer {
         bool allowMessageCopy = default(false); // Allow or not copy of messages
         bool selectFromAllVehicles = default(false); // Chose for all vehicle or for only new
         bool useMessagesSendLog = default(false); // Use or not message send log
-        int beaconTypeInitialize = default(0); // 1 for mfcv, 2 for epidemic, 3 for minicurso_UFPI_TraCI, 0 for the default
+        int beaconTypeInitialize = default(0); // 1 for mfcv, 2 for epidemic, 0 for the default
         bool mfcvCreateEventGenerateMessage = default(false); // Use the event to generate message or not
         int vehTimeLimitToAcceptGenerateMgs @unit("s") = default(0s); // Time limit that one vehile enter in the scenario
 
@@ -66,6 +66,7 @@ simple BaseWaveApplLayer like IBaseApplLayer {
         int bufferMessageOnlyDeliveryLimit = default(0); // Size limit of the buffer with message onlyDelivery
 
         double busValueCategoryGoingTarget = default(0); // Value (double) to use when use categories and has a bus in the neighbors
+        double busPercentageRouteGoTarget = default(0); // % of the route o msg.target that bus need to go to use "busValueCategoryGoingTarget"
         double taxiValueCategory = default(0); // Value (double) to use when use categories and has a taxi in the neighbors
         double rateTimeToSendModDecision = default(0); // Value * rateTimeToSend when use S in DSCR to select the next node
         double speedModDecision = default(0); // Value * speed when use S in DSCR to select the next node
