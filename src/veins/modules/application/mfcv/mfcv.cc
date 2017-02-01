@@ -455,27 +455,30 @@ void mfcv::sendBeaconMessage() {
     trySendBeaconMessage();
     //printMessagesBuffer();
     messageToSend++; // Move to next message
+    simtime_t schedleNext = simTime() + SnormalTimeSendMessage/2 + double(rateTimeToSend)/1000;
 
+    //cout << "normalTimeSendMessage: " << SnormalTimeSendMessage << " rateTimeToSend: " << double(rateTimeToSend)/1000 << "s";
+    //cout << "\nschedleNext: " << schedleNext << "\n";
     if (!SuseRateTimeToSend) {
-        //cout << source << " schedule useRateTimeToSend: false the sendBeaconMessageEvt at: " << simTime() << " to: " << (simTime() + par("normalTimeSendMessage").doubleValue()) << endl;
-        scheduleAt((simTime() + par("normalTimeSendMessage").doubleValue()), sendBeaconMessageEvt);
+        //cout << source << " schedule useRateTimeToSend: false the sendBeaconMessageEvt at: " << simTime() << " to: " << (simTime() + SnormalTimeSendMessage) << endl;
+        scheduleAt((simTime() + SnormalTimeSendMessage), sendBeaconMessageEvt);
     } else {
         if (messageToSend >= messagesOrderReceivedMfcv.size()) {
             if (simTime() > timeToFinishLastStartSend) {
-                scheduleAt((simTime() + double(rateTimeToSend)/1000), sendBeaconMessageEvt);
-                //cout << source << " 1_schedule at: " << simTime() << " to: " << (simTime() + double(rateTimeToSend)/1000);
+                scheduleAt(schedleNext, sendBeaconMessageEvt);
+                //cout << source << " 1_schedule at: " << simTime() << " to: " << schedleNext;
             } else {
                 scheduleAt(timeToFinishLastStartSend, sendBeaconMessageEvt);
                 //cout << source << " 2_schedule at: " << simTime() << " to: " << timeToFinishLastStartSend;
             }
 
-            timeToFinishLastStartSend += double(rateTimeToSendLimitTime)/1000;
+            timeToFinishLastStartSend += (double(rateTimeToSend)/1000 + SnormalTimeSendMessage) * 2;
         } else {
-            scheduleAt((simTime() + double(rateTimeToSend)/1000), sendBeaconMessageEvt);
-            //cout << source << " 3_schedule at: " << simTime() << " to: " << (simTime() + double(rateTimeToSend)/1000) << " rateTimeToSend: " << rateTimeToSend;
+            scheduleAt(schedleNext, sendBeaconMessageEvt);
+            //cout << source << " 3_schedule at: " << simTime() << " to: " << schedleNext << " rateTimeToSend: " << rateTimeToSend;
         }
-        //cout << " timeToFinishLastStartSend: " << timeToFinishLastStartSend << endl;
-        //cout << "                               " << source << " expSendbyDSCR: " << SexpSendbyDSCR << " at: " << simTime() << endl << endl;
+        //cout << " timeToFinishLastStartSend: " << timeToFinishLastStartSend;
+        //cout << "\n                               " << source << " expSendbyDSCR: " << SexpSendbyDSCR << " at: " << simTime() << "\n\n";
     }
 }
 
@@ -948,7 +951,7 @@ void mfcv::vehCreateEventTrySendBeaconMessage() {
 
         //cout << source << " at: "<< simTime() << " schedule created SendBeaconMessage to: "<< timeToFinishLastStartSend << endl;
         scheduleAt(timeToFinishLastStartSend, sendBeaconMessageEvt);
-        timeToFinishLastStartSend += double(rateTimeToSendLimitTime)/1000; // /1000 because works with s instead ms
+        timeToFinishLastStartSend += (double(rateTimeToSend)/1000 + SnormalTimeSendMessage) * 2; // /1000 because works with s instead ms
     }
 }
 
@@ -1154,7 +1157,7 @@ void mfcv::vehUpdateRateTimeToSend() {
     unsigned short int distance = traci->getDistance(mobility->getPositionAt(simTime() - rateTimeToSendUpdateTime), curPosition, false);
 
     if (distance >= rateTimeToSendDistanceControl) {
-        if(rateTimeToSend > 100) { // Inferior limit
+        if(rateTimeToSend > 100) { // Lower limit
             rateTimeToSend -= 100;
         }
     } else {
