@@ -33,7 +33,7 @@ void mfcv::mfcvInitializeVariablesVeh() {
 
 void mfcv::createEvtTaxiChangeRoute() {
     if (vehCategory.compare("T") == 0 ) {
-        taxiRoadIDNow = traciVehicle->getRoadId();
+        taxiRoadIdNow = traciVehicle->getRoadId();
         sendTaxiChangeRoute = new cMessage("Event update rateTimeToSend vehicle", SendEvtTaxiChangeRoute);
         //cout << source << " at: " << simTime() << " schedule created sendTaxiChangeRoute to: "<< (simTime() + 1) << endl;
 
@@ -41,7 +41,7 @@ void mfcv::createEvtTaxiChangeRoute() {
     }
 }
 
-int mfcv::selectLaneNamePositionID() {
+int mfcv::selectLaneNamePositionId() {
     uniform_int_distribution <int> dist(0, (SlaneNameLoaded.size() - 1)); // generate a value, e.g, dist(0, 10), will be 0, 1, ... 10
     return dist(mtSelectLaneName);
 }
@@ -51,13 +51,13 @@ void mfcv::tryChangeRouteUntilSuccess() {
     printPlannedRoadIds(traciVehicle->getPlannedRoadIds());
 
     bool resultChangeRoute;
-    int positionID;
+    int positionId;
     string newTarget;
 
     while (!resultChangeRoute) {
-        positionID = selectLaneNamePositionID();
-        newTarget = SlaneNameLoaded.at(positionID);
-        cout << "\nnewTarget test: " << newTarget << " - SlaneNameLoaded.at(" << positionID << ")";
+        positionId = selectLaneNamePositionId();
+        newTarget = SlaneNameLoaded.at(positionId);
+        cout << "\nnewTarget test: " << newTarget << " - SlaneNameLoaded.at(" << positionId << ")";
 
         resultChangeRoute = traciVehicle->newRoute_JB(newTarget.c_str());
         cout << " - resultChangeRoute status: " << boolToString(resultChangeRoute);
@@ -87,7 +87,7 @@ void mfcv::printPlannedRoadIds(list<string> plannedRoadIds) {
 
 void mfcv::busPositionFunctionsRun() {
     routeId = traciVehicle->getRouteId();
-    SrouteIDVehID.insert(make_pair(source, routeId));
+    SrouteIdVehId.insert(make_pair(source, routeId));
     msgUseOnlyDeliveryBuffer = 0;
 
     createBusPositionSaveEvent(); // Create event to generate a csv file with the bus position (if getBusPosition => true)
@@ -188,7 +188,7 @@ void mfcv::busPosLoadFromFile() {
             cout << "\nfileInput: " << fileInput << "\n";
 
             int countPos = 0;
-            string timeString, routeIDTmp;
+            string timeString, routeIdTmp;
             Coord positionBus;
             size_t pos;
             simtime_t simTimeTmp;
@@ -202,8 +202,8 @@ void mfcv::busPosLoadFromFile() {
 
                 if (countPos == 2) {
                     timePosTmp.clear();
-                    routeIDTmp = line;
-                    //cout << "\n\nrouteIDTmp: " << routeIDTmp << "\n";
+                    routeIdTmp = line;
+                    //cout << "\n\nrouteIdTmp: " << routeIdTmp << "\n";
                 } else if (countPos == 3) {
                     if (line.size() == 0) {
                         countPos = 3;
@@ -241,9 +241,9 @@ void mfcv::busPosLoadFromFile() {
                    struct busPosByTime structBusPosByTime;
                    structBusPosByTime.timePos = timePosTmp;
 
-                   SposTimeBusLoaded.insert(make_pair(routeIDTmp, structBusPosByTime));
+                   SposTimeBusLoaded.insert(make_pair(routeIdTmp, structBusPosByTime));
                    countPos = 1;
-                   cout << "\nBus route loaded: " << routeIDTmp;
+                   cout << "\nBus route loaded: " << routeIdTmp;
                }
 
             }
@@ -492,9 +492,9 @@ void mfcv::trySendBeaconMessage() {
             string idMessage, rcvId = source;
             idMessage = messagesOrderReceivedMfcv[messageToSend];
             if (messagesBufferMfcv[idMessage].getHopCount() > 1) {
-                rcvId = neighborWithShortestDistanceToTarge(idMessage);
+                rcvId = neighborWithShortestDistanceToTarget(idMessage);
             } else {
-                rcvId = neighborWithShortestDistanceToTargeOnlyDelivery(idMessage);
+                rcvId = neighborWithShortestDistanceToTargetOnlyDelivery(idMessage);
             }
 
             string catVeh;
@@ -506,7 +506,7 @@ void mfcv::trySendBeaconMessage() {
                 cout << source << " chose the vehicle " << rcvId << " in the expSendbyDSCR " << SexpSendbyDSCR << " to be a next hop to the " << idMessage << " message" << endl;
                 cout << "    " << source << " send message to " << rcvId << " with category " << catVeh << " at: "<< simTime() << endl;
                 cout << "    MessageToSend: " << messageToSend << endl;
-                cout << "    MessageID: " << idMessage << endl;
+                cout << "    MessageId: " << idMessage << endl;
                 cout << "    Source: " << messagesBufferMfcv[idMessage].getSource() << endl;
                 cout << "    Message content: " << messagesBufferMfcv[idMessage].getWsmData() << endl;
                 cout << "    Target: " << messagesBufferMfcv[idMessage].getTarget() << endl;
@@ -554,7 +554,7 @@ void mfcv::trySendBeaconMessage() {
     }*/
 }
 
-string mfcv::neighborWithShortestDistanceToTargeOnlyDelivery(string idMessage) {
+string mfcv::neighborWithShortestDistanceToTargetOnlyDelivery(string idMessage) {
     unordered_map <string, WaveShortMessage>::iterator itBeaconNeighbors;
 
     for (itBeaconNeighbors = beaconStatusNeighbors.begin(); itBeaconNeighbors != beaconStatusNeighbors.end(); itBeaconNeighbors++) {
@@ -581,7 +581,7 @@ bool mfcv::has3inSexpSendbyDSCR() { //true if has 3 (3 meaning category in the e
     return false;
 }
 
-string mfcv::neighborWithShortestDistanceToTarge(string idMessage) {
+string mfcv::neighborWithShortestDistanceToTarget(string idMessage) {
     string category, neighborCategory, neighborId;
     Coord targetPos, senderPosPrevious, senderPosNow;
     shortestDistance sD;
@@ -603,7 +603,7 @@ string mfcv::neighborWithShortestDistanceToTarge(string idMessage) {
         neighborCategory = itBeaconNeighbors->second.getCategory();
         neighborId = itBeaconNeighbors->first;
 
-        if (neighborCategory.compare("rsu") != 0) { // When use more than one rsu, will ignore the RSU in the neighborID
+        if (neighborCategory.compare("rsu") != 0) { // When use more than one rsu, will ignore the RSU in the neighborId
             if (!messagesSendLog.empty() && (messagesSendLog[idMessage].find(neighborId) != std::string::npos)) {
                 cout << source << " has been send a message " << idMessage << " to " << neighborId << endl;
             } else {
@@ -1025,22 +1025,22 @@ WaveShortMessage* mfcv::updateBeaconMessageWSM(WaveShortMessage* wsm, string rcv
     return wsm;
 }
 
-unsigned short int mfcv::busRouteDiffTarget(string busID, Coord targetPos, double localVehDistanceNow) {
+unsigned short int mfcv::busRouteDiffTarget(string busId, Coord targetPos, double localVehDistanceNow) {
     if (par("useBusPosition").boolValue()) {
-        string routeIDTmp;
-        if (SrouteIDVehID.find(busID) == SrouteIDVehID.end()) {
-            cout << "\nJBe - SrouteIDVehID.find(" << busID << ") == SrouteIDVehID.end()";
-            ASSERT2(0, "JBe - SrouteIDVehID.find(busID) == SrouteIDVehID.end()");
+        string routeIdTmp;
+        if (SrouteIdVehId.find(busId) == SrouteIdVehId.end()) {
+            cout << "\nJBe - SrouteIdVehId.find(" << busId << ") == SrouteIdVehId.end()";
+            ASSERT2(0, "JBe - SrouteIdVehId.find(busId) == SrouteIdVehId.end()");
         } else {
-            routeIDTmp = SrouteIDVehID.find(busID)->second;
+            routeIdTmp = SrouteIdVehId.find(busId)->second;
         }
 
         struct busPosByTime structBusPosByTime;
-        if (SposTimeBusLoaded.find(routeIDTmp) == SposTimeBusLoaded.end()) {
-            cout << "\nSposTimeBusLoaded.find(" << routeIDTmp << ") == SposTimeBusLoaded.end()";
-            ASSERT2(0, "SposTimeBusLoaded.find(routeIDTmp) == SposTimeBusLoaded.end()");
+        if (SposTimeBusLoaded.find(routeIdTmp) == SposTimeBusLoaded.end()) {
+            cout << "\nSposTimeBusLoaded.find(" << routeIdTmp << ") == SposTimeBusLoaded.end()";
+            ASSERT2(0, "SposTimeBusLoaded.find(routeIdTmp) == SposTimeBusLoaded.end()");
         } else {
-            structBusPosByTime = SposTimeBusLoaded.find(routeIDTmp)->second;
+            structBusPosByTime = SposTimeBusLoaded.find(routeIdTmp)->second;
         }
 
         double distNow, smallDist;
@@ -1075,7 +1075,7 @@ unsigned short int mfcv::busRouteDiffTarget(string busID, Coord targetPos, doubl
             }
         }
 
-        cout << "\nrouteIDTmp: " << routeIDTmp;
+        cout << "\nrouteIdTmp: " << routeIdTmp;
         cout << "\ntargetPos: " << targetPos;
         cout << "\ntimeSmallDist: " << timeSmallDist;
         cout << "\nsmallCoord: " << smallCoord;
@@ -1083,8 +1083,8 @@ unsigned short int mfcv::busRouteDiffTarget(string busID, Coord targetPos, doubl
 
         if (smallDist <= 250) {
             return 1; // Send to bus as onlyDelivery
-        } else if (smallDist <= (localVehDistanceNow * 0.8)) { // Small distance less than 80% of now to the target
-            return 2; // Use bus values as 0.9
+        } else if (smallDist <= (localVehDistanceNow * SbusPercentageRouteGoTarget)) { // Small distance less than "SbusPercentageRouteGoTarget" % of now to the target
+            return 2; // Use bus values as "busValueCategoryGoingTarget"
         }
     }
     return 0; // Equal a private car
@@ -1111,11 +1111,11 @@ void mfcv::handleSelfMsg(cMessage* msg) {
             list<string> plannedRoadIds = traciVehicle->getPlannedRoadIds();
             cout << "\n\n" << source << " Category: " << vehCategory << " plannedRoadIds.size() == " << plannedRoadIds.size() << " at: " << simTime();
 
-            string tmpTaxiRoadIDNow = traciVehicle->getRoadId();
-            if (count(tmpTaxiRoadIDNow.begin(), tmpTaxiRoadIDNow.end(), ':') == 0) { // To ignore the conjunctions (start with :)
-                taxiRoadIDNow = tmpTaxiRoadIDNow; // Update the roadID
+            string tmpTaxiRoadIdNow = traciVehicle->getRoadId();
+            if (count(tmpTaxiRoadIdNow.begin(), tmpTaxiRoadIdNow.end(), ':') == 0) { // To ignore the conjunctions (start with :)
+                taxiRoadIdNow = tmpTaxiRoadIdNow; // Update the roadId
             }
-            cout << " traciVehicle->getRoadId(): " << traciVehicle->getRoadId() << " taxiRoadIDNow: " << taxiRoadIDNow << endl;
+            cout << " traciVehicle->getRoadId(): " << traciVehicle->getRoadId() << " taxiRoadIdNow: " << taxiRoadIdNow << endl;
 
             list<string>::iterator itPlannedRoadIds = plannedRoadIds.begin();
             string tmpTaxiRoute = *itPlannedRoadIds;
@@ -1124,7 +1124,7 @@ void mfcv::handleSelfMsg(cMessage* msg) {
                 tmpTaxiRoute += " " + *itPlannedRoadIds;
             }
 
-            int posInti = tmpTaxiRoute.find(taxiRoadIDNow);
+            int posInti = tmpTaxiRoute.find(taxiRoadIdNow);
             string tmpTaxiSubRoute = tmpTaxiRoute.substr((posInti), tmpTaxiRoute.size());
 
             cout << "\ntmpTaxiRoute: \"" << tmpTaxiRoute << "\"";
