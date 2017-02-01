@@ -587,6 +587,8 @@ string mfcv::neighborWithShortestDistanceToTarge(string idMessage) {
     shortestDistance sD;
     unsigned short int meet1Cat, meet2Cat, meet3Cat;
     double neighborDistanceBefore, neighborDistanceNow;
+    double rateTimeToSendPart, speedPart;
+
     unordered_map <string, shortestDistance> vehShortestDistanceToTarget;
     unordered_map <string, WaveShortMessage>::iterator itBeaconNeighbors;
 
@@ -652,8 +654,11 @@ string mfcv::neighborWithShortestDistanceToTarge(string idMessage) {
                     sD.speedVeh = itBeaconNeighbors->second.getSenderSpeed();
                     sD.rateTimeToSendVeh = itBeaconNeighbors->second.getRateTimeToSend();
 
+                    speedPart = sD.speedVeh * SspeedModDecision;
+                    rateTimeToSendPart = double(sD.rateTimeToSendVeh) * SrateTimeToSendModDecision;
+
                     sD.Distance = neighborDistanceNow; // 1
-                    sD.DistanceSpeed = sD.Distance - (sD.speedVeh); // 12
+                    sD.DistanceSpeed = sD.Distance + speedPart; // 12
 
                     // 13
                     if (sD.categoryVeh.compare(SfirstCategoryPrivateCar) == 0) { // Private car
@@ -677,11 +682,11 @@ string mfcv::neighborWithShortestDistanceToTarge(string idMessage) {
                         ASSERT2(0, "JBe - Error category unknown -");
                     }
 
-                    sD.DistanceRateTimeToSend = sD.Distance + (double(sD.rateTimeToSendVeh)/100); // 14
-                    sD.DistanceSpeedCategory = sD.DistanceCategory - (sD.speedVeh); // 123
-                    sD.DistanceSpeedRateTimeToSend = sD.DistanceSpeed + (double(sD.rateTimeToSendVeh)/100); // 124
-                    sD.DistanceCategoryRateTimeToSend = sD.DistanceCategory + (double(sD.rateTimeToSendVeh)/100); // 134
-                    sD.DistanceSpeedCategoryRateTimeToSend = sD.DistanceCategoryRateTimeToSend - (sD.speedVeh); // 1234
+                    sD.DistanceRateTimeToSend = sD.Distance + rateTimeToSendPart; // 14
+                    sD.DistanceSpeedCategory = sD.DistanceCategory + speedPart; // 123
+                    sD.DistanceSpeedRateTimeToSend = sD.DistanceSpeed + rateTimeToSendPart; // 124
+                    sD.DistanceCategoryRateTimeToSend = sD.DistanceCategory + rateTimeToSendPart; // 134
+                    sD.DistanceSpeedCategoryRateTimeToSend = sD.DistanceSpeedCategory + rateTimeToSendPart; // 1234
 
                     // Distance = [0 - 125] - 720 m
                     // vehicle Speed = 0 - (16.67/25) - 84 m/s
