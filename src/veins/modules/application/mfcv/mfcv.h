@@ -43,9 +43,18 @@ class mfcv : public BaseWaveApplLayer {
         struct shortestDistance {
             Coord senderPos;
             string categoryVeh;
-            double distanceToTargetNow, distanceToTargetBefore, decisionValueDistanceCategory, decisionValueDistanceSpeed;
-            double decisionValueDistanceRateTimeToSend, decisionValueDistanceCategoryRateTimeToSend, speedVeh;
             unsigned short int rateTimeToSendVeh;
+            double speedVeh;
+            double distanceToTargetBefore;
+
+            double distanceToTargetNow; // 1
+            double decisionValueDistanceSpeed; // 12
+            double decisionValueDistanceCategory; // 13
+            double decisionValueDistanceRateTimeToSend; // 14
+            double decisionValueDistanceSpeedCategory; // 123
+            double decisionValueDistanceSpeedRateTimeToSend; // 124
+            double decisionValueDistanceCategoryRateTimeToSend; // 134
+            double decisionValueDistanceSpeedCategoryRateTimeToSend; // 1234
         };
 
     protected:
@@ -116,7 +125,7 @@ int BaseWaveApplLayer::ScountMesssageDrop, BaseWaveApplLayer::ScountMeetJustOneC
 int BaseWaveApplLayer::ScountMeetTotal, BaseWaveApplLayer::ScountVehicleAll, BaseWaveApplLayer::SmessageId, BaseWaveApplLayer::ScountVehicleTaxi;
 int BaseWaveApplLayer::ScountBeaconSend, BaseWaveApplLayer::ScountSummaryVectorSend, BaseWaveApplLayer::ScountRequestMessageVectorSend;
 
-double BaseWaveApplLayer::SbusValueSend, BaseWaveApplLayer::StaxiValueSend;
+double BaseWaveApplLayer::SbusValueCategoryGoingTarget, BaseWaveApplLayer::StaxiValueCategory;
 
 unsigned short int BaseWaveApplLayer::SbeaconTypeInitialize;
 unsigned short int BaseWaveApplLayer::SrepeatNumber, BaseWaveApplLayer::SexpNumber, BaseWaveApplLayer::SexpSendbyDSCR;
