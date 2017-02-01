@@ -339,6 +339,9 @@ void BaseWaveApplLayer::generalInitializeVariables_executionByExpNumberMfcv() {
             SprojectInfo += texTmp + "useMessagesSendLog:_ " + boolToString(SuseMessagesSendLog);
             SprojectInfo += texTmp + "timeToUpdatePosition:_ " + to_string(StimeToUpdatePosition) + " s";
             SprojectInfo += texTmp + "bufferMessageOnlyDeliveryLimit:_ " + to_string(SbufferMessageOnlyDeliveryLimit);
+
+            SprojectInfo += texTmp + "SbusValueCategoryGoingTarget:_ " + to_string(SbusValueCategoryGoingTarget);
+            SprojectInfo += texTmp + "taxiValueCategory:_ " + to_string(StaxiValueCategory);
         } else if (SbeaconTypeInitialize == 2) {
             SprojectInfo += texTmp + "sendSummaryVectorInterval:_ " + to_string(SsendSummaryVectorInterval) + " s";
         } else {
