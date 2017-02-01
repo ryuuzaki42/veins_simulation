@@ -91,18 +91,18 @@ else
     fi
 
     if [ "$grepValue" == '' ]; then
-        echo -e "\nError - option \"$optionInput\" is unknown\n"
+        echo -e "\n## Error - option \"$optionInput\" is unknown\n"
     else
-        echo -e "\nGrep the value: $optionInput - \"${!opTmp}\""
+        echo -e "\n## Grep the value: $optionInput - \"${!opTmp}\""
         grepResult=`cat $fileName | grep -E "$grepValue|## Working in the folder.*run_0" | sed 's/## Working in the folder.*run_0//g'`
 
         echo "$grepResult"
 
-        echo -e "\nValues more clean:"
+        echo -e "\n## Values more clean:"
         echo "$grepResult" | rev | cut -d ':' -f1 | rev | cut -d ' ' -f2-
 
         if [ $optionInput -eq "1" ]; then
-            echo -e "\nValues more clean2:"
+            echo -e "\n## Values more clean2:"
             echo "$grepResult" | rev | cut -d ':' -f1 | rev | cut -d ' ' -f6- | sed 's/ % received//g'
         fi
     fi
