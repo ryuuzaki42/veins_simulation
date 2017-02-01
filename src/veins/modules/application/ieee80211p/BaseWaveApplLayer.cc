@@ -268,6 +268,7 @@ void BaseWaveApplLayer::generalInitializeVariables_executionByExpNumberMfcv() {
         SuseBeaconStatusBufferSize = par("useBeaconStatusBufferSize");
         StimeToUpdatePosition = par("vehTimeUpdatePosition");
         StimeLimitGenerateMessage = par("timeLimitGenerateMessage");
+        StimeGenerateNewMessage = par("timeGenerateNewMessage");
         SvehTimeLimitToAcceptGenerateMgs = par("vehTimeLimitToAcceptGenerateMgs");
 
         SexpNumber = par("expNumber").longValue();
@@ -318,6 +319,7 @@ void BaseWaveApplLayer::generalInitializeVariables_executionByExpNumberMfcv() {
         SprojectInfo += texTmp + "allowMessageCopy:_ " + boolToString(SallowMessageCopy);
         SprojectInfo += texTmp + "selectFromAllVehicles:_ " + boolToString(SselectFromAllVehicles);
         SprojectInfo += texTmp + "timeLimitGenerateMessage:_ " + to_string(StimeLimitGenerateMessage) + " s";
+        SprojectInfo += texTmp + "timeGenerateNewMessage:_ " + to_string(StimeGenerateNewMessage);
         SprojectInfo += texTmp + "messageHopLimit:_ " + to_string(SmessageHopLimit);
         SprojectInfo += texTmp + "messageBufferSize:_ " + to_string(SmessageBufferSize);
         SprojectInfo += texTmp + "expSendbyDSCR:_ " + to_string(SexpSendbyDSCR);
@@ -1752,7 +1754,7 @@ void BaseWaveApplLayer::handleSelfMsg(cMessage* msg) {
         }
         case SendEvtSelectVehGenerateMessage: {
             selectVehGenerateMessage();
-            scheduleAt(simTime() + par("timeGenerateNewMessage").doubleValue(), sendSelectVehGenerateMessageEvt);
+            scheduleAt(simTime() + StimeGenerateNewMessage, sendSelectVehGenerateMessageEvt);
             break;
         }
         case Send_EpidemicMessageRequestEvt: {

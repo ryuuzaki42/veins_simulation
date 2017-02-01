@@ -132,7 +132,7 @@ unsigned short int BaseWaveApplLayer::SbeaconTypeInitialize;
 unsigned short int BaseWaveApplLayer::SrepeatNumber, BaseWaveApplLayer::SexpNumber, BaseWaveApplLayer::SexpSendbyDSCR;
 unsigned short int BaseWaveApplLayer::ScountGenerateMessage, BaseWaveApplLayer::SttlMessage, BaseWaveApplLayer::SvehTimeLimitToAcceptGenerateMgs;
 
-unsigned short int BaseWaveApplLayer::SbeaconStatusBufferSize, BaseWaveApplLayer::SttlBeaconStatus;
+unsigned short int BaseWaveApplLayer::SbeaconStatusBufferSize, BaseWaveApplLayer::SttlBeaconStatus, BaseWaveApplLayer::StimeGenerateNewMessage;
 unsigned short int BaseWaveApplLayer::StimeLimitGenerateMessage, BaseWaveApplLayer::StimeToUpdatePosition, BaseWaveApplLayer::SmessageBufferSize;
 bool BaseWaveApplLayer::SuseBeaconStatusBufferSize;
 

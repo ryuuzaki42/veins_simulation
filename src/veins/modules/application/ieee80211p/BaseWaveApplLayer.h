@@ -186,7 +186,7 @@ class BaseWaveApplLayer : public BaseApplLayer {
         static int ScountMeetTotal, ScountMeetTwoCategory, ScountMeetJustOneCategory, ScountVehicleAll, SmessageId;
         static int ScountBeaconSend, ScountSummaryVectorSend, ScountRequestMessageVectorSend, ScountMessageOnlyDeliveryBus;
 
-        static unsigned short int SbeaconStatusBufferSize, SttlBeaconStatus, SbeaconTypeInitialize;
+        static unsigned short int SbeaconStatusBufferSize, SttlBeaconStatus, SbeaconTypeInitialize, StimeGenerateNewMessage;
         static unsigned short int StimeLimitGenerateMessage, StimeToUpdatePosition, SmessageBufferSize, SvehTimeLimitToAcceptGenerateMgs;
         static bool SuseBeaconStatusBufferSize;
 
