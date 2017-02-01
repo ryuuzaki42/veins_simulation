@@ -647,24 +647,27 @@ string mfcv::neighborWithShortestDistanceToTarge(string idMessage) {
 
                 if (insert) {
                     sD.categoryVeh = neighborCategory;
-                    sD.distanceToTargetNow = neighborDistanceNow;
                     sD.distanceToTargetBefore = neighborDistanceBefore;
                     sD.senderPos = senderPosNow;
                     sD.speedVeh = itBeaconNeighbors->second.getSenderSpeed();
                     sD.rateTimeToSendVeh = itBeaconNeighbors->second.getRateTimeToSend();
 
+                    sD.distanceToTargetNow = neighborDistanceNow; // 1
+                    sD.decisionValueDistanceSpeed = sD.distanceToTargetNow - (sD.speedVeh); // 12
+
+                    // 13
                     if (sD.categoryVeh.compare(SfirstCategoryPrivateCar) == 0) { // Private car
-                        sD.decisionValueDistanceCategory = sD.distanceToTargetNow; // equal to * 1
+                        sD.decisionValueDistanceCategory = sD.distanceToTargetNow;
                         meet1Cat = 1;
                     } else if (sD.categoryVeh.compare(SsecondCategoryBus) == 0) { // Bus
                         if (msgOnlyDeliveryFunctionResult == 2) {
-                            sD.decisionValueDistanceCategory = sD.distanceToTargetNow * 0.9;
+                            sD.decisionValueDistanceCategory = sD.distanceToTargetNow * SbusValueCategoryGoingTarget;
                         } else {
                             sD.decisionValueDistanceCategory = sD.distanceToTargetNow;
                         }
                         meet2Cat = 1;
                     } else if (sD.categoryVeh.compare(SthirdCategoryTaxi) == 0) { // Taxi
-                        sD.decisionValueDistanceCategory = sD.distanceToTargetNow * 0.95;
+                        sD.decisionValueDistanceCategory = sD.distanceToTargetNow * StaxiValueCategory;
                         meet3Cat = 1;
                     } else {
                         cout << endl << "JBe - Error category unknown - " << source << " category: " << sD.categoryVeh << endl;
@@ -674,13 +677,23 @@ string mfcv::neighborWithShortestDistanceToTarge(string idMessage) {
                         ASSERT2(0, "JBe - Error category unknown -");
                     }
 
-                    sD.decisionValueDistanceSpeed = sD.distanceToTargetNow - (sD.speedVeh);
-                    sD.decisionValueDistanceRateTimeToSend = sD.distanceToTargetNow + (double(sD.rateTimeToSendVeh)/100);
-                    sD.decisionValueDistanceCategoryRateTimeToSend = sD.decisionValueDistanceCategory + (double(sD.rateTimeToSendVeh)/100);
+                    sD.decisionValueDistanceRateTimeToSend = sD.distanceToTargetNow + (double(sD.rateTimeToSendVeh)/100); // 14
+                    sD.decisionValueDistanceSpeedCategory = sD.decisionValueDistanceCategory - (sD.speedVeh); // 123
+                    sD.decisionValueDistanceSpeedRateTimeToSend = sD.decisionValueDistanceSpeed + (double(sD.rateTimeToSendVeh)/100); // 124
+                    sD.decisionValueDistanceCategoryRateTimeToSend = sD.decisionValueDistanceCategory + (double(sD.rateTimeToSendVeh)/100); // 134
+                    sD.decisionValueDistanceSpeedCategoryRateTimeToSend = sD.decisionValueDistanceCategoryRateTimeToSend - (sD.speedVeh); // 1234
 
                     // Distance = [0 - 125] - 720 m
                     // vehicle Speed = 0 - (16.67/25) - 84 m/s
                     // rateTimeToSend = 100 to 5000 ms
+
+                    // Category - distanceToTargetNow
+                    //     Private car - D * 1
+                    //     Bus         - 1ª Test route - If <= 250 msg.target - send.OnlyDelivery(True)
+                    //                 - 2ª Test route - if <= 80% msg.target - D * StaxiValueCategory
+                    //                 - 3ª Test route - D * 1
+                    //     Taxi        - D * SbusValueCategoryGoingTarget
+
                     // DecisonValueDS = distance - speed
                     // DecisonValueDCR = distanceCategory + rateTimeToSend/100 (0.1 * 10)
 
@@ -739,20 +752,24 @@ void mfcv::printVehShortestDistanceToTarget(unordered_map <string, shortestDista
         cout << "    Position: " << mobility->getCurrentPosition() << endl;
         cout << "    RateTimeToSend: " << rateTimeToSend << endl;
 
-        cout << endl << "Printing vehShortestDistanceToTarget to " << source << " at: " << simTime() << endl;
+        cout << "\nPrinting vehShortestDistanceToTarget to " << source << " at: " << simTime() << "\n\n";
         unordered_map <string, shortestDistance>::iterator itShortestDistance;
         for (itShortestDistance = vehShortestDistanceToTarget.begin(); itShortestDistance != vehShortestDistanceToTarget.end(); itShortestDistance++) {
-            cout << "    Id(veh): " << itShortestDistance->first << endl;
-            cout << "    Position: " << itShortestDistance->second.senderPos << endl;
-            cout << "    Category: " << itShortestDistance->second.categoryVeh << endl;
-            cout << "    DistanceBefore: " << itShortestDistance->second.distanceToTargetBefore << endl;
-            cout << "    DistanceNow:    " << itShortestDistance->second.distanceToTargetNow << endl;
-            cout << "    Speed: " << itShortestDistance->second.speedVeh << endl;
-            cout << "    RateTimeToSend: " << itShortestDistance->second.rateTimeToSendVeh << endl;
-            cout << "    DistanceCategory: " << itShortestDistance->second.decisionValueDistanceCategory << endl;
-            cout << "    DecisionValueDistanceSpeed: " << itShortestDistance->second.decisionValueDistanceSpeed << endl;
-            cout << "    decisionValueDistanceRateTimeToSend: " << itShortestDistance->second.decisionValueDistanceRateTimeToSend << endl;
-            cout << "    DecisionValueDistanceCategoryRateTimeToSend: " << itShortestDistance->second.decisionValueDistanceCategoryRateTimeToSend << endl << endl;
+            cout << "\n    Id(veh): " << itShortestDistance->first;
+            cout << "\n    Position: " << itShortestDistance->second.senderPos;
+            cout << "\n    Category: " << itShortestDistance->second.categoryVeh;
+            cout << "\n    DistanceBefore: " << itShortestDistance->second.distanceToTargetBefore;
+            cout << "\n    Speed: " << itShortestDistance->second.speedVeh;
+            cout << "\n    RateTimeToSend: " << itShortestDistance->second.rateTimeToSendVeh;
+
+            cout << "\n       1 DistanceNow (decisionValueDistance):    " << itShortestDistance->second.distanceToTargetNow;
+            cout << "\n      12 DistanceSpeed: " << itShortestDistance->second.decisionValueDistanceSpeed;
+            cout << "\n      13 DistanceCategory: " << itShortestDistance->second.decisionValueDistanceCategory;
+            cout << "\n      14 DistanceRateTimeToSend: " << itShortestDistance->second.decisionValueDistanceRateTimeToSend;
+            cout << "\n     123 DistanceSpeedCategory: " << itShortestDistance->second.decisionValueDistanceSpeedCategory;
+            cout << "\n     124 DistanceSpeedRateTimeToSend: " << itShortestDistance->second.decisionValueDistanceSpeedRateTimeToSend;
+            cout << "\n     134 DistanceCategoryRateTimeToSend: " << itShortestDistance->second.decisionValueDistanceCategoryRateTimeToSend;
+            cout << "\n    1234 DistanceSpeedCategoryRateTimeToSend: " << itShortestDistance->second.decisionValueDistanceSpeedCategoryRateTimeToSend << "\n\n";
         }
     } else {
         cout << endl << "vehShortestDistanceToTarget to " << source << " at: " << simTime() << " vehShortestDistanceToTarget is empty" << endl << endl;
@@ -767,7 +784,7 @@ string mfcv::selectVehIdWithSmallValueBySexpSendbyDSCR(unordered_map <string, sh
 
         smallValueFound = DBL_MAX;
         for (itShortestDistance = vehShortestDistanceToTarget.begin(); itShortestDistance != vehShortestDistanceToTarget.end(); itShortestDistance++) {
-            //1: Distance - 2: Speed - 3: Category - 4: RateTimeToSend
+            // 1: Distance - 2: Speed - 3: Category - 4: RateTimeToSend
             switch (SexpSendbyDSCR) {
                 case 1: // Distance
                     valueToTest = itShortestDistance->second.distanceToTargetNow;
@@ -777,16 +794,21 @@ string mfcv::selectVehIdWithSmallValueBySexpSendbyDSCR(unordered_map <string, sh
                     break;
                 case 13: // DistanceCategory
                     valueToTest = itShortestDistance->second.decisionValueDistanceCategory;
-                    //valueToTest = itShortestDistance->second.distanceToTargetNow; TODO test
                     break;
-////######################################################################################################
-//              case 14:   DistanceRateTimeToSend
-//              case 123:  DistanceSpeedCategory
-//              case 124:  DistanceSpeedRateTimeToSend
-//              case 1234: DistanceSpeedCategoryRateTimeToSend
-////######################################################################################################
-                case 134:
+                case 14: // DistanceRateTimeToSend
+                    valueToTest = itShortestDistance->second.decisionValueDistanceRateTimeToSend;
+                    break;
+                case 123: // DistanceSpeedCategory
+                    valueToTest = itShortestDistance->second.decisionValueDistanceSpeedCategory;
+                    break;
+                case 124: // DistanceSpeedRateTimeToSend
+                    valueToTest = itShortestDistance->second.decisionValueDistanceSpeedRateTimeToSend;
+                    break;
+                case 134: // DistanceCategoryRateTimeToSend
                     valueToTest = itShortestDistance->second.decisionValueDistanceCategoryRateTimeToSend;
+                    break;
+                case 1234: // DistanceSpeedCategoryRateTimeToSend
+                    valueToTest = itShortestDistance->second.decisionValueDistanceSpeedCategoryRateTimeToSend;
                     break;
                 default:
                     cout << "JBe - Error! expSendbyDSCR: " << SexpSendbyDSCR << " not defined, class in mfcv.cc -";
