@@ -243,6 +243,8 @@ void BaseWaveApplLayer::generalInitializeVariables_executionByExpNumberMfcv() {
 
         SbusValueCategoryGoingTarget = par("busValueCategoryGoingTarget").doubleValue();
         StaxiValueCategory = par("taxiValueCategory").doubleValue();
+        SrateTimeToSendModDecision = par("rateTimeToSendModDecision").doubleValue();
+        SspeedModDecision = par("speedModDecision").doubleValue();
 
         SbufferMessageOnlyDeliveryLimit = par("bufferMessageOnlyDeliveryLimit");
         ScountToDeliveryMsg = ScountToDeliveryMsgUnicID = SmsgUseOnlyDeliveryBufferGeneral = 0;
@@ -340,8 +342,10 @@ void BaseWaveApplLayer::generalInitializeVariables_executionByExpNumberMfcv() {
             SprojectInfo += texTmp + "timeToUpdatePosition:_ " + to_string(StimeToUpdatePosition) + " s";
             SprojectInfo += texTmp + "bufferMessageOnlyDeliveryLimit:_ " + to_string(SbufferMessageOnlyDeliveryLimit);
 
-            SprojectInfo += texTmp + "SbusValueCategoryGoingTarget:_ " + to_string(SbusValueCategoryGoingTarget);
+            SprojectInfo += texTmp + "busValueCategoryGoingTarget:_ " + to_string(SbusValueCategoryGoingTarget);
             SprojectInfo += texTmp + "taxiValueCategory:_ " + to_string(StaxiValueCategory);
+            SprojectInfo += texTmp + "rateTimeToSendModDecision:_ " + to_string(SrateTimeToSendModDecision);
+            SprojectInfo += texTmp + "speedModDecision:_ " + to_string(SspeedModDecision);
         } else if (SbeaconTypeInitialize == 2) {
             SprojectInfo += texTmp + "sendSummaryVectorInterval:_ " + to_string(SsendSummaryVectorInterval) + " s";
         } else {

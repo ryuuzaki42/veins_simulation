@@ -67,6 +67,8 @@ simple BaseWaveApplLayer like IBaseApplLayer {
 
         double busValueCategoryGoingTarget = default(0); // Value (double) to use when use categories and has a bus in the neighbors
         double taxiValueCategory = default(0); // Value (double) to use when use categories and has a taxi in the neighbors
+        double rateTimeToSendModDecision = default(0); // Value * rateTimeToSend when use S in DSCR to select the next node
+        double speedModDecision = default(0); // Value * speed when use S in DSCR to select the next node
 
     gates:
         input lowerLayerIn; // from mac layer
