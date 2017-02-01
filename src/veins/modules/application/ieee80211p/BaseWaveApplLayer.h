@@ -33,7 +33,7 @@ class BaseWaveApplLayer : public BaseApplLayer {
         virtual void initialize_veins_TraCI(int stage);
         virtual void finish();
 
-        virtual  void receiveSignal(cComponent* source, simsignal_t signalID, cObject* obj, cObject* details);
+        virtual  void receiveSignal(cComponent* source, simsignal_t signalId, cObject* obj, cObject* details);
 
         enum WaveApplMessageKinds {
             SERVICE_PROVIDER = LAST_BASE_APPL_MESSAGE_KIND,
@@ -60,7 +60,7 @@ class BaseWaveApplLayer : public BaseApplLayer {
 //######################################### MFCV #############################################
         //## Used to another projects
         void generalInitializeVariables_executionByExpNumberMfcv();
-        string getFolderResultMfcv(unsigned short int experimentSendbyDSR);
+        string getFolderResultMfcv();
         void generateMessageMfcvAndEpidemic();
 
         void toFinishRSU();
@@ -70,7 +70,7 @@ class BaseWaveApplLayer : public BaseApplLayer {
         void restartFilesResultRSU();
         void restartFilesResultVeh(string projectInfo, Coord initialPos);
         void saveVehStartPositionVeh(string fileNameLocation, Coord initialPos);
-        void insertMessageDropVeh(string ID, unsigned short int type, simtime_t timeGenarted);
+        void insertMessageDropVeh(string Id, unsigned short int type, simtime_t timeGenarted);
 
         void printCountMessagesReceivedRSU();
         void messagesReceivedMeasuringRSU(WaveShortMessage* wsm);
@@ -137,7 +137,7 @@ class BaseWaveApplLayer : public BaseApplLayer {
         Coord curPosition;
 
         string source, target;
-        static int ScountToDeliveryMsg, ScountToDeliveryMsgUnicID;
+        static int ScountToDeliveryMsg, ScountToDeliveryMsgUniqueId;
         static unsigned int SbufferMessageOnlyDeliveryLimit;
         int countToDeliveryMsgLocal; // Count of message toDelivery received by one rsu
 
@@ -158,7 +158,7 @@ class BaseWaveApplLayer : public BaseApplLayer {
         cMessage* sendSelectVehGenerateMessageEvt;
         cMessage* getTrafficEvtMethodCheck;
 
-        static mt19937 mtSelectVehicleGenarateMessage, mtTargetMessageSelect, mtSelectLaneName;
+        static mt19937 mtSelectVehicleGenerateMessage, mtTargetMessageSelect, mtSelectLaneName;
 
         double vehOffSet;
 
@@ -171,7 +171,7 @@ class BaseWaveApplLayer : public BaseApplLayer {
         unsigned short int target_x, target_y;
         static unordered_map <int, Coord> SrsuPositions;
         unsigned int msgBufferUse;
-        static double SbusValueCategoryGoingTarget, StaxiValueCategory;
+        static double SbusValueCategoryGoingTarget, SbusPercentageRouteGoTarget, StaxiValueCategory;
         static double SrateTimeToSendModDecision, SspeedModDecision;
 
         static string SfileMessagesUnicastVeh, SfileMessagesDropVeh;
@@ -182,7 +182,7 @@ class BaseWaveApplLayer : public BaseApplLayer {
         static unsigned short int SrepeatNumber, SexpNumber, SexpSendbyDSCR, ScountGenerateMessage, SttlMessage;
 
         static int SmsgDroppedbyTTL, SmsgDroppedbyCopy, SmsgDroppedbyBuffer, ScountVehicleBus, ScountVehicleTaxi;
-        static int ScountMsgPacketSend, SmsgBufferUseGeneral, SmessageHopLimit, ScountMesssageDrop;
+        static int ScountMsgPacketSend, SmsgBufferUseGeneral, SmessageHopLimit, ScountMessageDrop;
         static int ScountMeetTotal, ScountMeetTwoCategory, ScountMeetJustOneCategory, ScountVehicleAll, SmessageId;
         static int ScountBeaconSend, ScountSummaryVectorSend, ScountRequestMessageVectorSend, ScountMessageOnlyDeliveryBus;
 
@@ -228,7 +228,7 @@ class BaseWaveApplLayer : public BaseApplLayer {
         static unordered_map <string, busPosByTime> SposTimeBus; // To save bus position in a .csv
         static unordered_map <string, busPosByTime> SposTimeBusLoaded; // To load bus position to memory form a .csv
         static vector <string > SlaneNameLoaded; // To load lane name to memory form a .csv
-        static unordered_map <string, string> SrouteIDVehID; // routeID - vehID
+        static unordered_map <string, string> SrouteIdVehId; // routeId - vehId
 
         struct targetResultMsg {
             unsigned int totalMessageReceived, messageHopDiffZero, messageHopEqualZero;
