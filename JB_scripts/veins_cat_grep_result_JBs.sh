@@ -22,7 +22,7 @@
 #
 # Script: Grep result from a file
 #
-# Last update: 31/01/2017
+# Last update: 01/02/2017
 #
 if [ "$1" != "noHead" ]; then
     echo -e "\nThis script grep values from a result from a file"
@@ -50,9 +50,15 @@ else
     op11="Final count messages drop:"
     op12="Final average buffer use:"
     op13="Final buffer use total general:"
+    op14="Final count packets messages send:"
+    op15="count SummaryVectorSend:"
+    op16="Epidemic count RequestMessageVectorSend:"
+    op17="Epidemic \(full\) is the sum of those 3:"
 
-    countOption=13
+    countOption=17
     optionInput=$2
+
+    ((countOption++))
     if [ "$optionInput" == '' ]; then
         i=1
         while [ "$i" -lt "$countOption" ]; do
@@ -74,7 +80,7 @@ else
         read optionInput
     fi
 
-    if [ $optionInput -eq "88" ]; then
+    if [ "$optionInput" == "88" ]; then
         i=1
         while [ "$i" -lt "$countOption" ]; do
             $0 noHead $fileName $i
@@ -82,16 +88,16 @@ else
         done
 
         exit 0
-    elif [ "$optionInput" -eq "99" ]; then
+    elif [ "$optionInput" == "99" ]; then
         echo -en "\nInsert the value to be used in the grep: "
         read grepValue
     else
         opTmp="op$optionInput"
-        grepValue=`echo ${!opTmp}`
+        grepValue=`echo "${!opTmp}"`
     fi
 
     if [ "$grepValue" == '' ]; then
-        echo -e "\n## Error - option \"$optionInput\" is unknown\n"
+        echo -e "\n## Error - option \"$optionInput\" is unknown"
     else
         echo -e "\n## Grep the value: $optionInput - \"${!opTmp}\""
         grepResult=`cat $fileName | grep -E "$grepValue|## Working in the folder.*run_0" | sed 's/## Working in the folder.*run_0//g'`
