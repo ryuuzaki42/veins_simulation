@@ -172,7 +172,7 @@ class BaseWaveApplLayer : public BaseApplLayer {
         static unordered_map <int, Coord> SrsuPositions;
         unsigned int msgBufferUse;
         static double SbusValueCategoryGoingTarget, SbusPercentageRouteGoTarget, StaxiValueCategory;
-        static double SrateTimeToSendModDecision, SspeedModDecision;
+        static double SrateTimeToSendModDecision, SspeedModDecision, SnormalTimeSendMessage;
 
         static string SfileMessagesUnicastVeh, SfileMessagesDropVeh;
         static string SfileMessagesCountRsu, SfileMessagesGeneratedVehRsu, SresultFolder;

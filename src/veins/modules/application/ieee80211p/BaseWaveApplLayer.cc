@@ -245,6 +245,7 @@ void BaseWaveApplLayer::generalInitializeVariables_executionByExpNumberMfcv() {
         StaxiValueCategory = par("taxiValueCategory").doubleValue();
         SrateTimeToSendModDecision = par("rateTimeToSendModDecision").doubleValue();
         SspeedModDecision = par("speedModDecision").doubleValue();
+        SnormalTimeSendMessage = par("normalTimeSendMessage").doubleValue();
         SbusPercentageRouteGoTarget = par("busPercentageRouteGoTarget").doubleValue();
 
         SbufferMessageOnlyDeliveryLimit = par("bufferMessageOnlyDeliveryLimit");
@@ -331,11 +332,7 @@ void BaseWaveApplLayer::generalInitializeVariables_executionByExpNumberMfcv() {
         SprojectInfo += texTmp;
         if (SbeaconTypeInitialize == 1) {
             SprojectInfo += texTmp + "useRateTimeToSend:_ " + boolToString(SuseRateTimeToSend);
-            if (!SuseRateTimeToSend) {
-                stringstream ss;
-                ss << fixed << setprecision(1) << par("normalTimeSendMessage").doubleValue();
-                SprojectInfo += texTmp + "normalTimeSendMessage:_ " + ss.str() + " s";
-            }
+            SprojectInfo += texTmp + "normalTimeSendMessage:_ " + to_string(SnormalTimeSendMessage) + " s";
 
             SprojectInfo += texTmp + "ttlBeaconStatus:_ " + to_string(SttlBeaconStatus) + " s";
             SprojectInfo += texTmp + "beaconStatusBufferSize:_ " + to_string(SbeaconStatusBufferSize);
@@ -358,7 +355,6 @@ void BaseWaveApplLayer::generalInitializeVariables_executionByExpNumberMfcv() {
         }
 
         SprojectInfo += getCFGVAR();
-
         cout << endl << SprojectInfo << endl;
     }
 }

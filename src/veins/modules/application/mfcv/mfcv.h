@@ -126,7 +126,7 @@ int BaseWaveApplLayer::ScountMeetTotal, BaseWaveApplLayer::ScountVehicleAll, Bas
 int BaseWaveApplLayer::ScountBeaconSend, BaseWaveApplLayer::ScountSummaryVectorSend, BaseWaveApplLayer::ScountRequestMessageVectorSend;
 
 double BaseWaveApplLayer::SbusValueCategoryGoingTarget, BaseWaveApplLayer::SbusPercentageRouteGoTarget, BaseWaveApplLayer::StaxiValueCategory;
-double BaseWaveApplLayer::SrateTimeToSendModDecision, BaseWaveApplLayer::SspeedModDecision;
+double BaseWaveApplLayer::SrateTimeToSendModDecision, BaseWaveApplLayer::SspeedModDecision, BaseWaveApplLayer::SnormalTimeSendMessage;
 
 unsigned short int BaseWaveApplLayer::SbeaconTypeInitialize;
 unsigned short int BaseWaveApplLayer::SrepeatNumber, BaseWaveApplLayer::SexpNumber, BaseWaveApplLayer::SexpSendbyDSCR;
