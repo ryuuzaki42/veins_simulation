@@ -22,7 +22,7 @@
 #
 # Script: limpa o histórico de resultados de execução do framework Veins
 #
-# Last update: 24/11/2016
+# Last update: 01/02/2017
 #
 cd $veinsFolder # veinsFolder (change in your ~/.bashrc)
 
@@ -33,17 +33,17 @@ echo -e "\tprojects/*/.tkenvrc"
 echo -e "\tprojects/*/run.r"
 echo -e "\tprojects/*/runExperimentOuptut.r"
 
-echo -e "\nList of files that will be deleted:\n"
-ls -r projects/*/results/
-ls projects/*/.tkenvrc
-ls projects/*/.tkenvlog
-ls projects/*/run.r
-ls projects/*/runExperimentOuptut.r
+echo -e "\nList of file(s) that will be deleted:\n"
+find projects/*/results/ 2> /dev/null | sort && echo
+find projects/*/.tkenvrc 2> /dev/null && echo
+find projects/*/.tkenvlog 2> /dev/null && echo
+find projects/*/run.r 2> /dev/null && echo
+find projects/*/runExperimentOuptut.r 2> /dev/null && echo
 
-echo -en "\nWant continue? (y)es - (n)o: "
-read resposta
+echo -n "Want continue? (y)es - (n)o: "
+read continueOrNot
 
-if [ "$resposta" = 'y' ]; then # Change "projects" for your project folder
+if [ "$continueOrNot" = 'y' ]; then # Change "projects" for your project folder
     rm -r projects/*/results/
     rm projects/*/.tkenvrc
     rm projects/*/.tkenvlog
