@@ -22,7 +22,7 @@
 #
 # Script: Script that load config Veins/OMNeT and SUMO needed
 #
-# Last update: 08/01/2016
+# Last update: 01/02/2017
 #
 
 ## Veins add in ~/.bashrc - Path can be different in your PC
@@ -74,7 +74,7 @@ veins_RunExperiment() {
     opp_run -r $runExperimentI..$runExperimentF -n ../../src/veins/ -u Cmdenv -l ../../out/gcc-debug/src/libveins_simulation.so "$iniFile"
 
     echo -e "\n\nExperiment starts date: $dateStart"
-    echo -e "Experiment ends date: `date`\n" # End of runing experiment
+    echo -e "Experiment ends date: `date`\n" # End of running experiment
 }
 alias opp-exc=veins_RunExperiment
 alias opp-exc-res="veins_RunExperiment > results/ExperimentOutput.r"
