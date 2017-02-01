@@ -23,16 +23,16 @@
 # Script: Cria um versão zipada do pasta veins_simulation em um pasta
 # no Dropbox (dropboxFolderDest)
 #
-# Last update: 29/01/2017
+# Last update: 01/02/2017
 #
 dropboxFolderDest="/media/sda2/prog/Dropbox/z_share_code_JB" # Dropbox destination folder
 veinsFolderOri=$veinsFolder # veinsFolder (change in your ~/.bashrc)
 veinsNameFolder=`echo $veinsFolder | rev | cut -d"/" -f1 | rev`
 
-echo -en "\nWith version want generate? - Valid 01, 02, 03 etc: "
+echo -en "\nWith version want generate? - Valid v01, v02, v03 etc: "
 read versionInput
 
-veinsVersion="veins_v$versionInput-full"
+veinsVersion="veins_$versionInput-full"
 echo "veinsVersion: $veinsVersion"
 
 echo -e "\nThis script create a \"$veinsVersion.zip\" from ($veinsFolderOri/)"
