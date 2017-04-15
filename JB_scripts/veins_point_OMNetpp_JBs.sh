@@ -22,11 +22,11 @@
 #
 # Script: Script to convert SUMO point to OMNeT++ points
 #
-# last update: 20/11/2016
+# last update: 14/04/2017
 #
-echo "\n# Script to convert the SUMO point to OMNeT #\n"
+echo -e "\n# Script to convert the SUMO point to OMNeT #\n"
 
-if [ $# -eq 6 ]; then
+if [ "$#" -eq '6' ]; then
     #$1 -n
     netFile=$2 # .net.xml
     # $3 -x
@@ -36,23 +36,23 @@ if [ $# -eq 6 ]; then
 
     echo -e "Getting the boundaries to $netFile\n"
     fileTmp="tmp_" # Create a tmp "net.xml" file
-    fileTmp+=`date +%s | md5sum | head -c 10` # Add some random part
+    fileTmp+=$(date +%s | md5sum | head -c 10) # Add some random part
     fileTmp+="net.xml"
 
-    boundaryNetFile=`netconvert -s $netFile -o $fileTmp -v | grep "Original boundary" | awk '{print $4}'` # Run netconvert to get boundaries
+    boundaryNetFile=$(netconvert -s "$netFile" -o "$fileTmp" -v | grep "Original boundary" | awk '{print $4}') # Run netconvert to get boundaries
 
-    rm $fileTmp # Delete tmpfile
+    rm "$fileTmp" # Delete tmpfile
 
-    boundaryXLeft=`echo "$boundaryNetFile" | cut -d',' -f1` # Get x left
-    boundaryYLeft=`echo "$boundaryNetFile" | cut -d',' -f2` # Get y left
-    boundaryXRight=`echo "$boundaryNetFile" | cut -d',' -f3` # Get x right
-    boundaryYRight=`echo "$boundaryNetFile" | cut -d',' -f4` # Get y right
+    boundaryXLeft=$(echo "$boundaryNetFile" | cut -d',' -f1) # Get x left
+    boundaryYLeft=$(echo "$boundaryNetFile" | cut -d',' -f2) # Get y left
+    boundaryXRight=$(echo "$boundaryNetFile" | cut -d',' -f3) # Get x right
+    boundaryYRight=$(echo "$boundaryNetFile" | cut -d',' -f4) # Get y right
 
     echo -e "\nBoundary of $netFile: $boundaryNetFile or ($boundaryXLeft, $boundaryYLeft) to ($boundaryXRight, $boundaryYRight)"
 
     if [ "$boundaryXLeft" == "0.00" ] && [ "$boundaryYLeft" == "0.00" ]; then # Test if boundaryXLeft and boundaryYLeft are 0.00
-        xFinalPos=`echo "scale=2; ($xPoint)" | bc`
-        yFinalPos=`echo "scale=2; ($boundaryYRight - $yPoint)" | bc`
+        xFinalPos=$(echo "scale=2; ($xPoint)" | bc)
+        yFinalPos=$(echo "scale=2; ($boundaryYRight - $yPoint)" | bc)
 
         echo -e "\nNetwork file: $netFile\nPoints ($xPoint, $yPoint)\nIn the  in the OMNeT++: ($xFinalPos, $yFinalPos)\n"
     else
