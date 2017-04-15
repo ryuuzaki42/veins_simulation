@@ -22,9 +22,9 @@
 #
 # Script: Create the run line to run in the opp_runall
 #
-# last update: 20/11/2016
+# last update: 14/04/2017
 #
-if [ $# -lt 4 ]; then # Test at least tree parameters
+if [ "$#" -lt 4 ]; then # Test at least tree parameters
     echo -e "\nError in the parameters"
     echo "To run: opp_runall -j3 veins_opp_runall_JBr.sh -f omnet.ini -r 0..2"
     echo " opp_runall - opp_runall command"
@@ -38,29 +38,29 @@ else
     #$3 is -r
     runNumber=$4
 
-    if [ -e $iniFile ]; then
+    if [ -e "$iniFile" ]; then
         export TZ=America/Sao_Paulo # Set timezone to America/Sao_Paulo
 
-        fileResult="results/run_"$runNumber".r"
+        fileResult="results/run_${runNumber}.r"
         mkdir results 2> /dev/null # create the results folder if not exists
 
-        dateStart=`date` # Start running experiment
-        dateStartSeconds=`date +%s`
-        echo -e "\nExperiment run $runNumber staring at: $dateStart" | tee $fileResult
+        dateStart=$(date) # Start running experiment
+        dateStartSeconds=$(date +%s)
+        echo -e "\nExperiment run $runNumber staring at: $dateStart" | tee "$fileResult"
 
-        echo -e "\nRunning: opp_run -u Cmdenv -n ../../src/veins/ -l ../../out/gcc-debug/src/libveins_simulation.so -f $iniFile -r $runNumber >> $fileResult\n" | tee -a $fileResult
-        opp_run -u Cmdenv -n ../../src/veins/ -l ../../out/gcc-debug/src/libveins_simulation.so -f $iniFile -r $runNumber >> $fileResult # running experiment
+        echo -e "\nRunning: opp_run -u Cmdenv -n ../../src/veins/ -l ../../out/gcc-debug/src/libveins_simulation.so -f $iniFile -r $runNumber >> $fileResult\n" | tee -a "$fileResult"
+        opp_run -u Cmdenv -n ../../src/veins/ -l ../../out/gcc-debug/src/libveins_simulation.so -f "$iniFile" -r "$runNumber" >> "$fileResult" # running experiment
 
-        dateEnd=`date` # End running experiment
-        echo -e "\nExperiment run $runNumber starts at: $dateStart" | tee -a $fileResult
-        echo -e "Experiment run $runNumber ends at: $dateEnd" | tee -a $fileResult
+        dateEnd=$(date) # End running experiment
+        echo -e "\nExperiment run $runNumber starts at: $dateStart" | tee -a "$fileResult"
+        echo -e "Experiment run $runNumber ends at: $dateEnd" | tee -a "$fileResult"
 
-        dateEndSeconds=`date +%s`
-        dateDiffSeconds=`echo "($dateEndSeconds - $dateStartSeconds)" | bc`
-        dateDiffMin=`echo "scale=2; $dateDiffSeconds/60" | bc`
-        dateDiffHour=`echo "scale=2; $dateDiffSeconds/(60*60)" | bc`
-        echo -e "Time spent in run $runNumber: $dateDiffSeconds s - or $dateDiffMin min - or $dateDiffHour h\n" | tee -a $fileResult
+        dateEndSeconds=$(date +%s)
+        dateDiffSeconds=$(echo "($dateEndSeconds - $dateStartSeconds)" | bc)
+        dateDiffMin=$(echo "scale=2; $dateDiffSeconds/60" | bc)
+        dateDiffHour=$(echo "scale=2; $dateDiffSeconds/(60*60)" | bc)
+        echo -e "Time spent in run $runNumber: $dateDiffSeconds s - or $dateDiffMin min - or $dateDiffHour h\n" | tee -a "$fileResult"
     else
-        echo -e "\nError: $iniFile not exists\n" | tee $fileResult
+        echo -e "\nError: $iniFile not exists\n" | tee "$fileResult"
     fi
 fi
