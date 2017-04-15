@@ -22,40 +22,40 @@
 #
 # Script: Save configs from a omnet.ini file
 #
-# last update: 01/12/2016
+# last update: 14/04/2017
 #
-countIniFile=`ls *.ini | wc -l`
+countIniFile=$(find ./*.ini | wc -l)
 
 if [ "$countIniFile" == '' ]; then
     echo -e  "\nError: the \"omnet.ini\" not found\n"
-elif [ $countIniFile -gt 1 ]; then
+elif [ "$countIniFile" -gt '1' ]; then
     echo -e "\nError: the has more than one \"omnet.ini\" file\n"
 else # $countIniFile == 1
-    # grep some values from omnet.ini file
-    iniFileGrepAdd=`cat *.ini | grep -E "\*.\*.appl.|sim|rsu.*.mobility|txPower|pMax|^$|launchConfig"`
-    #echo -e "##\n$iniFileGrepAdd\n##"
+    # Grep some values from ./*.ini file
+    iniFileGrepAdd=$(cat ./*.ini | grep -E "\*.\*.appl.|sim|rsu.*.mobility|txPower|pMax|^$|launchConfig")
 
-    # remove some value from grep previous
-    iniFileGrepRm=`echo "$iniFileGrepAdd" | grep -v -E "^#|raffic|folder|cout|mobility.z"`
-    #echo -e "##\n$iniFileGrepRm\n##"
+    # Remove some value from grep previous
+    iniFileGrepRm=$(echo "$iniFileGrepAdd" | grep -v -E "^#|raffic|folder|cout|mobility.z")
 
-    # replace multiple empty line with one empty line
-    iniFileSedEmptyLine=`echo "$iniFileGrepRm" | sed '/^$/N;/^\n$/D'`
-    #echo -e "##\n$iniFileSedEmptyLine\n##"
+    # Replace multiple empty line with one empty line
+    iniFileSedEmptyLine=$(echo "$iniFileGrepRm" | sed '/^$/N;/^\n$/D')
 
     inputValue=$1
     if [ "$inputValue" != "inTheTerminal" ]; then
         echo -en "\nFile name to save the config: "
-        read fileNameSave
+        read -r fileNameSave
 
         echo -e "\nType some information about this in this config: "
-        read newInformationAdd
+        read -r newInformationAdd
 
-        echo -e "\n\n\n\n\n###############################################################" > $fileNameSave
-        echo -e "\n# Config saved #" > $fileNameSave
-        echo -e "\nInformation about this config:\n$newInformationAdd" >> $fileNameSave
+        {
+            echo -e "\n\n\n\n\n###############################################################"
+            echo -e "\n# Config saved #"
+            echo -e "\nInformation about this config:\n$newInformationAdd"
 
-        echo -e "\n## Config\n$iniFileSedEmptyLine" >> $fileNameSave
+            echo -e "\n## Config\n$iniFileSedEmptyLine"
+        } >> "$fileNameSave"
+
         echo -e "\n\tConfig saved in the file $fileNameSave\n"
     else
         echo -e "\n\n\n\n\n###############################################################"
@@ -65,6 +65,6 @@ else # $countIniFile == 1
     fi
 
     echo -e "\n\n\n\n\n############################## .ini file ##############################\n"
-    cat *.ini
+    cat ./*.ini
     echo -e "\n############################## .ini file ##############################\n"
 fi
