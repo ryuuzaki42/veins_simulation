@@ -23,14 +23,14 @@
 # Script: Cria uma pasta no Dropbox ($dropboxFolderDest) com as
 # configurações necessárias (*.ini, *.ned etc) e depois zip essa pasta (veins_v001.zip)
 #
-# Last update: 14/04/2017
+# Last update: 16/12/2017
 #
 dropboxFolderDest="/media/sda2/prog/Dropbox/z_share_code_JB" # Dropbox destination folder
 veinsFolderOri=$veinsFolder # veinsFolder (change in your ~/.bashrc)
 veinsVersion="veins_v01-configs"
 
-echo -e "\nThis script create a \"$veinsVersion.zip\" from ($veinsFolderOri/)"
-echo -e "in a Dropbox ($dropboxFolderDest/) and delete sensitive data\n"
+echo -e "\\nThis script create a \"$veinsVersion.zip\" from ($veinsFolderOri/)"
+echo -e "in a Dropbox ($dropboxFolderDest/) and delete sensitive data\\n"
 
 cd "$dropboxFolderDest" || exit
 folderCP="$dropboxFolderDest/$veinsVersion"
@@ -57,10 +57,10 @@ cp -r "$veinsFolderOri/src/" "$folderCP/" # Copy the src to veins_v001
 cd "$folderCP/src/" || exit # Move to src veins_v001 folder
 rm ./*.so
 
-delCC=$(find . | grep "\.cc") # Get all .cc files
+delCC=$(find . | grep "\\.cc") # Get all .cc files
 rm "$delCC" # Delete the .cc files
 
-delH=$(find . | grep "\.h") # Get all .h files
+delH=$(find . | grep "\\.h") # Get all .h files
 rm "$delH" # Delete the .h files
 
 dirEmpty=$(find . -type d -empty) # Get all empty directories
@@ -69,5 +69,5 @@ rmdir "$dirEmpty" # Delete the empty directories
 cd ../.. || exit # Move up two levels
 
 zip -r "$veinsVersion.zip" "$veinsVersion/"
-echo -e "\nThe \"$veinsVersion.zip\" was created in \"$veinsFolderOri\"/\n"
+echo -e "\\nThe \"$veinsVersion.zip\" was created in \"$veinsFolderOri\"/\\n"
 rm -r "$veinsVersion"
