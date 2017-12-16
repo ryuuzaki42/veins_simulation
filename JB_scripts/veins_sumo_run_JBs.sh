@@ -22,18 +22,18 @@
 #
 # Script: Run SUMO (sumo ou sumo-gui) as the framework Veins need
 #
-# last update: 14/04/2017
+# last update: 16/12/2017
 #
-echo -e "\npython sumo-launchd.py -vv -c (\"sumo-gui\"|\"sumo\")"
-echo -e "\nWant run sumo-gui or sumo?"
+echo -e "\\npython sumo-launchd.py -vv -c (\"sumo-gui\"|\"sumo\")"
+echo -e "\\nWant run sumo-gui or sumo?"
 echo -en "(y)es to sumo-gui - (n)o to sumo: "
 read -r sumoRun
 
 cd "$veinsFolder" || exit # veinsFolder (change in your ~/.bashrc)
 if [ "$sumoRun" = 'y' ]; then
-    echo -e "\nRunning sumo-gui\n"
+    echo -e "\\nRunning sumo-gui\\n"
     python sumo-launchd.py -vv -c sumo-gui
 else
-    echo -e "\nRunning sumo\n"
+    echo -e "\\nRunning sumo\\n"
     python sumo-launchd.py -vv -c sumo
 fi
