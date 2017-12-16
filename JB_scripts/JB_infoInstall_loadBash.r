@@ -22,7 +22,7 @@
 #
 # Script: Script that load configuration Veins/OMNeT and SUMO needed
 #
-# Last update: 14/04/2017
+# Last update: 16/12/2017
 #
 ## Veins add in ~/.bashrc - Path can be different in your PC
 #. /media/sda2/prog/git_clone/8_veins_simulation/JB_scripts/JB_infoInstall_loadBash.r # copy and uncomment (don't remove the . (dot))
@@ -51,16 +51,16 @@ alias veins_folder_cd='cd $veinsFolder'
 
 veins_RunExperiment() {
     dateStart=$(date) # Start running experiments
-    echo -e "\nExperiments staring at: $dateStart"
+    echo -e "\\nExperiments staring at: $dateStart"
 
     # get initial variables
-    iniFile="$1"
-    runExperimentI="$2"
-    runExperimentF="$3"
+    iniFile=$1
+    runExperimentI=$2
+    runExperimentF=$3
 
     # cd veins folder, make and go back
     veins_folder_cd
-    echo -e "\nMake the files in the folder \"$(pwd)\"\n"
+    echo -e "\\nMake the files in the folder \"$(pwd)\"\\n"
     make
     cd - || exit
 
@@ -69,11 +69,11 @@ veins_RunExperiment() {
         runExperimentF='0'
     fi
 
-    echo -e "\nRunning: opp_run -r $runExperimentI..$runExperimentF -n ../../src/veins/ -u Cmdenv -l ../../out/gcc-debug/src/libveins_simulation.so $iniFile\n"
+    echo -e "\\nRunning: opp_run -r $runExperimentI..$runExperimentF -n ../../src/veins/ -u Cmdenv -l ../../out/gcc-debug/src/libveins_simulation.so $iniFile\\n"
     opp_run -r "$runExperimentI..$runExperimentF" -n ../../src/veins/ -u Cmdenv -l ../../out/gcc-debug/src/libveins_simulation.so "$iniFile"
 
-    echo -e "\n\nExperiment starts date: $dateStart"
-    echo -e "Experiment ends date: $(date)\n" # End of running experiment
+    echo -e "\\n\\nExperiment starts date: $dateStart"
+    echo -e "Experiment ends date: $(date)\\n" # End of running experiment
 }
 alias opp-exc=veins_RunExperiment
 alias opp-exc-res="veins_RunExperiment > results/ExperimentOutput.r"
