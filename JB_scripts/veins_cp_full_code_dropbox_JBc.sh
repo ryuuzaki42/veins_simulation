@@ -22,20 +22,20 @@
 #
 # Script: Create a ziped version of veins_simulation/ folder in the Dropbox ($dropboxFolderDest)
 #
-# Last update: 15/04/2017
+# Last update: 16/12/2017
 #
 dropboxFolderDest="/media/sda2/prog/Dropbox/z_share_code_JB" # Dropbox destination folder
 veinsFolderOri=$veinsFolder # veinsFolder (change in your ~/.bashrc)
 veinsNameFolder=$(echo "$veinsFolder" | rev | cut -d"/" -f2 | rev)
 
-echo -en "\nWith version want generate? - Valid v01, v02, v03 etc: "
+echo -en "\\nWith version want generate? - Valid v01, v02, v03 etc: "
 read -r versionInput
 
 veinsVersion="veins_$versionInput-full"
 echo "veinsVersion: $veinsVersion"
 
-echo -e "\nThis script create a \"$veinsVersion.zip\" from ($veinsFolderOri/)"
-echo -e "in the Dropbox ($dropboxFolderDest/) with out log files\n"
+echo -e "\\nThis script create a \"$veinsVersion.zip\" from ($veinsFolderOri/)"
+echo -e "in the Dropbox ($dropboxFolderDest/) with out log files\\n"
 
 rm "$dropboxFolderDest/$veinsVersion.zip" 2> /dev/null # Delete older $veinsVersion.zip if exists
 
@@ -54,5 +54,5 @@ rm "$veinsVersion.zip" # Delete the last $veinsVersion.zip
 mv "$veinsNameFolder" "$veinsVersion" # Rename the folder to veinsVersion
 
 zip -r "$veinsVersion.zip" "$veinsVersion" # Zip $veinsVersion in $veinsVersion.zip
-echo -e "\nThe \"$veinsVersion.zip\" was created from \"$veinsFolderOri\"\n"
+echo -e "\\nThe \"$veinsVersion.zip\" was created from \"$veinsFolderOri\"\\n"
 rm -r "$veinsVersion" # Delete de $veinsVersion folder
