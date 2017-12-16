@@ -22,16 +22,16 @@
 #
 # Script: Create the run line to run in the opp_runall
 #
-# last update: 14/04/2017
+# last update: 16/12/2017
 #
 if [ "$#" -lt 4 ]; then # Test at least tree parameters
-    echo -e "\nError in the parameters"
+    echo -e "\\nError in the parameters"
     echo "To run: opp_runall -j3 veins_opp_runall_JBr.sh -f omnet.ini -r 0..2"
     echo " opp_runall - opp_runall command"
     echo " -j\"count of cores\" - number of cores to run"
     echo " veins_opp_runall_JBr.sh - this script"
     echo " -f omnet.ini - ini file of configuration"
-    echo -e " -r 0..2 or -r runSart..runEnd, like -r 0..1 or -r 0..3,6..9\n"
+    echo -e " -r 0..2 or -r runSart..runEnd, like -r 0..1 or -r 0..3,6..9\\n"
 else
     #$1 is -f
     iniFile=$2
@@ -46,21 +46,21 @@ else
 
         dateStart=$(date) # Start running experiment
         dateStartSeconds=$(date +%s)
-        echo -e "\nExperiment run $runNumber staring at: $dateStart" | tee "$fileResult"
+        echo -e "\\nExperiment run $runNumber staring at: $dateStart" | tee "$fileResult"
 
-        echo -e "\nRunning: opp_run -u Cmdenv -n ../../src/veins/ -l ../../out/gcc-debug/src/libveins_simulation.so -f $iniFile -r $runNumber >> $fileResult\n" | tee -a "$fileResult"
+        echo -e "\\nRunning: opp_run -u Cmdenv -n ../../src/veins/ -l ../../out/gcc-debug/src/libveins_simulation.so -f $iniFile -r $runNumber >> $fileResult\\n" | tee -a "$fileResult"
         opp_run -u Cmdenv -n ../../src/veins/ -l ../../out/gcc-debug/src/libveins_simulation.so -f "$iniFile" -r "$runNumber" >> "$fileResult" # running experiment
 
         dateEnd=$(date) # End running experiment
-        echo -e "\nExperiment run $runNumber starts at: $dateStart" | tee -a "$fileResult"
+        echo -e "\\nExperiment run $runNumber starts at: $dateStart" | tee -a "$fileResult"
         echo -e "Experiment run $runNumber ends at: $dateEnd" | tee -a "$fileResult"
 
         dateEndSeconds=$(date +%s)
         dateDiffSeconds=$(echo "($dateEndSeconds - $dateStartSeconds)" | bc)
         dateDiffMin=$(echo "scale=2; $dateDiffSeconds/60" | bc)
         dateDiffHour=$(echo "scale=2; $dateDiffSeconds/(60*60)" | bc)
-        echo -e "Time spent in run $runNumber: $dateDiffSeconds s - or $dateDiffMin min - or $dateDiffHour h\n" | tee -a "$fileResult"
+        echo -e "Time spent in run $runNumber: $dateDiffSeconds s - or $dateDiffMin min - or $dateDiffHour h\\n" | tee -a "$fileResult"
     else
-        echo -e "\nError: $iniFile not exists\n" | tee "$fileResult"
+        echo -e "\\nError: $iniFile not exists\\n" | tee "$fileResult"
     fi
 fi
