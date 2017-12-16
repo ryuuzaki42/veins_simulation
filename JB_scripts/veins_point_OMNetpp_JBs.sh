@@ -22,9 +22,9 @@
 #
 # Script: Script to convert SUMO point to OMNeT++ points
 #
-# last update: 14/04/2017
+# last update: 16/12/2017
 #
-echo -e "\n# Script to convert the SUMO point to OMNeT #\n"
+echo -e "\\n# Script to convert the SUMO point to OMNeT #\\n"
 
 if [ "$#" -eq '6' ]; then
     #$1 -n
@@ -34,7 +34,7 @@ if [ "$#" -eq '6' ]; then
     # $5 -y
     yPoint=$6 # y point number
 
-    echo -e "Getting the boundaries to $netFile\n"
+    echo -e "Getting the boundaries to $netFile\\n"
     fileTmp="tmp_" # Create a tmp "net.xml" file
     fileTmp+=$(date +%s | md5sum | head -c 10) # Add some random part
     fileTmp+="net.xml"
@@ -48,16 +48,16 @@ if [ "$#" -eq '6' ]; then
     boundaryXRight=$(echo "$boundaryNetFile" | cut -d',' -f3) # Get x right
     boundaryYRight=$(echo "$boundaryNetFile" | cut -d',' -f4) # Get y right
 
-    echo -e "\nBoundary of $netFile: $boundaryNetFile or ($boundaryXLeft, $boundaryYLeft) to ($boundaryXRight, $boundaryYRight)"
+    echo -e "\\nBoundary of $netFile: $boundaryNetFile or ($boundaryXLeft, $boundaryYLeft) to ($boundaryXRight, $boundaryYRight)"
 
     if [ "$boundaryXLeft" == "0.00" ] && [ "$boundaryYLeft" == "0.00" ]; then # Test if boundaryXLeft and boundaryYLeft are 0.00
         xFinalPos=$(echo "scale=2; ($xPoint)" | bc)
         yFinalPos=$(echo "scale=2; ($boundaryYRight - $yPoint)" | bc)
 
-        echo -e "\nNetwork file: $netFile\nPoints ($xPoint, $yPoint)\nIn the  in the OMNeT++: ($xFinalPos, $yFinalPos)\n"
+        echo -e "\\nNetwork file: $netFile\\nPoints ($xPoint, $yPoint)\\nIn the  in the OMNeT++: ($xFinalPos, $yFinalPos)\\n"
     else
-        echo -e "\n\n\tError: Script not implemented with (x,y) : ($boundaryXLeft $boundaryYLeft) values\n"
+        echo -e "\\n\\n\\tError: Script not implemented with (x,y) : ($boundaryXLeft $boundaryYLeft) values\\n"
     fi
 else
-    echo -e "Error parameters - Try use: $0 -n file.net.xml -x \"xPoint\" -y \"yPoint\"\n"
+    echo -e "Error parameters - Try use: $0 -n file.net.xml -x \"xPoint\" -y \"yPoint\"\\n"
 fi
