@@ -23,15 +23,15 @@
 # Script: Create the run a easy line to run in the opp_runall
 # Obs: You need veins_opp_runall_JBr.sh
 #
-# last update: 14/04/2017
+# last update: 16/12/2017
 #
 if [ "$#" -lt 5 ]; then # Test at least tree parameters
-    echo -e "\nError in the parameters"
+    echo -e "\\nError in the parameters"
     echo "To run: veins_opp_runall_easy_JBr.sh -j3 -f omnet.ini -r 0..2"
     echo " veins_opp_runall_easy_JBr.sh - this script"
     echo " -j\"count of cores\" - number of cores to run"
     echo " -f omnet.ini - ini file of configuration"
-    echo -e " -r 0..2 or -r runSart..runEnd, like -r 0..1 or -r 0..3,6..9\n"
+    echo -e " -r 0..2 or -r runSart..runEnd, like -r 0..1 or -r 0..3,6..9\\n"
 else
     coreNumber=$1 # Like -j3 with 3 cores
     #$2 is -f
@@ -47,7 +47,7 @@ else
 
         SimulationStart=$(date) # Start simulation
         SimulationStartSeconds=$(date +%s)
-        echo -e "\nSimulation staring at: $SimulationStart\n" | tee "$fileResultGeneral"
+        echo -e "\\nSimulation staring at: $SimulationStart\\n" | tee "$fileResultGeneral"
 
         opp_runall "$coreNumber" veins_opp_runall_JBr.sh -f "$iniFile" -r "$runNumber"
         # Example: opp_runall -j3 veins_opp_runall_JBr.sh -f omnet.ini -r 0..2
@@ -64,8 +64,8 @@ else
         SimulationDiffSeconds=$(echo "($SimulationEndSeconds - $SimulationStartSeconds)" | bc)
         SimulationDiffMin=$(echo "scale=2; $SimulationDiffSeconds/60" | bc)
         SimulationDiffHour=$(echo "scale=2; $SimulationDiffSeconds/(60*60)" | bc)
-        echo -e "\nTime spent in simulation: $SimulationDiffSeconds s - or $SimulationDiffMin min - or $SimulationDiffHour h\n" | tee -a "$fileResultGeneral"
+        echo -e "\\nTime spent in simulation: $SimulationDiffSeconds s - or $SimulationDiffMin min - or $SimulationDiffHour h\\n" | tee -a "$fileResultGeneral"
     else
-        echo -e "\nError: $iniFile not exists\n" | tee "$fileResultGeneral"
+        echo -e "\\nError: $iniFile not exists\\n" | tee "$fileResultGeneral"
     fi
 fi
