@@ -24,57 +24,57 @@
 # Obs: Need print "This simulation run terminated correctly" at
 #  the end of our simulation to be checked
 #
-# Last update: 11/12/2016
+# Last update: 10/01/2018
 #
 fileRsuName="rsu_Count_Messages_Received.r"
-fileRSUCheck=` find .| sort | grep $fileRsuName` # Get the result path files to rsu_Count_Messages_Received.r
+fileRSUCheck=$(find . | sort | grep "$fileRsuName") # Get the result path files to rsu_Count_Messages_Received.r
 
 if [ "$fileRSUCheck" == '' ]; then
-    echo -e "\nError: Not found any file \"$fileRsuName\" in the sub directories\n"
+    echo -e "\\nError: Not found any file \"$fileRsuName\" in the sub directories\\n"
 else
-    echo -e "\n    # Check the simulation runs status that terminated (correctly or with error) #\n"
+    echo -e "\\n    # Check the simulation runs status that terminated (correctly or with error) #\\n"
 
-    tmpFileRunCorrectly=`mktemp`
-    tmpFilePathCorrectly=`mktemp`
+    tmpFileRunCorrectly=$(mktemp)
+    tmpFilePathCorrectly=$(mktemp)
 
-    tmpFileRunError=`mktemp`
-    tmpFilePathError=`mktemp`
+    tmpFileRunError=$(mktemp)
+    tmpFilePathError=$(mktemp)
 
     for lineFile in $fileRSUCheck; do # Read the fileRSUCheck line by line and set in lineFile
-        runNumber=`echo "$lineFile" | rev | cut -d'/' -f2-4 | rev` # Get the run number
+        runNumber=$(echo "$lineFile" | rev | cut -d'/' -f2-4 | rev) # Get the run number
 
-        if cat $lineFile | grep -q "This simulation run terminated correctly"; then # Test if terminated success
-            echo "$lineFile" >> $tmpFilePathCorrectly
-            echo -e "    $runNumber" >> $tmpFileRunCorrectly
+        if grep -q "This simulation run terminated correctly" < "$lineFile"; then # Test if terminated success
+            echo "$lineFile" >> "$tmpFilePathCorrectly"
+            echo -e "    $runNumber" >> "$tmpFileRunCorrectly"
         else
-            echo "$lineFile" >> $tmpFilePathError
-            echo -e "    $runNumber" >> $tmpFileRunError
+            echo "$lineFile" >> "$tmpFilePathError"
+            echo -e "    $runNumber" >> "$tmpFileRunError"
         fi
     done
 
-    experimentName=`echo $lineFile | rev | cut -d'/' -f5 | rev` # Get experiment name
+    experimentName=$(echo "$lineFile" | rev | cut -d'/' -f5 | rev) # Get experiment name
 
-    sizeResultFile=`ls -l $tmpFilePathCorrectly | awk '{print $5}'` # Get the size of result error file
+    sizeResultFile=$(du "$tmpFilePathCorrectly" | awk '{print $1}') # Get the size of result error file
     if [ "$sizeResultFile" != '0' ]; then # If result file is not empty
-        echo -e "\nRun(s) terminated correctly:\n"
-        cat $tmpFilePathCorrectly
-        echo -e "\n\n$experimentName"
-        cat $tmpFileRunCorrectly
+        echo -e "\\nRun(s) terminated correctly:\\n"
+        cat "$tmpFilePathCorrectly"
+        echo -e "\\n\\n$experimentName"
+        cat "$tmpFileRunCorrectly"
     else
-        echo -e "\n\n    #    All the simulation run(s) terminated with error    #\n"
+        echo -e "\\n\\n    #    All the simulation run(s) terminated with error    #\\n"
     fi
 
-    sizeResultFile=`ls -l $tmpFilePathError | awk '{print $5}'`
+    sizeResultFile=$(du "$tmpFilePathError" | awk '{print $1}')
     if [ "$sizeResultFile" != '0' ]; then
-        echo -e "\nRun(s) terminated with error:\n"
-        cat $tmpFilePathError
-        echo -e "\n\n$experimentName"
-        cat $tmpFileRunError
+        echo -e "\\nRun(s) terminated with error:\\n"
+        cat "$tmpFilePathError"
+        echo -e "\\n\\n$experimentName"
+        cat "$tmpFileRunError"
     else
-        echo -e "\n\n    #    All the simulation run(s) terminated correctly    #\n"
+        echo -e "\\n\\n    #    All the simulation run(s) terminated correctly    #\\n"
     fi
 
     echo
-    rm $tmpFileRunCorrectly $tmpFilePathCorrectly
-    rm $tmpFileRunError $tmpFilePathError
+    rm "$tmpFileRunCorrectly" "$tmpFilePathCorrectly"
+    rm "$tmpFileRunError" "$tmpFilePathError"
 fi
